@@ -143,7 +143,9 @@
 
 # inactive by default (opt-in rows): these ship disabled; each is enabled per row in the
 # plugin manager, whose enable writes a user-layer "disabled: false" override that wins.
-- id: web-ui-ssh
+- id: web-ui-pet
+  disabled: true
+- id: web-ui-skin-center
   disabled: true
 - id: web-ui-describe-image
   disabled: true

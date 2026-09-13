@@ -80,7 +80,8 @@ rows:
 # 开启即写入用户层 disabled:false 覆盖（优先于本默认），停用回写 disabled:true。
 # 锁定的核心行（compat/settings/plugin-manager）不可列入本清单。
 inactive:
-  - web-ui-ssh
+  - web-ui-pet
+  - web-ui-skin-center
   - web-ui-describe-image
   - web-ui-liangshen
   - web-ui-skill-explorer
