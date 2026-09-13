@@ -115,7 +115,7 @@ async function call(
   port: number,
   method: string,
   path: string,
-  opts: { body?: string; cookie?: string; origin?: string } = {},
+  opts: { body?: string; cookie?: string; origin?: string; headers?: Record<string, string> } = {},
 ): Promise<{ status: number; contentType: string | undefined; body: string }> {
   return await new Promise((resolve, reject) => {
     const headers: Record<string, string> = { host: 'tunnel.example.com' }
@@ -583,4 +583,27 @@ describe('remote desktop channel (/remote)', () => {
     }
     expect(pairedDeviceIdOf(request({ host: 'x', 'x-dsh-remote-device': 'revoked' }), service)).toBeUndefined()
   })
+})
+
+it('terminates an active paired HTTP stream when the device is revoked', async () => {
+  const service = makeService()
+  const cookie = pairedCookie(service)
+  const upstream = createServer((_req, res) => { res.writeHead(200); res.write('ready') })
+  await new Promise<void>(resolve => upstream.listen(0, '127.0.0.1', resolve))
+  const upstreamPort = (upstream.address() as AddressInfo).port
+  let outer: TestServer | undefined
+  const controller = new AbortController()
+  try {
+    outer = await serve(makeRemoteApiRoutes({ service, port: upstreamPort }))
+    const response = await fetch(`http://127.0.0.1:${outer.port}/remote/api/events`, { headers: { cookie }, signal: controller.signal })
+    const reader = response.body!.getReader()
+    expect(new TextDecoder().decode((await reader.read()).value)).toBe('ready')
+    service.revoke(cookie.slice(cookie.indexOf('=') + 1))
+    await expect(reader.read()).rejects.toThrow()
+  } finally {
+    controller.abort()
+    await outer?.close()
+    upstream.closeAllConnections()
+    await new Promise<void>((resolve, reject) => { upstream.close(error => error ? reject(error) : resolve()) })
+  }
 })

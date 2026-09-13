@@ -1,6 +1,6 @@
 /**
  * Mobile remote control for the dsh web GUI — host half. Mounts the pairing
- * service (one-time tokens, device sessions, revocation), the /api/pair
+ * service (limited-lifetime tokens, device sessions, revocation), the /api/pair
  * route family (issue/accept/stop/heartbeat/status/events), the api/gate
  * listener that enforces pairing on every other /api request from
  * non-loopback hosts, and the presence sweep. The browser half (the
@@ -52,6 +52,7 @@ import { makeUpdateRoutes } from './update-routes.ts'
 import { mountOnce } from './mount-once.ts'
 import { REMOTE_CHANNEL_BOOT_SCRIPT } from './remote-channel-boot.ts'
 import { UUID_POLYFILL_SCRIPT } from './uuid-polyfill.ts'
+import type { DesktopRemoteAccess } from './desktop-access.ts'
 
 declare module '@deepseek-ai/cordis' {
   interface Events {
@@ -114,7 +115,7 @@ export interface Config {
    * so a harness browser credential a device has already redeemed is not
    * invalidated by stop() — see the README security model. Set false to keep
    * the desktop on plain `/api` (only useful when that origin is already
-   * trusted for `/api`).
+   * trusted for `/api`). Desktop always requires pairing on `/remote`.
    */
   requirePairingForLan?: boolean
   /**
@@ -184,7 +185,8 @@ export interface Config {
    * some profile shapes, otherwise on the next start — and the settings
    * card reports the divergence (pendingRestart) instead of guessing.
    * While the toggle has never been set (undefined), the plugin does not
-   * touch the patch file at all.
+   * touch the patch file at all. Desktop instead changes its separate
+   * listener immediately and leaves profile files and firewall rules alone.
    */
   lanBind?: boolean
   /**
@@ -194,6 +196,8 @@ export interface Config {
    * schema, so the path builder asserts containment independently).
    */
   profile?: string
+  /** Desktop-only startup port; zero selects a free local port. */
+  desktopPort?: number
   /** Master switch for the plugin (browser half + host pairing surfaces). */
   enabled?: boolean
 }
@@ -213,6 +217,7 @@ export const Config: z<Config> = z.object({
   relay: z.boolean().default(true),
   lanBind: z.boolean(),
   profile: z.string().pattern(/^[A-Za-z0-9][A-Za-z0-9._-]*$/),
+  desktopPort: z.number().step(1).min(0).max(65535),
   enabled: z.boolean().default(true),
 })
 
@@ -224,7 +229,7 @@ const SWEEP_INTERVAL_MS = 10_000
  * which legitimately resolves to `undefined` when unset (the schema keeps it
  * optional, so `Required` alone would over-narrow it to `string`).
  */
-type ResolvedConfig = Required<Omit<Config, 'publicBaseUrl' | 'trustedHosts' | 'devicesFile' | 'lanBind' | 'profile' | 'tunnelToken'>> & {
+type ResolvedConfig = Required<Omit<Config, 'publicBaseUrl' | 'trustedHosts' | 'devicesFile' | 'lanBind' | 'profile' | 'tunnelToken' | 'desktopPort'>> & {
   publicBaseUrl: string | undefined
   trustedHosts: string[] | undefined
   devicesFile: string
@@ -285,7 +290,18 @@ const DEFAULTS: ResolvedConfig = {
  */
 export const apply = mountOnce('@gestaltrun/dsh-remote-web-ui', applyImpl)
 
-function applyImpl(ctx: Context, config?: Config): void {
+function applyImpl(ctx: Context, config?: Config): void | Promise<void> {
+  const desktop = ctx.get('desktopRemoteAccess') as DesktopRemoteAccess | undefined
+  if (desktop === undefined) return applyMounted(ctx, config)
+  return desktop.initialize(config?.desktopPort ?? 0).then(() => {
+    ctx.effect(() => async () => {
+      await desktop.configure({ enabled: false, lanBind: false })
+    }, 'remote-web-ui: Desktop listener')
+    applyMounted(ctx, { ...config, requirePairingForLan: true, relay: config?.relay ?? false, profile: config?.profile ?? 'desktop' }, desktop)
+  })
+}
+
+function applyMounted(ctx: Context, config?: Config, desktop?: DesktopRemoteAccess): void {
   const envPublicBase = process.env.DSH_REMOTE_PUBLIC_BASE_URL?.trim() || undefined
   const resolved: ResolvedConfig = {
     tokenTtlMs: config?.tokenTtlMs ?? DEFAULTS.tokenTtlMs,
@@ -316,7 +332,7 @@ function applyImpl(ctx: Context, config?: Config): void {
       maxDevices: value.maxDevices ?? DEFAULTS.maxDevices,
       idleExpireMs: value.idleExpireMs ?? DEFAULTS.idleExpireMs,
       cookieName: value.cookieName ?? DEFAULTS.cookieName,
-      requirePairingForLan: value.requirePairingForLan ?? DEFAULTS.requirePairingForLan,
+      requirePairingForLan: desktop === undefined ? value.requirePairingForLan ?? DEFAULTS.requirePairingForLan : true,
       publicBaseUrl: value.publicBaseUrl ?? envPublicBase,
       trustedHosts: value.trustedHosts,
       devicesFile: value.devicesFile ?? DEFAULTS.devicesFile,
@@ -440,6 +456,14 @@ function applyImpl(ctx: Context, config?: Config): void {
     service.setLanBases(lanBases)
   }
 
+  if (desktop !== undefined) {
+    ctx.effect(() => desktop.onChange((state) => {
+      service.setLanBases(state.listening && state.host === '0.0.0.0'
+        ? lanIPv4Addresses().map(address => ({ address, base: `http://${address}:${String(state.port)}` }))
+        : [])
+    }), 'remote-web-ui: Desktop bind updates')
+  }
+
   // Push a committed settings section into the service and gate. The service
   // config object is read per operation (token mint, touch, sweep), and the
   // gate re-reads its fence flag per request, so a live edit takes effect
@@ -520,6 +544,18 @@ function applyImpl(ctx: Context, config?: Config): void {
   let lastFirewallApplied: AppliedFirewallState | undefined
   const lanBindStatus = (): Record<string, unknown> => {
     const resolvedNow = resolve()
+    if (desktop !== undefined) {
+      const state = desktop.status()
+      return {
+        profile: resolvedNow.profile, setting: resolvedNow.lanBind ?? null,
+        blockHost: null, bindHost: state.host, port: state.port,
+        listening: state.listening, error: state.error,
+        lanUrls: state.listening && state.host === '0.0.0.0'
+          ? lanIPv4Addresses().map(address => `http://${address}:${String(state.port)}`) : [],
+        firewall: { ok: true, managed: false }, platform: process.platform,
+        pendingRestart: false,
+      }
+    }
     let state: { blockPresent: boolean; host?: string; port?: number }
     try {
       state = lanBindState(resolvedNow.profile)
@@ -712,7 +748,7 @@ function applyImpl(ctx: Context, config?: Config): void {
   // governed by the harness fence + browser-auth cookie, and this cohort's
   // api/gate seam has no emitter — so stop()/revoke() cannot invalidate a
   // browser credential a device has already redeemed.
-  if (ctx.webServer.host === '0.0.0.0') {
+  if (desktop === undefined && ctx.webServer.host === '0.0.0.0') {
     console.warn('remote-web-ui: LAN-exposed bind — pairing gates the /remote channel; direct /api stays under the harness fence + browser auth (stop() does not revoke an already-redeemed browser credential)')
   }
 
@@ -725,7 +761,11 @@ function applyImpl(ctx: Context, config?: Config): void {
     // the currently bound port. The block takes effect on the next start, so
     // the re-assert at every boot keeps it in sync with both the toggle and
     // the flags.
-    if (value.lanBind !== undefined) {
+    if (desktop !== undefined) {
+      void desktop.configure({ enabled: value.enabled, lanBind: value.lanBind === true }).catch((error: unknown) => {
+        console.error(`remote-web-ui: Desktop remote listener failed: ${error instanceof Error ? error.message : String(error)}`)
+      })
+    } else if (value.lanBind !== undefined) {
       const startup = ctx.get('webStartup') as StartupFacts | undefined
       const desiredHost = desiredBindHost(value.lanBind === true, startup?.host)
       const desiredPort = desiredBindPort(startup?.port, Number.isFinite(ctx.webServer.port) ? ctx.webServer.port : undefined)

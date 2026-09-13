@@ -6,6 +6,7 @@
 import type { IncomingMessage } from 'node:http'
 import { connect, createServer as createTcpServer, type Socket } from 'node:net'
 import { describe, expect, it } from 'vitest'
+import { once } from 'node:events'
 import type { AddressInfo } from 'node:net'
 import { PairingService } from '../src/pairing.ts'
 import { makeRemoteApiUpgradeRoutes, REMOTE_API_PATHS } from '../src/remote-api.ts'
@@ -233,3 +234,25 @@ describe('remote desktop event-stream upgrades', () => {
     }
   })
 })
+
+for (const action of ['stop', 'revoke'] as const) {
+  it(`closes an established paired socket when ${action} invalidates its device`, async () => {
+    const service = makeService()
+    const cookie = pairedCookie(service)
+    const upstream = await startUpstream()
+    let driven: Awaited<ReturnType<typeof driveUpgrade>> | undefined
+    try {
+      const [route] = makeRemoteApiUpgradeRoutes({ service, port: upstream.port })
+      driven = await driveUpgrade(route.handler, { cookie, 'sec-websocket-key': 'k', 'sec-websocket-version': '13' })
+      await waitFor101(driven.client)
+      const closed = once(driven.client, 'close')
+      if (action === 'stop') service.stop()
+      else service.revoke(cookie.slice(cookie.indexOf('=') + 1))
+      await closed
+      expect(driven.client.destroyed).toBe(true)
+    } finally {
+      await driven?.close()
+      await upstream.close()
+    }
+  })
+}

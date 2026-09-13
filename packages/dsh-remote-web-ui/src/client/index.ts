@@ -112,23 +112,24 @@ const HEARTBEAT_INTERVAL_MS = 10_000
 export const inject = ['slots', 'locale', 'connection', 'settingsScope', 'remote']
 
 /**
- * Register remote control on HTTP(S) pages; custom-protocol hosts keep their own transport.
+ * Register remote controls on Web and Desktop; only HTTP(S) pages install the remote channel.
  * @param ctx - client root context.
  */
 export function apply(ctx: ClientContext): void {
-  if (!isRemoteWebPage(window.location.href)) return
+  const webPage = isRemoteWebPage(window.location.href)
+  if (!webPage && (window.location.protocol !== 'dsh-app:' || window.location.host !== 'app')) return
 
   // Portrait-touch adaptation of the official UI: installed under the plugin
   // lifecycle so disabling the plugin in cordis patch (disabled: true) never
   // injects mobile CSS, gesture hooks, or the whale floating button.
-  startMobileAdapt()
-  ctx.effect(() => () => {
+  if (webPage) startMobileAdapt()
+  if (webPage) ctx.effect(() => () => {
     ;(window as unknown as { __dshRemoteAdapt?: RemoteAdaptGlobal }).__dshRemoteAdapt?.setEnabled?.(false)
   }, 'remote-web-ui: mobile-adapt')
 
   // Anonymous install heartbeat (docs/telemetry.md): one beat per browser per
   // UTC day, package name only, silent failure.
-  reportDailyHeartbeat([{ name: '@gestaltrun/dsh-remote-web-ui' }])
+  if (webPage) reportDailyHeartbeat([{ name: '@gestaltrun/dsh-remote-web-ui' }])
 
   ctx.effect(() => {
     try {
@@ -143,7 +144,7 @@ export function apply(ctx: ClientContext): void {
   // service (ctx.layout.toggleSidebar / closeDetails flip the panel state;
   // the narrow-viewport semantics open the drawer).
   const layout = ctx.get('layout') as { toggleSidebar?: () => void; closeDetails?: () => void } | undefined
-  const adapt = (window as unknown as { __dshRemoteAdapt?: RemoteAdaptGlobal }).__dshRemoteAdapt
+  const adapt = webPage ? (window as unknown as { __dshRemoteAdapt?: RemoteAdaptGlobal }).__dshRemoteAdapt : undefined
   // The official layout face throws (by contract) when the root entry has
   // not mounted yet; these closures also fire from gestures racing that
   // first mount, so they tolerate the throw instead of surfacing it.
@@ -196,6 +197,7 @@ export function apply(ctx: ClientContext): void {
   // before the layout face was wired, so its closeDetails was a no-op and a
   // restored details panel would otherwise sit hidden until landscape.
   const syncAdaptEnabled = (): void => {
+    if (!webPage) return
     ;(window as unknown as { __dshRemoteAdapt?: RemoteAdaptGlobal }).__dshRemoteAdapt?.setEnabled?.(enabled())
   }
   settingsScope.subscribe(syncAdaptEnabled)
@@ -260,6 +262,7 @@ export function apply(ctx: ClientContext): void {
   // while the plugin is enabled.
   let disposeRuntime: (() => void) | undefined
   const syncRuntime = (): void => {
+    if (!webPage) return
     if (enabled() && disposeRuntime === undefined) {
       disposeRuntime = ctx.effect(() => {
         const connection = ctx.get('connection') as ConnectionHandle | undefined
@@ -317,6 +320,7 @@ export function apply(ctx: ClientContext): void {
   const bootSeat = (): RemoteChannelBootSeat | undefined =>
     (window as unknown as Record<string, RemoteChannelBootSeat | undefined>)[REMOTE_CHANNEL_BOOT_GLOBAL]
   const syncChannel = (): void => {
+    if (!webPage) return
     const transition = channelTransition(channelActive(), disposeChannel !== undefined)
     if (transition === 'install') {
       const seat = bootSeat()
@@ -360,7 +364,7 @@ export function apply(ctx: ClientContext): void {
   }
   settingsScope.subscribe(syncChannel)
   syncChannel()
-  if (!isLoopbackHostname(window.location.hostname) && settingsScope.getSnapshot().status !== 'ready') {
+  if (webPage && !isLoopbackHostname(window.location.hostname) && settingsScope.getSnapshot().status !== 'ready') {
     void readPairGatePolicy().then((policy) => {
       hostPairingPolicy = policy.requirePairingForLan
       syncChannel()
@@ -377,7 +381,7 @@ export function apply(ctx: ClientContext): void {
 
   // One-time failed-pair toast. The accept result lands asynchronously, so
   // the marker check is deferred past the accept round trip.
-  ctx.effect(() => {
+  if (webPage) ctx.effect(() => {
     const timer = window.setTimeout(() => {
       if (sessionStorage.getItem(PAIR_FAILED_MARKER) === null) return
       sessionStorage.removeItem(PAIR_FAILED_MARKER)
