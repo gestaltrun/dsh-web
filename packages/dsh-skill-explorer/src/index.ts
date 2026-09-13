@@ -99,4 +99,4 @@ function applyImpl(ctx: Context, config?: Config): void {
  * one profile, so the second host apply must be a no-op instead of
  * re-registering the same routes and failing the boot.
  */
-export const apply = mountOnce('@linxin666/dsh-client-ui-skill-explorer', applyImpl)
+export const apply = mountOnce('@gestaltrun/dsh-client-ui-skill-explorer', applyImpl)

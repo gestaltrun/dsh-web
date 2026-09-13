@@ -82,7 +82,7 @@ export function bundledPresetsRoot(): string {
  * @param ctx - host plugin context carrying systemPrompt.
  * @param config - resolved plugin config (schema defaults applied by the loader).
  */
-export const apply = mountOnce('@linxin666/dsh-liangshen', applyImpl)
+export const apply = mountOnce('@gestaltrun/dsh-liangshen', applyImpl)
 
 function applyImpl(ctx: Context, config?: Config): void {
   // The live source the announcement reads: the settings section once the web

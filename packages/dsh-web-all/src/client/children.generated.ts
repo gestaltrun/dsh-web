@@ -11,23 +11,23 @@
  * at runtime (see mountClientChildren in src/client/index.ts).
  */
 
-import * as child0 from '@linxin666/dsh-client-ui-web-ui-settings/client'
-import * as child1 from '@linxin666/dsh-client-ui-plugin-manager/client'
-import * as child2 from '@linxin666/dsh-client-ui-market/client'
-import * as child3 from '@linxin666/dsh-client-ui-task-board/client'
-import * as child4 from '@linxin666/dsh-client-ui-git-graph/client'
-import * as child5 from '@linxin666/dsh-remote-web-ui/client'
-import * as child6 from '@linxin666/dsh-pet/client'
-import * as child7 from '@linxin666/dsh-ssh/client'
-import * as child8 from '@linxin666/dsh-tool-describe-image/client'
-import * as child9 from '@linxin666/dsh-liangshen/client'
-import * as child10 from '@linxin666/dsh-client-ui-skill-explorer/client'
-import * as child11 from '@linxin666/dsh-doctor/client'
-import * as child12 from '@linxin666/dsh-usage/client'
-import * as child13 from '@linxin666/dsh-session-archive/client'
-import * as child14 from '@linxin666/dsh-client-ui-model-capabilities/client'
-import * as child15 from '@linxin666/dsh-client-ui-preset-center/client'
-import * as child16 from '@linxin666/dsh-client-ui-skin-center/client'
+import * as child0 from '@gestaltrun/dsh-client-ui-web-ui-settings/client'
+import * as child1 from '@gestaltrun/dsh-client-ui-plugin-manager/client'
+import * as child2 from '@gestaltrun/dsh-client-ui-market/client'
+import * as child3 from '@gestaltrun/dsh-client-ui-task-board/client'
+import * as child4 from '@gestaltrun/dsh-client-ui-git-graph/client'
+import * as child5 from '@gestaltrun/dsh-remote-web-ui/client'
+import * as child6 from '@gestaltrun/dsh-pet/client'
+import * as child7 from '@gestaltrun/dsh-ssh/client'
+import * as child8 from '@gestaltrun/dsh-tool-describe-image/client'
+import * as child9 from '@gestaltrun/dsh-liangshen/client'
+import * as child10 from '@gestaltrun/dsh-client-ui-skill-explorer/client'
+import * as child11 from '@gestaltrun/dsh-doctor/client'
+import * as child12 from '@gestaltrun/dsh-usage/client'
+import * as child13 from '@gestaltrun/dsh-session-archive/client'
+import * as child14 from '@gestaltrun/dsh-client-ui-model-capabilities/client'
+import * as child15 from '@gestaltrun/dsh-client-ui-preset-center/client'
+import * as child16 from '@gestaltrun/dsh-client-ui-skin-center/client'
 
 /** The loose shape every child client module must expose at runtime. */
 export interface ClientChildModule {
@@ -44,21 +44,21 @@ export interface ClientChild {
 }
 
 export const clientChildren: readonly ClientChild[] = [
-  { name: '@linxin666/dsh-client-ui-web-ui-settings', module: child0 },
-  { name: '@linxin666/dsh-client-ui-plugin-manager', module: child1 },
-  { name: '@linxin666/dsh-client-ui-market', module: child2 },
-  { name: '@linxin666/dsh-client-ui-task-board', module: child3 },
-  { name: '@linxin666/dsh-client-ui-git-graph', module: child4 },
-  { name: '@linxin666/dsh-remote-web-ui', module: child5 },
-  { name: '@linxin666/dsh-pet', module: child6 },
-  { name: '@linxin666/dsh-ssh', module: child7 },
-  { name: '@linxin666/dsh-tool-describe-image', module: child8 },
-  { name: '@linxin666/dsh-liangshen', module: child9 },
-  { name: '@linxin666/dsh-client-ui-skill-explorer', module: child10 },
-  { name: '@linxin666/dsh-doctor', module: child11 },
-  { name: '@linxin666/dsh-usage', module: child12 },
-  { name: '@linxin666/dsh-session-archive', module: child13 },
-  { name: '@linxin666/dsh-client-ui-model-capabilities', module: child14 },
-  { name: '@linxin666/dsh-client-ui-preset-center', module: child15 },
-  { name: '@linxin666/dsh-client-ui-skin-center', module: child16 },
+  { name: '@gestaltrun/dsh-client-ui-web-ui-settings', module: child0 },
+  { name: '@gestaltrun/dsh-client-ui-plugin-manager', module: child1 },
+  { name: '@gestaltrun/dsh-client-ui-market', module: child2 },
+  { name: '@gestaltrun/dsh-client-ui-task-board', module: child3 },
+  { name: '@gestaltrun/dsh-client-ui-git-graph', module: child4 },
+  { name: '@gestaltrun/dsh-remote-web-ui', module: child5 },
+  { name: '@gestaltrun/dsh-pet', module: child6 },
+  { name: '@gestaltrun/dsh-ssh', module: child7 },
+  { name: '@gestaltrun/dsh-tool-describe-image', module: child8 },
+  { name: '@gestaltrun/dsh-liangshen', module: child9 },
+  { name: '@gestaltrun/dsh-client-ui-skill-explorer', module: child10 },
+  { name: '@gestaltrun/dsh-doctor', module: child11 },
+  { name: '@gestaltrun/dsh-usage', module: child12 },
+  { name: '@gestaltrun/dsh-session-archive', module: child13 },
+  { name: '@gestaltrun/dsh-client-ui-model-capabilities', module: child14 },
+  { name: '@gestaltrun/dsh-client-ui-preset-center', module: child15 },
+  { name: '@gestaltrun/dsh-client-ui-skin-center', module: child16 },
 ]

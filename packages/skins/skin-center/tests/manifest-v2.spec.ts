@@ -97,7 +97,7 @@ describe('validateSkinManifestV2', () => {
       name: '夕港',
       nameEn: 'Harbor',
       author: 'moeblack',
-      package: '@linxin666/dsh-client-ui-skin-harbor',
+      package: '@gestaltrun/dsh-client-ui-skin-harbor',
       wiring: { id: 'ui-skin-harbor', bundleWired: false },
       bodyAttr: 'data-dsh-harbor',
     }
@@ -172,7 +172,7 @@ describe('validateSkinManifestV2', () => {
       nameEn: 'Harbor',
       version: '0.1.0',
       author: 'moeblack',
-      package: '@linxin666/dsh-skin-harbor',
+      package: '@gestaltrun/dsh-skin-harbor',
       wiring: { kind: 'client-plugin' },
       bodyAttr: 'data-dsh-harbor',
     }

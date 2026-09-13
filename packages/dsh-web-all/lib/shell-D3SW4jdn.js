@@ -165,7 +165,7 @@ function isOverrideShape(config) {
 * Known retired family plugins: stale rows from older user profiles mount as
 * silent no-ops so upgrading the aggregate package never breaks the host boot.
 */
-const RETIRED_PLUGINS = /* @__PURE__ */ new Set(["@linxin666/dsh-perf", "@linxin666/dsh-desktop-launcher"]);
+const RETIRED_PLUGINS = /* @__PURE__ */ new Set(["@gestaltrun/dsh-perf", "@gestaltrun/dsh-desktop-launcher"]);
 /** Apply one shell entry: mount the configured real plugin behind an isolation boundary. */
 async function apply(ctx, config) {
 	holdHealthRoutes(ctx);
@@ -205,4 +205,4 @@ async function apply(ctx, config) {
 //#endregion
 export { apply as n, inject as r, _resetDegradedRouteForTest as t };
 
-//# sourceMappingURL=shell-BlyfMdCj.js.map
+//# sourceMappingURL=shell-D3SW4jdn.js.map

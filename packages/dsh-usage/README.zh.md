@@ -29,7 +29,7 @@ dsh Web GUI 的使用统计插件：多 provider 余额与编程套餐用量检�
 在 profile（如 `~/.dsh/profiles/web`）中：
 
 ```bash
-pnpm add @linxin666/dsh-usage
+pnpm add @gestaltrun/dsh-usage
 ```
 
 并插入 `cordis.patch.yml`（或使用 bundle patch）：
@@ -37,7 +37,7 @@ pnpm add @linxin666/dsh-usage
 ```yaml
 - insert:
     - id: usage
-      name: '@linxin666/dsh-usage'
+      name: '@gestaltrun/dsh-usage'
 ```
 
 宿主半区需要重启 `dsh web`；客户端半区刷新页面即生效。分区入口在 `设置 -> 使用统计`。

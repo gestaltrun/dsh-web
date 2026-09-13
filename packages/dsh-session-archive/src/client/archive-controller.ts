@@ -3,7 +3,7 @@
  * chunked batch pipelines (family-partitioned for delete), computes the
  * confirm-dialog delete plan with the same core rules the host enforces, and
  * drives preview/auto-preview fetches.
- * @module @linxin666/dsh-session-archive/client/archive-controller
+ * @module @gestaltrun/dsh-session-archive/client/archive-controller
  */
 
 import type { ArchiveSessionRow, BatchResponse, DeletePlanView, OpResult } from '../core/types.ts'

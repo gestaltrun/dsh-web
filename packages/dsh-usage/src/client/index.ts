@@ -3,7 +3,7 @@
  * (below the Workshop entry) and polls the host overview only while the
  * section is open. All provider probing and credential handling happens in
  * the host half; this bundle only renders the overview document.
- * @module @linxin666/dsh-usage/client
+ * @module @gestaltrun/dsh-usage/client
  */
 
 import type { Context as ClientContext } from '@deepseek-ai/cordis'

@@ -6,7 +6,7 @@
  * merge, and the poll loop. Resilience contract: every public method resolves
  * or no-ops, never throws; the host being absent, a fetch failure or a broken
  * response only degrades the snapshot.
- * @module @linxin666/dsh-doctor/client
+ * @module @gestaltrun/dsh-doctor/client
  */
 
 import { DoctorApi, type DoctorApiFail } from './doctor-api.ts'

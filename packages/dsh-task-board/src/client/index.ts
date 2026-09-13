@@ -137,7 +137,7 @@ async function readPresetRoster(
 export function apply(ctx: ClientContext): void {
   // Anonymous install heartbeat (docs/telemetry.md): one beat per browser per
   // UTC day, package name only, silent failure.
-  reportDailyHeartbeat([{ name: '@linxin666/dsh-client-ui-task-board' }])
+  reportDailyHeartbeat([{ name: '@gestaltrun/dsh-client-ui-task-board' }])
 
   // A duplicated client injection (module factory executed twice in one page
   // lifetime) would otherwise mount a second sidebar entry and board view.

@@ -2,8 +2,8 @@
 /**
  * Dual-publish the legacy aggregate package.
  *
- * The product rename publishes the current `@linxin666/dsh-web-all` package
- * and, for the transition window, a final `@linxin666/dsh-web-ui-all` package
+ * The product rename publishes the current `@gestaltrun/dsh-web-all` package
+ * and, for the transition window, a final `@gestaltrun/dsh-web-ui-all` package
  * carrying the same runtime with the old npm identity. This script builds the
  * legacy tarball from the current aggregate's `pnpm pack` output, rewrites
  * only the npm identity and its client loader id, adds the deterministic
@@ -22,8 +22,8 @@ import { fileURLToPath } from 'node:url'
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = resolve(SCRIPT_DIR, '..')
 const AGGREGATE_DIR = join(REPO_ROOT, 'packages', 'dsh-web-all')
-export const LEGACY_NAME = '@linxin666/dsh-web-ui-all'
-export const CURRENT_NAME = '@linxin666/dsh-web-all'
+export const LEGACY_NAME = '@gestaltrun/dsh-web-ui-all'
+export const CURRENT_NAME = '@gestaltrun/dsh-web-all'
 const LEGACY_VERSION_PREFIX = 'v'
 /**
  * Whether new legacy dual-publishes are still accepted.
@@ -43,7 +43,7 @@ const DUAL_PUBLISH_RELEASES = 2
 export function rewriteLegacyPackageJson(text, version) {
   const pkg = JSON.parse(text)
   pkg.name = LEGACY_NAME
-  if (typeof pkg.description === 'string') pkg.description = pkg.description.replace(/@linxin666\/dsh-web-all/g, LEGACY_NAME)
+  if (typeof pkg.description === 'string') pkg.description = pkg.description.replace(/@gestaltrun\/dsh-web-all/g, LEGACY_NAME)
   pkg.dsh = {
     ...(pkg.dsh ?? {}),
     migrate: {

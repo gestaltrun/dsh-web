@@ -1,7 +1,7 @@
 /**
  * The repository root is a thin alias bundle over the published npm aggregate:
  * its patch is the aggregate's generated manifest, while every module the rows
- * reference resolves from the `@linxin666/dsh-web-all` dependency. That
+ * reference resolves from the `@gestaltrun/dsh-web-all` dependency. That
  * dependency must name one exact released version — the version whose package
  * exports match the patch rows in the same commit. A range admits any version
  * in it, so an install that keeps an older lockfile entry mounts rows whose
@@ -11,7 +11,7 @@
  */
 
 /** The aggregate dependency the root alias resolves every row's modules from. */
-export const ROOT_AGGREGATE_DEPENDENCY = '@linxin666/dsh-web-all'
+export const ROOT_AGGREGATE_DEPENDENCY = '@gestaltrun/dsh-web-all'
 
 /**
  * Check the root alias dependency against the release tag.

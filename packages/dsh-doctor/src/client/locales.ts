@@ -1,7 +1,7 @@
 /**
  * Locale dictionaries for the dsh-doctor recovery console. The zh dictionary is
  * the key source; the en dictionary mirrors the exact key set.
- * @module @linxin666/dsh-doctor/client
+ * @module @gestaltrun/dsh-doctor/client
  */
 
 /** Simplified Chinese copy (the key-set source of truth). */

@@ -20,7 +20,7 @@ const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = resolve(SCRIPT_DIR, '..')
 
 const tag = process.argv[2] ?? ''
-const match = /^v?(\d+\.\d+\.\d+)$/.exec(tag)
+const match = /^v?(\d+\.\d+\.\d+(?:-gestaltrun\.\d+)?)$/.exec(tag)
 if (match === null) {
   console.error('usage: node scripts/verify-version.mjs <x.y.z | vX.Y.Z>')
   process.exit(2)

@@ -20,7 +20,7 @@
  * lifecycleScope split: the ledger tracks activation scope; the catalog
  * snapshot, the decoration layer elements and the persisted selection are
  * component scope and survive every switch.
- * @module @linxin666/dsh-client-ui-skin-center/runtime/skin-controller
+ * @module @gestaltrun/dsh-client-ui-skin-center/runtime/skin-controller
  */
 
 import type { EffectLedger } from './effect-ledger.ts'

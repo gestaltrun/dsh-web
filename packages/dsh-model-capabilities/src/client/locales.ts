@@ -2,7 +2,7 @@
  * dsh-model-capabilities locale dictionaries (zh/en). The zh dictionary is
  * the key source; `en` mirrors its full key set (packages/AGENTS.md bilingual
  * discipline). Russian copy ships centrally in dsh-i18n.
- * @module @linxin666/dsh-client-ui-model-capabilities/client/locales
+ * @module @gestaltrun/dsh-client-ui-model-capabilities/client/locales
  */
 
 /** Dictionary namespace this package registers. */

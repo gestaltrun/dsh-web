@@ -29,7 +29,7 @@ Requires DSH 0.1.2-alpha.2 or later: the plugin is developed against the 0.1.2-a
 In your profile (e.g. `~/.dsh/profiles/web`):
 
 ```bash
-pnpm add @linxin666/dsh-usage
+pnpm add @gestaltrun/dsh-usage
 ```
 
 and insert into `cordis.patch.yml` (or use the bundle patch):
@@ -37,7 +37,7 @@ and insert into `cordis.patch.yml` (or use the bundle patch):
 ```yaml
 - insert:
     - id: usage
-      name: '@linxin666/dsh-usage'
+      name: '@gestaltrun/dsh-usage'
 ```
 
 Restart `dsh web` for the host half; the client half applies on refresh. The section lives in `Settings -> Usage Statistics`.

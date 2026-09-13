@@ -3,4 +3,4 @@
 # loads the recovery console and browser failure probe on the web platform.
 - insert:
     - id: doctor
-      name: '@linxin666/dsh-doctor'
+      name: '@gestaltrun/dsh-doctor'

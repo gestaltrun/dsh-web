@@ -4,7 +4,7 @@
  * route; the host resolves the key through the credential seam (the key never
  * crosses into the browser), lists the endpoint's models, and returns only the
  * id list — a success doubles as the connectivity and credential check.
- * @module @linxin666/dsh-tool-describe-image/client/model-probe
+ * @module @gestaltrun/dsh-tool-describe-image/client/model-probe
  */
 
 /** The host model-probe endpoint, same-origin with the web shell. */

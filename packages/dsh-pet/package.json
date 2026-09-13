@@ -1,7 +1,7 @@
 {
-  "name": "@linxin666/dsh-pet",
+  "name": "@gestaltrun/dsh-pet",
   "description": "Multi-pet companion plugin for the dsh web GUI: a registry-driven floating pet that reacts to model activity, with per-pet naming, petting/feeding interactions and an affinity score",
-  "version": "0.3.21",
+  "version": "0.3.21-gestaltrun.0",
   "type": "module",
   "packageManager": "pnpm@11.7.0",
   "engines": {
@@ -102,6 +102,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zhu1090093659/dsh-web.git"
+    "url": "https://github.com/gestaltrun/dsh-web.git",
+    "directory": "packages/dsh-pet"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "tag": "latest"
   }
 }

@@ -430,8 +430,8 @@ test('telemetry heartbeat expands items into one idempotent row each', async () 
     kind: 'heartbeat',
     visitor: VISITOR_OK,
     items: [
-      { name: '@linxin666/dsh-client-ui-market' },
-      { name: '@linxin666/dsh-pet', version: '1.2.3', channel: 'market' },
+      { name: '@gestaltrun/dsh-client-ui-market' },
+      { name: '@gestaltrun/dsh-pet', version: '1.2.3', channel: 'market' },
     ],
   })
   assert.equal(response.status, 200)
@@ -450,7 +450,7 @@ test('telemetry heartbeat expands items into one idempotent row each', async () 
   await postEvent({ DB: db }, {
     kind: 'heartbeat',
     visitor: VISITOR_OK,
-    items: [{ name: '@linxin666/dsh-pet', version: '1.2.3', channel: 'market' }],
+    items: [{ name: '@gestaltrun/dsh-pet', version: '1.2.3', channel: 'market' }],
   })
   assert.equal(db.batches[1][0].args[0], batch[1].args[0])
 })
@@ -487,11 +487,11 @@ test('telemetry summary returns aggregates without pruning old events', async ()
       [{ day: '2026-05-01', pv: 3, uv: 2 }],
       [{ subject: '/', pv: 9 }],
       [{ n: 41 }],
-      [{ subject: '@linxin666/dsh-pet', visitors: 1 }],
-      [{ subject: '@linxin666/dsh-pet', channel: 'market', visitors: 1 }],
-      [{ subject: '@linxin666/dsh-pet', visitors: 2 }],
+      [{ subject: '@gestaltrun/dsh-pet', visitors: 1 }],
+      [{ subject: '@gestaltrun/dsh-pet', channel: 'market', visitors: 1 }],
+      [{ subject: '@gestaltrun/dsh-pet', visitors: 2 }],
       [{ n: 17 }],
-      [{ subject: '@linxin666/dsh-pet', version: '1.2.3', visitors: 2 }],
+      [{ subject: '@gestaltrun/dsh-pet', version: '1.2.3', visitors: 2 }],
     ],
   })
   const response = await worker.fetch(new Request('https://dsh-market.com/api/telemetry/summary?days=7'), { DB: db }, context())
@@ -503,7 +503,7 @@ test('telemetry summary returns aggregates without pruning old events', async ()
   assert.deepEqual(payload.site.paths_page, { offset: 0, limit: 20 })
   assert.equal(payload.plugins.totals.items, 17)
   assert.deepEqual(payload.plugins.items_page, { offset: 0, limit: 200 })
-  assert.equal(payload.plugins.items[0].item, '@linxin666/dsh-pet')
+  assert.equal(payload.plugins.items[0].item, '@gestaltrun/dsh-pet')
   assert.equal(payload.plugins.items[0].instances, 2)
   assert.equal(payload.plugins.items[0].active_today, 1)
   assert.equal(payload.plugins.items[0].channels.market, 1)
@@ -511,7 +511,7 @@ test('telemetry summary returns aggregates without pruning old events', async ()
   assert.equal(db.runs.some((entry) => entry.sql.includes('DELETE FROM telemetry_events')), false)
   const rollup = db.runs.find((entry) => entry.sql.includes('INSERT INTO telemetry_summary_cache'))
   assert.ok(rollup, 'a live aggregation must seed the summary rollup cache')
-  assert.deepEqual(JSON.parse(rollup.args[1]).plugins.items[0].item, '@linxin666/dsh-pet')
+  assert.deepEqual(JSON.parse(rollup.args[1]).plugins.items[0].item, '@gestaltrun/dsh-pet')
 })
 
 test('telemetry summary binds the requested pagination windows', async () => {

@@ -27,7 +27,7 @@
  * Entries are plain data; the HTTP layer (src/we-routes.ts) assigns media
  * tokens and decides what is playable. Everything here is injectable for
  * tests: roots, platform and environment are parameters, never hard reads.
- * @module @linxin666/dsh-client-ui-skin-center/we-library
+ * @module @gestaltrun/dsh-client-ui-skin-center/we-library
  */
 
 import { execFileSync } from 'node:child_process'

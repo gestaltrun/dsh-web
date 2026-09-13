@@ -8,7 +8,7 @@
  * The stylesheet is inert for the stock look: a catalog skin, custom theme or
  * wallpaper must be active. It is installed once per runtime and removed with
  * that runtime, so disabling the plugin restores the shell unchanged.
- * @module @linxin666/dsh-client-ui-skin-center/runtime/shell-rendering
+ * @module @gestaltrun/dsh-client-ui-skin-center/runtime/shell-rendering
  */
 
 /** Marker owned by the shared shell-rendering stylesheet. */

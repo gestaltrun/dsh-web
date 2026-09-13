@@ -37,7 +37,7 @@ async function loadLib() {
   try {
     return await import(pathToFileURL(LIB_PATH).href)
   } catch (error) {
-    console.error('dsh-skin: cannot load the skin-center lib — run "pnpm --filter @linxin666/dsh-client-ui-skin-center build" first.')
+    console.error('dsh-skin: cannot load the skin-center lib — run "pnpm --filter @gestaltrun/dsh-client-ui-skin-center build" first.')
     console.error(String(error && error.message ? error.message : error))
     process.exit(2)
   }

@@ -7,7 +7,7 @@
  * comments and unrelated rows byte-for-byte in spirit; the !!js expression
  * tag keeps loader expressions literal so profiles carrying them stay
  * parseable.
- * @module @linxin666/dsh-client-ui-plugin-manager/host
+ * @module @gestaltrun/dsh-client-ui-plugin-manager/host
  */
 
 import { copyFile, rename, writeFile } from 'node:fs/promises'

@@ -3,10 +3,10 @@ import { test } from 'node:test'
 import { DEFAULT_REGISTRY, assertPublished, missingVersions, sweepOnce, versionDocUrl } from './verify-registry.mjs'
 
 test('versionDocUrl encodes the scope and normalizes the registry base', () => {
-  assert.equal(versionDocUrl('@linxin666/dsh-web-all', '0.3.18'),
-    DEFAULT_REGISTRY + '/%40linxin666%2Fdsh-web-all/0.3.18')
-  assert.equal(versionDocUrl('@linxin666/dsh-web-all', '0.3.18', 'https://example.test/'),
-    'https://example.test/%40linxin666%2Fdsh-web-all/0.3.18')
+  assert.equal(versionDocUrl('@gestaltrun/dsh-web-all', '0.3.18'),
+    DEFAULT_REGISTRY + '/%40gestaltrun%2Fdsh-web-all/0.3.18')
+  assert.equal(versionDocUrl('@gestaltrun/dsh-web-all', '0.3.18', 'https://example.test/'),
+    'https://example.test/%40gestaltrun%2Fdsh-web-all/0.3.18')
 })
 
 test('missingVersions keeps input order and drops resolved packages', () => {
@@ -33,15 +33,15 @@ test('sweepOnce reports one result per package and treats errors as misses', asy
     return response(200)
   }
   const results = await sweepOnce({
-    packages: ['@linxin666/ok', '@linxin666/missing', '@linxin666/boom'],
+    packages: ['@gestaltrun/ok', '@gestaltrun/missing', '@gestaltrun/boom'],
     version: '1.0.0',
     fetchImpl,
   })
   assert.equal(calls.length, 3)
   assert.deepEqual(results.map(result => [result.name, result.ok]), [
-    ['@linxin666/ok', true],
-    ['@linxin666/missing', false],
-    ['@linxin666/boom', false],
+    ['@gestaltrun/ok', true],
+    ['@gestaltrun/missing', false],
+    ['@gestaltrun/boom', false],
   ])
   assert.equal(results[1].reason, 'HTTP 404')
   assert.equal(results[2].reason, 'network down')

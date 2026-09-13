@@ -19,9 +19,9 @@
  *
  * Config contract (written by scripts/aggregate.mjs):
  *   - id: web-ui-usage
- *     name: '@linxin666/dsh-web-all'
+ *     name: '@gestaltrun/dsh-web-all'
  *     config:
- *       plugin: '@linxin666/dsh-usage'
+ *       plugin: '@gestaltrun/dsh-usage'
  *       (config: {...})   forwarded verbatim to the real plugin
  *
  * The aggregate's SELF row (web-ui-compat) mounts this package with NO
@@ -190,8 +190,8 @@ function isOverrideShape(config: ShellConfig | undefined): boolean {
  * silent no-ops so upgrading the aggregate package never breaks the host boot.
  */
 const RETIRED_PLUGINS = new Set([
-  '@linxin666/dsh-perf',
-  '@linxin666/dsh-desktop-launcher',
+  '@gestaltrun/dsh-perf',
+  '@gestaltrun/dsh-desktop-launcher',
 ])
 
 /** Apply one shell entry: mount the configured real plugin behind an isolation boundary. */

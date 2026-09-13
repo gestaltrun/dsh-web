@@ -44,7 +44,7 @@ describe('bare row enablement', () => {
 
 describe('claimedIdsOf', () => {
   it('extracts insert ids from a bundle patch', () => {
-    expect(claimedIdsOf('- insert:\n    - id: ui-plugin-manager\n      name: "@linxin666/dsh-client-ui-plugin-manager"\n')).toEqual(['ui-plugin-manager'])
+    expect(claimedIdsOf('- insert:\n    - id: ui-plugin-manager\n      name: "@gestaltrun/dsh-client-ui-plugin-manager"\n')).toEqual(['ui-plugin-manager'])
   })
 
   it('returns empty for empty or malformed patches', () => {
@@ -57,10 +57,10 @@ describe('claimedIdsOf', () => {
 const AGGREGATE = [
   '- insert:',
   '    - id: web-ui-skin-center',
-  "      name: '@linxin666/dsh-web-all/skin-center'",
+  "      name: '@gestaltrun/dsh-web-all/skin-center'",
   '- insert:',
   '    - id: web-ui-i18n',
-  "      name: '@linxin666/dsh-i18n'",
+  "      name: '@gestaltrun/dsh-i18n'",
   '# inactive by default (opt-in rows)',
   '- id: web-ui-ssh',
   '  disabled: true',
@@ -129,7 +129,7 @@ describe('setRowEnabled', () => {
   it('writes an explicit disabled: false override for a bundle-disabled row', () => {
     // Removing the user row is only equivalent to enabling when no lower layer
     // disables the id; a bundle that ships it disabled needs the explicit flag.
-    const next = setRowEnabled(SAMPLE, 'p', 'web-ui-ssh', '@linxin666/dsh-web-all/ssh', true, false)
+    const next = setRowEnabled(SAMPLE, 'p', 'web-ui-ssh', '@gestaltrun/dsh-web-all/ssh', true, false)
     expect(next).not.toBe(SAMPLE)
     const { root } = parsePatch(next, 'p')
     const appended = root.items.find(item => bareRowId(item) === 'web-ui-ssh')

@@ -13,7 +13,7 @@
  * official shape is used structurally (no value import), so a missing or
  * foreign module system degrades to an empty result instead of breaking the
  * console.
- * @module @linxin666/dsh-doctor/client
+ * @module @gestaltrun/dsh-doctor/client
  */
 
 /** The structural slice of ctx.modules this scanner reads. */

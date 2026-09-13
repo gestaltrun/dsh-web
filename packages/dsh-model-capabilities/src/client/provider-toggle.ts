@@ -7,7 +7,7 @@
  * both the composer picker and the subagent selection read. Enable restores
  * the archived profile and clears the archive entry. Both namespaces are
  * revision-fenced; orderings keep the worst case a harmless duplicate archive.
- * @module @linxin666/dsh-client-ui-model-capabilities/client/provider-toggle
+ * @module @gestaltrun/dsh-client-ui-model-capabilities/client/provider-toggle
  */
 
 import type { RemoteFailure } from '@deepseek-ai/dsh-typert-protocol'

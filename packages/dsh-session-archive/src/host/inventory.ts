@@ -7,7 +7,7 @@
  * (sizes, sessions missing from the feed), and the plugin's own archive-time
  * ledger. The result is the single document the browser half renders and
  * plans against.
- * @module @linxin666/dsh-session-archive/host/inventory
+ * @module @gestaltrun/dsh-session-archive/host/inventory
  */
 
 import { existsSync, readFileSync } from 'node:fs'

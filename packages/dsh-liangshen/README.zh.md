@@ -58,14 +58,14 @@ DeepSeek V4 模型在选择执行轨迹时，会受到初始提示词与首轮�
 
 ```sh
 # 方式一：全家桶（推荐）
-dsh plugin --profile web add @linxin666/dsh-web-all@latest
+dsh plugin --profile web add @gestaltrun/dsh-web-all@latest
 
 # 方式二：单独安装
-dsh plugin --profile web add @linxin666/dsh-liangshen@latest
+dsh plugin --profile web add @gestaltrun/dsh-liangshen@latest
 
-# 两种方式二选一：聚合包与独立 @linxin666/dsh-liangshen 都会挂载本 preset。
+# 两种方式二选一：聚合包与独立 @gestaltrun/dsh-liangshen 都会挂载本 preset。
 # 需要在两者之间切换时，先 dsh plugin remove 移除另一个再安装：
-dsh plugin --profile web remove @linxin666/dsh-liangshen
+dsh plugin --profile web remove @gestaltrun/dsh-liangshen
 ```
 
 装完**完整重启 `dsh web`**，新建空 session，预设选择「梁神模式」。插件会在启动时把 presets 同步进 `~/.dsh/.agent-presets`（升级插件后重启即自动更新）。

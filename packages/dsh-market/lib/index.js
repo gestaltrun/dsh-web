@@ -154,7 +154,7 @@ function isLoopbackRequest(request) {
 *    center can tell official-market content — same-review code built from
 *    the dsh-web repository — apart from hand-dropped directories
 *    (issue #1073).
-* @module @linxin666/dsh-client-ui-market/core
+* @module @gestaltrun/dsh-client-ui-market/core
 */
 const MARKET_ORIGIN = "https://dsh-market.com";
 /** Provenance manifest written into every installed asset directory. */
@@ -422,7 +422,7 @@ function writeJson(res, status, body, headers = {}) {
 *  - POST /api/market/install-preset { id, force? }  (writes the preset library)
 * The host fetches the manifest itself, validates every path, and never
 * accepts a URL or a file list from the client (see core/installer).
-* @module @linxin666/dsh-client-ui-market/routes
+* @module @gestaltrun/dsh-client-ui-market/routes
 */
 const MARKET_API_PREFIX = "/api/market";
 function isLoopback(req) {
@@ -548,7 +548,7 @@ const inject = ["webServer"];
 const MARKET_SETTINGS_NAMESPACE = "dsh-web-ui-market";
 const Config = z.object({ enabled: z.boolean().default(true) });
 /** Register the namespace and mount the install gateway (once). */
-const apply = mountOnce("@linxin666/dsh-client-ui-market", applyImpl);
+const apply = mountOnce("@gestaltrun/dsh-client-ui-market", applyImpl);
 function applyImpl(ctx) {
 	ctx.inject(["settings"], (settingsCtx) => {
 		try {

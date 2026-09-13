@@ -1,4 +1,4 @@
-# @linxin666/dsh-client-ui-session-id
+# @gestaltrun/dsh-client-ui-session-id
 
 [English](README.md) | 中文
 
@@ -26,7 +26,7 @@
 ### 从 npm 安装（推荐）
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-client-ui-session-id@latest
+dsh plugin --profile web add @gestaltrun/dsh-client-ui-session-id@latest
 ```
 
 重启 `dsh web`（或等待热更新生效）后，点击侧边栏底部的「会话 ID」入口即可。
@@ -34,7 +34,7 @@ dsh plugin --profile web add @linxin666/dsh-client-ui-session-id@latest
 ### 从仓库安装（开发调试）
 
 ```sh
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install
 pnpm -r build

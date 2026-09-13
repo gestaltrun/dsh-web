@@ -15,7 +15,7 @@
  * Fail-closed: a host without the `llm-deepseek` namespace (adapter not
  * mounted), a missing settings seam, or a missing agentDefaultModel service
  * answers `supported: false` and rejects every write.
- * @module @linxin666/dsh-tool-describe-image/native-images
+ * @module @gestaltrun/dsh-tool-describe-image/native-images
  */
 
 import type { IncomingMessage, ServerResponse } from 'node:http'

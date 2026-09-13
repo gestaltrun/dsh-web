@@ -1,87 +1,87 @@
 [
   {
-    "name": "@linxin666/dsh-client-ui-web-ui-settings",
-    "specifier": "@linxin666/dsh-client-ui-web-ui-settings/client",
+    "name": "@gestaltrun/dsh-client-ui-web-ui-settings",
+    "specifier": "@gestaltrun/dsh-client-ui-web-ui-settings/client",
     "source": "packages/dsh-web-settings/src/client/index.ts"
   },
   {
-    "name": "@linxin666/dsh-client-ui-plugin-manager",
-    "specifier": "@linxin666/dsh-client-ui-plugin-manager/client",
+    "name": "@gestaltrun/dsh-client-ui-plugin-manager",
+    "specifier": "@gestaltrun/dsh-client-ui-plugin-manager/client",
     "source": "packages/dsh-plugin-manager/src/client/index.ts"
   },
   {
-    "name": "@linxin666/dsh-client-ui-market",
-    "specifier": "@linxin666/dsh-client-ui-market/client",
+    "name": "@gestaltrun/dsh-client-ui-market",
+    "specifier": "@gestaltrun/dsh-client-ui-market/client",
     "source": "packages/dsh-market/src/client/index.ts"
   },
   {
-    "name": "@linxin666/dsh-client-ui-task-board",
-    "specifier": "@linxin666/dsh-client-ui-task-board/client",
+    "name": "@gestaltrun/dsh-client-ui-task-board",
+    "specifier": "@gestaltrun/dsh-client-ui-task-board/client",
     "source": "packages/dsh-task-board/src/client/index.ts"
   },
   {
-    "name": "@linxin666/dsh-client-ui-git-graph",
-    "specifier": "@linxin666/dsh-client-ui-git-graph/client",
+    "name": "@gestaltrun/dsh-client-ui-git-graph",
+    "specifier": "@gestaltrun/dsh-client-ui-git-graph/client",
     "source": "packages/dsh-git-graph/src/client/index.ts"
   },
   {
-    "name": "@linxin666/dsh-remote-web-ui",
-    "specifier": "@linxin666/dsh-remote-web-ui/client",
+    "name": "@gestaltrun/dsh-remote-web-ui",
+    "specifier": "@gestaltrun/dsh-remote-web-ui/client",
     "source": "packages/dsh-remote-web-ui/src/client/index.ts"
   },
   {
-    "name": "@linxin666/dsh-pet",
-    "specifier": "@linxin666/dsh-pet/client",
+    "name": "@gestaltrun/dsh-pet",
+    "specifier": "@gestaltrun/dsh-pet/client",
     "source": "packages/dsh-pet/src/client/index.ts"
   },
   {
-    "name": "@linxin666/dsh-ssh",
-    "specifier": "@linxin666/dsh-ssh/client",
+    "name": "@gestaltrun/dsh-ssh",
+    "specifier": "@gestaltrun/dsh-ssh/client",
     "source": "packages/dsh-ssh/src/client/index.ts"
   },
   {
-    "name": "@linxin666/dsh-tool-describe-image",
-    "specifier": "@linxin666/dsh-tool-describe-image/client",
+    "name": "@gestaltrun/dsh-tool-describe-image",
+    "specifier": "@gestaltrun/dsh-tool-describe-image/client",
     "source": "packages/dsh-tool-describe-image/src/client/index.ts"
   },
   {
-    "name": "@linxin666/dsh-liangshen",
-    "specifier": "@linxin666/dsh-liangshen/client",
+    "name": "@gestaltrun/dsh-liangshen",
+    "specifier": "@gestaltrun/dsh-liangshen/client",
     "source": "packages/dsh-liangshen/src/client/index.ts"
   },
   {
-    "name": "@linxin666/dsh-client-ui-skill-explorer",
-    "specifier": "@linxin666/dsh-client-ui-skill-explorer/client",
+    "name": "@gestaltrun/dsh-client-ui-skill-explorer",
+    "specifier": "@gestaltrun/dsh-client-ui-skill-explorer/client",
     "source": "packages/dsh-skill-explorer/src/client/index.ts"
   },
   {
-    "name": "@linxin666/dsh-doctor",
-    "specifier": "@linxin666/dsh-doctor/client",
+    "name": "@gestaltrun/dsh-doctor",
+    "specifier": "@gestaltrun/dsh-doctor/client",
     "source": "packages/dsh-doctor/src/client/index.ts"
   },
   {
-    "name": "@linxin666/dsh-usage",
-    "specifier": "@linxin666/dsh-usage/client",
+    "name": "@gestaltrun/dsh-usage",
+    "specifier": "@gestaltrun/dsh-usage/client",
     "source": "packages/dsh-usage/src/client/index.ts"
   },
   {
-    "name": "@linxin666/dsh-session-archive",
-    "specifier": "@linxin666/dsh-session-archive/client",
+    "name": "@gestaltrun/dsh-session-archive",
+    "specifier": "@gestaltrun/dsh-session-archive/client",
     "source": "packages/dsh-session-archive/src/client/index.ts"
   },
   {
-    "name": "@linxin666/dsh-client-ui-model-capabilities",
-    "specifier": "@linxin666/dsh-client-ui-model-capabilities/client",
+    "name": "@gestaltrun/dsh-client-ui-model-capabilities",
+    "specifier": "@gestaltrun/dsh-client-ui-model-capabilities/client",
     "source": "packages/dsh-model-capabilities/src/client/index.ts"
   },
   {
-    "name": "@linxin666/dsh-client-ui-preset-center",
-    "specifier": "@linxin666/dsh-client-ui-preset-center/client",
+    "name": "@gestaltrun/dsh-client-ui-preset-center",
+    "specifier": "@gestaltrun/dsh-client-ui-preset-center/client",
     "source": "packages/dsh-preset-center/src/client/index.ts"
   },
   {
-    "name": "@linxin666/dsh-client-ui-skin-center",
-    "specifier": "@linxin666/dsh-client-ui-skin-center/client",
+    "name": "@gestaltrun/dsh-client-ui-skin-center",
+    "specifier": "@gestaltrun/dsh-client-ui-skin-center/client",
     "source": "packages/skins/skin-center/src/client/index.ts"
   }
 ]

@@ -15,7 +15,7 @@
  * — the same whole-array override the official card performs on its first
  * edit. Unknown fields on each entry survive: drafts are structurally open.
  *
- * @module @linxin666/dsh-client-ui-model-capabilities/core
+ * @module @gestaltrun/dsh-client-ui-model-capabilities/core
  */
 
 import type { JsonValue } from '@deepseek-ai/dsh-util-values'

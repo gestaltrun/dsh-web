@@ -11,7 +11,7 @@
  * archive entry. Orderings are chosen so the worst case is a harmless
  * duplicate archive, never a lost profile.
  *
- * @module @linxin666/dsh-client-ui-model-capabilities/core/provider-toggle
+ * @module @gestaltrun/dsh-client-ui-model-capabilities/core/provider-toggle
  */
 
 import type { JsonValue } from '@deepseek-ai/dsh-util-values'

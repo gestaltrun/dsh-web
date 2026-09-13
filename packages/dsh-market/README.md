@@ -1,4 +1,4 @@
-# @linxin666/dsh-client-ui-market
+# @gestaltrun/dsh-client-ui-market
 
 English | [中文](README.zh.md)
 
@@ -20,7 +20,7 @@ this card's preset tab renders).
   into the roster's user root through the Presets panel. Reinstalling an existing directory asks for
   confirmation and replaces it atomically.
 - One-click plugin install through the optional `pluginManager` service (provided by
-  `@linxin666/dsh-client-ui-plugin-manager`); without it the card degrades to the copy-command index.
+  `@gestaltrun/dsh-client-ui-plugin-manager`); without it the card degrades to the copy-command index.
 - Remote browsers see the read-only catalog: install buttons are hidden, the Workshop site link and
   copy-command fallbacks stay available.
 - Each card also shows an independent Workshop install count next to likes, plus a plugin npm
@@ -30,13 +30,13 @@ this card's preset tab renders).
 ## Install
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-client-ui-market
+dsh plugin --profile web add @gestaltrun/dsh-client-ui-market
 ```
 
 Restart `dsh web`; the Workshop section appears in the settings page and opens this store card
 directly (skins / pets / plugins / presets tabs). The Skin Center, the Pet section and the plugin
 manager in the official Plugins section are separate first-level settings entries; the presets tab is
-rendered by `@linxin666/dsh-client-ui-preset-center`, which contributes it into the child slot this
+rendered by `@gestaltrun/dsh-client-ui-preset-center`, which contributes it into the child slot this
 card declares.
 
 ## Config

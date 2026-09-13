@@ -15,7 +15,7 @@
  * roster after the directory is discoverable. A preset that hides a row from
  * this scan is still gated by the install/enable split and the operator's
  * confirmation.
- * @module @linxin666/dsh-client-ui-preset-center/core/profile
+ * @module @gestaltrun/dsh-client-ui-preset-center/core/profile
  */
 
 import { readFileSync } from 'node:fs'

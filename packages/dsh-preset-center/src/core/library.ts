@@ -10,7 +10,7 @@
  *
  * The module owns no policy: reserved ids and the default-preset guard live in
  * the route layer, which is the only place that can read the roster.
- * @module @linxin666/dsh-client-ui-preset-center/core/library
+ * @module @gestaltrun/dsh-client-ui-preset-center/core/library
  */
 
 import { cpSync, existsSync, mkdirSync, readdirSync, renameSync, rmSync, statSync } from 'node:fs'

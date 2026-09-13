@@ -5,7 +5,7 @@
  * plus a compact settings row. Data comes from the host's loopback-fenced
  * /api/dsh-usage/overview document; polling runs only while the section is
  * mounted and the tab is visible.
- * @module @linxin666/dsh-usage/client/UsageSectionCard
+ * @module @gestaltrun/dsh-usage/client/UsageSectionCard
  */
 
 import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from 'react'

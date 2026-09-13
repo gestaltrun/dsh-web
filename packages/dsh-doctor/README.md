@@ -1,4 +1,4 @@
-# @linxin666/dsh-doctor
+# @gestaltrun/dsh-doctor
 
 English | [中文](README.zh.md)
 
@@ -34,7 +34,7 @@ installation.
 - The Doctor Supervisor runs as a per-user background service. It classifies
   exits into user stops, task completion and real failures, applies the
   crash-loop circuit breaker, and owns rescue scheduling.
-- The Doctor Launcher detects the legacy aggregate package before starting DSH and automatically migrates `@linxin666/dsh-web-ui-all` to `@linxin666/dsh-web-all` when `autoMigrate` is enabled (default true) and the target package is available; migration goes through the official `dsh plugin` CLI with manifest/lockfile backups and a `--dump-config` gate.
+- The Doctor Launcher detects the legacy aggregate package before starting DSH and automatically migrates `@gestaltrun/dsh-web-ui-all` to `@gestaltrun/dsh-web-all` when `autoMigrate` is enabled (default true) and the target package is available; migration goes through the official `dsh plugin` CLI with manifest/lockfile backups and a `--dump-config` gate.
 - The Doctor Launcher relays `dsh` arguments verbatim to the real DSH
   executable, forwards stdin, stdout, stderr and signals, records startup
   intent and exit facts, and only then reports an incident.
@@ -60,19 +60,19 @@ Profile package.json and cordis.patch.yml are only touched through the official
 ### From npm (family first)
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-web-all@latest
+dsh plugin --profile web add @gestaltrun/dsh-web-all@latest
 ```
 
 ### As a standalone bundle
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-doctor@latest
+dsh plugin --profile web add @gestaltrun/dsh-doctor@latest
 ```
 
 ### From the repository (development)
 
 ```sh
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install
 pnpm -r build

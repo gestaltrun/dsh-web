@@ -2,7 +2,7 @@
  * Shell isolation contract, exercised through the REAL dsh-app-boot boot()
  * (imported from the installed host package when available) with the actually
  * built shell artifact (lib/index.js). The contract: a family patch row that
- * mounts @linxin666/dsh-web-all with `config.plugin` degrades alone when the
+ * mounts @gestaltrun/dsh-web-all with `config.plugin` degrades alone when the
  * real plugin fails to import or start, while healthy siblings mount and
  * provide services as usual. The control proves today's direct-mount shape
  * still kills the whole boot, anchoring why the shell exists.
@@ -92,14 +92,14 @@ describe('dsh-web-all fault-isolation shell (real boot)', () => {
   it('has a built shell artifact and a shell-pointing patch', () => {
     expect(existsSync(join(PACKAGE_DIR, 'lib/shell.js'))).toBe(true)
     const patch = await_import_patch()
-    expect(patch).toContain("name: '@linxin666/dsh-web-all'")
+    expect(patch).toContain("name: '@gestaltrun/dsh-web-all'")
     // Family rows mount per-family subpath exports (distinct inventory
     // titles) while still carrying the real plugin name in config...
-    expect(patch).toMatch(/- id: web-ui-usage\n      name: '@linxin666\/dsh-web-all\/usage'\n      config:\n        plugin: '@linxin666\/dsh-usage'/)
+    expect(patch).toMatch(/- id: web-ui-usage\n      name: '@gestaltrun\/dsh-web-all\/usage'\n      config:\n        plugin: '@gestaltrun\/dsh-usage'/)
     // ...and the built shells re-export exists for those specifiers.
     expect(existsSync(join(PACKAGE_DIR, 'lib/shells/shell.js'))).toBe(true)
     // The exempted i18n row keeps its direct name.
-    expect(patch).toMatch(/- id: web-ui-i18n\n      name: '@linxin666\/dsh-i18n'/)
+    expect(patch).toMatch(/- id: web-ui-i18n\n      name: '@gestaltrun\/dsh-i18n'/)
   })
 
   dshIt('a family subpath row degrades alone exactly like the main-face shell', () => {

@@ -246,7 +246,7 @@ function writeJson(res, status, body, headers = {}) {
 *  - the discovery root is `USER_PRESET_DIR` of
 *    `@deepseek-ai/dsh-agent-presets`, appended to the roster unless a
 *    deployment sets `includeUserRoot: false`.
-* @module @linxin666/dsh-client-ui-preset-center/core/paths
+* @module @gestaltrun/dsh-client-ui-preset-center/core/paths
 */
 /** Library directory under the DSH home: installed but inert. */
 const LIBRARY_DIR = "agent-presets";
@@ -254,7 +254,7 @@ const LIBRARY_DIR = "agent-presets";
 const ENABLED_DIR = ".agent-presets";
 /**
 * Provenance filename written by the market installer (mirrors
-* `PROVENANCE_FILENAME` in `@linxin666/dsh-client-ui-market`; no
+* `PROVENANCE_FILENAME` in `@gestaltrun/dsh-client-ui-market`; no
 * cross-package runtime import, the same way the skin center mirrors it).
 */
 const PROVENANCE_FILENAME = "dsh-market.provenance.json";
@@ -284,7 +284,7 @@ function enabledRoot(dshHome) {
 * hand-authored directory, and a pristine copy apart from one edited after
 * install. Fail-closed: unreadable or wrongly-shaped provenance is `missing`,
 * never trusted.
-* @module @linxin666/dsh-client-ui-preset-center/core/provenance
+* @module @gestaltrun/dsh-client-ui-preset-center/core/provenance
 */
 /** Market origin the provenance must pin (mirrors MARKET_ORIGIN in the market package). */
 const MARKET_ORIGIN = "https://dsh-market.com";
@@ -396,7 +396,7 @@ function isDirectory(dir) {
 * roster after the directory is discoverable. A preset that hides a row from
 * this scan is still gated by the install/enable split and the operator's
 * confirmation.
-* @module @linxin666/dsh-client-ui-preset-center/core/profile
+* @module @gestaltrun/dsh-client-ui-preset-center/core/profile
 */
 const CODE_FILE_RE = /\.(?:mjs|cjs|js)$/;
 /** Unquote a YAML scalar the shallow way (the profile is not a parser). */
@@ -461,7 +461,7 @@ function needsConfirmation(profile) {
 *
 * The module owns no policy: reserved ids and the default-preset guard live in
 * the route layer, which is the only place that can read the roster.
-* @module @linxin666/dsh-client-ui-preset-center/core/library
+* @module @gestaltrun/dsh-client-ui-preset-center/core/library
 */
 /** A refused library operation. */
 var PresetOperationError = class extends Error {
@@ -984,7 +984,7 @@ const name = "ui-preset-center";
 /** The gateway requires the host webserver; the roster is read opportunistically. */
 const inject = ["webServer"];
 /** Mount the preset-center gateway (once per process). */
-const apply = mountOnce("@linxin666/dsh-client-ui-preset-center", applyImpl);
+const apply = mountOnce("@gestaltrun/dsh-client-ui-preset-center", applyImpl);
 function applyImpl(ctx) {
 	const routes = makePresetCenterRoutes({ ctx });
 	for (const route of routes) try {

@@ -38,14 +38,14 @@
 
 ## 安装
 
-安装全家桶聚合包 `@linxin666/dsh-web-all`（全部插件与皮肤）或单独安装本插件：
+安装全家桶聚合包 `@gestaltrun/dsh-web-all`（全部插件与皮肤）或单独安装本插件：
 
 ```sh
 # 推荐：直接从 npm 安装
-dsh plugin --profile web add @linxin666/dsh-remote-web-ui@latest
+dsh plugin --profile web add @gestaltrun/dsh-remote-web-ui@latest
 
 # 或从仓库（开发循环）
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install && pnpm -r build
 dsh plugin --profile web add link:$(pwd)/packages/dsh-remote-web-ui
@@ -112,9 +112,9 @@ cloudflared tunnel --url http://127.0.0.1:3080
 cd dsh-web
 export NPM_TOKEN='<token>'   # 仅当仍需私有 @deepseek-ai 认证时
 pnpm install
-pnpm --filter @linxin666/dsh-remote-web-ui run build
-pnpm --filter @linxin666/dsh-remote-web-ui test
-pnpm --filter @linxin666/dsh-remote-web-ui run typecheck
+pnpm --filter @gestaltrun/dsh-remote-web-ui run build
+pnpm --filter @gestaltrun/dsh-remote-web-ui test
+pnpm --filter @gestaltrun/dsh-remote-web-ui run typecheck
 ```
 
 对端 API 来自官方 NPM SDK：用到的每个 `@deepseek-ai/*` 包都声明在 devDependencies（0.1.2-alpha.2 cohort）中，TypeScript/Vitest 直接从 node_modules 解析类型——不需要 DSH 源码 checkout。消费侧 `prepare` 构建（`tsdown.prepare.config.ts`）不做类型检查地转译，git 安装同样无需 harness checkout。

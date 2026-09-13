@@ -299,14 +299,14 @@ global React root (createRoot → document.body) <-- polling 2s -- pet-client (b
 
 ## Install
 
-Install the family aggregate package `@linxin666/dsh-web-all` (all plugins and skins in one) or this plugin alone:
+Install the family aggregate package `@gestaltrun/dsh-web-all` (all plugins and skins in one) or this plugin alone:
 
 ```sh
 ### From npm (recommended)
-dsh plugin --profile web add @linxin666/dsh-pet@latest
+dsh plugin --profile web add @gestaltrun/dsh-pet@latest
 
 ### From the repository (development)
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install && pnpm -r build
 dsh plugin --profile web add link:$(pwd)/packages/dsh-pet

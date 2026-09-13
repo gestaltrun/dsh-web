@@ -16,7 +16,7 @@
  * requires write access to $DSH_HOME itself — an attacker with that access
  * can already install full plugins, so the file is a provenance record,
  * not a capability guard against the local user.
- * @module @linxin666/dsh-client-ui-skin-center/provenance
+ * @module @gestaltrun/dsh-client-ui-skin-center/provenance
  */
 
 import { createHash } from 'node:crypto'
@@ -25,10 +25,10 @@ import { dirname, join, sep } from 'node:path'
 
 import { REVIEWED_SKIN_HOOKS } from './reviewed-hooks.generated.ts'
 
-/** Provenance filename written by the market installer (mirrors PROVENANCE_FILENAME in @linxin666/dsh-client-ui-market; no cross-package runtime import). */
+/** Provenance filename written by the market installer (mirrors PROVENANCE_FILENAME in @gestaltrun/dsh-client-ui-market; no cross-package runtime import). */
 export const MARKET_PROVENANCE_FILENAME = 'dsh-market.provenance.json'
 
-/** Market origin the provenance must pin (mirrors MARKET_ORIGIN in @linxin666/dsh-client-ui-market). */
+/** Market origin the provenance must pin (mirrors MARKET_ORIGIN in @gestaltrun/dsh-client-ui-market). */
 export const MARKET_PROVENANCE_SOURCE = 'https://dsh-market.com'
 
 function sha256Hex(abs: string): string | null {

@@ -58,14 +58,14 @@ Both preset-local plugins are configured in `agent.cordis.yml`:
 
 ```sh
 # Option 1: family bundle (recommended)
-dsh plugin --profile web add @linxin666/dsh-web-all@latest
+dsh plugin --profile web add @gestaltrun/dsh-web-all@latest
 
 # Option 2: standalone
-dsh plugin --profile web add @linxin666/dsh-liangshen@latest
+dsh plugin --profile web add @gestaltrun/dsh-liangshen@latest
 
-# Pick ONE of the two: the bundle and the standalone @linxin666/dsh-liangshen
+# Pick ONE of the two: the bundle and the standalone @gestaltrun/dsh-liangshen
 # both mount this preset. If you switch between them, remove the other first:
-dsh plugin --profile web remove @linxin666/dsh-liangshen
+dsh plugin --profile web remove @gestaltrun/dsh-liangshen
 ```
 
 Fully restart `dsh web`, open a NEW empty session, and pick "梁神模式" as the preset. The plugin syncs the presets into `~/.dsh/.agent-presets` at startup (upgrades refresh them automatically on next restart).

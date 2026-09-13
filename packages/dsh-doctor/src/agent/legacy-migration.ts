@@ -9,10 +9,10 @@
  */
 
 /** The previously published aggregate package name. */
-export const LEGACY_AGGREGATE = '@linxin666/dsh-web-ui-all'
+export const LEGACY_AGGREGATE = '@gestaltrun/dsh-web-ui-all'
 
 /** The current aggregate package name. */
-export const CURRENT_AGGREGATE = '@linxin666/dsh-web-all'
+export const CURRENT_AGGREGATE = '@gestaltrun/dsh-web-all'
 
 /** One deterministic legacy-to-current package migration. */
 export interface LegacyAggregateMigration {

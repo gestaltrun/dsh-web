@@ -67,7 +67,7 @@ declare module '@deepseek-ai/cordis' {
 export const inject = ['slots', 'locale', 'theme', 'settingsScope', 'connection', 'remote']
 
 /** Self-report item for the install heartbeat. */
-const SELF_ITEM = [{ name: '@linxin666/dsh-client-ui-skin-center' }]
+const SELF_ITEM = [{ name: '@gestaltrun/dsh-client-ui-skin-center' }]
 
 /**
  * Beat the install heartbeat (docs/telemetry.md), enriching it with the

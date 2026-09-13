@@ -108,7 +108,7 @@ describe('loadSkinCatalog', () => {
   })
 
   it('carries deprecated-field warnings without failing the skin', () => {
-    writeSkin(builtin, 'legacy', v2('legacy', { package: '@linxin666/old', bodyAttr: 'data-dsh-x' }))
+    writeSkin(builtin, 'legacy', v2('legacy', { package: '@gestaltrun/old', bodyAttr: 'data-dsh-x' }))
     const catalog = loadSkinCatalog({ builtinDir: builtin, userDir: user })
     expect(catalog.skins).toHaveLength(1)
     expect(catalog.skins[0].warnings).toHaveLength(2)

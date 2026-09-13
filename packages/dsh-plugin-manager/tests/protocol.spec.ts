@@ -40,14 +40,14 @@ describe('parsePluginList', () => {
     const row = {
       ...pluginRow,
       children: [
-        { id: 'web-ui-pet', name: '@linxin666/dsh-pet', enabled: false },
-        { id: 'web-ui-plugin-manager', name: '@linxin666/dsh-client-ui-plugin-manager', enabled: true, locked: true },
+        { id: 'web-ui-pet', name: '@gestaltrun/dsh-pet', enabled: false },
+        { id: 'web-ui-plugin-manager', name: '@gestaltrun/dsh-client-ui-plugin-manager', enabled: true, locked: true },
       ],
     }
     const [item] = parsePluginList({ plugins: [row] })
     expect(item.children).toEqual([
-      { id: 'web-ui-pet', name: '@linxin666/dsh-pet', enabled: false },
-      { id: 'web-ui-plugin-manager', name: '@linxin666/dsh-client-ui-plugin-manager', enabled: true, locked: true },
+      { id: 'web-ui-pet', name: '@gestaltrun/dsh-pet', enabled: false },
+      { id: 'web-ui-plugin-manager', name: '@gestaltrun/dsh-client-ui-plugin-manager', enabled: true, locked: true },
     ])
   })
 
@@ -113,12 +113,12 @@ describe('parseUpdateList', () => {
 
   it('parses a legacy migration row', () => {
     expect(parseUpdateList({ updates: [{
-      id: '@linxin666/dsh-web-ui-all', current: '0.3.2', latest: '0.3.3',
-      kind: 'migrate', target: '@linxin666/dsh-web-all', targetVersion: '0.3.3',
+      id: '@gestaltrun/dsh-web-ui-all', current: '0.3.2', latest: '0.3.3',
+      kind: 'migrate', target: '@gestaltrun/dsh-web-all', targetVersion: '0.3.3',
     }] }))
       .toEqual([{
-        id: '@linxin666/dsh-web-ui-all', current: '0.3.2', latest: '0.3.3',
-        kind: 'migrate', target: '@linxin666/dsh-web-all', targetVersion: '0.3.3',
+        id: '@gestaltrun/dsh-web-ui-all', current: '0.3.2', latest: '0.3.3',
+        kind: 'migrate', target: '@gestaltrun/dsh-web-all', targetVersion: '0.3.3',
       }])
   })
 

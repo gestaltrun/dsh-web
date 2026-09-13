@@ -19,7 +19,7 @@
  *  - the adapter never REMOVES attributes it did not set; disposal only
  *    disconnects the observer (stamping is cosmetic and scopes itself under
  *    html[data-dsh-skin] consumers).
- * @module @linxin666/dsh-client-ui-skin-center/runtime/semantic-adapter
+ * @module @gestaltrun/dsh-client-ui-skin-center/runtime/semantic-adapter
  */
 
 export type SemanticAttr = 'data-dsh-surface' | 'data-dsh-part' | 'data-dsh-plugin'

@@ -85,40 +85,40 @@ describe('gateway update route', () => {
   })
 
   it('starts a migration job for the legacy aggregate', async () => {
-    const { facts, dir } = profile('^0.3.2', '@linxin666/dsh-web-ui-all', '0.3.2')
+    const { facts, dir } = profile('^0.3.2', '@gestaltrun/dsh-web-ui-all', '0.3.2')
     tempDirs.push(dir)
     const { handler, update, migrate } = updateHandler(
       facts,
-      async name => name === '@linxin666/dsh-web-all' ? manifest('0.3.3') : undefined,
+      async name => name === '@gestaltrun/dsh-web-all' ? manifest('0.3.3') : undefined,
       async () => '0.1.1-rc.2',
     )
     const captured = response()
-    await handler(request({ id: '@linxin666/dsh-web-ui-all' }), captured.res)
+    await handler(request({ id: '@gestaltrun/dsh-web-ui-all' }), captured.res)
     expect(captured.status()).toBe(200)
     expect(captured.body()).toEqual({ jobId: 'job-1' })
     expect(update).not.toHaveBeenCalled()
     expect(migrate).toHaveBeenCalledWith(
-      '@linxin666/dsh-web-ui-all',
-      '@linxin666/dsh-web-all',
+      '@gestaltrun/dsh-web-ui-all',
+      '@gestaltrun/dsh-web-all',
       '0.3.3',
-      '@linxin666/dsh-web-all@0.3.3',
+      '@gestaltrun/dsh-web-all@0.3.3',
     )
   })
 
   it('rewrites a local repository link for the legacy migration route', async () => {
-    const { facts, dir } = profile('link:/Users/zcl/code/dsh-web/packages/dsh-web-ui-all', '@linxin666/dsh-web-ui-all', '0.3.2')
+    const { facts, dir } = profile('link:/Users/zcl/code/dsh-web/packages/dsh-web-ui-all', '@gestaltrun/dsh-web-ui-all', '0.3.2')
     tempDirs.push(dir)
     const { handler, migrate } = updateHandler(
       facts,
-      async name => name === '@linxin666/dsh-web-all' ? manifest('0.3.3') : undefined,
+      async name => name === '@gestaltrun/dsh-web-all' ? manifest('0.3.3') : undefined,
       async () => '0.1.1-rc.2',
     )
     const captured = response()
-    await handler(request({ id: '@linxin666/dsh-web-ui-all' }), captured.res)
+    await handler(request({ id: '@gestaltrun/dsh-web-ui-all' }), captured.res)
     expect(captured.status()).toBe(200)
     expect(migrate).toHaveBeenCalledWith(
-      '@linxin666/dsh-web-ui-all',
-      '@linxin666/dsh-web-all',
+      '@gestaltrun/dsh-web-ui-all',
+      '@gestaltrun/dsh-web-all',
       '0.3.3',
       'link:/Users/zcl/code/dsh-web/packages/dsh-web-all',
     )
@@ -274,19 +274,19 @@ describe('gateway check-updates route', () => {
   })
 
   it('reports a migration update for the legacy aggregate', async () => {
-    const { facts, dir } = profile('^0.3.2', '@linxin666/dsh-web-ui-all', '0.3.2')
+    const { facts, dir } = profile('^0.3.2', '@gestaltrun/dsh-web-ui-all', '0.3.2')
     tempDirs.push(dir)
     const handler = checkUpdatesHandler(
       facts,
-      async name => name === '@linxin666/dsh-web-all' ? manifest('0.3.3', { dsh: { engines: { dsh: '>=0.1.1-rc.1' } } }) : undefined,
+      async name => name === '@gestaltrun/dsh-web-all' ? manifest('0.3.3', { dsh: { engines: { dsh: '>=0.1.1-rc.1' } } }) : undefined,
       async () => '0.1.1-rc.2',
     )
     const captured = response()
     await handler(request({}), captured.res)
     expect(captured.body()).toEqual({
       updates: [{
-        id: '@linxin666/dsh-web-ui-all', current: '0.3.2', latest: '0.3.3',
-        kind: 'migrate', target: '@linxin666/dsh-web-all', targetVersion: '0.3.3',
+        id: '@gestaltrun/dsh-web-ui-all', current: '0.3.2', latest: '0.3.3',
+        kind: 'migrate', target: '@gestaltrun/dsh-web-all', targetVersion: '0.3.3',
         requiresDsh: '>=0.1.1-rc.1', compatible: true,
       }],
     })

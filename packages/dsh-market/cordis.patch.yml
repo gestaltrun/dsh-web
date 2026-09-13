@@ -5,4 +5,4 @@
 # served from lib/client.js) render the first-level "Market" section.
 - insert:
     - id: ui-market
-      name: '@linxin666/dsh-client-ui-market'
+      name: '@gestaltrun/dsh-client-ui-market'

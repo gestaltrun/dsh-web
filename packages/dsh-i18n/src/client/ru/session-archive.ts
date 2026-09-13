@@ -2,7 +2,7 @@
  * ru copy for dsh-session-archive (namespace `dsh-web-ui-session-archive`).
  * Mirrors the zh key set of packages/dsh-session-archive/src/client/locales.ts;
  * scripts/i18n-audit.mjs verifies coverage and placeholder parity.
- * @module @linxin666/dsh-i18n/client/ru/session-archive
+ * @module @gestaltrun/dsh-i18n/client/ru/session-archive
  */
 
 export const ru: Record<string, string> = {

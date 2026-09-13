@@ -3,7 +3,7 @@
  * settings section. All session enumeration and mutation happens in the
  * host half over loopback-fenced routes; this bundle renders the inventory
  * document and drives the batch pipelines.
- * @module @linxin666/dsh-session-archive/client
+ * @module @gestaltrun/dsh-session-archive/client
  */
 
 import type { Context as ClientContext } from '@deepseek-ai/cordis'

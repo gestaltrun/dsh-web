@@ -4,7 +4,7 @@
  * package renames its locale namespace); the mapping below owns the namespace
  * ids the locale registry sees. scripts/i18n-audit.mjs loads this module to
  * verify per-namespace coverage against every package's zh keys.
- * @module @linxin666/dsh-i18n/client/ru
+ * @module @gestaltrun/dsh-i18n/client/ru
  */
 import { ru as doctor } from './doctor.ts'
 import { ru as gitGraph } from './git-graph.ts'

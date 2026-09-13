@@ -2,8 +2,8 @@
  * Doctor launch-time migration for the legacy aggregate package.
  *
  * The Doctor Launcher runs before the real DSH process so a stale
- * `@linxin666/dsh-web-ui-all` profile can be migrated to
- * `@linxin666/dsh-web-all` without user interaction. Every mutation goes
+ * `@gestaltrun/dsh-web-ui-all` profile can be migrated to
+ * `@gestaltrun/dsh-web-all` without user interaction. Every mutation goes
  * through the official `dsh plugin` CLI and is backed up before it starts.
  * The legacy package stays in place until the current aggregate is installed
  * and verified; a failed migration restores the original manifest when
@@ -87,7 +87,7 @@ async function targetAvailable(targetSpec: string, profileDir: string, deps: Leg
     return exists(join(path, 'package.json'))
   }
   const targetVersion = deps.targetVersion ?? currentPackageVersion()
-  const encoded = '@linxin666%2Fdsh-web-all'
+  const encoded = '@gestaltrun%2Fdsh-web-all'
   const fetchImpl = deps.fetch ?? (async (url: string) => await fetch(url, { signal: AbortSignal.timeout(REGISTRY_TIMEOUT_MS) }))
   try {
     const response = await fetchImpl(`https://registry.npmjs.org/${encoded}/${targetVersion}`)
@@ -122,8 +122,8 @@ export async function migrateLegacyAggregate(
   }
   const parsed = parseProfileManifest(manifestText, packageJsonPath)
   if (parsed.error !== undefined) return { kind: 'error', message: parsed.error }
-  const legacyName = '@linxin666/dsh-web-ui-all'
-  const currentName = '@linxin666/dsh-web-all'
+  const legacyName = '@gestaltrun/dsh-web-ui-all'
+  const currentName = '@gestaltrun/dsh-web-all'
   const oldSpec = parsed.facts.dependencies[legacyName]
   if (oldSpec === undefined || !isLegacyAggregate(legacyName)) return { kind: 'noop', message: 'legacy aggregate is not installed' }
   const targetVersion = options.targetVersion ?? currentPackageVersion()

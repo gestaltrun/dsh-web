@@ -47,29 +47,29 @@ describe('daily telemetry heartbeat', () => {
   })
 
   it('sends one anonymous beat with the package name and a random visitor id', () => {
-    reportDailyHeartbeat([{ name: '@linxin666/dsh-client-ui-market' }])
+    reportDailyHeartbeat([{ name: '@gestaltrun/dsh-client-ui-market' }])
     const body = lastBody()
     expect(body.kind).toBe('heartbeat')
     expect(body.visitor).toMatch(/^[A-Za-z0-9_-]{16,64}$/)
-    expect(body.items).toEqual([{ name: '@linxin666/dsh-client-ui-market' }])
+    expect(body.items).toEqual([{ name: '@gestaltrun/dsh-client-ui-market' }])
   })
 
   it('persists the visitor id for later beats', () => {
-    reportDailyHeartbeat([{ name: '@linxin666/dsh-client-ui-market' }])
+    reportDailyHeartbeat([{ name: '@gestaltrun/dsh-client-ui-market' }])
     reportDailyHeartbeat([])
     expect(store.getItem('dsh-web-ui-telemetry-visitor')).toBe('0123456789abcdef0123456789abcdef')
   })
 
   it('marks the day only after an accepted send so offline browsers retry', async () => {
     vi.mocked(fetch).mockImplementationOnce(async () => new Response(null, { status: 503 }))
-    reportDailyHeartbeat([{ name: '@linxin666/dsh-pet' }])
+    reportDailyHeartbeat([{ name: '@gestaltrun/dsh-pet' }])
     await Promise.resolve()
     await Promise.resolve()
     await Promise.resolve()
     expect(store.getItem(todayKey())).toBeNull()
 
     vi.mocked(fetch).mockImplementationOnce(async () => new Response(null, { status: 200 }))
-    reportDailyHeartbeat([{ name: '@linxin666/dsh-pet' }])
+    reportDailyHeartbeat([{ name: '@gestaltrun/dsh-pet' }])
     await Promise.resolve()
     await Promise.resolve()
     expect(store.getItem(todayKey())).toBe('1')
@@ -77,13 +77,13 @@ describe('daily telemetry heartbeat', () => {
 
   it('stays silent for the rest of the day once the beat was accepted', () => {
     store.setItem(todayKey(), '')
-    reportDailyHeartbeat([{ name: '@linxin666/dsh-pet' }])
+    reportDailyHeartbeat([{ name: '@gestaltrun/dsh-pet' }])
     expect(fetch).not.toHaveBeenCalled()
   })
 
   it('never throws and sends nothing when storage is unavailable', () => {
     vi.stubGlobal('localStorage', undefined)
-    expect(() => reportDailyHeartbeat([{ name: '@linxin666/dsh-pet' }])).not.toThrow()
+    expect(() => reportDailyHeartbeat([{ name: '@gestaltrun/dsh-pet' }])).not.toThrow()
     expect(fetch).not.toHaveBeenCalled()
   })
 
@@ -95,7 +95,7 @@ describe('daily telemetry heartbeat', () => {
   it('skips automated browsers (navigator.webdriver)', () => {
     Object.defineProperty(navigator, 'webdriver', { value: true, configurable: true })
     try {
-      reportDailyHeartbeat([{ name: '@linxin666/dsh-pet' }])
+      reportDailyHeartbeat([{ name: '@gestaltrun/dsh-pet' }])
       expect(fetch).not.toHaveBeenCalled()
     } finally {
       Object.defineProperty(navigator, 'webdriver', { value: false, configurable: true })
@@ -105,10 +105,10 @@ describe('daily telemetry heartbeat', () => {
   it('carries explicit version and channel, omitting absent fields', () => {
     reportDailyHeartbeat([
       { name: 'skin:harbor', version: '2.0.1', channel: 'market' },
-      { name: '@linxin666/dsh-pet' },
+      { name: '@gestaltrun/dsh-pet' },
     ])
     const body = JSON.parse(String(vi.mocked(fetch).mock.calls[0][1]?.body))
     expect(body.items[0]).toEqual({ name: 'skin:harbor', version: '2.0.1', channel: 'market' })
-    expect(body.items[1]).toEqual({ name: '@linxin666/dsh-pet' })
+    expect(body.items[1]).toEqual({ name: '@gestaltrun/dsh-pet' })
   })
 })

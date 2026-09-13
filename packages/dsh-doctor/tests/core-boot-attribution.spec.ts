@@ -2,12 +2,12 @@ import { describe, expect, it } from 'vitest'
 import { attributeBootFailure } from '../src/core/boot-attribution.ts'
 
 const ROWS = ['web-ui-usage', 'web-ui-pet', 'web-ui-compat', 'web-ui-i18n'] as const
-const NAMES = { 'web-ui-usage': '@linxin666/dsh-usage', 'web-ui-pet': '@linxin666/dsh-pet' }
+const NAMES = { 'web-ui-usage': '@gestaltrun/dsh-usage', 'web-ui-pet': '@gestaltrun/dsh-pet' }
 
 describe('attributeBootFailure', () => {
   it('attributes a loader apply message to its row id', () => {
     const trace = [
-      'dsh: plugin tree failed to load: failed to apply loader entry include (cordis:include): failed to apply loader entry web-ui-usage (@linxin666/dsh-usage): real plugin start boom',
+      'dsh: plugin tree failed to load: failed to apply loader entry include (cordis:include): failed to apply loader entry web-ui-usage (@gestaltrun/dsh-usage): real plugin start boom',
       'Error: real plugin start boom',
     ].join('\n')
     const verdict = attributeBootFailure({ stderrTail: trace, rowIds: ROWS })
@@ -17,7 +17,7 @@ describe('attributeBootFailure', () => {
   })
 
   it('attributes a loader import message', () => {
-    const trace = 'dsh: plugin tree failed to load: failed to apply loader entry include (cordis:include): failed to import loader entry web-ui-pet (@linxin666/dsh-pet): Cannot find package'
+    const trace = 'dsh: plugin tree failed to load: failed to apply loader entry include (cordis:include): failed to import loader entry web-ui-pet (@gestaltrun/dsh-pet): Cannot find package'
     const verdict = attributeBootFailure({ stderrTail: trace, rowIds: ROWS })
     expect(verdict?.rowId).toBe('web-ui-pet')
     expect(verdict?.source).toBe('import-message')
@@ -31,7 +31,7 @@ describe('attributeBootFailure', () => {
   })
 
   it('attributes an activation line via the row name', () => {
-    const trace = 'dsh: 1 entry did not activate\n@linxin666/dsh-usage: pending (waiting for service: ghost)'
+    const trace = 'dsh: 1 entry did not activate\n@gestaltrun/dsh-usage: pending (waiting for service: ghost)'
     const verdict = attributeBootFailure({ stderrTail: trace, rowIds: ROWS, namesByRowId: NAMES })
     expect(verdict?.rowId).toBe('web-ui-usage')
     expect(verdict?.source).toBe('activation-line')

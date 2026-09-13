@@ -1,4 +1,4 @@
-# @linxin666/dsh-client-ui-__NAME__
+# @gestaltrun/dsh-client-ui-__NAME__
 
 English | [中文](README.zh.md)
 
@@ -14,7 +14,7 @@ this file with the real description once the plugin is implemented.
 ### From npm (recommended)
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-client-ui-__NAME__@latest
+dsh plugin --profile web add @gestaltrun/dsh-client-ui-__NAME__@latest
 ```
 
 ### From the repository (development)

@@ -5,7 +5,7 @@
  * the service stays transport-only and every endpoint detail lives here.
  *
  * All probes run host-side (Node fetch); API keys never reach the browser.
- * @module @linxin666/dsh-usage/core/adapters
+ * @module @gestaltrun/dsh-usage/core/adapters
  */
 
 import type { PlanWindowView } from './types.ts'

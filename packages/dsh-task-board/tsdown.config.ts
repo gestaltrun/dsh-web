@@ -10,7 +10,7 @@
  */
 import { clientBundle } from '../../shared/tsdown.client.ts'
 
-export default clientBundle('@linxin666/dsh-client-ui-task-board', ['src/index.ts', 'src/invariant.ts'], {
+export default clientBundle('@gestaltrun/dsh-client-ui-task-board', ['src/index.ts', 'src/invariant.ts'], {
   libExternal: [
     '@deepseek-ai/dsh-agent-presets',
     '@deepseek-ai/dsh-api-gateway',

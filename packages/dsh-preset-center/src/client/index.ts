@@ -3,7 +3,7 @@
  * contributes the Presets panel into the child slot the Workshop card
  * declares. Nothing here fetches the catalog — the store card owns that — and
  * every mutation goes through the host's loopback gateway.
- * @module @linxin666/dsh-client-ui-preset-center/client
+ * @module @gestaltrun/dsh-client-ui-preset-center/client
  */
 
 import type { Context as ClientContext } from '@deepseek-ai/cordis'

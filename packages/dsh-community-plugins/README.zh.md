@@ -1,4 +1,4 @@
-# @linxin666/dsh-client-ui-community-plugins
+# @gestaltrun/dsh-client-ui-community-plugins
 
 [English](README.md) | 中文
 
@@ -15,7 +15,7 @@ dsh web 生态的社区插件索引数据源：`community.json` 是创意工坊�
 
 本包无需直接安装；它以索引数据源身份随仓库发布。
 
-既有 profile 若仍挂载旧卡（如聚合包），可在官方「插件」分区的插件管理 Tab 中卸载 `@linxin666/dsh-client-ui-community-plugins`（下次启动生效）。
+既有 profile 若仍挂载旧卡（如聚合包），可在官方「插件」分区的插件管理 Tab 中卸载 `@gestaltrun/dsh-client-ui-community-plugins`（下次启动生效）。
 
 ## 已知限制
 

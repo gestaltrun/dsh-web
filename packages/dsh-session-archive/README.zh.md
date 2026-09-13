@@ -17,7 +17,7 @@ DSH Web 的会话归档管理插件：集中查看全部会话，批量归档/�
 ## 安装
 
 ```sh
-pnpm add @linxin666/dsh-session-archive
+pnpm add @gestaltrun/dsh-session-archive
 ```
 
 全家桶（`dsh-web-all`）已包含本插件。独立挂载到 profile：

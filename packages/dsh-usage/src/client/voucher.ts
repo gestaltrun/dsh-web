@@ -6,7 +6,7 @@
  * everything user-facing around it lives in the section's locales. The pure
  * helpers are unit-tested; the draw itself degrades to a thrown error the
  * section renders as its failure line.
- * @module @linxin666/dsh-usage/client/voucher
+ * @module @gestaltrun/dsh-usage/client/voucher
  */
 
 import { isDeepSeekProviderRoute } from '../core/adapters.ts'

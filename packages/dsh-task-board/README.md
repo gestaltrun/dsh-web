@@ -42,13 +42,13 @@ The board view renders on first open and keeps its local view state when closed 
 Install the aggregate package or this package alone, then restart `dsh web`:
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-client-ui-task-board@latest
+dsh plugin --profile web add @gestaltrun/dsh-client-ui-task-board@latest
 ```
 
 For local development:
 
 ```sh
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install
 pnpm build
@@ -95,9 +95,9 @@ On macOS the backend starts `/usr/bin/caffeinate -i -w <host-pid>` and never req
 Node 20 or newer and the official NPM SDK packages are required; no DSH source checkout is used.
 
 ```sh
-pnpm --filter @linxin666/dsh-client-ui-task-board typecheck
-pnpm --filter @linxin666/dsh-client-ui-task-board test
-pnpm --filter @linxin666/dsh-client-ui-task-board build
+pnpm --filter @gestaltrun/dsh-client-ui-task-board typecheck
+pnpm --filter @gestaltrun/dsh-client-ui-task-board test
+pnpm --filter @gestaltrun/dsh-client-ui-task-board build
 ```
 
 Set `DSH_POWER_SMOKE=1` to opt into the native helper smoke test on Windows, macOS, or Linux. It starts the fixed helper, waits for readiness, releases it in cleanup, and confirms process exit without changing the system power plan. Linux first probes systemd-logind with a bounded timeout; without a usable system bus the native portion is skipped while pure logic tests remain available.

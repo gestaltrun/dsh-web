@@ -23,7 +23,7 @@
  * browser). A pointer cancel aborts without committing, and the external
  * value is re-synced into the DOM only while the user is neither dragging
  * nor keyboard-focusing the input.
- * @module @linxin666/dsh-client-ui-skin-center/slider-control
+ * @module @gestaltrun/dsh-client-ui-skin-center/slider-control
  */
 import { useCallback, useEffect, useRef, type ReactNode } from 'react'
 

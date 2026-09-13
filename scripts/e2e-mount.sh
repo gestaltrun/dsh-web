@@ -16,10 +16,10 @@
 #   bash scripts/e2e-mount.sh
 #
 # 依赖改写（scripts/e2e-mount-rewrite，默认 auto 模式）：聚合包 tarball 里
-# 已在 npm 发布的 @linxin666/* 依赖保持 registry 安装（门禁原语义不变），
+# 已在 npm 发布的 @gestaltrun/* 依赖保持 registry 安装（门禁原语义不变），
 # 仅尚未发布的新包（推送 → 发布窗口）自动打包仓库 workspace 改写为 file:
 # tarball——窗口期不再必红。改写为 file: 的家族 tarball 会被递归打补丁：它
-# 自己的 @linxin666/* 依赖（如 dsh-skins → dsh-client-ui-skin-center）走
+# 自己的 @gestaltrun/* 依赖（如 dsh-skins → dsh-client-ui-skin-center）走
 # 同一套规则，避免嵌套边在 npm 传播完成前回落到未发布的 registry 版本。
 #
 # 环境变量（均可省略）：
@@ -30,7 +30,7 @@
 #                       （用于 dsh-better-sidebar@0.13.0 尚未发版前的本地
 #                       联调；CI 不设此变量，走 npm 已发布版本）
 #   FAMILY_TGZS_DIR     本地家族 tarball 目录（手工全覆盖，优先级高于 auto
-#                       模式）：给出时把聚合包 tarball 里全部 @linxin666/* 依赖
+#                       模式）：给出时把聚合包 tarball 里全部 @gestaltrun/* 依赖
 #                       改写为 file:<目录内同名 tarball>（验证仓库当前构建，
 #                       而非 npm 已发布版本；与本地全 tarball 安装流程一致）
 #   PORT                固定端口（默认 0 = OS 分配，从日志解析 URL）
@@ -102,7 +102,7 @@ TARBALL="$(cd "$WEB_UI_ALL_DIR" && pwd)/$TARBALL"
 say "tarball: $TARBALL"
 
 # 步骤 1b：解析聚合包 tarball 依赖（scripts/e2e-mount-rewrite）。auto 模式
-# 只把 npm 上尚未发布的 @linxin666/* 依赖改写为仓库 workspace 打包的 file:
+# 只把 npm 上尚未发布的 @gestaltrun/* 依赖改写为仓库 workspace 打包的 file:
 # tarball（发布窗口治理）；FAMILY_TGZS_DIR / BETTER_SIDEBAR_TGZ 为手工全
 # 覆盖，优先级高于 auto 模式。
 if [ -n "$FAMILY_TGZS_DIR" ]; then
@@ -161,8 +161,8 @@ allowBuilds:
   ssh2: true
 
 minimumReleaseAgeExclude:
-  - 'dsh-better-sidebar@0.19.0'
-  - '@linxin666/*'
+  - '@gestaltrun/dsh-better-sidebar@0.19.1-gestaltrun.0'
+  - '@gestaltrun/*'
 EOF
 
 # 步骤 3：官方 CLI 安装 tarball + bundle 协调（真实挂载路径）
@@ -174,13 +174,13 @@ if ! node -e '
   const fs = require("fs");
   const p = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
   const bundles = p.dsh?.profile?.bundles ?? [];
-  process.exit(bundles.some(b => b === "@linxin666/dsh-web-all") ? 0 : 1);
+  process.exit(bundles.some(b => b === "@gestaltrun/dsh-web-all") ? 0 : 1);
 ' "$PROFILE_DIR/package.json"; then
   warn "dsh-web-all 未出现在 dsh.profile.bundles 中——挂载未注册"
   cat "$PROFILE_DIR/package.json"
   exit 1
 fi
-say "挂载已注册：dsh.profile.bundles 包含 @linxin666/dsh-web-all"
+say "挂载已注册：dsh.profile.bundles 包含 @gestaltrun/dsh-web-all"
 
 # 步骤 5：启动 dsh web（--port 0 = OS 分配；keyless 可起）
 say "启动 dsh web（port=${PORT}）..."

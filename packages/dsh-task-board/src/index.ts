@@ -96,7 +96,7 @@ const DEFAULT_ANNOUNCE = false
  * @param ctx - the plugin context (systemPrompt injected).
  * @param config - resolved plugin config (schema defaults applied by the loader).
  */
-export const apply = mountOnce('@linxin666/dsh-client-ui-task-board', applyImpl)
+export const apply = mountOnce('@gestaltrun/dsh-client-ui-task-board', applyImpl)
 
 function applyImpl(ctx: Context, config?: Config): void {
   const host = new TaskBoardHostService(ctx.typertGateway, {

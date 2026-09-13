@@ -1,7 +1,7 @@
 {
-  "name": "@linxin666/dsh-ssh",
+  "name": "@gestaltrun/dsh-ssh",
   "description": "Remote SSH operations for the dsh web GUI: host config store (~/.dsh/dsh-ssh.json, import from ~/.ssh/config), a persistent ssh2 connection pool with jump-host support, exec / PTY web terminal / SFTP transfer / local port-forward tunnels / cluster execution, plus agent tools (ssh_list, ssh_exec, ssh_upload, ssh_download, ssh_tunnel, ssh_cluster). Hot-pluggable — mounted via ~/.dsh/cordis.patch.yml + a profile node_modules symlink, no dsh source changes.",
-  "version": "0.3.21",
+  "version": "0.3.21-gestaltrun.0",
   "type": "module",
   "packageManager": "pnpm@11.7.0",
   "engines": {
@@ -98,6 +98,12 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zhu1090093659/dsh-web.git"
+    "url": "https://github.com/gestaltrun/dsh-web.git",
+    "directory": "packages/dsh-ssh"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "tag": "latest"
   }
 }

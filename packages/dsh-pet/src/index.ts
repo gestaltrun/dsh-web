@@ -8,7 +8,7 @@
  * those sources, never touching host or client code. Install via
  * 'dsh plugin --profile web add link:<dsh-web>/packages/dsh-pet'; the
  * cordis.patch.yml inserts this plugin row.
- * @module @linxin666/dsh-pet
+ * @module @gestaltrun/dsh-pet
  */
 
 import { Context } from '@deepseek-ai/cordis'
@@ -139,7 +139,7 @@ export function makePetSettingsSchema(fallbackPetId: string) {
 }
 
 /** Register the pet service and its API + asset routes on the context. */
-export const apply = mountOnce('@linxin666/dsh-pet', applyImpl)
+export const apply = mountOnce('@gestaltrun/dsh-pet', applyImpl)
 
 function applyImpl(ctx: Context, config: PetConfig = {}): void {
   const registry = config.registry

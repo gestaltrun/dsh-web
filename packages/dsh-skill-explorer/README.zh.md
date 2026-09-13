@@ -1,4 +1,4 @@
-# @linxin666/dsh-client-ui-skill-explorer
+# @gestaltrun/dsh-client-ui-skill-explorer
 
 [English](README.md) | 中文
 
@@ -26,13 +26,13 @@ DSH Web GUI 的**技能中心**：按来源分级浏览已加载的全部 skill�
 ### 从 npm（推荐）
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-client-ui-skill-explorer@latest
+dsh plugin --profile web add @gestaltrun/dsh-client-ui-skill-explorer@latest
 ```
 
 ### 从仓库（开发）
 
 ```sh
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install
 pnpm -r build

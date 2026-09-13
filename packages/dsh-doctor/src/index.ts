@@ -26,7 +26,7 @@ export function effectiveConfig(config?: Config): Required<Config> {
   return { enabled: config?.enabled ?? true, fullProtection: config?.fullProtection ?? DEFAULT_DOCTOR_POLICY.fullProtection, autoRepair: config?.autoRepair ?? DEFAULT_DOCTOR_POLICY.autoRepair, autoMigrate: config?.autoMigrate ?? DEFAULT_DOCTOR_POLICY.autoMigrate, heartbeatIntervalMs: config?.heartbeatIntervalMs ?? 5000 }
 }
 
-export const apply = mountOnce('@linxin666/dsh-doctor', (ctx: Context, config?: Config): void => {
+export const apply = mountOnce('@gestaltrun/dsh-doctor', (ctx: Context, config?: Config): void => {
   let current: () => Config = () => config ?? {}
   let disposeRuntime: (() => void) | undefined
   let wasEnabled = false

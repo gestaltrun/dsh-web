@@ -299,14 +299,14 @@ dsh-pet/
 
 ## 安装
 
-安装聚合全家桶 `@linxin666/dsh-web-all`（全部插件与皮肤一次到位），或单独安装本插件：
+安装聚合全家桶 `@gestaltrun/dsh-web-all`（全部插件与皮肤一次到位），或单独安装本插件：
 
 ```sh
 ### 从 npm 安装（推荐）
-dsh plugin --profile web add @linxin666/dsh-pet@latest
+dsh plugin --profile web add @gestaltrun/dsh-pet@latest
 
 ### 从仓库安装（开发调试）
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install && pnpm -r build
 dsh plugin --profile web add link:$(pwd)/packages/dsh-pet

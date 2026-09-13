@@ -6,7 +6,7 @@
  * side is covered by a minimal LZ4 block encoder (literal-only for TEXB
  * mipmaps, literals+match for PKG entry chains) so the decoder is exercised
  * through realistic round-trips.
- * @module @linxin666/dsh-client-ui-skin-center/tests/pkg-extract
+ * @module @gestaltrun/dsh-client-ui-skin-center/tests/pkg-extract
  */
 
 import { Buffer } from 'node:buffer'

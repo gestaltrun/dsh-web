@@ -8,7 +8,7 @@
  * contracts/status-decoration-v1.schema.json; this hand-rolled parser is
  * authoritative. Keep this file erasable-syntax-only (scripts/ import it
  * under node's strip-only mode).
- * @module @linxin666/dsh-pet/decoration
+ * @module @gestaltrun/dsh-pet/decoration
  */
 
 import { isAbsolute } from 'node:path'

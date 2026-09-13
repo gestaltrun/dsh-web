@@ -1,7 +1,7 @@
 /**
  * dsh-usage locale dictionaries (zh/en). The zh dictionary is the key source;
  * `en` mirrors its full key set (packages/AGENTS.md bilingual discipline).
- * @module @linxin666/dsh-usage/client/locales
+ * @module @gestaltrun/dsh-usage/client/locales
  */
 
 /** Dictionary namespace this package registers. */

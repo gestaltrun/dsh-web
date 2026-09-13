@@ -20,7 +20,7 @@
  *     must keep working, so a failed ns registration skips just that ns.
  *   - Every disposer is idempotent; the combined teardown releases only what
  *     actually registered.
- * @module @linxin666/dsh-i18n/client
+ * @module @gestaltrun/dsh-i18n/client
  */
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
 // Type-only: pulls the locale service's Context merge (ctx.locale) and the

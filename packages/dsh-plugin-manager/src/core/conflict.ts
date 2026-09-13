@@ -12,7 +12,7 @@
  * Loader only re-reads the composition at the next start), so that failure
  * shape is left to the boot-failure ring — the real start is the authoritative
  * conflict detector.
- * @module @linxin666/dsh-client-ui-plugin-manager/core
+ * @module @gestaltrun/dsh-client-ui-plugin-manager/core
  */
 
 import type { PluginControlItem } from './protocol.ts'

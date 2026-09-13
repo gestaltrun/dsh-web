@@ -5,7 +5,7 @@
  * manifest. The host half stays as an inert cordis entry so existing
  * profiles and the aggregate keep resolving the row; the row can be removed
  * through the plugin manager.
- * @module @linxin666/dsh-client-ui-community-plugins
+ * @module @gestaltrun/dsh-client-ui-community-plugins
  */
 
 import type { Context } from '@deepseek-ai/cordis'
@@ -21,4 +21,4 @@ export const inject = []
  * Inert apply: the data source carries no runtime behavior.
  * @param _ctx - cordis context.
  */
-export const apply = mountOnce('@linxin666/dsh-client-ui-community-plugins', (_ctx: Context) => {})
+export const apply = mountOnce('@gestaltrun/dsh-client-ui-community-plugins', (_ctx: Context) => {})

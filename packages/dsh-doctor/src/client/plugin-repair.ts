@@ -7,7 +7,7 @@
  * service is resolved structurally (no value import, no inject dependency),
  * so a shell without the plugin manager degrades the row actions instead of
  * failing apply.
- * @module @linxin666/dsh-doctor/client
+ * @module @gestaltrun/dsh-doctor/client
  */
 
 /** One recorded plugin boot failure (the service's failure-ring slice). */

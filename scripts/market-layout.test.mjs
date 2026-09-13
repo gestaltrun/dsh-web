@@ -41,7 +41,7 @@ test('skins.json 契约与资产存在性', () => {
     if (skinJson.sourceUrl) {
       assert.equal(item.repo, skinJson.sourceUrl, 'skin repo must mirror sourceUrl: ' + item.id)
     } else {
-      assert.equal(item.repo, `https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/${item.id}`, 'skin repo must point to catalog source: ' + item.id)
+      assert.equal(item.repo, `https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/${item.id}`, 'skin repo must point to catalog source: ' + item.id)
     }
     assert.ok(/^https:\/\//.test(item.repo), 'skin repo must be https: ' + item.id)
     const bg = item.contributes && item.contributes.backgroundMedia

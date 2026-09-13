@@ -1,7 +1,7 @@
 {
-  "name": "@linxin666/dsh-i18n",
+  "name": "@gestaltrun/dsh-i18n",
   "description": "DSH web GUI language pack plugin: registers the Русский language into the locale catalog and centrally carries the ru dictionaries for every family plugin namespace (missing keys fall back to English through the SDK chain).",
-  "version": "0.3.21",
+  "version": "0.3.21-gestaltrun.0",
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
@@ -55,5 +55,15 @@
     "README.zh.md",
     "README.i18n.yaml"
   ],
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "tag": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gestaltrun/dsh-web.git",
+    "directory": "packages/dsh-i18n"
+  }
 }

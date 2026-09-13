@@ -1,7 +1,7 @@
 {
-  "name": "@linxin666/dsh-client-ui-session-id",
+  "name": "@gestaltrun/dsh-client-ui-session-id",
   "description": "DSH web GUI plugin: sidebar-foot Session ID panel listing every session with its full id and one-click copy (browser-only; no source changes).",
-  "version": "0.3.21",
+  "version": "0.3.21-gestaltrun.0",
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
@@ -74,5 +74,15 @@
     "README.zh.md",
     "README.i18n.yaml"
   ],
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "tag": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gestaltrun/dsh-web.git",
+    "directory": "packages/dsh-session-id"
+  }
 }

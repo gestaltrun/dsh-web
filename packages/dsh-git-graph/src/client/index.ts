@@ -120,7 +120,7 @@ export const CONTEXT_FALLBACK_MS = 2000
 export function apply(ctx: ClientContext): void {
   // Anonymous install heartbeat (docs/telemetry.md): one beat per browser per
   // UTC day, package name only, silent failure.
-  reportDailyHeartbeat([{ name: '@linxin666/dsh-client-ui-git-graph' }])
+  reportDailyHeartbeat([{ name: '@gestaltrun/dsh-client-ui-git-graph' }])
 
   ctx.effect(() => {
     try {

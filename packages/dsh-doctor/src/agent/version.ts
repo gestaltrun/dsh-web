@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url'
  * Supervisor reports this version and the CLI pins the rescue-capsule install
  * spec to it; the Web console compares it with the host half's own version to
  * detect a stale Supervisor after an update.
- * @module @linxin666/dsh-doctor/agent
+ * @module @gestaltrun/dsh-doctor/agent
  */
 
 /** Read the version of the package owning a module file. */

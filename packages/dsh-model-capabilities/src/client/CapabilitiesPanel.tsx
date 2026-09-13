@@ -15,7 +15,7 @@
  * Remove-provider seam), which takes the provider out of the model catalog
  * both pickers read; enabling restores it. A missing namespace or a refused
  * read renders the failure inline, never a blank.
- * @module @linxin666/dsh-client-ui-model-capabilities/client/CapabilitiesPanel
+ * @module @gestaltrun/dsh-client-ui-model-capabilities/client/CapabilitiesPanel
  */
 
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'

@@ -26,7 +26,7 @@
  *    center can tell official-market content — same-review code built from
  *    the dsh-web repository — apart from hand-dropped directories
  *    (issue #1073).
- * @module @linxin666/dsh-client-ui-market/core
+ * @module @gestaltrun/dsh-client-ui-market/core
  */
 
 import { createHash } from 'node:crypto'

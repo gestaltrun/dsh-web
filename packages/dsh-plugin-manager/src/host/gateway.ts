@@ -6,7 +6,7 @@
  * CLI changed (the conflict ledger). The npm web runtime has no installer
  * service, so this gateway is its write path; on runtimes with official
  * channels the browser half never calls it.
- * @module @linxin666/dsh-client-ui-plugin-manager/host
+ * @module @gestaltrun/dsh-client-ui-plugin-manager/host
  */
 
 import { spawn } from 'node:child_process'

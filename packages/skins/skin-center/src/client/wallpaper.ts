@@ -20,7 +20,7 @@
  * image (video: first frame captured to a canvas; scene: the host-decoded
  * PNG; web: the preview image) for a zero-animation-cost backdrop. When
  * 'pauseOnHidden' is set the video pauses while the window is hidden.
- * @module @linxin666/dsh-client-ui-skin-center/wallpaper
+ * @module @gestaltrun/dsh-client-ui-skin-center/wallpaper
  */
 import type { SettingsScope, SettingsScopeSnapshot } from '@deepseek-ai/dsh-client-ui-settings/client'
 import { setSceneBackdropActive } from './runtime/backdrop-scene.ts'

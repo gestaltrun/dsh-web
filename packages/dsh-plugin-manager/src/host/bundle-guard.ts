@@ -10,7 +10,7 @@
  * (`webserver: duplicate prefix route "/sidebar/api"`). This module decides,
  * from the before-state composition, which newly added bundles entries are
  * such duplicate mounts; the gateway strips exactly those entries back out.
- * @module @linxin666/dsh-client-ui-plugin-manager/host
+ * @module @gestaltrun/dsh-client-ui-plugin-manager/host
  */
 
 import { readFile } from 'node:fs/promises'

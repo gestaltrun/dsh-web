@@ -160,7 +160,7 @@ function scanSkins() {
     item.files = listFiles(dir)
     // Source GitHub link: preserve an explicit sourceUrl, otherwise point to
     // this repository's catalog directory so every published skin is discoverable.
-    item.repo = meta.sourceUrl || `https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/${name}`
+    item.repo = meta.sourceUrl || `https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/${name}`
     if (Object.keys(contributes).length) item.contributes = contributes
     if (meta.requires) item.requires = meta.requires
     if (meta.facets) item.facets = meta.facets

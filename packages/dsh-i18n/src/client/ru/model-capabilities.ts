@@ -2,7 +2,7 @@
  * ru copy for dsh-model-capabilities (namespace `model-caps`).
  * Mirrors the zh key set of packages/dsh-model-capabilities/src/client/locales.ts;
  * scripts/i18n-audit.mjs verifies coverage and placeholder parity.
- * @module @linxin666/dsh-i18n/client/ru/model-capabilities
+ * @module @gestaltrun/dsh-i18n/client/ru/model-capabilities
  */
 
 export const ru: Record<string, string> = {

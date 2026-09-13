@@ -42,13 +42,13 @@
 安装聚合包或单独安装本包，然后重启 `dsh web`：
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-client-ui-task-board@latest
+dsh plugin --profile web add @gestaltrun/dsh-client-ui-task-board@latest
 ```
 
 本地开发安装：
 
 ```sh
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install
 pnpm build
@@ -95,9 +95,9 @@ macOS 后端启动 `/usr/bin/caffeinate -i -w <host-pid>`，绝不请求 `-d`。
 需要 Node 20 或更高版本及官方 NPM SDK 包；不使用 DSH 源码 checkout。
 
 ```sh
-pnpm --filter @linxin666/dsh-client-ui-task-board typecheck
-pnpm --filter @linxin666/dsh-client-ui-task-board test
-pnpm --filter @linxin666/dsh-client-ui-task-board build
+pnpm --filter @gestaltrun/dsh-client-ui-task-board typecheck
+pnpm --filter @gestaltrun/dsh-client-ui-task-board test
+pnpm --filter @gestaltrun/dsh-client-ui-task-board build
 ```
 
 设置 `DSH_POWER_SMOKE=1` 可在 Windows、macOS 或 Linux 上显式启用原生 helper smoke：真实启动固定 helper、等待 ready、在清理路径释放并确认进程退出，不修改系统电源计划。Linux 会先以有界超时探测 systemd-logind；没有可用 system bus 时原生部分跳过，纯逻辑测试仍可运行。

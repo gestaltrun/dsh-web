@@ -3,7 +3,7 @@
  * section: independent auto-archive / auto-delete switches with day
  * thresholds (validated locally before save), candidate previews, manual
  * run-now buttons, and the persisted last-run/next-check status.
- * @module @linxin666/dsh-session-archive/client/AutoSettings
+ * @module @gestaltrun/dsh-session-archive/client/AutoSettings
  */
 
 import { useMemo, useState, useSyncExternalStore, type ReactNode } from 'react'

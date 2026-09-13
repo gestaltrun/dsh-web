@@ -6,7 +6,7 @@
  * hand-authored directory, and a pristine copy apart from one edited after
  * install. Fail-closed: unreadable or wrongly-shaped provenance is `missing`,
  * never trusted.
- * @module @linxin666/dsh-client-ui-preset-center/core/provenance
+ * @module @gestaltrun/dsh-client-ui-preset-center/core/provenance
  */
 
 import { createHash } from 'node:crypto'

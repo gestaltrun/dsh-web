@@ -3,7 +3,7 @@
  * by the host (authoritative plan) and the browser half (confirm-dialog
  * preview), so the numbers a user confirms are computed by the same rules
  * the host enforces.
- * @module @linxin666/dsh-session-archive/core/cascade
+ * @module @gestaltrun/dsh-session-archive/core/cascade
  */
 
 import type { ArchiveSessionRow, DeletePlanView, OpResult } from './types.ts'

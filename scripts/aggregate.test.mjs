@@ -97,7 +97,7 @@ test('web-ui-all mounts dsh-better-sidebar as an external row', () => {
   const idx = lines.findIndex((line) => /^ {4}- id: web-ui-better-sidebar$/.test(line))
   assert.ok(idx >= 0, 'web-ui-better-sidebar row is missing from the aggregate patch')
   // The paired name line resolves the row from the profile root (npm package).
-  assert.match(lines[idx + 1] ?? '', /^ {6}name: 'dsh-better-sidebar'$/)
+  assert.match(lines[idx + 1] ?? '', /^ {6}name: '@gestaltrun\/dsh-better-sidebar'$/)
 })
 
 test('web-ui-all does not mount the dsh-client-runtime-dependent @mlgbnb/dsh-archive-manager', () => {
@@ -141,5 +141,5 @@ test('web-ui-all leaves the deprecated @morlay/better-session integration out', 
   // simplification note removing better-session).
   assert.doesNotMatch(patch, /@morlay\//, 'the deprecated better-session integration must not reappear in the aggregate patch')
   assert.doesNotMatch(patch, /^- id: web-ui-(session-branch|session-rdb|conversation-message-actions)$/m, 'better-session sub-plugin rows must not mount')
-  assert.doesNotMatch(patch, /@linxin666\/dsh-perf/, 'the removed dsh-perf plugin must not reappear in the aggregate patch')
+  assert.doesNotMatch(patch, /@gestaltrun\/dsh-perf/, 'the removed dsh-perf plugin must not reappear in the aggregate patch')
 })

@@ -5,7 +5,7 @@
  * a memory-mode scope or a hostile scope degrades to an 'unavailable' state
  * instead of breaking the console. The facade also routes a failed write back
  * as a result value instead of a rejection.
- * @module @linxin666/dsh-doctor/client
+ * @module @gestaltrun/dsh-doctor/client
  */
 
 import type { SettingsScope } from '@deepseek-ai/dsh-client-ui-settings/client'

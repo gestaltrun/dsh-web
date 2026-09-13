@@ -25,7 +25,7 @@ function fakeCtx(): { effect: ReturnType<typeof vi.fn>; dispose: () => void } {
 describe('mountOnce', () => {
   it('runs the first mount and unmarks on fiber disposal', () => {
     const apply = vi.fn()
-    const wrapped = mountOnce('@linxin666/dsh-pet', apply)
+    const wrapped = mountOnce('@gestaltrun/dsh-pet', apply)
     const ctx = fakeCtx()
     wrapped(ctx, { enabled: true })
     expect(apply).toHaveBeenCalledTimes(1)
@@ -38,7 +38,7 @@ describe('mountOnce', () => {
 
   it('skips a second mount of the same package name until disposed', () => {
     const apply = vi.fn()
-    const wrapped = mountOnce('@linxin666/dsh-ssh', apply)
+    const wrapped = mountOnce('@gestaltrun/dsh-ssh', apply)
     const ctx = fakeCtx()
     wrapped(ctx)
     wrapped(fakeCtx())
@@ -54,10 +54,10 @@ describe('mountOnce', () => {
     const applyB = vi.fn()
     const ctxA = fakeCtx()
     const ctxB = fakeCtx()
-    mountOnce('@linxin666/dsh-task-board', applyA)(ctxA)
-    mountOnce('@linxin666/dsh-remote-web-ui', applyB)(ctxB)
-    mountOnce('@linxin666/dsh-task-board', applyA)(fakeCtx())
-    mountOnce('@linxin666/dsh-remote-web-ui', applyB)(fakeCtx())
+    mountOnce('@gestaltrun/dsh-task-board', applyA)(ctxA)
+    mountOnce('@gestaltrun/dsh-remote-web-ui', applyB)(ctxB)
+    mountOnce('@gestaltrun/dsh-task-board', applyA)(fakeCtx())
+    mountOnce('@gestaltrun/dsh-remote-web-ui', applyB)(fakeCtx())
     expect(applyA).toHaveBeenCalledTimes(1)
     expect(applyB).toHaveBeenCalledTimes(1)
     ctxA.dispose()

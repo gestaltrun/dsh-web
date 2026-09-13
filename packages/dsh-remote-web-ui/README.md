@@ -38,14 +38,14 @@ The paired remote desktop also runs in **host mode**: on this harness line the "
 
 ## Install
 
-Install the family aggregate package `@linxin666/dsh-web-all` (all plugins and skins in one) or this plugin alone:
+Install the family aggregate package `@gestaltrun/dsh-web-all` (all plugins and skins in one) or this plugin alone:
 
 ```sh
 # Recommended: install directly from npm
-dsh plugin --profile web add @linxin666/dsh-remote-web-ui@latest
+dsh plugin --profile web add @gestaltrun/dsh-remote-web-ui@latest
 
 # Or from the repository (development loop)
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install && pnpm -r build
 dsh plugin --profile web add link:$(pwd)/packages/dsh-remote-web-ui
@@ -112,9 +112,9 @@ Work from this repository (no sibling checkout needed):
 cd dsh-web
 export NPM_TOKEN='<token>'   # only if private @deepseek-ai auth is still required
 pnpm install
-pnpm --filter @linxin666/dsh-remote-web-ui run build
-pnpm --filter @linxin666/dsh-remote-web-ui test
-pnpm --filter @linxin666/dsh-remote-web-ui run typecheck
+pnpm --filter @gestaltrun/dsh-remote-web-ui run build
+pnpm --filter @gestaltrun/dsh-remote-web-ui test
+pnpm --filter @gestaltrun/dsh-remote-web-ui run typecheck
 ```
 
 The peer APIs come from the official NPM SDK: every `@deepseek-ai/*` package used here is declared in devDependencies (0.1.2-alpha.2 cohort), and TypeScript/Vitest resolve types straight from node_modules — no DSH source checkout is required. The consumer-side `prepare` build (`tsdown.prepare.config.ts`) transpiles without type checking, so git installs work without any harness checkout either.

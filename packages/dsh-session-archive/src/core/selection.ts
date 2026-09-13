@@ -2,7 +2,7 @@
  * Browser-side inventory filtering, sorting, and selection accounting. Pure
  * logic over the complete inventory the host serves, so "select all" always
  * means the full filtered result set — never just the rendered window.
- * @module @linxin666/dsh-session-archive/core/selection
+ * @module @gestaltrun/dsh-session-archive/core/selection
  */
 
 import type { ArchiveSessionRow, ArchiveIssueCode } from './types.ts'

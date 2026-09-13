@@ -227,7 +227,7 @@
       "description": "DSH 技能中心：按来源分级浏览已加载 skill（系统内置 / 项目 / 用户 / 自定义 / 运行时），支持启用/禁用、创建与删除（移入 .trash）。",
       "descriptionEn": "DSH skill center: browse loaded skills grouped by source (bundled / project / user / custom / runtime), with enable/disable, create and delete (move to .trash).",
       "repo": "https://github.com/wingsky-1/dsh-skill-explorer",
-      "npm": "@linxin666/dsh-client-ui-skill-explorer",
+      "npm": "@gestaltrun/dsh-client-ui-skill-explorer",
       "category": "tools",
       "subcategory": "dev"
     },
@@ -454,7 +454,7 @@
       "description": "侧边栏底部会话 ID 面板：列出全部会话的完整 ID 并一键复制（纯浏览器、只读，不修改会话状态）。",
       "descriptionEn": "Sidebar-foot Session ID panel: lists every session with its full id and one-click copy (browser-only and read-only, never mutates sessions).",
       "repo": "https://github.com/zhu1090093659/dsh-web/tree/main/packages/dsh-session-id",
-      "npm": "@linxin666/dsh-client-ui-session-id",
+      "npm": "@gestaltrun/dsh-client-ui-session-id",
       "category": "ui",
       "subcategory": "panel"
     },

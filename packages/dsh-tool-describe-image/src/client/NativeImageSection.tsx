@@ -6,7 +6,7 @@
  * form, so a toggle settles immediately while the rest of the card keeps its
  * staged drafts. Unsupported hosts and failed writes render a hint; nothing
  * here throws.
- * @module @linxin666/dsh-tool-describe-image/client/NativeImageSection
+ * @module @gestaltrun/dsh-tool-describe-image/client/NativeImageSection
  */
 
 import { useCallback, useEffect, useState } from 'react'

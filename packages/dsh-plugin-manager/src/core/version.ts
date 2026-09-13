@@ -12,7 +12,7 @@
  * this check must allow. Everything here is pure and tolerant of untrusted
  * input: a malformed value means "cannot verify", which the callers treat as
  * a fail-closed verdict when a requirement was declared (issue #754).
- * @module @linxin666/dsh-client-ui-plugin-manager/core
+ * @module @gestaltrun/dsh-client-ui-plugin-manager/core
  */
 
 /** One parsed DSH host or package version. */

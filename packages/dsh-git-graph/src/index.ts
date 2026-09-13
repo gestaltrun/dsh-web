@@ -1,5 +1,5 @@
 /**
- * @linxin666/dsh-client-ui-git-graph — host half: the workspace-gated git
+ * @gestaltrun/dsh-client-ui-git-graph — host half: the workspace-gated git
  * service and its /git/* HTTP routes (JSON operations + SSE change stream)
  * on the shared webserver, plus the opt-in model-facing git_worktree tool.
  * The browser half (exports "./client") is served by client-modules from
@@ -10,7 +10,7 @@
  * settings-gated exception (agentTool, default off): while enabled, agents
  * may create/list/remove managed worktrees of their calling session's
  * repository.
- * @module @linxin666/dsh-client-ui-git-graph
+ * @module @gestaltrun/dsh-client-ui-git-graph
  */
 
 import { realpath } from 'node:fs/promises'
@@ -85,7 +85,7 @@ function createWorkspaceGate(ctx: Context): WorkspaceGate {
  * @param ctx - context carrying webServer, subprocess, and workspaceRegistry.
  * @param config - profile patch values (the settings card re-sources them).
  */
-export const apply = mountOnce('@linxin666/dsh-client-ui-git-graph', applyImpl)
+export const apply = mountOnce('@gestaltrun/dsh-client-ui-git-graph', applyImpl)
 
 function applyImpl(ctx: Context, config?: Config): void {
   const service = new GitService(subprocessRunner(ctx), createWorkspaceGate(ctx))

@@ -10,7 +10,7 @@
  * rides the same allow-listed channel as skin switching. This module is the
  * dependency-free source of truth both halves (host routes / migration and
  * the browser controller) share.
- * @module @linxin666/dsh-client-ui-skin-center/core/background
+ * @module @gestaltrun/dsh-client-ui-skin-center/core/background
  */
 
 /** Skin-background preference set persisted in the v2 active state file. */
