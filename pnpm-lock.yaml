@@ -2499,7 +2499,7 @@ packages:
         optional: true
 
   '@gestaltrun/dsh-better-sidebar@0.19.1-gestaltrun.0':
-    resolution: {integrity: sha512-bBz80vL4EbXdCVnGTHhYLJLdNjdbvQSwJz7+GDt/ZlrPZr4tXUfTmvO8Sor2rQ0mY+QnSSxJCCXGeLAjtOLF3A==}
+    resolution: {integrity: sha512-MOsP+BuF4UtViWxOU1mEC1rUIYmwjdQ8Rac829u5xuXOd9LPm0c4X6scJJtuPOMz/qE7eWwskSguhen189XDGA==}
     engines: {node: '>=20'}
     peerDependencies:
       '@deepseek-ai/cordis': ^4.0.2
