@@ -4,10 +4,13 @@
  * the outer leg down without an unhandled error, and normal completion must
  * keep reusing the upstream keep-alive connection.
  */
-import { createServer, request as httpRequest, type IncomingMessage, type Server } from 'node:http'
-import { describe, expect, it } from 'vitest'
+import { Agent, createServer, request as httpRequest, type ClientRequest, type IncomingMessage, type Server, type ServerResponse } from 'node:http'
+import { setImmediate as immediate } from 'node:timers/promises'
+import { describe, expect, it, vi } from 'vitest'
 import type { AddressInfo } from 'node:net'
 import { proxyLoopbackHttp } from '../src/loopback-proxy.ts'
+import { PairingService } from '../src/pairing.ts'
+import { makeRemoteApiRoutes } from '../src/remote-api.ts'
 
 interface TestServer {
   port: number
@@ -159,4 +162,85 @@ describe('loopback proxy connection lifecycle', () => {
       await up.close()
     }
   })
+})
+
+for (const action of ['revoke', 'stop'] as const) {
+  it(`closes the pending inner connection when ${action} occurs before response headers`, async () => {
+    const service = new PairingService({ tokenTtlMs: 60_000, offlineAfterMs: 10_000, maxDevices: 4, cookieName: 'test_pair' })
+    service.setLanBases([{ address: '192.0.2.10', base: 'http://192.0.2.10:3080' }])
+    const accepted = service.accept(service.issue().token)
+    if (!accepted.ok) throw new Error('Pairing failed')
+    const entered = Promise.withResolvers<{ req: IncomingMessage; res: ServerResponse }>()
+    const inner = createServer((req, res) => {
+      req.resume()
+      req.on('end', () => { entered.resolve({ req, res }) })
+    })
+    let outer: Server | undefined
+    let caller: ClientRequest | undefined
+    try {
+      const upstream = await listen(inner)
+      const [route] = makeRemoteApiRoutes({ service, port: upstream.port })
+      outer = createServer((req, res) => { void route.handler(req, res) })
+      const proxy = await listen(outer)
+      const failed = Promise.withResolvers<Error>()
+      caller = httpRequest({ host: '127.0.0.1', port: proxy.port, path: '/remote/api/probe', headers: { cookie: `test_pair=${accepted.deviceId}` } })
+      caller.on('error', failed.resolve)
+      caller.end()
+      const active = await entered.promise
+      if (action === 'revoke') service.revoke(accepted.deviceId)
+      else service.stop()
+      expect(await failed.promise).toMatchObject({ code: 'ECONNRESET' })
+      expect(await waitFor(() => active.req.socket.destroyed && active.res.destroyed)).toBe(true)
+      const connections = await new Promise<number>((resolve, reject) => {
+        inner.getConnections((error, count) => { if (error) reject(error); else resolve(count) })
+      })
+      expect(connections).toBe(0)
+    } finally {
+      caller?.destroy()
+      outer?.closeAllConnections()
+      inner.closeAllConnections()
+      await Promise.all([outer, inner].map(server => server === undefined ? undefined : new Promise<void>(resolve => { server.close(() => { resolve() }) })))
+    }
+  })
+}
+
+it('does not create an inner socket after the outer client closes while waiting for inner authentication', async () => {
+  const entered = Promise.withResolvers<void>()
+  const authenticated = Promise.withResolvers<string>()
+  const outerClosed = Promise.withResolvers<void>()
+  let connections = 0
+  const inner = createServer((_req, res) => { res.end('unexpected request') })
+  inner.on('connection', () => { connections++ })
+  let outer: Server | undefined
+  let caller: ClientRequest | undefined
+  const connect = vi.spyOn(Agent.prototype, 'createConnection')
+  try {
+    const upstream = await listen(inner)
+    outer = createServer((req, res) => {
+      res.once('close', () => { outerClosed.resolve() })
+      proxyLoopbackHttp(req, res, upstream.port, '/probe', {
+        ready: () => { entered.resolve(); return authenticated.promise },
+        invalidate: () => {},
+      })
+    })
+    const proxy = await listen(outer)
+    caller = httpRequest({ host: '127.0.0.1', port: proxy.port })
+    caller.on('error', () => { /* This client deliberately closes before authentication resolves. */ })
+    caller.end()
+    await entered.promise
+    caller.destroy()
+    await outerClosed.promise
+    connect.mockClear()
+    authenticated.resolve('inner=credential')
+    await immediate()
+    expect(connect).not.toHaveBeenCalled()
+    expect(connections).toBe(0)
+  } finally {
+    authenticated.resolve('inner=credential')
+    caller?.destroy()
+    outer?.closeAllConnections()
+    inner.closeAllConnections()
+    await Promise.all([outer, inner].map(server => server === undefined ? undefined : new Promise<void>(resolve => { server.close(() => { resolve() }) })))
+    connect.mockRestore()
+  }
 })

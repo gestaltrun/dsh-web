@@ -50,9 +50,20 @@ export function proxyLoopbackHttp(
   upstreamPath: string,
   auth?: InnerAuth,
 ): void {
+  let cancelled = false
+  const cancel = (): void => { cancelled = true }
+  res.once('close', cancel)
+  req.once('aborted', cancel)
+  req.once('error', cancel)
   void Promise.resolve(auth?.ready())
     .catch(() => undefined)
-    .then((cookie) => { pipeLoopbackHttp(req, res, port, upstreamPath, auth, typeof cookie === 'string' ? cookie : undefined) })
+    .then((cookie) => {
+      res.off('close', cancel)
+      req.off('aborted', cancel)
+      req.off('error', cancel)
+      if (cancelled || res.destroyed || res.writableEnded || req.aborted) return
+      pipeLoopbackHttp(req, res, port, upstreamPath, auth, typeof cookie === 'string' ? cookie : undefined)
+    })
 }
 
 function pipeLoopbackHttp(
@@ -75,6 +86,7 @@ function pipeLoopbackHttp(
   if (typeof accept === 'string') headers.accept = accept
   if (cookie !== undefined) headers.cookie = cookie
 
+  let response: IncomingMessage | undefined
   const upstream = httpRequest({
     host: '127.0.0.1',
     port,
@@ -82,6 +94,9 @@ function pipeLoopbackHttp(
     method: req.method,
     headers,
   }, (upstreamRes) => {
+    response = upstreamRes
+    upstreamRes.on('error', () => { res.destroy() })
+    if (res.destroyed || res.writableEnded) { upstreamRes.destroy(); return }
     // The cached credential went stale (secret rotation, credential store
     // reset): drop it so the next request re-redeems. The in-flight response
     // still pipes through untouched.
@@ -93,29 +108,30 @@ function pipeLoopbackHttp(
     }
     res.writeHead(upstreamRes.statusCode ?? 502, out)
     upstreamRes.pipe(res)
-    // Inner leg died mid-response (reset, truncation): tear the outer leg
-    // down instead of letting the truncated response raise an unhandled
-    // 'error' with no listener.
-    upstreamRes.on('error', () => { res.destroy() })
-    // Outer leg died before the response finished (phone left mid-request):
-    // reset the inner request so the loopback server stops working on a call
-    // nobody will read. Guarded so a normal completion never destroys a
-    // keep-alive socket the agent would reuse.
-    res.on('close', () => {
-      if (!upstreamRes.readableEnded) upstream.destroy()
-    })
+  })
+  // Cancellation owns the whole request, including the wait for response headers.
+  // Completed responses leave their keep-alive socket available to the agent.
+  const cancelUpstream = (): void => {
+    if (response?.readableEnded === true) return
+    req.unpipe(upstream)
+    upstream.destroy()
+  }
+  res.once('close', cancelUpstream)
+  req.once('aborted', cancelUpstream)
+  req.once('error', cancelUpstream)
+  upstream.once('close', () => {
+    res.off('close', cancelUpstream)
+    req.off('aborted', cancelUpstream)
+    req.off('error', cancelUpstream)
   })
   upstream.on('error', () => {
+    if (res.destroyed || res.writableEnded) return
     if (!res.headersSent) {
       writeJson(res, 502, { ok: false, error: { code: 'upstream-failure', message: 'upstream request failed' } })
       return
     }
     res.destroy()
   })
-  // The outer request aborted mid-body: reset the inner request instead of
-  // feeding it a truncated body that still gets processed (mirror of the
-  // upgrade path's two-leg teardown).
-  req.on('error', () => { upstream.destroy() })
   req.pipe(upstream)
 }
 
