@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { execFileSync } from 'node:child_process'
 import { test } from 'node:test'
-import { integrity, REPOSITORY, validatePackage, validateTarball } from './release-pack.mjs'
+import { integrity, REPOSITORY, runPnpm, validatePackage, validateTarball } from './release-pack.mjs'
 import { validateArtifacts } from './release-publish.mjs'
 
 const version = '0.3.21-gestaltrun.0'
@@ -58,6 +58,21 @@ test('publication verifies actual tarball bytes and the complete owned package s
     assert.throws(() => validateTarball(tarball, version), /Upstream npm identity/)
     writeFileSync(tarball, Buffer.concat([readFileSync(tarball), Buffer.from('tampered')]))
     assert.throws(() => validateArtifacts(root, { root }), /digest/)
+  } finally {
+    rmSync(root, { recursive: true, force: true })
+  }
+})
+
+
+test('the package manager receives literal paths and arguments without a command shell', () => {
+  const root = mkdtempSync(join(tmpdir(), 'gestaltrun pnpm '))
+  try {
+    const cli = join(root, 'pnpm.cjs')
+    writeFileSync(cli, 'process.stdout.write(JSON.stringify(process.argv.slice(2)))\n')
+    const args = ['pack', '--pack-destination', join(root, 'out with spaces'), '$(touch injected)', '`touch injected`']
+    assert.deepEqual(JSON.parse(runPnpm(args, { cwd: root, encoding: 'utf8' }, cli)), args)
+    assert.throws(() => runPnpm([], {}, 'pnpm.cmd'), /repository-pinned/)
+    assert.throws(() => runPnpm([], {}, ''), /repository-pinned/)
   } finally {
     rmSync(root, { recursive: true, force: true })
   }

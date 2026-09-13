@@ -14,6 +14,12 @@ export const SCOPE = '@gestaltrun/'
 export const SIDEBAR = '@gestaltrun/dsh-better-sidebar'
 export const SIDEBAR_VERSION = '0.19.1-gestaltrun.0'
 
+/** Invoke the package manager which launched this script through the current Node executable. */
+export function runPnpm(args, options, cli = process.env.npm_execpath) {
+  if (!cli || !/(?:^|[\\/])pnpm(?:\.[cm]?js)?$/.test(cli)) throw new Error('Run this command through the repository-pinned pnpm release:pack script')
+  return execFileSync(process.execPath, [cli, ...args], options)
+}
+
 /** Require fork ownership, one cohort version, and registry-safe dependency names. */
 export function validatePackage(pkg, version, { packed = false } = {}) {
   if (!pkg.name?.startsWith(`${SCOPE}dsh-`) || pkg.private === true) throw new Error(`Not a publishable Gestaltrun package: ${pkg.name}`)
@@ -66,7 +72,7 @@ export function installSidebarOverride(tarball, root = ROOT) {
   if (/^overrides:/m.test(workspace)) throw new Error('Local sidebar installation requires merging an existing overrides mapping')
   writeFileSync(workspacePath, `${workspace.trimEnd()}\n\noverrides:\n  '${SIDEBAR}': ${JSON.stringify(`file:${path}`)}\n`)
   try {
-    execFileSync('pnpm', ['install', '--no-frozen-lockfile', '--ignore-scripts'], { cwd: root, stdio: 'inherit' })
+    runPnpm(['install', '--no-frozen-lockfile', '--ignore-scripts'], { cwd: root, stdio: 'inherit' })
   } finally {
     writeFileSync(workspacePath, workspace)
     writeFileSync(lockPath, lock)
@@ -82,14 +88,14 @@ export function packFamily({ out, sidebarTarball, root = ROOT }) {
   const version = family[0].pkg.version
   for (const { pkg } of family) validatePackage(pkg, version)
   if (sidebarTarball) installSidebarOverride(sidebarTarball, root)
-  execFileSync('node', ['scripts/sync-shared.mjs', '--check'], { cwd: root, stdio: 'inherit' })
-  execFileSync('node', ['scripts/aggregate.mjs', '--check'], { cwd: root, stdio: 'inherit' })
+  execFileSync(process.execPath, ['scripts/sync-shared.mjs', '--check'], { cwd: root, stdio: 'inherit' })
+  execFileSync(process.execPath, ['scripts/aggregate.mjs', '--check'], { cwd: root, stdio: 'inherit' })
   // Build tools preserve companion chunks; remove prior outputs before packaging.
   for (const { dir } of family) rmSync(join(dir, 'lib'), { recursive: true, force: true })
-  execFileSync('pnpm', ['build'], { cwd: root, stdio: 'inherit' })
+  runPnpm(['build'], { cwd: root, stdio: 'inherit' })
   const artifacts = []
   for (const { pkg } of family) {
-    execFileSync('pnpm', ['--config.ignore-scripts=true', '--filter', pkg.name, 'pack', '--pack-destination', output], { cwd: root, stdio: 'inherit' })
+    runPnpm(['--config.ignore-scripts=true', '--filter', pkg.name, 'pack', '--pack-destination', output], { cwd: root, stdio: 'inherit' })
     const filename = `${pkg.name.slice(1).replace('/', '-')}-${pkg.version}.tgz`
     const path = join(output, filename)
     if (!existsSync(path)) throw new Error(`Missing package archive: ${filename}`)

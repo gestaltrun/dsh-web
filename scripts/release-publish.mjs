@@ -33,6 +33,7 @@ export function validateArtifacts(directory, { repository = process.env.GITHUB_R
 if (resolve(process.argv[1] ?? '') === fileURLToPath(import.meta.url)) {
   const { values } = parseArgs({ args: process.argv.slice(2).filter(arg => arg !== '--'), options: { from: { type: 'string' }, tag: { type: 'string', default: 'latest' }, 'dry-run': { type: 'boolean', default: false } } })
   if (!values.from || !/^[a-z][a-z0-9-]*$/.test(values.tag)) throw new Error('Usage: pnpm release:publish --from <directory> [--tag latest] [--dry-run]')
+  if (process.platform === 'win32') throw new Error('Publish npm archives through the Linux release workflow; Windows supports release:pack')
   const artifacts = validateArtifacts(resolve(values.from))
   for (const { path, pkg } of artifacts) {
     const args = ['publish', path, '--registry', 'https://registry.npmjs.org/', '--access', 'public', '--tag', values.tag]
