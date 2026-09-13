@@ -15843,6 +15843,7 @@ window.__ModuleLoader__.load({
 		const REMOTE_PREFIX = "/remote";
 		/** The live rule set. */
 		const REMOTE_CHANNEL_RULES = {
+			pageProtocols: ["http:", "https:"],
 			remotePrefix: REMOTE_PREFIX,
 			apiPrefix: "/api/",
 			pairPrefix: "/api/pair/",
@@ -15874,6 +15875,7 @@ window.__ModuleLoader__.load({
 		* plugin loopback fences pass.
 		*
 		* The rewrite is deliberately narrow:
+		* - non-HTTP(S) pages keep their native transport;
 		* - loopback origins are untouched (the desktop at 127.0.0.1 keeps original paths);
 		* - the pairing routes (`/api/pair/*`) stay where they are — accept must
 		*   work BEFORE a device is paired;
@@ -15889,6 +15891,14 @@ window.__ModuleLoader__.load({
 		* the given window and returns their restore.
 		*/
 		const RULES = REMOTE_CHANNEL_RULES;
+		/**
+		* Whether the current page can use the remote HTTP host and its pairing routes.
+		* @param href - the current page's absolute URL.
+		* @returns false for Desktop custom protocols and file pages.
+		*/
+		function isRemoteWebPage(href) {
+			return RULES.pageProtocols.includes(new URL(href).protocol);
+		}
 		/** Decide whether a remote desktop channel is required from local or host policy. */
 		function remoteChannelRequired(hostname, snapshot, hostPairingPolicy) {
 			if (isLoopbackHostname(hostname)) return false;
@@ -16004,6 +16014,7 @@ window.__ModuleLoader__.load({
 		* @returns a function restoring the originals.
 		*/
 		function installRemoteChannel(window, options = {}) {
+			if (!isRemoteWebPage(window.location.href)) return () => {};
 			const originalFetch = window.fetch;
 			const OriginalWebSocket = window.WebSocket;
 			const OriginalEventSource = window.EventSource;
@@ -17200,10 +17211,11 @@ window.__ModuleLoader__.load({
 			"remote"
 		];
 		/**
-		* Register the remote-control surface.
+		* Register remote control on HTTP(S) pages; custom-protocol hosts keep their own transport.
 		* @param ctx - client root context.
 		*/
 		function apply$12(ctx) {
+			if (!isRemoteWebPage(window.location.href)) return;
 			startMobileAdapt();
 			ctx.effect(() => () => {
 				window.__dshRemoteAdapt?.setEnabled?.(false);

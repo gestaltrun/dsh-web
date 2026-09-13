@@ -7,6 +7,7 @@
  * plugin loopback fences pass.
  *
  * The rewrite is deliberately narrow:
+ * - non-HTTP(S) pages keep their native transport;
  * - loopback origins are untouched (the desktop at 127.0.0.1 keeps original paths);
  * - the pairing routes (`/api/pair/*`) stay where they are — accept must
  *   work BEFORE a device is paired;
@@ -33,6 +34,15 @@ export type { RemoteChannelBootSeat } from '../remote-channel-rules.ts'
 export { REMOTE_CHANNEL_BOOT_GLOBAL } from '../remote-channel-rules.ts'
 
 const RULES = REMOTE_CHANNEL_RULES
+
+/**
+ * Whether the current page can use the remote HTTP host and its pairing routes.
+ * @param href - the current page's absolute URL.
+ * @returns false for Desktop custom protocols and file pages.
+ */
+export function isRemoteWebPage(href: string): boolean {
+  return RULES.pageProtocols.includes(new URL(href).protocol)
+}
 
 /** Minimal settings snapshot used by the remote channel decision. */
 export interface RemoteChannelSettingsSnapshot {
@@ -204,6 +214,7 @@ function patchSrcAccessor(ctor: SrcConstructor | undefined, rewrite: (value: str
  * @returns a function restoring the originals.
  */
 export function installRemoteChannel(window: ChannelWindow, options: RemoteChannelOptions = {}): () => void {
+  if (!isRemoteWebPage(window.location.href)) return () => {}
   const originalFetch = window.fetch
   const OriginalWebSocket = window.WebSocket
   const OriginalEventSource = window.EventSource

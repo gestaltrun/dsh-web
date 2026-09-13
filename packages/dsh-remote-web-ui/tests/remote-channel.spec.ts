@@ -96,20 +96,20 @@ const FORBIDDEN_ENVELOPE = JSON.stringify({
 /** A minimal fake window recording resolved URLs (mutation via state object). */
 function makeWindow(origin = 'https://tunnel.example.com', body = '{}', status = 200): ChannelWindow & {
   state: {
-    fetchCalls: { url: string }[]
+    fetchCalls: { url: string; init?: RequestInit }[]
     wsUrls: string[]
     responseStatus: number
   }
 } {
   const state = {
-    fetchCalls: [] as { url: string }[],
+    fetchCalls: [] as { url: string; init?: RequestInit }[],
     wsUrls: [] as string[],
     responseStatus: status,
   }
   const base = `${origin}/some/page`
   const fakeFetch = ((_input: RequestInfo | URL, _init?: RequestInit) => {
     const raw = typeof _input === 'string' || _input instanceof URL ? _input.toString() : _input.url
-    state.fetchCalls.push({ url: new URL(raw, base).href })
+    state.fetchCalls.push({ url: new URL(raw, base).href, init: _init })
     return Promise.resolve(new Response(body, { status: state.responseStatus, headers: { 'content-type': 'application/json' } }))
   }) as typeof globalThis.fetch
   class FakeWebSocket {
@@ -126,6 +126,26 @@ function makeWindow(origin = 'https://tunnel.example.com', body = '{}', status =
 }
 
 describe('installRemoteChannel', () => {
+  it.each(['dsh-app://app', 'file://'])('preserves the native transport on %s pages', async (origin) => {
+    const window = makeWindow(origin)
+    const originalFetch = window.fetch
+    const OriginalWebSocket = window.WebSocket
+    const restore = installRemoteChannel(window)
+    try {
+      expect(window.fetch).toBe(originalFetch)
+      expect(window.WebSocket).toBe(OriginalWebSocket)
+      const init = { method: 'POST', body: JSON.stringify({ rpcId: 'picker-1' }) }
+      await window.fetch('/api/directoryPicker/pick', init)
+      expect(window.state.fetchCalls).toEqual([{ url: `${origin}/api/directoryPicker/pick`, init }])
+      new window.WebSocket('ws://app/sidebar/ws/terminal')
+      expect(window.state.wsUrls).toEqual(['ws://app/sidebar/ws/terminal'])
+    } finally {
+      restore()
+    }
+    expect(window.fetch).toBe(originalFetch)
+    expect(window.WebSocket).toBe(OriginalWebSocket)
+  })
+
   it('rewrites same-origin /api fetches and reports unpaired 403', async () => {
     const window = makeWindow('https://tunnel.example.com', UNPAIRED_ENVELOPE, 403)
     let unpaired = 0

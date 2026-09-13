@@ -32,6 +32,7 @@ import {
   channelTransition,
   installRemoteChannel,
   isLoopbackHostname,
+  isRemoteWebPage,
   remoteChannelRequired,
   REMOTE_CHANNEL_BOOT_GLOBAL,
   type RemoteChannelBootSeat,
@@ -111,10 +112,12 @@ const HEARTBEAT_INTERVAL_MS = 10_000
 export const inject = ['slots', 'locale', 'connection', 'settingsScope', 'remote']
 
 /**
- * Register the remote-control surface.
+ * Register remote control on HTTP(S) pages; custom-protocol hosts keep their own transport.
  * @param ctx - client root context.
  */
 export function apply(ctx: ClientContext): void {
+  if (!isRemoteWebPage(window.location.href)) return
+
   // Portrait-touch adaptation of the official UI: installed under the plugin
   // lifecycle so disabling the plugin in cordis patch (disabled: true) never
   // injects mobile CSS, gesture hooks, or the whale floating button.

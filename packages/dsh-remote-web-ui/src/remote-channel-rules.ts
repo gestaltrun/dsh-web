@@ -18,6 +18,8 @@ export const REMOTE_API_PREFIX = `${REMOTE_PREFIX}/api`
 
 /** Every decision input of the remote-channel rewrite, JSON-serializable. */
 export interface RemoteChannelRules {
+  /** Page protocols served by the remote HTTP host. */
+  readonly pageProtocols: readonly string[]
   readonly remotePrefix: string
   readonly apiPrefix: string
   readonly pairPrefix: string
@@ -37,6 +39,7 @@ export interface RemoteChannelRules {
 
 /** The live rule set. */
 export const REMOTE_CHANNEL_RULES: RemoteChannelRules = {
+  pageProtocols: ['http:', 'https:'],
   remotePrefix: REMOTE_PREFIX,
   apiPrefix: '/api/',
   pairPrefix: '/api/pair/',

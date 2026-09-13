@@ -114,6 +114,24 @@ describe('remote channel boot patch (issue #987)', () => {
     expect(win.wsUrls[0]).toContain('/remote/api/remote.mux?device=dev-42')
   })
 
+  it.each(['dsh-app://app/', 'file:///index.html'])('keeps the existing transport on %s pages', async (href) => {
+    const win = makeWindow()
+    const page = new URL(href)
+    win.location = { origin: page.origin, href, hostname: page.hostname }
+    const originalFetch = win.fetch
+    const originalWebSocket = win.WebSocket
+    const originalKeys = Object.keys(win)
+    boot(win)
+    expect(win.fetch).toBe(originalFetch)
+    expect(win.WebSocket).toBe(originalWebSocket)
+    expect(Object.keys(win)).toEqual(originalKeys)
+    expect(win[REMOTE_CHANNEL_BOOT_GLOBAL]).toBeUndefined()
+    const init = { method: 'POST', body: JSON.stringify({ rpcId: 'picker-1' }) }
+    await win.fetch('/api/directoryPicker/pick', init)
+    expect(win.calls).toEqual([new URL('/api/directoryPicker/pick', href).href])
+    expect(win.initSeen).toEqual([init])
+  })
+
   it('does nothing on loopback origins', () => {
     for (const hostname of ['localhost', '127.0.0.1', '127.1.2.3']) {
       const win = makeWindow(hostname)
