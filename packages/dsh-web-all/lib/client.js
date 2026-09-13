@@ -15295,7 +15295,7 @@ window.__ModuleLoader__.load({
 							props.resetField("cookieName");
 						}
 					}),
-					/* @__PURE__ */ (0, react_jsx_runtime.jsx)(BooleanField$3, {
+					window.location.protocol !== "dsh-app:" && /* @__PURE__ */ (0, react_jsx_runtime.jsx)(BooleanField$3, {
 						id: "settings-remote-fence",
 						label: t("settings.requirePairingForLan"),
 						hint: t("settings.requirePairingForLanHint"),
@@ -15375,7 +15375,7 @@ window.__ModuleLoader__.load({
 					/* @__PURE__ */ (0, react_jsx_runtime.jsx)(BooleanField$3, {
 						id: "settings-remote-lan-bind",
 						label: t("settings.lanBind"),
-						hint: t("settings.lanBindHint"),
+						hint: t(window.location.protocol === "dsh-app:" ? "settings.lanBindDesktopHint" : "settings.lanBindHint"),
 						inheritLabel: t("settings.inherit"),
 						onLabel: t("settings.on"),
 						offLabel: t("settings.off"),
@@ -15414,7 +15414,8 @@ window.__ModuleLoader__.load({
 				};
 			}, []);
 			if (frame === void 0) return null;
-			const lanOn = frame.blockHost === "0.0.0.0";
+			const desktop = frame.listening !== void 0;
+			const lanOn = desktop ? frame.listening === true && frame.bindHost === "0.0.0.0" : frame.blockHost === "0.0.0.0";
 			const firewallText = frame.firewall.managed ? t(frame.firewall.ok ? "lan.firewall.ok" : "lan.firewall.bad") : t("lan.firewall.unmanaged");
 			const lines = [t("lan.bind", {
 				host: frame.bindHost,
@@ -15422,7 +15423,8 @@ window.__ModuleLoader__.load({
 			}) + " · " + firewallText];
 			if (lanOn && frame.lanUrls.length > 0) lines.push(t("lan.urls", { urls: frame.lanUrls.join("  ") }));
 			if (!lanOn) lines.push(t("lan.off"));
-			if (frame.setting === null) lines.push(t("lan.untouched"));
+			if (frame.error !== void 0) lines.push(t("lan.listenerFailed", { error: frame.error }));
+			if (frame.setting === null && !desktop) lines.push(t("lan.untouched"));
 			if (frame.pendingRestart === true) lines.push(t("lan.pendingRestart"));
 			return /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
 				style: {
@@ -15473,7 +15475,7 @@ window.__ModuleLoader__.load({
 			"pair.linkLabel": "配对链接",
 			"pair.tokenLabel": "配对令牌",
 			"pair.dockerHint": "Docker 或反向代理环境下，可直接复制此令牌并在目标设备配对页面输入。",
-			"pair.oneTimeHint": "链接含一次性令牌；任一设备配对成功后立即失效，配对下一台设备请刷新二维码。",
+			"pair.oneTimeHint": "链接在有效期内可配对多台设备；刷新二维码会立即使旧链接失效。",
 			"pair.failed.title": "配对失败",
 			"pair.failed.detail": "链接无效或已使用，请回到电脑端刷新二维码后重新扫码。",
 			"fence.unpaired.title": "此设备未配对，无法访问工作区数据",
@@ -15542,6 +15544,8 @@ window.__ModuleLoader__.load({
 			"settings.lanBindHint": "开启后插件把绑定默认改写为 0.0.0.0 并写入 profile 补丁（显式 --host 仍优先），同时维护主机防火墙放行（Windows/Linux；macOS 无需管理）；关闭回退 127.0.0.1。绑定变化通常在重启 dsh web 后生效。",
 			"lan.cardTitle": "局域网访问",
 			"lan.bind": "绑定：{host}:{port}",
+			"settings.lanBindDesktopHint": "默认仅本机可访问。开启后立即允许已配对设备通过局域网连接；关闭后恢复仅本机访问。主机防火墙由系统管理，不会自动启动公网隧道。",
+			"lan.listenerFailed": "远程监听未启动：{error}",
 			"lan.off": "当前仅本机可访问。",
 			"lan.urls": "局域网地址：{urls}",
 			"lan.firewall.ok": "防火墙已放行",
@@ -15638,7 +15642,7 @@ window.__ModuleLoader__.load({
 			"pair.linkLabel": "Pairing link",
 			"pair.tokenLabel": "Pairing token",
 			"pair.dockerHint": "In Docker or reverse proxy environments, copy this token to pair directly on the target device.",
-			"pair.oneTimeHint": "The link carries one single-use token; it dies as soon as any device pairs. Refresh the QR to pair the next device.",
+			"pair.oneTimeHint": "The link can pair multiple devices until it expires. Refreshing the QR immediately invalidates the previous link.",
 			"pair.failed.title": "Pairing failed",
 			"pair.failed.detail": "The link is invalid or was already used. Refresh the QR code on your computer and scan again.",
 			"fence.unpaired.title": "This device is not paired and cannot reach workspace data",
@@ -15707,6 +15711,8 @@ window.__ModuleLoader__.load({
 			"settings.lanBindHint": "When on, the plugin writes a managed block into the profile patch defaulting the bind to 0.0.0.0 (an explicit --host flag still wins), and maintains the matching host firewall rule (Windows/Linux; other platforms need none). When off, the block pins 127.0.0.1. The bind change usually takes effect after dsh web restarts.",
 			"lan.cardTitle": "LAN access",
 			"lan.bind": "Bind: {host}:{port}",
+			"settings.lanBindDesktopHint": "Local access only by default. Turn on to immediately allow paired devices over the LAN; turn off to restore local access. The system manages the firewall. No public tunnel starts automatically.",
+			"lan.listenerFailed": "Remote listener did not start: {error}",
 			"lan.off": "Currently localhost-only.",
 			"lan.urls": "LAN URLs: {urls}",
 			"lan.firewall.ok": "firewall open",
@@ -17211,16 +17217,17 @@ window.__ModuleLoader__.load({
 			"remote"
 		];
 		/**
-		* Register remote control on HTTP(S) pages; custom-protocol hosts keep their own transport.
+		* Register remote controls on Web and Desktop; only HTTP(S) pages install the remote channel.
 		* @param ctx - client root context.
 		*/
 		function apply$12(ctx) {
-			if (!isRemoteWebPage(window.location.href)) return;
-			startMobileAdapt();
-			ctx.effect(() => () => {
+			const webPage = isRemoteWebPage(window.location.href);
+			if (!webPage && (window.location.protocol !== "dsh-app:" || window.location.host !== "app")) return;
+			if (webPage) startMobileAdapt();
+			if (webPage) ctx.effect(() => () => {
 				window.__dshRemoteAdapt?.setEnabled?.(false);
 			}, "remote-web-ui: mobile-adapt");
-			reportDailyHeartbeat$6([{ name: "@gestaltrun/dsh-remote-web-ui" }]);
+			if (webPage) reportDailyHeartbeat$6([{ name: "@gestaltrun/dsh-remote-web-ui" }]);
 			ctx.effect(() => {
 				try {
 					return ctx.locale.register(NS$10, {
@@ -17232,7 +17239,7 @@ window.__ModuleLoader__.load({
 				}
 			}, "remote-web-ui: dictionaries");
 			const layout = ctx.get("layout");
-			const adapt = window.__dshRemoteAdapt;
+			const adapt = webPage ? window.__dshRemoteAdapt : void 0;
 			const layoutCall = (call) => {
 				try {
 					call?.();
@@ -17257,6 +17264,7 @@ window.__ModuleLoader__.load({
 				return snapshot.status === "ready" ? snapshot.value?.enabled ?? true : snapshot.status === "unavailable";
 			};
 			const syncAdaptEnabled = () => {
+				if (!webPage) return;
 				window.__dshRemoteAdapt?.setEnabled?.(enabled());
 			};
 			settingsScope.subscribe(syncAdaptEnabled);
@@ -17306,6 +17314,7 @@ window.__ModuleLoader__.load({
 			});
 			let disposeRuntime;
 			const syncRuntime = () => {
+				if (!webPage) return;
 				if (enabled() && disposeRuntime === void 0) disposeRuntime = ctx.effect(() => {
 					const loopback = ctx.get("connection")?.isLoopback ?? true;
 					runPairBootFlow(ctx, window.location.search);
@@ -17361,6 +17370,7 @@ window.__ModuleLoader__.load({
 			const channelActive = () => remoteChannelRequired(window.location.hostname, settingsScope.getSnapshot(), hostPairingPolicy);
 			const bootSeat = () => window[REMOTE_CHANNEL_BOOT_GLOBAL];
 			const syncChannel = () => {
+				if (!webPage) return;
 				const transition = channelTransition(channelActive(), disposeChannel !== void 0);
 				if (transition === "install") {
 					const seat = bootSeat();
@@ -17390,7 +17400,7 @@ window.__ModuleLoader__.load({
 			};
 			settingsScope.subscribe(syncChannel);
 			syncChannel();
-			if (!isLoopbackHostname(window.location.hostname) && settingsScope.getSnapshot().status !== "ready") readPairGatePolicy().then((policy) => {
+			if (webPage && !isLoopbackHostname(window.location.hostname) && settingsScope.getSnapshot().status !== "ready") readPairGatePolicy().then((policy) => {
 				hostPairingPolicy = policy.requirePairingForLan;
 				syncChannel();
 				if (hostPairingPolicy && unpairedWhilePolicyPending) showFenceNotice();
@@ -17401,7 +17411,7 @@ window.__ModuleLoader__.load({
 				if (unpairedWhilePolicyPending) showFenceNotice();
 				unpairedWhilePolicyPending = false;
 			});
-			ctx.effect(() => {
+			if (webPage) ctx.effect(() => {
 				const timer = window.setTimeout(() => {
 					if (sessionStorage.getItem("dsh-remote-pair-failed") === null) return;
 					sessionStorage.removeItem(PAIR_FAILED_MARKER);
