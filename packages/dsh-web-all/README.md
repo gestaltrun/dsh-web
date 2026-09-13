@@ -2,7 +2,7 @@
 
 English | [中文](README.zh.md)
 
-The Gestaltrun aggregate installs the plugins selected in `aggregate.yml` plus `@gestaltrun/dsh-better-sidebar`. Workshop, its community preset panel and its catalog package are excluded from the installed product. Official presets, installed-plugin management and saved user content remain available.
+The Gestaltrun aggregate installs the plugins selected in `aggregate.yml` plus `@gestaltrun/dsh-better-sidebar`. Workshop, its community preset panel and its catalog package are excluded from the installed product. Official presets, installed-plugin management and saved user content remain available. Plugin install telemetry is disabled; no Workshop heartbeat or visitor state is collected.
 
 
 ## What it is

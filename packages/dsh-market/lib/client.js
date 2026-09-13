@@ -2145,76 +2145,6 @@ window.__ModuleLoader__.load({
 			"remote.note": "Remote browsers can browse and copy commands only; one-click install needs the local (loopback) browser."
 		};
 		//#endregion
-		//#region src/client/telemetry.ts
-		const VISITOR_KEY = "dsh-web-ui-telemetry-visitor";
-		const DAY_KEY_PREFIX = "dsh-web-ui-telemetry-day:";
-		const ENDPOINT = "https://dsh-market.com/api/telemetry/event";
-		/** The building package's version, when the bundle carries it. */
-		function bakedVersion() {
-			try {
-				return "0.3.21-gestaltrun.1";
-			} catch {
-				return;
-			}
-		}
-		/** Read or lazily create the anonymous visitor id; null when storage is unavailable. */
-		function visitorId() {
-			try {
-				const existing = localStorage.getItem(VISITOR_KEY);
-				if (existing && /^[A-Za-z0-9_-]{16,64}$/.test(existing)) return existing;
-				const fresh = crypto.randomUUID().replaceAll("-", "");
-				localStorage.setItem(VISITOR_KEY, fresh);
-				return fresh;
-			} catch {
-				return null;
-			}
-		}
-		/** Drop stale per-day dedup keys so localStorage does not grow forever. */
-		function pruneDayKeys(today) {
-			try {
-				for (let index = localStorage.length - 1; index >= 0; index -= 1) {
-					const key = localStorage.key(index);
-					if (key !== null && key.startsWith(DAY_KEY_PREFIX) && key !== DAY_KEY_PREFIX + today) localStorage.removeItem(key);
-				}
-			} catch {}
-		}
-		/**
-		* Fire the daily heartbeat for the given items at most once per UTC day per
-		* browser. Never throws and never blocks the caller. Items without an explicit
-		* version inherit the bundle's baked build version.
-		*/
-		function reportDailyHeartbeat(items) {
-			try {
-				if (items.length === 0) return;
-				const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
-				if (navigator.webdriver) return;
-				if (localStorage.getItem(DAY_KEY_PREFIX + today) !== null) return;
-				const visitor = visitorId();
-				if (visitor === null) return;
-				pruneDayKeys(today);
-				const payloadItems = items.map((item) => {
-					const out = { name: item.name };
-					const version = item.version ?? bakedVersion();
-					if (version !== void 0) out.version = version;
-					if (item.channel !== void 0) out.channel = item.channel;
-					return out;
-				});
-				const body = JSON.stringify({
-					kind: "heartbeat",
-					visitor,
-					items: payloadItems
-				});
-				fetch(ENDPOINT, {
-					method: "POST",
-					headers: { "content-type": "application/json" },
-					body,
-					keepalive: true
-				}).then((response) => {
-					if (response.ok) localStorage.setItem(DAY_KEY_PREFIX + today, "1");
-				}).catch(() => {});
-			} catch {}
-		}
-		//#endregion
 		//#region src/client/index.ts
 		const MARKET_NS = "dsh-web-ui-market";
 		const SECTION_ID = "dsh-workshop";
@@ -2227,7 +2157,6 @@ window.__ModuleLoader__.load({
 		];
 		/** Register the market section and the plugin-manager bridge. */
 		function apply(ctx) {
-			reportDailyHeartbeat([{ name: "@gestaltrun/dsh-client-ui-market" }]);
 			ctx.effect(() => {
 				try {
 					return ctx.locale.register(MARKET_NS, {

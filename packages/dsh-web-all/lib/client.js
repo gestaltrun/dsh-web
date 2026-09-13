@@ -591,76 +591,6 @@ window.__ModuleLoader__.load({
 			"description": "Enable and configure the dsh-web family plugins from one place."
 		};
 		//#endregion
-		//#region ../dsh-web-settings/src/client/telemetry.ts
-		const VISITOR_KEY$10 = "dsh-web-ui-telemetry-visitor";
-		const DAY_KEY_PREFIX$10 = "dsh-web-ui-telemetry-day:";
-		const ENDPOINT$10 = "https://dsh-market.com/api/telemetry/event";
-		/** The building package's version, when the bundle carries it. */
-		function bakedVersion$10() {
-			try {
-				return "0.3.21-gestaltrun.1";
-			} catch {
-				return;
-			}
-		}
-		/** Read or lazily create the anonymous visitor id; null when storage is unavailable. */
-		function visitorId$10() {
-			try {
-				const existing = localStorage.getItem(VISITOR_KEY$10);
-				if (existing && /^[A-Za-z0-9_-]{16,64}$/.test(existing)) return existing;
-				const fresh = crypto.randomUUID().replaceAll("-", "");
-				localStorage.setItem(VISITOR_KEY$10, fresh);
-				return fresh;
-			} catch {
-				return null;
-			}
-		}
-		/** Drop stale per-day dedup keys so localStorage does not grow forever. */
-		function pruneDayKeys$10(today) {
-			try {
-				for (let index = localStorage.length - 1; index >= 0; index -= 1) {
-					const key = localStorage.key(index);
-					if (key !== null && key.startsWith(DAY_KEY_PREFIX$10) && key !== DAY_KEY_PREFIX$10 + today) localStorage.removeItem(key);
-				}
-			} catch {}
-		}
-		/**
-		* Fire the daily heartbeat for the given items at most once per UTC day per
-		* browser. Never throws and never blocks the caller. Items without an explicit
-		* version inherit the bundle's baked build version.
-		*/
-		function reportDailyHeartbeat$10(items) {
-			try {
-				if (items.length === 0) return;
-				const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
-				if (navigator.webdriver) return;
-				if (localStorage.getItem(DAY_KEY_PREFIX$10 + today) !== null) return;
-				const visitor = visitorId$10();
-				if (visitor === null) return;
-				pruneDayKeys$10(today);
-				const payloadItems = items.map((item) => {
-					const out = { name: item.name };
-					const version = item.version ?? bakedVersion$10();
-					if (version !== void 0) out.version = version;
-					if (item.channel !== void 0) out.channel = item.channel;
-					return out;
-				});
-				const body = JSON.stringify({
-					kind: "heartbeat",
-					visitor,
-					items: payloadItems
-				});
-				fetch(ENDPOINT$10, {
-					method: "POST",
-					headers: { "content-type": "application/json" },
-					body,
-					keepalive: true
-				}).then((response) => {
-					if (response.ok) localStorage.setItem(DAY_KEY_PREFIX$10 + today, "1");
-				}).catch(() => {});
-			} catch {}
-		}
-		//#endregion
 		//#region ../dsh-web-settings/src/client/index.ts
 		var client_exports$14 = /* @__PURE__ */ __exportAll({
 			apply: () => apply$15,
@@ -680,7 +610,6 @@ window.__ModuleLoader__.load({
 		* @param ctx - client root context.
 		*/
 		function apply$15(ctx) {
-			reportDailyHeartbeat$10([{ name: "@gestaltrun/dsh-client-ui-web-ui-settings" }]);
 			ctx.effect(() => {
 				try {
 					return ctx.locale.register("web-ui-plugins", {
@@ -2042,76 +1971,6 @@ window.__ModuleLoader__.load({
 		/** The cordis service name the browser half provides the face under. */
 		const PLUGIN_MANAGER_SERVICE = "pluginManager";
 		//#endregion
-		//#region ../dsh-plugin-manager/src/client/telemetry.ts
-		const VISITOR_KEY$9 = "dsh-web-ui-telemetry-visitor";
-		const DAY_KEY_PREFIX$9 = "dsh-web-ui-telemetry-day:";
-		const ENDPOINT$9 = "https://dsh-market.com/api/telemetry/event";
-		/** The building package's version, when the bundle carries it. */
-		function bakedVersion$9() {
-			try {
-				return "0.3.21-gestaltrun.1";
-			} catch {
-				return;
-			}
-		}
-		/** Read or lazily create the anonymous visitor id; null when storage is unavailable. */
-		function visitorId$9() {
-			try {
-				const existing = localStorage.getItem(VISITOR_KEY$9);
-				if (existing && /^[A-Za-z0-9_-]{16,64}$/.test(existing)) return existing;
-				const fresh = crypto.randomUUID().replaceAll("-", "");
-				localStorage.setItem(VISITOR_KEY$9, fresh);
-				return fresh;
-			} catch {
-				return null;
-			}
-		}
-		/** Drop stale per-day dedup keys so localStorage does not grow forever. */
-		function pruneDayKeys$9(today) {
-			try {
-				for (let index = localStorage.length - 1; index >= 0; index -= 1) {
-					const key = localStorage.key(index);
-					if (key !== null && key.startsWith(DAY_KEY_PREFIX$9) && key !== DAY_KEY_PREFIX$9 + today) localStorage.removeItem(key);
-				}
-			} catch {}
-		}
-		/**
-		* Fire the daily heartbeat for the given items at most once per UTC day per
-		* browser. Never throws and never blocks the caller. Items without an explicit
-		* version inherit the bundle's baked build version.
-		*/
-		function reportDailyHeartbeat$9(items) {
-			try {
-				if (items.length === 0) return;
-				const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
-				if (navigator.webdriver) return;
-				if (localStorage.getItem(DAY_KEY_PREFIX$9 + today) !== null) return;
-				const visitor = visitorId$9();
-				if (visitor === null) return;
-				pruneDayKeys$9(today);
-				const payloadItems = items.map((item) => {
-					const out = { name: item.name };
-					const version = item.version ?? bakedVersion$9();
-					if (version !== void 0) out.version = version;
-					if (item.channel !== void 0) out.channel = item.channel;
-					return out;
-				});
-				const body = JSON.stringify({
-					kind: "heartbeat",
-					visitor,
-					items: payloadItems
-				});
-				fetch(ENDPOINT$9, {
-					method: "POST",
-					headers: { "content-type": "application/json" },
-					body,
-					keepalive: true
-				}).then((response) => {
-					if (response.ok) localStorage.setItem(DAY_KEY_PREFIX$9 + today, "1");
-				}).catch(() => {});
-			} catch {}
-		}
-		//#endregion
 		//#region ../dsh-plugin-manager/src/client/index.ts
 		var client_exports$13 = /* @__PURE__ */ __exportAll({
 			apply: () => apply$14,
@@ -2377,7 +2236,6 @@ window.__ModuleLoader__.load({
 		}
 		/** Contribute the family plugin-manager tab and provide the shared face. */
 		function apply$14(ctx) {
-			reportDailyHeartbeat$9([{ name: "@gestaltrun/dsh-client-ui-plugin-manager" }]);
 			ctx.effect(() => {
 				try {
 					return ctx.locale.register(NS$12, {
@@ -7389,76 +7247,6 @@ window.__ModuleLoader__.load({
 			}
 		};
 		//#endregion
-		//#region ../dsh-task-board/src/client/telemetry.ts
-		const VISITOR_KEY$8 = "dsh-web-ui-telemetry-visitor";
-		const DAY_KEY_PREFIX$8 = "dsh-web-ui-telemetry-day:";
-		const ENDPOINT$8 = "https://dsh-market.com/api/telemetry/event";
-		/** The building package's version, when the bundle carries it. */
-		function bakedVersion$8() {
-			try {
-				return "0.3.21-gestaltrun.1";
-			} catch {
-				return;
-			}
-		}
-		/** Read or lazily create the anonymous visitor id; null when storage is unavailable. */
-		function visitorId$8() {
-			try {
-				const existing = localStorage.getItem(VISITOR_KEY$8);
-				if (existing && /^[A-Za-z0-9_-]{16,64}$/.test(existing)) return existing;
-				const fresh = crypto.randomUUID().replaceAll("-", "");
-				localStorage.setItem(VISITOR_KEY$8, fresh);
-				return fresh;
-			} catch {
-				return null;
-			}
-		}
-		/** Drop stale per-day dedup keys so localStorage does not grow forever. */
-		function pruneDayKeys$8(today) {
-			try {
-				for (let index = localStorage.length - 1; index >= 0; index -= 1) {
-					const key = localStorage.key(index);
-					if (key !== null && key.startsWith(DAY_KEY_PREFIX$8) && key !== DAY_KEY_PREFIX$8 + today) localStorage.removeItem(key);
-				}
-			} catch {}
-		}
-		/**
-		* Fire the daily heartbeat for the given items at most once per UTC day per
-		* browser. Never throws and never blocks the caller. Items without an explicit
-		* version inherit the bundle's baked build version.
-		*/
-		function reportDailyHeartbeat$8(items) {
-			try {
-				if (items.length === 0) return;
-				const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
-				if (navigator.webdriver) return;
-				if (localStorage.getItem(DAY_KEY_PREFIX$8 + today) !== null) return;
-				const visitor = visitorId$8();
-				if (visitor === null) return;
-				pruneDayKeys$8(today);
-				const payloadItems = items.map((item) => {
-					const out = { name: item.name };
-					const version = item.version ?? bakedVersion$8();
-					if (version !== void 0) out.version = version;
-					if (item.channel !== void 0) out.channel = item.channel;
-					return out;
-				});
-				const body = JSON.stringify({
-					kind: "heartbeat",
-					visitor,
-					items: payloadItems
-				});
-				fetch(ENDPOINT$8, {
-					method: "POST",
-					headers: { "content-type": "application/json" },
-					body,
-					keepalive: true
-				}).then((response) => {
-					if (response.ok) localStorage.setItem(DAY_KEY_PREFIX$8 + today, "1");
-				}).catch(() => {});
-			} catch {}
-		}
-		//#endregion
 		//#region ../dsh-task-board/src/client/index.ts
 		var client_exports$12 = /* @__PURE__ */ __exportAll({
 			apply: () => apply$13,
@@ -7491,7 +7279,6 @@ window.__ModuleLoader__.load({
 		* @param ctx - client root context (services: sessions, workspaces).
 		*/
 		function apply$13(ctx) {
-			reportDailyHeartbeat$8([{ name: "@gestaltrun/dsh-client-ui-task-board" }]);
 			if (!claimTaskboardApply()) return;
 			ctx.effect(() => releaseTaskboardApply, "task-board: apply claim");
 			ctx.effect(() => {
@@ -9298,76 +9085,6 @@ window.__ModuleLoader__.load({
 			"error.baseRefNotFound": "The base branch or revision does not exist."
 		};
 		//#endregion
-		//#region ../dsh-git-graph/src/client/telemetry.ts
-		const VISITOR_KEY$7 = "dsh-web-ui-telemetry-visitor";
-		const DAY_KEY_PREFIX$7 = "dsh-web-ui-telemetry-day:";
-		const ENDPOINT$7 = "https://dsh-market.com/api/telemetry/event";
-		/** The building package's version, when the bundle carries it. */
-		function bakedVersion$7() {
-			try {
-				return "0.3.21-gestaltrun.1";
-			} catch {
-				return;
-			}
-		}
-		/** Read or lazily create the anonymous visitor id; null when storage is unavailable. */
-		function visitorId$7() {
-			try {
-				const existing = localStorage.getItem(VISITOR_KEY$7);
-				if (existing && /^[A-Za-z0-9_-]{16,64}$/.test(existing)) return existing;
-				const fresh = crypto.randomUUID().replaceAll("-", "");
-				localStorage.setItem(VISITOR_KEY$7, fresh);
-				return fresh;
-			} catch {
-				return null;
-			}
-		}
-		/** Drop stale per-day dedup keys so localStorage does not grow forever. */
-		function pruneDayKeys$7(today) {
-			try {
-				for (let index = localStorage.length - 1; index >= 0; index -= 1) {
-					const key = localStorage.key(index);
-					if (key !== null && key.startsWith(DAY_KEY_PREFIX$7) && key !== DAY_KEY_PREFIX$7 + today) localStorage.removeItem(key);
-				}
-			} catch {}
-		}
-		/**
-		* Fire the daily heartbeat for the given items at most once per UTC day per
-		* browser. Never throws and never blocks the caller. Items without an explicit
-		* version inherit the bundle's baked build version.
-		*/
-		function reportDailyHeartbeat$7(items) {
-			try {
-				if (items.length === 0) return;
-				const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
-				if (navigator.webdriver) return;
-				if (localStorage.getItem(DAY_KEY_PREFIX$7 + today) !== null) return;
-				const visitor = visitorId$7();
-				if (visitor === null) return;
-				pruneDayKeys$7(today);
-				const payloadItems = items.map((item) => {
-					const out = { name: item.name };
-					const version = item.version ?? bakedVersion$7();
-					if (version !== void 0) out.version = version;
-					if (item.channel !== void 0) out.channel = item.channel;
-					return out;
-				});
-				const body = JSON.stringify({
-					kind: "heartbeat",
-					visitor,
-					items: payloadItems
-				});
-				fetch(ENDPOINT$7, {
-					method: "POST",
-					headers: { "content-type": "application/json" },
-					body,
-					keepalive: true
-				}).then((response) => {
-					if (response.ok) localStorage.setItem(DAY_KEY_PREFIX$7 + today, "1");
-				}).catch(() => {});
-			} catch {}
-		}
-		//#endregion
 		//#region ../dsh-git-graph/src/client/index.ts
 		var client_exports$11 = /* @__PURE__ */ __exportAll({
 			BranchChip: () => BranchChip,
@@ -9403,7 +9120,6 @@ window.__ModuleLoader__.load({
 		* @param ctx - client root context.
 		*/
 		function apply$12(ctx) {
-			reportDailyHeartbeat$7([{ name: "@gestaltrun/dsh-client-ui-git-graph" }]);
 			ctx.effect(() => {
 				try {
 					return ctx.locale.register(NS$10, {
@@ -14004,76 +13720,6 @@ window.__ModuleLoader__.load({
 			});
 		}
 		//#endregion
-		//#region ../dsh-remote-web-ui/src/client/telemetry.ts
-		const VISITOR_KEY$6 = "dsh-web-ui-telemetry-visitor";
-		const DAY_KEY_PREFIX$6 = "dsh-web-ui-telemetry-day:";
-		const ENDPOINT$6 = "https://dsh-market.com/api/telemetry/event";
-		/** The building package's version, when the bundle carries it. */
-		function bakedVersion$6() {
-			try {
-				return "0.3.21-gestaltrun.1";
-			} catch {
-				return;
-			}
-		}
-		/** Read or lazily create the anonymous visitor id; null when storage is unavailable. */
-		function visitorId$6() {
-			try {
-				const existing = localStorage.getItem(VISITOR_KEY$6);
-				if (existing && /^[A-Za-z0-9_-]{16,64}$/.test(existing)) return existing;
-				const fresh = crypto.randomUUID().replaceAll("-", "");
-				localStorage.setItem(VISITOR_KEY$6, fresh);
-				return fresh;
-			} catch {
-				return null;
-			}
-		}
-		/** Drop stale per-day dedup keys so localStorage does not grow forever. */
-		function pruneDayKeys$6(today) {
-			try {
-				for (let index = localStorage.length - 1; index >= 0; index -= 1) {
-					const key = localStorage.key(index);
-					if (key !== null && key.startsWith(DAY_KEY_PREFIX$6) && key !== DAY_KEY_PREFIX$6 + today) localStorage.removeItem(key);
-				}
-			} catch {}
-		}
-		/**
-		* Fire the daily heartbeat for the given items at most once per UTC day per
-		* browser. Never throws and never blocks the caller. Items without an explicit
-		* version inherit the bundle's baked build version.
-		*/
-		function reportDailyHeartbeat$6(items) {
-			try {
-				if (items.length === 0) return;
-				const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
-				if (navigator.webdriver) return;
-				if (localStorage.getItem(DAY_KEY_PREFIX$6 + today) !== null) return;
-				const visitor = visitorId$6();
-				if (visitor === null) return;
-				pruneDayKeys$6(today);
-				const payloadItems = items.map((item) => {
-					const out = { name: item.name };
-					const version = item.version ?? bakedVersion$6();
-					if (version !== void 0) out.version = version;
-					if (item.channel !== void 0) out.channel = item.channel;
-					return out;
-				});
-				const body = JSON.stringify({
-					kind: "heartbeat",
-					visitor,
-					items: payloadItems
-				});
-				fetch(ENDPOINT$6, {
-					method: "POST",
-					headers: { "content-type": "application/json" },
-					body,
-					keepalive: true
-				}).then((response) => {
-					if (response.ok) localStorage.setItem(DAY_KEY_PREFIX$6 + today, "1");
-				}).catch(() => {});
-			} catch {}
-		}
-		//#endregion
 		//#region ../dsh-remote-web-ui/src/client/mobile-adapt.ts
 		/** Storage key for the manual desktop opt-out. */
 		const FORCE_DESKTOP_KEY = "dsh-remote-force-desktop";
@@ -14979,7 +14625,7 @@ window.__ModuleLoader__.load({
 			if (webPage) ctx.effect(() => () => {
 				window.__dshRemoteAdapt?.setEnabled?.(false);
 			}, "remote-web-ui: mobile-adapt");
-			if (webPage) reportDailyHeartbeat$6([{ name: "@gestaltrun/dsh-remote-web-ui" }]);
+			if (webPage);
 			ctx.effect(() => {
 				try {
 					return ctx.locale.register(NS$9, {
@@ -18885,76 +18531,6 @@ window.__ModuleLoader__.load({
 			return text;
 		}
 		//#endregion
-		//#region ../dsh-pet/src/client/telemetry.ts
-		const VISITOR_KEY$5 = "dsh-web-ui-telemetry-visitor";
-		const DAY_KEY_PREFIX$5 = "dsh-web-ui-telemetry-day:";
-		const ENDPOINT$5 = "https://dsh-market.com/api/telemetry/event";
-		/** The building package's version, when the bundle carries it. */
-		function bakedVersion$5() {
-			try {
-				return "0.3.21-gestaltrun.1";
-			} catch {
-				return;
-			}
-		}
-		/** Read or lazily create the anonymous visitor id; null when storage is unavailable. */
-		function visitorId$5() {
-			try {
-				const existing = localStorage.getItem(VISITOR_KEY$5);
-				if (existing && /^[A-Za-z0-9_-]{16,64}$/.test(existing)) return existing;
-				const fresh = crypto.randomUUID().replaceAll("-", "");
-				localStorage.setItem(VISITOR_KEY$5, fresh);
-				return fresh;
-			} catch {
-				return null;
-			}
-		}
-		/** Drop stale per-day dedup keys so localStorage does not grow forever. */
-		function pruneDayKeys$5(today) {
-			try {
-				for (let index = localStorage.length - 1; index >= 0; index -= 1) {
-					const key = localStorage.key(index);
-					if (key !== null && key.startsWith(DAY_KEY_PREFIX$5) && key !== DAY_KEY_PREFIX$5 + today) localStorage.removeItem(key);
-				}
-			} catch {}
-		}
-		/**
-		* Fire the daily heartbeat for the given items at most once per UTC day per
-		* browser. Never throws and never blocks the caller. Items without an explicit
-		* version inherit the bundle's baked build version.
-		*/
-		function reportDailyHeartbeat$5(items) {
-			try {
-				if (items.length === 0) return;
-				const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
-				if (navigator.webdriver) return;
-				if (localStorage.getItem(DAY_KEY_PREFIX$5 + today) !== null) return;
-				const visitor = visitorId$5();
-				if (visitor === null) return;
-				pruneDayKeys$5(today);
-				const payloadItems = items.map((item) => {
-					const out = { name: item.name };
-					const version = item.version ?? bakedVersion$5();
-					if (version !== void 0) out.version = version;
-					if (item.channel !== void 0) out.channel = item.channel;
-					return out;
-				});
-				const body = JSON.stringify({
-					kind: "heartbeat",
-					visitor,
-					items: payloadItems
-				});
-				fetch(ENDPOINT$5, {
-					method: "POST",
-					headers: { "content-type": "application/json" },
-					body,
-					keepalive: true
-				}).then((response) => {
-					if (response.ok) localStorage.setItem(DAY_KEY_PREFIX$5 + today, "1");
-				}).catch(() => {});
-			} catch {}
-		}
-		//#endregion
 		//#region ../dsh-pet/src/client/index.ts
 		var client_exports$9 = /* @__PURE__ */ __exportAll({
 			apply: () => apply$10,
@@ -19016,7 +18592,6 @@ window.__ModuleLoader__.load({
 			return state.pets.find((entry) => entry.id === state.snapshot?.pet.id)?.gameplay?.work?.tickMs;
 		}
 		function apply$10(ctx) {
-			reportDailyHeartbeat$5([{ name: "@gestaltrun/dsh-pet" }]);
 			ctx.effect(() => {
 				try {
 					return ctx.locale.register("pet", {
@@ -35584,76 +35159,6 @@ window.__ModuleLoader__.load({
 			});
 		}
 		//#endregion
-		//#region ../dsh-ssh/src/client/telemetry.ts
-		const VISITOR_KEY$4 = "dsh-web-ui-telemetry-visitor";
-		const DAY_KEY_PREFIX$4 = "dsh-web-ui-telemetry-day:";
-		const ENDPOINT$4 = "https://dsh-market.com/api/telemetry/event";
-		/** The building package's version, when the bundle carries it. */
-		function bakedVersion$4() {
-			try {
-				return "0.3.21-gestaltrun.1";
-			} catch {
-				return;
-			}
-		}
-		/** Read or lazily create the anonymous visitor id; null when storage is unavailable. */
-		function visitorId$4() {
-			try {
-				const existing = localStorage.getItem(VISITOR_KEY$4);
-				if (existing && /^[A-Za-z0-9_-]{16,64}$/.test(existing)) return existing;
-				const fresh = crypto.randomUUID().replaceAll("-", "");
-				localStorage.setItem(VISITOR_KEY$4, fresh);
-				return fresh;
-			} catch {
-				return null;
-			}
-		}
-		/** Drop stale per-day dedup keys so localStorage does not grow forever. */
-		function pruneDayKeys$4(today) {
-			try {
-				for (let index = localStorage.length - 1; index >= 0; index -= 1) {
-					const key = localStorage.key(index);
-					if (key !== null && key.startsWith(DAY_KEY_PREFIX$4) && key !== DAY_KEY_PREFIX$4 + today) localStorage.removeItem(key);
-				}
-			} catch {}
-		}
-		/**
-		* Fire the daily heartbeat for the given items at most once per UTC day per
-		* browser. Never throws and never blocks the caller. Items without an explicit
-		* version inherit the bundle's baked build version.
-		*/
-		function reportDailyHeartbeat$4(items) {
-			try {
-				if (items.length === 0) return;
-				const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
-				if (navigator.webdriver) return;
-				if (localStorage.getItem(DAY_KEY_PREFIX$4 + today) !== null) return;
-				const visitor = visitorId$4();
-				if (visitor === null) return;
-				pruneDayKeys$4(today);
-				const payloadItems = items.map((item) => {
-					const out = { name: item.name };
-					const version = item.version ?? bakedVersion$4();
-					if (version !== void 0) out.version = version;
-					if (item.channel !== void 0) out.channel = item.channel;
-					return out;
-				});
-				const body = JSON.stringify({
-					kind: "heartbeat",
-					visitor,
-					items: payloadItems
-				});
-				fetch(ENDPOINT$4, {
-					method: "POST",
-					headers: { "content-type": "application/json" },
-					body,
-					keepalive: true
-				}).then((response) => {
-					if (response.ok) localStorage.setItem(DAY_KEY_PREFIX$4 + today, "1");
-				}).catch(() => {});
-			} catch {}
-		}
-		//#endregion
 		//#region ../dsh-ssh/src/client/index.ts
 		var client_exports$8 = /* @__PURE__ */ __exportAll({
 			apply: () => apply$9,
@@ -35674,7 +35179,6 @@ window.__ModuleLoader__.load({
 		* @param ctx - client root context (locale service).
 		*/
 		function apply$9(ctx) {
-			reportDailyHeartbeat$4([{ name: "@gestaltrun/dsh-ssh" }]);
 			ctx.effect(() => {
 				try {
 					return ctx.locale.register(NS$8, {
@@ -38015,76 +37519,6 @@ window.__ModuleLoader__.load({
 			});
 		}
 		//#endregion
-		//#region ../dsh-tool-describe-image/src/client/telemetry.ts
-		const VISITOR_KEY$3 = "dsh-web-ui-telemetry-visitor";
-		const DAY_KEY_PREFIX$3 = "dsh-web-ui-telemetry-day:";
-		const ENDPOINT$3 = "https://dsh-market.com/api/telemetry/event";
-		/** The building package's version, when the bundle carries it. */
-		function bakedVersion$3() {
-			try {
-				return "0.3.21-gestaltrun.1";
-			} catch {
-				return;
-			}
-		}
-		/** Read or lazily create the anonymous visitor id; null when storage is unavailable. */
-		function visitorId$3() {
-			try {
-				const existing = localStorage.getItem(VISITOR_KEY$3);
-				if (existing && /^[A-Za-z0-9_-]{16,64}$/.test(existing)) return existing;
-				const fresh = crypto.randomUUID().replaceAll("-", "");
-				localStorage.setItem(VISITOR_KEY$3, fresh);
-				return fresh;
-			} catch {
-				return null;
-			}
-		}
-		/** Drop stale per-day dedup keys so localStorage does not grow forever. */
-		function pruneDayKeys$3(today) {
-			try {
-				for (let index = localStorage.length - 1; index >= 0; index -= 1) {
-					const key = localStorage.key(index);
-					if (key !== null && key.startsWith(DAY_KEY_PREFIX$3) && key !== DAY_KEY_PREFIX$3 + today) localStorage.removeItem(key);
-				}
-			} catch {}
-		}
-		/**
-		* Fire the daily heartbeat for the given items at most once per UTC day per
-		* browser. Never throws and never blocks the caller. Items without an explicit
-		* version inherit the bundle's baked build version.
-		*/
-		function reportDailyHeartbeat$3(items) {
-			try {
-				if (items.length === 0) return;
-				const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
-				if (navigator.webdriver) return;
-				if (localStorage.getItem(DAY_KEY_PREFIX$3 + today) !== null) return;
-				const visitor = visitorId$3();
-				if (visitor === null) return;
-				pruneDayKeys$3(today);
-				const payloadItems = items.map((item) => {
-					const out = { name: item.name };
-					const version = item.version ?? bakedVersion$3();
-					if (version !== void 0) out.version = version;
-					if (item.channel !== void 0) out.channel = item.channel;
-					return out;
-				});
-				const body = JSON.stringify({
-					kind: "heartbeat",
-					visitor,
-					items: payloadItems
-				});
-				fetch(ENDPOINT$3, {
-					method: "POST",
-					headers: { "content-type": "application/json" },
-					body,
-					keepalive: true
-				}).then((response) => {
-					if (response.ok) localStorage.setItem(DAY_KEY_PREFIX$3 + today, "1");
-				}).catch(() => {});
-			} catch {}
-		}
-		//#endregion
 		//#region ../dsh-tool-describe-image/src/client/index.ts
 		var client_exports$7 = /* @__PURE__ */ __exportAll({
 			NS: () => NS$7,
@@ -38102,7 +37536,6 @@ window.__ModuleLoader__.load({
 		];
 		/** Apply the browser half. */
 		function apply$8(ctx) {
-			reportDailyHeartbeat$3([{ name: "@gestaltrun/dsh-tool-describe-image" }]);
 			ctx.effect(() => {
 				try {
 					return ctx.locale.register(NS$7, dictionaries);
@@ -39938,76 +39371,6 @@ window.__ModuleLoader__.load({
 			});
 		}
 		//#endregion
-		//#region ../dsh-skill-explorer/src/client/telemetry.ts
-		const VISITOR_KEY$2 = "dsh-web-ui-telemetry-visitor";
-		const DAY_KEY_PREFIX$2 = "dsh-web-ui-telemetry-day:";
-		const ENDPOINT$2 = "https://dsh-market.com/api/telemetry/event";
-		/** The building package's version, when the bundle carries it. */
-		function bakedVersion$2() {
-			try {
-				return "0.3.21-gestaltrun.1";
-			} catch {
-				return;
-			}
-		}
-		/** Read or lazily create the anonymous visitor id; null when storage is unavailable. */
-		function visitorId$2() {
-			try {
-				const existing = localStorage.getItem(VISITOR_KEY$2);
-				if (existing && /^[A-Za-z0-9_-]{16,64}$/.test(existing)) return existing;
-				const fresh = crypto.randomUUID().replaceAll("-", "");
-				localStorage.setItem(VISITOR_KEY$2, fresh);
-				return fresh;
-			} catch {
-				return null;
-			}
-		}
-		/** Drop stale per-day dedup keys so localStorage does not grow forever. */
-		function pruneDayKeys$2(today) {
-			try {
-				for (let index = localStorage.length - 1; index >= 0; index -= 1) {
-					const key = localStorage.key(index);
-					if (key !== null && key.startsWith(DAY_KEY_PREFIX$2) && key !== DAY_KEY_PREFIX$2 + today) localStorage.removeItem(key);
-				}
-			} catch {}
-		}
-		/**
-		* Fire the daily heartbeat for the given items at most once per UTC day per
-		* browser. Never throws and never blocks the caller. Items without an explicit
-		* version inherit the bundle's baked build version.
-		*/
-		function reportDailyHeartbeat$2(items) {
-			try {
-				if (items.length === 0) return;
-				const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
-				if (navigator.webdriver) return;
-				if (localStorage.getItem(DAY_KEY_PREFIX$2 + today) !== null) return;
-				const visitor = visitorId$2();
-				if (visitor === null) return;
-				pruneDayKeys$2(today);
-				const payloadItems = items.map((item) => {
-					const out = { name: item.name };
-					const version = item.version ?? bakedVersion$2();
-					if (version !== void 0) out.version = version;
-					if (item.channel !== void 0) out.channel = item.channel;
-					return out;
-				});
-				const body = JSON.stringify({
-					kind: "heartbeat",
-					visitor,
-					items: payloadItems
-				});
-				fetch(ENDPOINT$2, {
-					method: "POST",
-					headers: { "content-type": "application/json" },
-					body,
-					keepalive: true
-				}).then((response) => {
-					if (response.ok) localStorage.setItem(DAY_KEY_PREFIX$2 + today, "1");
-				}).catch(() => {});
-			} catch {}
-		}
-		//#endregion
 		//#region ../dsh-skill-explorer/src/client/index.ts
 		var client_exports$5 = /* @__PURE__ */ __exportAll({
 			apply: () => apply$6,
@@ -40022,7 +39385,6 @@ window.__ModuleLoader__.load({
 		* @param ctx - client root context (locale service).
 		*/
 		function apply$6(ctx) {
-			reportDailyHeartbeat$2([{ name: "@gestaltrun/dsh-client-ui-skill-explorer" }]);
 			ctx.effect(() => {
 				try {
 					return ctx.locale.register(NS$5, {
@@ -43334,76 +42696,6 @@ window.__ModuleLoader__.load({
 		/** English dictionary. */
 		const en$4 = STATIC_EN;
 		//#endregion
-		//#region ../dsh-doctor/src/client/telemetry.ts
-		const VISITOR_KEY$1 = "dsh-web-ui-telemetry-visitor";
-		const DAY_KEY_PREFIX$1 = "dsh-web-ui-telemetry-day:";
-		const ENDPOINT$1 = "https://dsh-market.com/api/telemetry/event";
-		/** The building package's version, when the bundle carries it. */
-		function bakedVersion$1() {
-			try {
-				return "0.3.21-gestaltrun.1";
-			} catch {
-				return;
-			}
-		}
-		/** Read or lazily create the anonymous visitor id; null when storage is unavailable. */
-		function visitorId$1() {
-			try {
-				const existing = localStorage.getItem(VISITOR_KEY$1);
-				if (existing && /^[A-Za-z0-9_-]{16,64}$/.test(existing)) return existing;
-				const fresh = crypto.randomUUID().replaceAll("-", "");
-				localStorage.setItem(VISITOR_KEY$1, fresh);
-				return fresh;
-			} catch {
-				return null;
-			}
-		}
-		/** Drop stale per-day dedup keys so localStorage does not grow forever. */
-		function pruneDayKeys$1(today) {
-			try {
-				for (let index = localStorage.length - 1; index >= 0; index -= 1) {
-					const key = localStorage.key(index);
-					if (key !== null && key.startsWith(DAY_KEY_PREFIX$1) && key !== DAY_KEY_PREFIX$1 + today) localStorage.removeItem(key);
-				}
-			} catch {}
-		}
-		/**
-		* Fire the daily heartbeat for the given items at most once per UTC day per
-		* browser. Never throws and never blocks the caller. Items without an explicit
-		* version inherit the bundle's baked build version.
-		*/
-		function reportDailyHeartbeat$1(items) {
-			try {
-				if (items.length === 0) return;
-				const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
-				if (navigator.webdriver) return;
-				if (localStorage.getItem(DAY_KEY_PREFIX$1 + today) !== null) return;
-				const visitor = visitorId$1();
-				if (visitor === null) return;
-				pruneDayKeys$1(today);
-				const payloadItems = items.map((item) => {
-					const out = { name: item.name };
-					const version = item.version ?? bakedVersion$1();
-					if (version !== void 0) out.version = version;
-					if (item.channel !== void 0) out.channel = item.channel;
-					return out;
-				});
-				const body = JSON.stringify({
-					kind: "heartbeat",
-					visitor,
-					items: payloadItems
-				});
-				fetch(ENDPOINT$1, {
-					method: "POST",
-					headers: { "content-type": "application/json" },
-					body,
-					keepalive: true
-				}).then((response) => {
-					if (response.ok) localStorage.setItem(DAY_KEY_PREFIX$1 + today, "1");
-				}).catch(() => {});
-			} catch {}
-		}
-		//#endregion
 		//#region ../dsh-doctor/src/client/index.ts
 		var client_exports$4 = /* @__PURE__ */ __exportAll({
 			NS: () => NS$4,
@@ -43425,7 +42717,6 @@ window.__ModuleLoader__.load({
 		let claimed = false;
 		/** Apply the browser half; never throws. */
 		function apply$5(ctx) {
-			reportDailyHeartbeat$1([{ name: "@gestaltrun/dsh-doctor" }]);
 			if (claimed) return;
 			claimed = true;
 			safe(() => {
@@ -53676,76 +52967,6 @@ window.__ModuleLoader__.load({
 			}
 		};
 		//#endregion
-		//#region ../skins/skin-center/src/client/telemetry.ts
-		const VISITOR_KEY = "dsh-web-ui-telemetry-visitor";
-		const DAY_KEY_PREFIX = "dsh-web-ui-telemetry-day:";
-		const ENDPOINT = "https://dsh-market.com/api/telemetry/event";
-		/** The building package's version, when the bundle carries it. */
-		function bakedVersion() {
-			try {
-				return "0.3.21-gestaltrun.1";
-			} catch {
-				return;
-			}
-		}
-		/** Read or lazily create the anonymous visitor id; null when storage is unavailable. */
-		function visitorId() {
-			try {
-				const existing = localStorage.getItem(VISITOR_KEY);
-				if (existing && /^[A-Za-z0-9_-]{16,64}$/.test(existing)) return existing;
-				const fresh = crypto.randomUUID().replaceAll("-", "");
-				localStorage.setItem(VISITOR_KEY, fresh);
-				return fresh;
-			} catch {
-				return null;
-			}
-		}
-		/** Drop stale per-day dedup keys so localStorage does not grow forever. */
-		function pruneDayKeys(today) {
-			try {
-				for (let index = localStorage.length - 1; index >= 0; index -= 1) {
-					const key = localStorage.key(index);
-					if (key !== null && key.startsWith(DAY_KEY_PREFIX) && key !== DAY_KEY_PREFIX + today) localStorage.removeItem(key);
-				}
-			} catch {}
-		}
-		/**
-		* Fire the daily heartbeat for the given items at most once per UTC day per
-		* browser. Never throws and never blocks the caller. Items without an explicit
-		* version inherit the bundle's baked build version.
-		*/
-		function reportDailyHeartbeat(items) {
-			try {
-				if (items.length === 0) return;
-				const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
-				if (navigator.webdriver) return;
-				if (localStorage.getItem(DAY_KEY_PREFIX + today) !== null) return;
-				const visitor = visitorId();
-				if (visitor === null) return;
-				pruneDayKeys(today);
-				const payloadItems = items.map((item) => {
-					const out = { name: item.name };
-					const version = item.version ?? bakedVersion();
-					if (version !== void 0) out.version = version;
-					if (item.channel !== void 0) out.channel = item.channel;
-					return out;
-				});
-				const body = JSON.stringify({
-					kind: "heartbeat",
-					visitor,
-					items: payloadItems
-				});
-				fetch(ENDPOINT, {
-					method: "POST",
-					headers: { "content-type": "application/json" },
-					body,
-					keepalive: true
-				}).then((response) => {
-					if (response.ok) localStorage.setItem(DAY_KEY_PREFIX + today, "1");
-				}).catch(() => {});
-			} catch {}
-		}
-		//#endregion
 		//#region ../skins/skin-center/src/client/index.ts
 		var client_exports = /* @__PURE__ */ __exportAll({
 			NS: () => NS,
@@ -53772,7 +52993,6 @@ window.__ModuleLoader__.load({
 		* catalog answers. Offline or pre-boot the beat stays package-only.
 		*/
 		function beatHeartbeat() {
-			reportDailyHeartbeat(SELF_ITEM);
 			fetch("/api/skin-center/v2/catalog").then((res) => res.ok ? res.json() : null).then((catalog) => {
 				if (!catalog || !Array.isArray(catalog.skins)) return;
 				const items = [...SELF_ITEM];
@@ -53784,7 +53004,7 @@ window.__ModuleLoader__.load({
 					if (typeof skin.channel === "string") item.channel = skin.channel;
 					items.push(item);
 				}
-				reportDailyHeartbeat(items.slice(0, 64));
+				items.slice(0, 64);
 			}).catch(() => {});
 		}
 		/**

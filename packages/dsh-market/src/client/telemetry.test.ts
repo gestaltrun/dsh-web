@@ -1,114 +1,31 @@
 /** @vitest-environment jsdom */
 
-/**
- * The shared telemetry heartbeat (synced copy of shared/client/telemetry.ts):
- * one beat per browser per UTC day, silent failure, day marked only after an
- * accepted send.
- */
-
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { reportDailyHeartbeat } from './telemetry.ts'
 
-const ENDPOINT = 'https://dsh-market.com/api/telemetry/event'
+describe('disabled Workshop install telemetry', () => {
+  afterEach(() => vi.unstubAllGlobals())
 
-/** Minimal Storage double; Node's partial global localStorage leaks into
- * jsdom here, so every test installs its own deterministic instance. */
-function memoryStorage(): Storage {
-  const map = new Map<string, string>()
-  return {
-    get length() { return map.size },
-    clear: () => map.clear(),
-    getItem: (key) => (map.has(key) ? map.get(key)! : null),
-    key: (index) => Array.from(map.keys())[index] ?? null,
-    removeItem: (key) => { map.delete(key) },
-    setItem: (key, value) => { map.set(key, String(value)) },
-  }
-}
-
-let store: Storage
-const todayKey = () => 'dsh-web-ui-telemetry-day:' + new Date().toISOString().slice(0, 10)
-
-function lastBody(): Record<string, unknown> {
-  const call = vi.mocked(fetch).mock.calls.at(-1)
-  expect(call?.[0]).toBe(ENDPOINT)
-  return JSON.parse(String((call?.[1] as RequestInit).body))
-}
-
-describe('daily telemetry heartbeat', () => {
-  beforeEach(() => {
-    store = memoryStorage()
-    vi.stubGlobal('localStorage', store)
-    vi.stubGlobal('fetch', vi.fn(async () => new Response(null, { status: 200 })))
-    vi.stubGlobal('crypto', { randomUUID: () => '0123456789abcdef0123456789abcdef' })
-  })
-
-  afterEach(() => {
-    vi.unstubAllGlobals()
-  })
-
-  it('sends one anonymous beat with the package name and a random visitor id', () => {
-    reportDailyHeartbeat([{ name: '@gestaltrun/dsh-client-ui-market' }])
-    const body = lastBody()
-    expect(body.kind).toBe('heartbeat')
-    expect(body.visitor).toMatch(/^[A-Za-z0-9_-]{16,64}$/)
-    expect(body.items).toEqual([{ name: '@gestaltrun/dsh-client-ui-market' }])
-  })
-
-  it('persists the visitor id for later beats', () => {
-    reportDailyHeartbeat([{ name: '@gestaltrun/dsh-client-ui-market' }])
-    reportDailyHeartbeat([])
-    expect(store.getItem('dsh-web-ui-telemetry-visitor')).toBe('0123456789abcdef0123456789abcdef')
-  })
-
-  it('marks the day only after an accepted send so offline browsers retry', async () => {
-    vi.mocked(fetch).mockImplementationOnce(async () => new Response(null, { status: 503 }))
-    reportDailyHeartbeat([{ name: '@gestaltrun/dsh-pet' }])
-    await Promise.resolve()
-    await Promise.resolve()
-    await Promise.resolve()
-    expect(store.getItem(todayKey())).toBeNull()
-
-    vi.mocked(fetch).mockImplementationOnce(async () => new Response(null, { status: 200 }))
-    reportDailyHeartbeat([{ name: '@gestaltrun/dsh-pet' }])
-    await Promise.resolve()
-    await Promise.resolve()
-    expect(store.getItem(todayKey())).toBe('1')
-  })
-
-  it('stays silent for the rest of the day once the beat was accepted', () => {
-    store.setItem(todayKey(), '')
-    reportDailyHeartbeat([{ name: '@gestaltrun/dsh-pet' }])
-    expect(fetch).not.toHaveBeenCalled()
-  })
-
-  it('never throws and sends nothing when storage is unavailable', () => {
-    vi.stubGlobal('localStorage', undefined)
-    expect(() => reportDailyHeartbeat([{ name: '@gestaltrun/dsh-pet' }])).not.toThrow()
-    expect(fetch).not.toHaveBeenCalled()
-  })
-
-  it('skips empty item lists', () => {
-    reportDailyHeartbeat([])
-    expect(fetch).not.toHaveBeenCalled()
-  })
-
-  it('skips automated browsers (navigator.webdriver)', () => {
-    Object.defineProperty(navigator, 'webdriver', { value: true, configurable: true })
-    try {
-      reportDailyHeartbeat([{ name: '@gestaltrun/dsh-pet' }])
-      expect(fetch).not.toHaveBeenCalled()
-    } finally {
-      Object.defineProperty(navigator, 'webdriver', { value: false, configurable: true })
+  it.each([false, true])('does not send or touch browser state with webdriver=%s', (webdriver) => {
+    const values = new Map([['dsh-web-ui-telemetry-visitor', 'existing-user-data']])
+    const storage = {
+      getItem: vi.fn((key: string) => values.get(key) ?? null),
+      setItem: vi.fn((key: string, value: string) => values.set(key, value)),
+      removeItem: vi.fn((key: string) => values.delete(key)),
     }
-  })
-
-  it('carries explicit version and channel, omitting absent fields', () => {
-    reportDailyHeartbeat([
-      { name: 'skin:harbor', version: '2.0.1', channel: 'market' },
-      { name: '@gestaltrun/dsh-pet' },
-    ])
-    const body = JSON.parse(String(vi.mocked(fetch).mock.calls[0][1]?.body))
-    expect(body.items[0]).toEqual({ name: 'skin:harbor', version: '2.0.1', channel: 'market' })
-    expect(body.items[1]).toEqual({ name: '@gestaltrun/dsh-pet' })
+    const fetch = vi.fn(async () => new Response(null, { status: 200 }))
+    const randomUUID = vi.fn(() => '0123456789abcdef0123456789abcdef')
+    vi.stubGlobal('navigator', { webdriver })
+    vi.stubGlobal('localStorage', storage)
+    vi.stubGlobal('fetch', fetch)
+    vi.stubGlobal('crypto', { randomUUID })
+    reportDailyHeartbeat([{ name: '@gestaltrun/dsh-pet', version: '0.3.21-gestaltrun.1' }])
+    reportDailyHeartbeat([{ name: 'skin:blue-fantasy', channel: 'npm' }])
+    expect(fetch).not.toHaveBeenCalled()
+    expect(storage.getItem).not.toHaveBeenCalled()
+    expect(storage.setItem).not.toHaveBeenCalled()
+    expect(storage.removeItem).not.toHaveBeenCalled()
+    expect(randomUUID).not.toHaveBeenCalled()
+    expect([...values]).toEqual([['dsh-web-ui-telemetry-visitor', 'existing-user-data']])
   })
 })

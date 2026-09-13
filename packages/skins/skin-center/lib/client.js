@@ -5068,76 +5068,6 @@ window.__ModuleLoader__.load({
 			}
 		};
 		//#endregion
-		//#region src/client/telemetry.ts
-		const VISITOR_KEY = "dsh-web-ui-telemetry-visitor";
-		const DAY_KEY_PREFIX = "dsh-web-ui-telemetry-day:";
-		const ENDPOINT = "https://dsh-market.com/api/telemetry/event";
-		/** The building package's version, when the bundle carries it. */
-		function bakedVersion() {
-			try {
-				return "0.3.21-gestaltrun.1";
-			} catch {
-				return;
-			}
-		}
-		/** Read or lazily create the anonymous visitor id; null when storage is unavailable. */
-		function visitorId() {
-			try {
-				const existing = localStorage.getItem(VISITOR_KEY);
-				if (existing && /^[A-Za-z0-9_-]{16,64}$/.test(existing)) return existing;
-				const fresh = crypto.randomUUID().replaceAll("-", "");
-				localStorage.setItem(VISITOR_KEY, fresh);
-				return fresh;
-			} catch {
-				return null;
-			}
-		}
-		/** Drop stale per-day dedup keys so localStorage does not grow forever. */
-		function pruneDayKeys(today) {
-			try {
-				for (let index = localStorage.length - 1; index >= 0; index -= 1) {
-					const key = localStorage.key(index);
-					if (key !== null && key.startsWith(DAY_KEY_PREFIX) && key !== DAY_KEY_PREFIX + today) localStorage.removeItem(key);
-				}
-			} catch {}
-		}
-		/**
-		* Fire the daily heartbeat for the given items at most once per UTC day per
-		* browser. Never throws and never blocks the caller. Items without an explicit
-		* version inherit the bundle's baked build version.
-		*/
-		function reportDailyHeartbeat(items) {
-			try {
-				if (items.length === 0) return;
-				const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
-				if (navigator.webdriver) return;
-				if (localStorage.getItem(DAY_KEY_PREFIX + today) !== null) return;
-				const visitor = visitorId();
-				if (visitor === null) return;
-				pruneDayKeys(today);
-				const payloadItems = items.map((item) => {
-					const out = { name: item.name };
-					const version = item.version ?? bakedVersion();
-					if (version !== void 0) out.version = version;
-					if (item.channel !== void 0) out.channel = item.channel;
-					return out;
-				});
-				const body = JSON.stringify({
-					kind: "heartbeat",
-					visitor,
-					items: payloadItems
-				});
-				fetch(ENDPOINT, {
-					method: "POST",
-					headers: { "content-type": "application/json" },
-					body,
-					keepalive: true
-				}).then((response) => {
-					if (response.ok) localStorage.setItem(DAY_KEY_PREFIX + today, "1");
-				}).catch(() => {});
-			} catch {}
-		}
-		//#endregion
 		//#region src/client/index.ts
 		/** Locale namespace owned by this plugin. */
 		const NS = "skinCenter";
@@ -5158,7 +5088,6 @@ window.__ModuleLoader__.load({
 		* catalog answers. Offline or pre-boot the beat stays package-only.
 		*/
 		function beatHeartbeat() {
-			reportDailyHeartbeat(SELF_ITEM);
 			fetch("/api/skin-center/v2/catalog").then((res) => res.ok ? res.json() : null).then((catalog) => {
 				if (!catalog || !Array.isArray(catalog.skins)) return;
 				const items = [...SELF_ITEM];
@@ -5170,7 +5099,7 @@ window.__ModuleLoader__.load({
 					if (typeof skin.channel === "string") item.channel = skin.channel;
 					items.push(item);
 				}
-				reportDailyHeartbeat(items.slice(0, 64));
+				items.slice(0, 64);
 			}).catch(() => {});
 		}
 		/**

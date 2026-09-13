@@ -51,6 +51,7 @@ export function validateTarball(path, version) {
     if (!/\.(?:[cm]?js|yml)$/.test(entry)) continue
     const text = execFileSync('tar', ['-xOf', path, entry], { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 })
     if (text.includes('@linxin666/')) throw new Error(`Upstream npm identity in executable artifact: ${entry}`)
+    if (text.includes('https://dsh-market.com/api/telemetry/event')) throw new Error(`Workshop install telemetry in executable artifact: ${entry}`)
   }
   return pkg
 }

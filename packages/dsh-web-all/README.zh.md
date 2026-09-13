@@ -2,7 +2,7 @@
 
 [English](README.md) | 中文
 
-Gestaltrun 聚合包安装 `aggregate.yml` 中选定的插件和 `@gestaltrun/dsh-better-sidebar`。安装后的产品不包含创意工坊、其社区预设面板和目录数据包。官方预设、已安装插件管理和已保存的用户内容仍然可用。
+Gestaltrun 聚合包安装 `aggregate.yml` 中选定的插件和 `@gestaltrun/dsh-better-sidebar`。安装后的产品不包含创意工坊、其社区预设面板和目录数据包。官方预设、已安装插件管理和已保存的用户内容仍然可用。 插件安装统计处于关闭状态，不发送创意工坊心跳，也不收集访客状态。
 
 
 ## 是什么

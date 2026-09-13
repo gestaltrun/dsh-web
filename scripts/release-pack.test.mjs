@@ -56,6 +56,9 @@ test('publication verifies actual tarball bytes and the complete owned package s
     writeFileSync(join(stage, 'stale.js'), "import '@linxin666/dsh-fixture'\n")
     execFileSync('tar', ['-czf', tarball, '-C', root, 'package'])
     assert.throws(() => validateTarball(tarball, version), /Upstream npm identity/)
+    writeFileSync(join(stage, 'stale.js'), "fetch('https://dsh-market.com/api/telemetry/event')\n")
+    execFileSync('tar', ['-czf', tarball, '-C', root, 'package'])
+    assert.throws(() => validateTarball(tarball, version), /Workshop install telemetry/)
     writeFileSync(tarball, Buffer.concat([readFileSync(tarball), Buffer.from('tampered')]))
     assert.throws(() => validateArtifacts(root, { root }), /digest/)
   } finally {
