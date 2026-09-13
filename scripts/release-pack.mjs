@@ -6,6 +6,7 @@ import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseArgs } from 'node:util'
+import { canonicalizeGzip } from './canonical-gzip.mjs'
 import { walkFamilyPackages } from './lib/family-packages.mjs'
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url))
@@ -100,6 +101,7 @@ export function packFamily({ out, sidebarTarball, root = ROOT }) {
     const filename = `${pkg.name.slice(1).replace('/', '-')}-${pkg.version}.tgz`
     const path = join(output, filename)
     if (!existsSync(path)) throw new Error(`Missing package archive: ${filename}`)
+    writeFileSync(path, canonicalizeGzip(readFileSync(path)))
     validateTarball(path, version)
     artifacts.push({ name: pkg.name, version: pkg.version, filename, integrity: integrity(path) })
   }
