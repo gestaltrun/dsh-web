@@ -12,6 +12,11 @@ on:
         type: string
         default: latest
 
+      root_package:
+        description: Optional package root whose required family dependencies are published
+        type: string
+        default: ''
+
 permissions:
   contents: read
 
@@ -58,4 +63,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TAG: ${{ inputs.npm_tag }}
-        run: pnpm release:publish --from artifacts --tag "$NPM_TAG"
+          ROOT_PACKAGE: ${{ inputs.root_package }}
+        run: |
+          if [ -n "$ROOT_PACKAGE" ]; then
+            pnpm release:publish --from artifacts --tag "$NPM_TAG" --root "$ROOT_PACKAGE"
+          else
+            pnpm release:publish --from artifacts --tag "$NPM_TAG"
+          fi

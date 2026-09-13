@@ -11,7 +11,7 @@ importers:
   .:
     dependencies:
       '@gestaltrun/dsh-web-all':
-        specifier: 0.3.21-gestaltrun.0
+        specifier: 0.3.21-gestaltrun.1
         version: link:packages/dsh-web-all
     devDependencies:
       '@deepseek-ai/cordis':
@@ -1439,24 +1439,15 @@ importers:
       '@gestaltrun/dsh-better-sidebar':
         specifier: 0.19.1-gestaltrun.0
         version: 0.19.1-gestaltrun.0(5d01a0121f53fce90355120f9d87b845)
-      '@gestaltrun/dsh-client-ui-community-plugins':
-        specifier: workspace:*
-        version: link:../dsh-community-plugins
       '@gestaltrun/dsh-client-ui-git-graph':
         specifier: workspace:*
         version: link:../dsh-git-graph
-      '@gestaltrun/dsh-client-ui-market':
-        specifier: workspace:*
-        version: link:../dsh-market
       '@gestaltrun/dsh-client-ui-model-capabilities':
         specifier: workspace:*
         version: link:../dsh-model-capabilities
       '@gestaltrun/dsh-client-ui-plugin-manager':
         specifier: workspace:*
         version: link:../dsh-plugin-manager
-      '@gestaltrun/dsh-client-ui-preset-center':
-        specifier: workspace:*
-        version: link:../dsh-preset-center
       '@gestaltrun/dsh-client-ui-skill-explorer':
         specifier: workspace:*
         version: link:../dsh-skill-explorer

@@ -806,6 +806,7 @@ function renderPackageJson(pkgPath, resolvedDeps, shellSubpaths) {
   const next = {}
   for (const { name } of resolvedDeps) next[name] = 'workspace:*'
   for (const key of Object.keys(pkg.dependencies ?? {}).filter((k) => !(k in next)).sort()) {
+    if (pkg.dependencies[key].startsWith('workspace:')) continue
     next[key] = pkg.dependencies[key]
   }
   if (Object.keys(next).length) pkg.dependencies = next

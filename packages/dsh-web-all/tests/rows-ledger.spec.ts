@@ -130,9 +130,9 @@ describe('shell row-state surface', () => {
     expect(host.routes.has('/api/dsh-web-all/degraded')).toBe(true)
   })
 
-  it('a retired plugin row holds the routes but records nothing', async () => {
+  it.each(['@gestaltrun/dsh-perf', '@gestaltrun/dsh-client-ui-market', '@gestaltrun/dsh-client-ui-preset-center', '@gestaltrun/dsh-client-ui-community-plugins'])('retired %s holds routes without activating the old feature', async (plugin) => {
     const host = mockHost()
-    await apply(host.createCtx() as never, { plugin: '@gestaltrun/dsh-perf' })
+    await apply(host.createCtx() as never, { plugin })
     host.provideWebServer()
     expect(listActiveRows()).toEqual([])
     expect(host.routes.has('/api/dsh-web-all/rows')).toBe(true)

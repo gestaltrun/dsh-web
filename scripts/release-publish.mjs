@@ -30,11 +30,49 @@ export function validateArtifacts(directory, { repository = process.env.GITHUB_R
   return validated.sort((a, b) => Number(a.pkg.name.endsWith('/dsh-web-all')) - Number(b.pkg.name.endsWith('/dsh-web-all')))
 }
 
+/** Select exact family dependencies and required peers after validating the complete archive inventory. */
+export function selectRequiredArtifacts(artifacts, roots) {
+  if (roots.length === 0) return artifacts
+  const byName = new Map(artifacts.map(artifact => [artifact.pkg.name, artifact]))
+  const selected = new Set()
+  const visiting = new Set()
+  const ordered = []
+  const visit = (name) => {
+    if (selected.has(name)) return
+    const artifact = byName.get(name)
+    if (artifact === undefined) throw new Error(`Missing required family archive: ${name}`)
+    if (visiting.has(name)) throw new Error(`Cyclic family dependency: ${name}`)
+    visiting.add(name)
+    const peers = Object.fromEntries(Object.entries(artifact.pkg.peerDependencies ?? {})
+      .filter(([peer]) => artifact.pkg.peerDependenciesMeta?.[peer]?.optional !== true))
+    const dependencies = { ...artifact.pkg.dependencies, ...artifact.pkg.optionalDependencies, ...peers }
+    for (const [dependency, version] of Object.entries(dependencies)) {
+      if (!dependency.startsWith('@gestaltrun/') || dependency === '@gestaltrun/dsh-better-sidebar') continue
+      const target = byName.get(dependency)
+      if (target === undefined) throw new Error(`Missing required family archive: ${dependency}`)
+      if (target.pkg.version !== version) throw new Error(`Required family version mismatch: ${dependency}@${version}`)
+      visit(dependency)
+    }
+    visiting.delete(name)
+    selected.add(name)
+    ordered.push(artifact)
+  }
+  for (const root of roots) {
+    if (!byName.has(root)) throw new Error(`Unknown release root: ${root}`)
+    visit(root)
+  }
+  return ordered
+}
+
 if (resolve(process.argv[1] ?? '') === fileURLToPath(import.meta.url)) {
-  const { values } = parseArgs({ args: process.argv.slice(2).filter(arg => arg !== '--'), options: { from: { type: 'string' }, tag: { type: 'string', default: 'latest' }, 'dry-run': { type: 'boolean', default: false } } })
-  if (!values.from || !/^[a-z][a-z0-9-]*$/.test(values.tag)) throw new Error('Usage: pnpm release:publish --from <directory> [--tag latest] [--dry-run]')
+  const { values } = parseArgs({ args: process.argv.slice(2).filter(arg => arg !== '--'), options: { from: { type: 'string' }, tag: { type: 'string', default: 'latest' }, 'dry-run': { type: 'boolean', default: false }, root: { type: 'string', multiple: true }, list: { type: 'boolean', default: false } } })
+  if (!values.from || !/^[a-z][a-z0-9-]*$/.test(values.tag)) throw new Error('Usage: pnpm release:publish --from <directory> [--tag latest] [--root <package>] [--list] [--dry-run]')
   if (process.platform === 'win32') throw new Error('Publish npm archives through the Linux release workflow; Windows supports release:pack')
-  const artifacts = validateArtifacts(resolve(values.from))
+  const artifacts = selectRequiredArtifacts(validateArtifacts(resolve(values.from)), values.root ?? [])
+  if (values.list) {
+    console.log(JSON.stringify({ packages: artifacts.map(({ path, pkg }) => ({ name: pkg.name, version: pkg.version, filename: basename(path), integrity: integrity(path) })) }, null, 2))
+    process.exit(0)
+  }
   for (const { path, pkg } of artifacts) {
     const args = ['publish', path, '--registry', 'https://registry.npmjs.org/', '--access', 'public', '--tag', values.tag]
     if (values['dry-run']) args.push('--dry-run')

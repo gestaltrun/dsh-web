@@ -192,6 +192,9 @@ function isOverrideShape(config: ShellConfig | undefined): boolean {
 const RETIRED_PLUGINS = new Set([
   '@gestaltrun/dsh-perf',
   '@gestaltrun/dsh-desktop-launcher',
+  '@gestaltrun/dsh-client-ui-market',
+  '@gestaltrun/dsh-client-ui-preset-center',
+  '@gestaltrun/dsh-client-ui-community-plugins',
 ])
 
 /** Apply one shell entry: mount the configured real plugin behind an isolation boundary. */

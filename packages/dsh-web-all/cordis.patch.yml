@@ -24,20 +24,6 @@
       config:
         plugin: '@gestaltrun/dsh-client-ui-plugin-manager'
 
-# from ../dsh-community-plugins
-- insert:
-    - id: web-ui-community-plugins
-      name: '@gestaltrun/dsh-web-all/community-plugins'
-      config:
-        plugin: '@gestaltrun/dsh-client-ui-community-plugins'
-
-# from ../dsh-market
-- insert:
-    - id: web-ui-market
-      name: '@gestaltrun/dsh-web-all/market'
-      config:
-        plugin: '@gestaltrun/dsh-client-ui-market'
-
 # from ../dsh-task-board
 - insert:
     - id: web-ui-task-board
@@ -121,13 +107,6 @@
       name: '@gestaltrun/dsh-web-all/model-capabilities'
       config:
         plugin: '@gestaltrun/dsh-client-ui-model-capabilities'
-
-# from ../dsh-preset-center
-- insert:
-    - id: web-ui-preset-center
-      name: '@gestaltrun/dsh-web-all/preset-center'
-      config:
-        plugin: '@gestaltrun/dsh-client-ui-preset-center'
 
 # from ../skins/skin-center
 - insert:

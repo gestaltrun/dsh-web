@@ -96,6 +96,7 @@ describe('family subpath display names', () => {
   it('retired family subpaths (tombstones) resolve to the shell re-export for backwards compatibility', () => {
     expect(manifest.exports['./desktop-launcher']).toBe('./lib/shells/shell.js')
     expect(manifest.exports['./dsh-perf']).toBe('./lib/shells/shell.js')
+    for (const retired of ['market', 'preset-center', 'community-plugins']) expect(manifest.exports[`./${retired}`]).toBe('./lib/shells/shell.js')
   })
 
   it('the built shells face re-exports the main face apply (one degraded ledger)', async () => {

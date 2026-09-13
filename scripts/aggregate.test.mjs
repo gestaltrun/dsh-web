@@ -143,3 +143,18 @@ test('web-ui-all leaves the deprecated @morlay/better-session integration out', 
   assert.doesNotMatch(patch, /^- id: web-ui-(session-branch|session-rdb|conversation-message-actions)$/m, 'better-session sub-plugin rows must not mount')
   assert.doesNotMatch(patch, /@gestaltrun\/dsh-perf/, 'the removed dsh-perf plugin must not reappear in the aggregate patch')
 })
+
+test('Gestaltrun aggregate excludes Workshop and its catalog while retaining plugin management', () => {
+  const pkg = JSON.parse(readFileSync(join(ROOT, 'packages/dsh-web-all/package.json'), 'utf8'))
+  const patch = readFileSync(join(ROOT, 'packages/dsh-web-all/cordis.patch.yml'), 'utf8')
+  const clients = JSON.parse(readFileSync(join(ROOT, 'packages/dsh-web-all/src/client/children.specifiers.json'), 'utf8'))
+  for (const name of ['@gestaltrun/dsh-client-ui-market', '@gestaltrun/dsh-client-ui-preset-center', '@gestaltrun/dsh-client-ui-community-plugins']) {
+    assert.equal(pkg.dependencies[name], undefined, `Workshop dependency ${name} must not be distributed`)
+    assert.ok(!patch.includes(`plugin: '${name}'`), `Workshop row ${name} must not mount`)
+    assert.ok(!JSON.stringify(clients).includes(name), `Workshop client ${name} must not boot`)
+  }
+  assert.ok(pkg.dependencies['@gestaltrun/dsh-client-ui-plugin-manager'])
+  assert.match(patch, /id: web-ui-plugin-manager/)
+  assert.match(patch, /id: web-ui-ssh/)
+  assert.match(patch, /id: web-ui-remote-web-ui/)
+})

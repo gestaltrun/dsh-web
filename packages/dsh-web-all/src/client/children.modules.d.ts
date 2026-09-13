@@ -14,11 +14,6 @@ declare module '@gestaltrun/dsh-client-ui-plugin-manager/client' {
   export const inject: readonly string[] | undefined
 }
 
-declare module '@gestaltrun/dsh-client-ui-market/client' {
-  export const apply: unknown
-  export const inject: readonly string[] | undefined
-}
-
 declare module '@gestaltrun/dsh-client-ui-task-board/client' {
   export const apply: unknown
   export const inject: readonly string[] | undefined
@@ -75,11 +70,6 @@ declare module '@gestaltrun/dsh-session-archive/client' {
 }
 
 declare module '@gestaltrun/dsh-client-ui-model-capabilities/client' {
-  export const apply: unknown
-  export const inject: readonly string[] | undefined
-}
-
-declare module '@gestaltrun/dsh-client-ui-preset-center/client' {
   export const apply: unknown
   export const inject: readonly string[] | undefined
 }
