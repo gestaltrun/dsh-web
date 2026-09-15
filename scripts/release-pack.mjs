@@ -46,7 +46,9 @@ export function tarballPackage(path) {
 export function validateTarball(path, version) {
   const pkg = tarballPackage(path)
   validatePackage(pkg, version, { packed: true })
-  const entries = execFileSync('tar', ['-tzf', path], { encoding: 'utf8' }).trim().split('\n')
+  // Windows tar emits CRLF listings and may print backslashes; keep POSIX archive paths.
+  const entries = execFileSync('tar', ['-tzf', path], { encoding: 'utf8' })
+    .split(/\r?\n/u).map(entry => entry.trim().replaceAll('\\', '/')).filter(entry => entry.length > 0)
   for (const entry of entries) {
     if (!entry.startsWith('package/') || entry.split('/').includes('..')) throw new Error('Invalid archive entry')
     if (!/\.(?:[cm]?js|yml)$/.test(entry)) continue
