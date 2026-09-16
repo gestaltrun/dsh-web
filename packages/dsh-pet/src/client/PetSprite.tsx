@@ -14,7 +14,7 @@ import type { CSSProperties, PointerEvent as ReactPointerEvent, ReactElement, Re
 import { createPortal } from 'react-dom'
 import clsx from 'clsx'
 import type { TranslateNS } from '@deepseek-ai/dsh-client-ui-slots'
-import type { PetDisplayConfig } from '../persist.ts'
+import { bubbleScaleFor, type PetDisplayConfig } from '../persist.ts'
 import type { PetStateView } from '../service.ts'
 import { announcementFresh, type PetAnnouncement } from '../announce.ts'
 import type { PetDefinition } from '../registry.ts'
@@ -315,15 +315,39 @@ export function PetSprite(props: PetSpriteProps): ReactPortal {
   // custom visual (pet-center M3) replaces the atlas entirely.
   useEffect(() => {
     if (props.visual !== undefined) return
+    setImageReady(false)
     let cancelled = false
-    const img = new Image()
-    img.onload = () => {
-      if (!cancelled) setImageReady(true)
+    let retryTimer: ReturnType<typeof setTimeout> | undefined
+    let attempt = 0
+    const maxAttempts = 3
+    let activeImg: HTMLImageElement | null = null
+
+    const loadAtlas = () => {
+      const img = new Image()
+      activeImg = img
+      img.onload = () => {
+        if (!cancelled) setImageReady(true)
+      }
+      img.onerror = () => {
+        if (cancelled) return
+        if (attempt < maxAttempts) {
+          attempt += 1
+          const delay = Math.min(1000 * Math.pow(2, attempt - 1), 8000)
+          retryTimer = setTimeout(loadAtlas, delay)
+        }
+      }
+      img.src = definition.atlasUrl
     }
-    img.src = definition.atlasUrl
+
+    loadAtlas()
+
     return () => {
       cancelled = true
-      img.onload = null
+      if (retryTimer !== undefined) clearTimeout(retryTimer)
+      if (activeImg !== null) {
+        activeImg.onload = null
+        activeImg.onerror = null
+      }
     }
   }, [definition.atlasUrl, props.visual])
 
@@ -488,6 +512,9 @@ export function PetSprite(props: PetSpriteProps): ReactPortal {
   const pos = dragPos ?? { right: display.right, bottom: display.bottom }
   const spriteWidth = Math.round(cell.width * spriteScale)
   const spriteHeight = Math.round(cell.height * spriteScale)
+  // Bubble typography follows the sprite's own scale (#1549), bounded so a
+  // shrunk pet never carries unreadably small text.
+  const bubbleScale = bubbleScaleFor(display)
 
   // Concurrent sessions share one bubble slot: only the display session
   // speaks by default, and the rest hide behind a '+N' badge until the stack
@@ -553,7 +580,13 @@ export function PetSprite(props: PetSpriteProps): ReactPortal {
     <div
       ref={floatRef}
       className={styles.float}
-      style={{ right: pos.right, bottom: pos.bottom, zIndex: 2147483000 }}
+      style={{
+        right: pos.right,
+        bottom: pos.bottom,
+        zIndex: 2147483000,
+        // Read by .bubble / .bubbleStatus in pet.module.css.
+        ...({ '--pet-bubble-scale': String(bubbleScale) } as CSSProperties),
+      }}
       onPointerEnter={() => {
         clearHideTimer()
         setHovered(true)

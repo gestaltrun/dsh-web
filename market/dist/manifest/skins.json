@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-13",
+  "generated": "2026-09-16",
   "items": [
     {
       "id": "whale-song",
@@ -33,7 +33,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/whale-song",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/whale-song",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -97,7 +97,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/blue-fantasy",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/blue-fantasy",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -163,7 +163,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/harbor",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/harbor",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -230,7 +230,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/blueprint",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/blueprint",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css"
@@ -280,7 +280,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/xp",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/xp",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css"
@@ -333,7 +333,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/dragon-heir",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/dragon-heir",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -401,7 +401,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/cafe-roastery",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/cafe-roastery",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -447,7 +447,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/minecraft",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/minecraft",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css"
@@ -498,7 +498,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/trading",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/trading",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css"
@@ -525,8 +525,8 @@
       "nameEn": "Hatsune Miku",
       "author": "涂山苏苏",
       "rank": 10,
-      "tagline": "蓝紫双马尾 · 01 编号 · 音符波形 · 电子歌姬主题",
-      "description": "以世界第一的虚拟歌姬初音未来为灵感的主题皮肤：蓝紫洋红渐变贯穿全局，音符与声波曲线点缀在半透明面板之间，标题栏与状态栏带有 01 编号徽标与音乐波形，半透明毛玻璃面板透出背景图——沉浸式电子歌姬氛围。",
+      "tagline": "初音青绿机甲方格 · 明暗双主题独立配色 · 会话栏全透明露出壁纸",
+      "description": "初音未来主题的整体重做：明亮档是青空舞台（冷调青白平涂 + 墨蓝描边 + 硬投影），暗色档是夜海霓虹（深蓝平涂 + 青绿冷光边 + 品红高光），两套配色各自独立；会话栏完全透明让壁纸直通，面板改用机甲斜切角、拉丝金属与青蓝品红渐变描边，输入区做成座舱凹槽并配主题色光标，左上角字标为代号铭牌加渐变名号；界面字体换成 Bahnschrift 几何无衬线，顶栏与底栏收起，正文与设置面板按明暗两套分别校验可读性。",
       "tags": [
         "miku",
         "vocaloid",
@@ -535,8 +535,8 @@
         "idol",
         "waveform"
       ],
-      "version": "0.2.0",
-      "accent": "#2e9bff",
+      "version": "0.3.0",
+      "accent": "#39c5bb",
       "preview": {
         "light": "assets/skins/miku/preview/light.jpg",
         "dark": "assets/skins/miku/preview/dark.jpg"
@@ -551,7 +551,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/miku",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/miku",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -615,7 +615,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/whale-mom",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/whale-mom",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -678,7 +678,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/matrix",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/matrix",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css"
@@ -814,7 +814,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/summer-liquid-glass",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/summer-liquid-glass",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -960,7 +960,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/observatory",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/observatory",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -1010,7 +1010,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/stellar-diva",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/stellar-diva",
       "contributes": {
         "stylesheet": "skin.css",
         "backgroundMedia": {
@@ -1039,6 +1039,62 @@
         "client": {
           "entry": "hooks.mjs",
           "apiVersion": "x-org.linxin666.skin-center/v1alpha1"
+        }
+      }
+    },
+    {
+      "id": "hive-maw",
+      "name": "虫巢",
+      "nameEn": "Hive Maw",
+      "author": "lingfeng.zhang",
+      "rank": 31,
+      "tagline": "几丁质壁 · 卵囊光点 · 隧道肋弧 · 垂棘刻度",
+      "description": "巢穴隧道内壁：几丁质的双缝接缝、成簇的卵囊光点、向深处收束的隧道肋弧。生物荧光绿是全场唯一有彩度的线，只走缝、走点、走刻度；红只留给深处那对眼睛——也就是审批与危险。中性层是带绿调的夜黑，只带色温不带彩度。母题是巢穴本身：壁面接缝、卵室柜格、垂棘横梁，加上首屏的隧道环与卵囊簇。",
+      "tags": [
+        "hive",
+        "chitin",
+        "bioluminescent",
+        "tunnel",
+        "eggs",
+        "organic",
+        "css-only",
+        "dark-only"
+      ],
+      "version": "1.0.0",
+      "accent": "#8fe3a6",
+      "preview": {
+        "light": "assets/skins/hive-maw/preview/light.jpg",
+        "dark": "assets/skins/hive-maw/preview/dark.jpg"
+      },
+      "files": [
+        "LICENSE",
+        "README.md",
+        "README.zh.md",
+        "assets/hive-bg.jpg",
+        "assets/hive-hero-dark.svg",
+        "assets/hive-plate-dark.svg",
+        "assets/hive-sleeve-dark.svg",
+        "patches.css",
+        "preview/dark.jpg",
+        "preview/light.jpg",
+        "skin.css",
+        "skin.json"
+      ],
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/hive-maw",
+      "contributes": {
+        "stylesheet": "skin.css",
+        "patches": "patches.css",
+        "backgroundMedia": {
+          "light": {
+            "type": "image",
+            "src": "assets/skins/hive-maw/assets/hive-bg.jpg",
+            "scrim": "linear-gradient(180deg, rgba(4,8,5,0.34) 0%, rgba(4,8,5,0.46) 45%, rgba(4,8,5,0.66) 100%)"
+          },
+          "dark": {
+            "type": "image",
+            "src": "assets/skins/hive-maw/assets/hive-bg.jpg",
+            "scrim": "linear-gradient(180deg, rgba(4,8,5,0.34) 0%, rgba(4,8,5,0.46) 45%, rgba(4,8,5,0.66) 100%)"
+          }
         }
       }
     },
@@ -1074,7 +1130,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/starry-nocturne",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/starry-nocturne",
       "contributes": {
         "stylesheet": "skin.css",
         "backgroundMedia": {
@@ -1103,6 +1159,63 @@
         "client": {
           "entry": "hooks.mjs",
           "apiVersion": "x-org.linxin666.skin-center/v1alpha1"
+        }
+      }
+    },
+    {
+      "id": "ember-fall",
+      "name": "余烬",
+      "nameEn": "Ember Fall",
+      "author": "lingfeng.zhang",
+      "rank": 32,
+      "tagline": "枪铁灰 · 焊疤接缝 · 危标斜纹 · 灰烬烟幕",
+      "description": "坠机现场回收站：枪铁灰的壁面、焊珠虚线的接缝、45° 危标斜纹的审批区。余烬橙是全场唯一暖色，只走焊缝、走铆点、走地平线那道火光；紫火花是点睛，一颗一颗散在烟里。中性层是冷灰，压住背景里 burning 的天幕。母题是残骸回收：焊板输入壳、弹药柜格、烟幕横梁，加上首屏的坠毁剪影与地平火光。",
+      "tags": [
+        "ember",
+        "wreckage",
+        "mech",
+        "weld",
+        "hazard",
+        "ash",
+        "industrial",
+        "css-only",
+        "dark-only"
+      ],
+      "version": "1.0.0",
+      "accent": "#e8a860",
+      "preview": {
+        "light": "assets/skins/ember-fall/preview/light.jpg",
+        "dark": "assets/skins/ember-fall/preview/dark.jpg"
+      },
+      "files": [
+        "LICENSE",
+        "README.md",
+        "README.zh.md",
+        "assets/ember-bg.jpg",
+        "assets/ember-hero-dark.svg",
+        "assets/ember-plate-dark.svg",
+        "assets/ember-sleeve-dark.svg",
+        "patches.css",
+        "preview/dark.jpg",
+        "preview/light.jpg",
+        "skin.css",
+        "skin.json"
+      ],
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/ember-fall",
+      "contributes": {
+        "stylesheet": "skin.css",
+        "patches": "patches.css",
+        "backgroundMedia": {
+          "light": {
+            "type": "image",
+            "src": "assets/skins/ember-fall/assets/ember-bg.jpg",
+            "scrim": "linear-gradient(180deg, rgba(8,10,13,0.44) 0%, rgba(8,10,13,0.54) 45%, rgba(8,10,13,0.72) 100%)"
+          },
+          "dark": {
+            "type": "image",
+            "src": "assets/skins/ember-fall/assets/ember-bg.jpg",
+            "scrim": "linear-gradient(180deg, rgba(8,10,13,0.44) 0%, rgba(8,10,13,0.54) 45%, rgba(8,10,13,0.72) 100%)"
+          }
         }
       }
     },
@@ -1138,7 +1251,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/hologram-sanctum",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/hologram-sanctum",
       "contributes": {
         "stylesheet": "skin.css",
         "backgroundMedia": {
@@ -1202,7 +1315,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/abyssal-serenade",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/abyssal-serenade",
       "contributes": {
         "stylesheet": "skin.css",
         "backgroundMedia": {
@@ -1231,6 +1344,63 @@
         "client": {
           "entry": "hooks.mjs",
           "apiVersion": "x-org.linxin666.skin-center/v1alpha1"
+        }
+      }
+    },
+    {
+      "id": "astral-choir",
+      "name": "星辉教团",
+      "nameEn": "Astral Choir",
+      "author": "lingfeng.zhang",
+      "rank": 33,
+      "tagline": "夜紫 · 极光光带 · 尖塔光环 · 信众眼光",
+      "description": "朝圣之夜：垂直的极光光带掠过壁面，尖塔顶端的球体散开光环，信众的眼睛在暗处一点一点亮。夜紫是结构色，走框、走缝、走柜格；极光青是信号色，只走光带、走眼光点、走球体。中性层是带紫调的夜黑。母题是仪式本身：光环输入壳、圣龛柜格、光环横梁，加上首屏的尖塔与极光弧。",
+      "tags": [
+        "astral",
+        "aurora",
+        "cult",
+        "spire",
+        "halo",
+        "vigil",
+        "violet",
+        "css-only",
+        "dark-only"
+      ],
+      "version": "1.0.0",
+      "accent": "#9fe4f0",
+      "preview": {
+        "light": "assets/skins/astral-choir/preview/light.jpg",
+        "dark": "assets/skins/astral-choir/preview/dark.jpg"
+      },
+      "files": [
+        "LICENSE",
+        "README.md",
+        "README.zh.md",
+        "assets/astral-bg.jpg",
+        "assets/astral-hero-dark.svg",
+        "assets/astral-plate-dark.svg",
+        "assets/astral-sleeve-dark.svg",
+        "patches.css",
+        "preview/dark.jpg",
+        "preview/light.jpg",
+        "skin.css",
+        "skin.json"
+      ],
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/astral-choir",
+      "contributes": {
+        "stylesheet": "skin.css",
+        "patches": "patches.css",
+        "backgroundMedia": {
+          "light": {
+            "type": "image",
+            "src": "assets/skins/astral-choir/assets/astral-bg.jpg",
+            "scrim": "linear-gradient(180deg, rgba(8,6,16,0.36) 0%, rgba(8,6,16,0.48) 45%, rgba(8,6,16,0.68) 100%)"
+          },
+          "dark": {
+            "type": "image",
+            "src": "assets/skins/astral-choir/assets/astral-bg.jpg",
+            "scrim": "linear-gradient(180deg, rgba(8,6,16,0.36) 0%, rgba(8,6,16,0.48) 45%, rgba(8,6,16,0.68) 100%)"
+          }
         }
       }
     },
@@ -1281,7 +1451,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/black-gold",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/black-gold",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css"
@@ -1344,7 +1514,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/ice-princess",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/ice-princess",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -1395,7 +1565,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/furina",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/furina",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -1455,7 +1625,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/mint",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/mint",
       "contributes": {
         "stylesheet": "skin.css"
       }
@@ -1495,7 +1665,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/cyber-night",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/cyber-night",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -1567,7 +1737,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/deep-current",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/deep-current",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css"
@@ -1606,7 +1776,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/pink-sakura",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/pink-sakura",
       "contributes": {
         "stylesheet": "skin.css"
       }
@@ -1646,7 +1816,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/war-thunder",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/war-thunder",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -1708,7 +1878,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/wallpaper-exclusive",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/wallpaper-exclusive",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -1762,7 +1932,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/future-window",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/future-window",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -1869,7 +2039,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/catppuccin",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/catppuccin",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css"
@@ -1907,7 +2077,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/tokyo-night",
+      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/tokyo-night",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",

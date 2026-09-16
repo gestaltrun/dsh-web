@@ -1,5 +1,5 @@
 window.__ModuleLoader__.load({
-	id: "@gestaltrun/dsh-client-ui-skin-center",
+	id: "@linxin666/dsh-client-ui-skin-center",
 	factory: (require) => {
 		var module = { exports: {} };
 		var exports = module.exports;
@@ -8,10 +8,10 @@ window.__ModuleLoader__.load({
 		let react_jsx_runtime = require("react/jsx-runtime");
 		//#region \0dsh-css:packages/skins/skin-center/src/client/skin-center.module.css.mjs
 		const css = "body[data-dsh-skin-center] .eDzMgW_sectionList{margin:0;padding:0;list-style:none}body[data-dsh-skin-center] .eDzMgW_pluginCard{border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-3);border-radius:12px;list-style:none;transition:border-color .16s,background .16s}body[data-dsh-skin-center] .eDzMgW_pluginCard:hover{border-color:var(--dsw-alias-label-dimmed)}body[data-dsh-skin-center] .eDzMgW_cardHeaderStatic{align-items:center;gap:12px;width:100%;padding:14px 16px;display:flex}body[data-dsh-skin-center] .eDzMgW_headText{flex-direction:column;flex:1;gap:4px;min-width:0;display:flex}body[data-dsh-skin-center] .eDzMgW_pluginName{color:var(--dsw-alias-label-primary);align-items:baseline;gap:8px;font-size:15px;font-weight:600;line-height:1.4;display:flex}body[data-dsh-skin-center] .eDzMgW_cardDescription{color:var(--dsw-alias-label-tertiary);font-size:13px;line-height:1.5}body[data-dsh-skin-center] .eDzMgW_cardBody{border-top:1px solid var(--dsw-alias-border-l2);flex-direction:column;gap:12px;margin:0 16px;padding:12px 0 8px;display:flex}body[data-dsh-skin-center] .eDzMgW_head{flex-direction:column;gap:6px;display:flex}body[data-dsh-skin-center] .eDzMgW_titleBadge{color:var(--dsw-alias-label-secondary,#6b7280);font-size:11px;font-weight:500}body[data-dsh-skin-center] .eDzMgW_intro{color:var(--dsw-alias-label-secondary);font-size:13px;line-height:1.5}body[data-dsh-skin-center] .eDzMgW_themeRow{align-items:center;gap:8px;margin-top:2px;display:flex}body[data-dsh-skin-center] .eDzMgW_themeLabel{color:var(--dsw-alias-label-secondary,#6b7280);margin-right:2px;font-size:12px}body[data-dsh-skin-center] .eDzMgW_themeButton{font:inherit;border:1px solid var(--dsw-alias-border-l2);color:var(--dsw-alias-label-primary);cursor:pointer;background:0 0;border-radius:6px;padding:4px 12px;font-size:12px;font-weight:600;line-height:1.5;transition:background .12s,border-color .12s,color .12s}body[data-dsh-skin-center] .eDzMgW_themeButton:hover{border-color:var(--dsw-alias-label-dimmed)}body[data-dsh-skin-center] .eDzMgW_themeButton:active{border-color:var(--dsw-alias-brand-primary,#2b7cd9);background:var(--dsw-alias-button-primary-dimmed,#e8f1fc);color:var(--dsw-alias-brand-primary,#1e63b8)}body[data-dsh-skin-center] .eDzMgW_themeButton:focus-visible{outline:2px solid var(--dsw-alias-brand-primary,#2b7cd9);outline-offset:2px}body[data-dsh-skin-center] .eDzMgW_themeButtonActive{border-color:var(--dsw-alias-brand-primary,#2b7cd9);background:var(--dsw-alias-button-primary-dimmed,#e8f1fc);color:var(--dsw-alias-brand-primary,#1e63b8)}body[data-dsh-skin-center] .eDzMgW_list{flex-direction:column;gap:10px;display:flex}body[data-dsh-skin-center] .eDzMgW_card{border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-1);border-radius:8px;flex-direction:column;gap:6px;padding:12px;transition:border-color .16s;display:flex}body[data-dsh-skin-center] .eDzMgW_card:hover{border-color:var(--dsw-alias-label-dimmed)}body[data-dsh-skin-center] .eDzMgW_cardHead{align-items:center;gap:10px;min-width:0;display:flex}body[data-dsh-skin-center] .eDzMgW_swatch{width:14px;height:14px;box-shadow:inset 0 0 0 1px var(--dsw-alias-border-l4,#0f172a1f);border-radius:50%;flex:none}body[data-dsh-skin-center] .eDzMgW_cardName{text-overflow:ellipsis;white-space:nowrap;min-width:0;font-size:13px;font-weight:600;overflow:hidden}body[data-dsh-skin-center] .eDzMgW_cardTagline{color:var(--dsw-alias-label-secondary);margin:0;font-size:13px;line-height:1.45}body[data-dsh-skin-center] .eDzMgW_badge{letter-spacing:.02em;border-radius:999px;flex:none;min-width:0;margin-left:auto;padding:2px 8px;font-size:11px;font-weight:600}body[data-dsh-skin-center] .eDzMgW_badgeActive{color:var(--dsw-alias-state-success-primary,#0f6b3a);background:var(--dsw-alias-state-success-tertiary,#dcf3e5)}body[data-dsh-skin-center] .eDzMgW_badgeTrying{color:var(--dsw-alias-brand-primary,#1e63b8);background:var(--dsw-alias-button-primary-dimmed,#e2edfc)}body[data-dsh-skin-center] .eDzMgW_actions{flex-wrap:wrap;align-items:center;gap:8px;display:flex}body[data-dsh-skin-center] .eDzMgW_button{font:inherit;border:1px solid var(--dsw-alias-border-l2);color:var(--dsw-alias-label-primary);cursor:pointer;background:0 0;border-radius:6px;padding:4px 12px;font-size:12px;font-weight:600;line-height:1.5;transition:background .12s,border-color .12s,color .12s}body[data-dsh-skin-center] .eDzMgW_button:hover:not(:disabled){border-color:var(--dsw-alias-label-dimmed)}body[data-dsh-skin-center] .eDzMgW_button:active:not(:disabled){border-color:var(--dsw-alias-button-primary-hover,#1e63b8);background:var(--dsw-alias-button-primary-dimmed,#e8f1fc);color:var(--dsw-alias-brand-primary,#1e63b8)}body[data-dsh-skin-center] .eDzMgW_button:focus-visible{outline:2px solid var(--dsw-alias-brand-primary,#2b7cd9);outline-offset:2px}body[data-dsh-skin-center] .eDzMgW_buttonPrimary{border-color:var(--dsw-alias-button-info-fill);background:var(--dsw-alias-button-info-fill);color:var(--dsw-alias-bg-layer-3)}body[data-dsh-skin-center] .eDzMgW_buttonPrimary:hover:not(:disabled),body[data-dsh-skin-center] .eDzMgW_buttonPrimary:active:not(:disabled){opacity:.88}body[data-dsh-skin-center] .eDzMgW_buttonDanger{border-color:var(--dsw-alias-border-l2);color:var(--dsw-alias-state-danger-primary,#d93025);background:0 0}body[data-dsh-skin-center] .eDzMgW_buttonDanger:hover:not(:disabled){border-color:var(--dsw-alias-state-danger-primary,#d93025);background:var(--dsw-alias-state-danger-tertiary,#d9302514)}body[data-dsh-skin-center] .eDzMgW_buttonDangerConfirm{border-color:var(--dsw-alias-state-danger-primary,#d93025);background:var(--dsw-alias-state-danger-primary,#d93025);color:#fff}body[data-dsh-skin-center] .eDzMgW_toolbar{flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin:4px 0 2px;display:flex}body[data-dsh-skin-center] .eDzMgW_verifySummary{background:var(--dsw-alias-bg-layer-2);border:1px solid var(--dsw-alias-border-l2);border-radius:6px;padding:6px 12px;font-size:12px;line-height:1.4}body[data-dsh-skin-center] .eDzMgW_verifySummarySuccess{color:var(--dsw-alias-state-success-primary,#0f6b3a);border-color:var(--dsw-alias-state-success-tertiary,#dcf3e5)}body[data-dsh-skin-center] .eDzMgW_verifySummaryWarning{color:var(--dsw-alias-state-warning-primary,#b06000);border-color:var(--dsw-alias-state-warning-tertiary,#feebd3)}body[data-dsh-skin-center] .eDzMgW_badgeSuccess{color:var(--dsw-alias-state-success-primary,#0f6b3a);background:var(--dsw-alias-state-success-tertiary,#dcf3e5)}body[data-dsh-skin-center] .eDzMgW_badgeWarning{color:var(--dsw-alias-state-warning-primary,#b06000);background:var(--dsw-alias-state-warning-tertiary,#feebd3)}body[data-dsh-skin-center] .eDzMgW_badgeDanger{color:var(--dsw-alias-state-danger-primary,#d93025);background:var(--dsw-alias-state-danger-tertiary,#d930251f)}body[data-dsh-skin-center] .eDzMgW_integrityNote{color:var(--dsw-alias-state-warning-primary,#b06000);font-size:11px;line-height:1.4}body[data-dsh-skin-center] .eDzMgW_buttonGhost{opacity:.5;background:0 0;border-color:#0000}body[data-dsh-skin-center] .eDzMgW_button:disabled{opacity:.5;cursor:default}body[data-dsh-skin-center] .eDzMgW_error{color:var(--dsw-alias-state-error-primary,#b42318);font-size:12px}body[data-dsh-skin-center] .eDzMgW_enableRow{flex-wrap:wrap;align-items:center;gap:8px;padding:8px 0;display:flex}body[data-dsh-skin-center] .eDzMgW_enableLabel{color:var(--dsw-alias-label-primary);font-size:13px;font-weight:500}body[data-dsh-skin-center] .eDzMgW_enableHint{min-width:100%;color:var(--dsw-alias-label-secondary,#6b7280);flex:1;margin:0;font-size:12px;line-height:1.5}body[data-dsh-skin-center] .eDzMgW_switch{border:1px solid var(--dsw-alias-border-l3,#cbd5e1);background:var(--dsw-alias-bg-layer-3,#e2e8f0);cursor:pointer;border-radius:999px;flex:none;align-items:center;width:40px;height:22px;padding:2px;transition:background .12s,border-color .12s;display:inline-flex;position:relative}body[data-dsh-skin-center] .eDzMgW_switchOn{border-color:var(--dsw-alias-brand-primary,#2b7cd9);background:var(--dsw-alias-brand-primary,#2b7cd9)}body[data-dsh-skin-center] .eDzMgW_switch:focus-visible{outline:2px solid var(--dsw-alias-brand-primary,#2b7cd9);outline-offset:2px}body[data-dsh-skin-center] .eDzMgW_switchThumb{background:var(--dsw-alias-label-primary-foreground,#fff);width:18px;height:18px;box-shadow:0 0 0 1px var(--dsw-alias-border-l4,#0f172a1f);border-radius:50%;transition:transform .12s;display:block;transform:translate(0)}body[data-dsh-skin-center] .eDzMgW_switchOn .eDzMgW_switchThumb{transform:translate(18px)}body[data-dsh-skin-center] .eDzMgW_offNote{color:var(--dsw-alias-label-secondary,#6b7280);margin:0;font-size:12.5px;line-height:1.5}body[data-dsh-skin-center] .eDzMgW_backgroundRow{flex-direction:column;gap:6px;padding:8px 0;display:flex}body[data-dsh-skin-center] .eDzMgW_backgroundHead{align-items:center;gap:8px;display:flex}body[data-dsh-skin-center] .eDzMgW_backgroundLabel{color:var(--dsw-alias-label-primary);font-size:13px;font-weight:500}body[data-dsh-skin-center] .eDzMgW_backgroundValue{font-variant-numeric:tabular-nums;color:var(--dsw-alias-brand-primary,#2b7cd9);flex:none;margin-left:auto;font-size:12px}body[data-dsh-skin-center] .eDzMgW_backgroundRange{background:var(--dsw-alias-label-tertiary,#9aa4b5);background:color-mix(in srgb, var(--dsw-alias-label-tertiary,#9aa4b5) 45%, transparent);width:100%;height:4px;box-shadow:0 0 0 1px var(--dsw-alias-border-l3,#cbd5e1);-webkit-appearance:none;appearance:none;cursor:pointer;border-radius:999px;margin:0}body[data-dsh-skin-center] .eDzMgW_backgroundRange::-webkit-slider-runnable-track{background:var(--dsw-alias-bg-layer-3,#e2e8f0);border-radius:999px;height:4px}body[data-dsh-skin-center] .eDzMgW_backgroundRange::-moz-range-track{background:var(--dsw-alias-bg-layer-3,#e2e8f0);border-radius:999px;height:4px}body[data-dsh-skin-center] .eDzMgW_backgroundRange::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;border:2px solid var(--dsw-alias-label-primary-foreground,#fff);background:var(--dsw-alias-brand-primary,#2b7cd9);width:14px;height:14px;box-shadow:0 0 0 1px var(--dsw-alias-border-l4,#0f172a1f);cursor:pointer;border-radius:50%;margin-top:-5px}body[data-dsh-skin-center] .eDzMgW_backgroundRange::-moz-range-thumb{border:2px solid var(--dsw-alias-label-primary-foreground,#fff);background:var(--dsw-alias-brand-primary,#2b7cd9);width:12px;height:12px;box-shadow:0 0 0 1px var(--dsw-alias-border-l4,#0f172a1f);cursor:pointer;border-radius:50%}body[data-dsh-skin-center] .eDzMgW_backgroundRange:focus-visible{outline:2px solid var(--dsw-alias-brand-primary,#2b7cd9);outline-offset:2px}body[data-dsh-skin-center] .eDzMgW_backgroundHint{color:var(--dsw-alias-label-secondary,#6b7280);font-size:12px;line-height:1.5}body[data-dsh-skin-center] .eDzMgW_backgroundHintMuted{color:var(--dsw-alias-label-tertiary,#9aa4b5);font-size:12px;line-height:1.5}@media (prefers-reduced-motion:reduce){body[data-dsh-skin-center] .eDzMgW_pluginCard,body[data-dsh-skin-center] .eDzMgW_card,body[data-dsh-skin-center] .eDzMgW_themeButton,body[data-dsh-skin-center] .eDzMgW_button,body[data-dsh-skin-center] .eDzMgW_switch,body[data-dsh-skin-center] .eDzMgW_switchThumb{transition:none}}body[data-dsh-skin-center] .eDzMgW_wallpaperSection{border-top:1px solid var(--dsw-alias-border-l2);flex-direction:column;gap:10px;padding-top:10px;display:flex}body[data-dsh-skin-center] .eDzMgW_wallpaperStatus{color:var(--dsw-alias-label-secondary,#6b7280);align-items:center;gap:8px;font-size:12px;display:flex}body[data-dsh-skin-center] .eDzMgW_wallpaperStatusError{color:var(--dsw-alias-state-danger,#c53030)}body[data-dsh-skin-center] .eDzMgW_wallpaperControls{flex-direction:column;gap:10px;display:flex}body[data-dsh-skin-center] .eDzMgW_wallpaperGrid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;display:grid}body[data-dsh-skin-center] .eDzMgW_wallpaperCard{border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-1);border-radius:8px;flex-direction:column;gap:6px;padding:8px;transition:border-color .16s;display:flex}body[data-dsh-skin-center] .eDzMgW_wallpaperCard:hover{border-color:var(--dsw-alias-label-dimmed)}body[data-dsh-skin-center] .eDzMgW_wallpaperThumbWrap{aspect-ratio:16/9;background:var(--dsw-alias-bg-layer-1,#f1f5f9);border-radius:6px;position:relative;overflow:hidden}body[data-dsh-skin-center] .eDzMgW_wallpaperThumb{object-fit:cover;width:100%;height:100%;display:block}body[data-dsh-skin-center] .eDzMgW_wallpaperThumbEmpty{width:100%;height:100%}body[data-dsh-skin-center] .eDzMgW_wallpaperType{color:var(--dsw-alias-label-primary,#172a45);background:var(--dsw-alias-bg-layer-2,#ffffffd9);border-radius:4px;padding:3px 6px;font-size:10.5px;line-height:1;position:absolute;top:6px;left:6px}body[data-dsh-skin-center] .eDzMgW_wallpaperThumbWrap .eDzMgW_badge{position:absolute;top:6px;right:6px}body[data-dsh-skin-center] .eDzMgW_wallpaperName{color:var(--dsw-alias-label-primary);text-overflow:ellipsis;white-space:nowrap;font-size:12px;line-height:1.35;overflow:hidden}body[data-dsh-skin-center] .eDzMgW_wallpaperActions{flex-wrap:wrap;gap:6px;display:flex}body[data-dsh-skin-center] .eDzMgW_customThemeCard{overflow:hidden}body[data-dsh-skin-center] .eDzMgW_customThemeEditor{border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-1);border-radius:9px;flex-direction:column;gap:14px;margin:2px -2px -2px;padding:14px;display:flex}body[data-dsh-skin-center] .eDzMgW_customThemeScheme{flex-wrap:wrap;align-items:center;gap:8px;display:flex}body[data-dsh-skin-center] .eDzMgW_customThemeFields{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;display:grid}body[data-dsh-skin-center] .eDzMgW_customThemeField,body[data-dsh-skin-center] .eDzMgW_customThemeContrast{flex-direction:column;gap:7px;min-width:0;display:flex}body[data-dsh-skin-center] .eDzMgW_customThemeFieldLabel{color:var(--dsw-alias-label-secondary);font-size:12px;font-weight:500}body[data-dsh-skin-center] .eDzMgW_customThemeInputRow{align-items:center;gap:7px;min-width:0;display:flex}body[data-dsh-skin-center] .eDzMgW_customThemeColor{border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-2);cursor:pointer;border-radius:7px;flex:none;width:34px;height:30px;padding:2px}body[data-dsh-skin-center] .eDzMgW_customThemeHex{border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-specific-input-major);width:100%;min-width:0;height:30px;color:var(--dsw-alias-label-primary);font:inherit;border-radius:7px;outline:none;padding:0 9px;font-size:12px}body[data-dsh-skin-center] .eDzMgW_customThemeHex:focus,body[data-dsh-skin-center] .eDzMgW_customThemeColor:focus-visible{border-color:var(--dsw-alias-brand-primary);box-shadow:0 0 0 2px var(--dsw-alias-button-primary-dimmed)}body[data-dsh-skin-center] .eDzMgW_customThemeFooter{justify-content:space-between;align-items:center;gap:12px;padding-top:2px;display:flex}@media (width<=680px){body[data-dsh-skin-center] .eDzMgW_customThemeFields{grid-template-columns:1fr}body[data-dsh-skin-center] .eDzMgW_customThemeFooter{flex-direction:column;align-items:flex-start}}body[data-dsh-skin-center] .eDzMgW_wallpaperToolbar{flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin:8px 0;display:flex}body[data-dsh-skin-center] .eDzMgW_ratingFilterGroup{align-items:center;gap:4px;display:flex}body[data-dsh-skin-center] .eDzMgW_ratingFilterButton{background:var(--dsw-alias-bg-layer-1);border:1px solid var(--dsw-alias-border-l2);color:var(--dsw-alias-label-secondary);cursor:pointer;border-radius:6px;padding:4px 10px;font-size:12px;transition:all .15s}body[data-dsh-skin-center] .eDzMgW_ratingFilterButton:hover{background:var(--dsw-alias-interactive-bg-hover,#ffffff14);color:var(--dsw-alias-label-primary)}body[data-dsh-skin-center] .eDzMgW_ratingFilterActive{background:var(--dsw-alias-brand-primary,#2563eb);color:#fff;border-color:#0000}body[data-dsh-skin-center] .eDzMgW_ratingFilterActive:hover{background:var(--dsw-alias-brand-primary,#2563eb);color:#fff}body[data-dsh-skin-center] .eDzMgW_wallpaperRating{text-transform:uppercase;border-radius:4px;padding:3px 6px;font-size:10px;font-weight:600;line-height:1;position:absolute;bottom:6px;right:6px}body[data-dsh-skin-center] .eDzMgW_ratingG{color:var(--dsw-alias-label-secondary,#94a3b8);background:var(--dsw-alias-bg-layer-2,#0009)}body[data-dsh-skin-center] .eDzMgW_ratingPg13{color:#fbbf24;background:#000000b3;border:1px solid #fbbf2466}body[data-dsh-skin-center] .eDzMgW_ratingR18{color:#fff;background:#dc2626;font-weight:700;box-shadow:0 1px 4px #dc262666}body[data-dsh-skin-center] .eDzMgW_wallpaperPagination{flex-wrap:wrap;justify-content:center;align-items:center;gap:6px;margin:16px 0 8px;display:flex}body[data-dsh-skin-center] .eDzMgW_pageButton{background:var(--dsw-alias-bg-layer-1);border:1px solid var(--dsw-alias-border-l2);color:var(--dsw-alias-label-secondary);cursor:pointer;text-align:center;border-radius:6px;min-width:30px;padding:4px 10px;font-size:12px;transition:all .15s}body[data-dsh-skin-center] .eDzMgW_pageButton:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover,#ffffff14);color:var(--dsw-alias-label-primary)}body[data-dsh-skin-center] .eDzMgW_pageButton:disabled{opacity:.4;cursor:not-allowed}body[data-dsh-skin-center] .eDzMgW_pageButtonActive{background:var(--dsw-alias-brand-primary,#2563eb);color:#fff;border-color:#0000}body[data-dsh-skin-center] .eDzMgW_pageEllipsis{color:var(--dsw-alias-label-dimmed,#888);user-select:none;padding:0 4px;font-size:12px}body[data-dsh-skin-center] .eDzMgW_pageJumpForm{align-items:center;gap:4px;margin-left:8px;display:inline-flex}body[data-dsh-skin-center] .eDzMgW_pageJumpInput{border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-specific-input-major,#0003);width:44px;height:26px;color:var(--dsw-alias-label-primary);text-align:center;border-radius:6px;outline:none;padding:0 4px;font-size:12px}body[data-dsh-skin-center] .eDzMgW_pageJumpInput:focus{border-color:var(--dsw-alias-brand-primary)}body[data-dsh-skin-center] .eDzMgW_pageTotalInfo{color:var(--dsw-alias-label-dimmed,#888);margin-left:6px;font-size:12px}";
-		const tagId = "@gestaltrun/dsh-client-ui-skin-center/packages/skins/skin-center/src/client/skin-center.module.css";
+		const tagId = "@linxin666/dsh-client-ui-skin-center/packages/skins/skin-center/src/client/skin-center.module.css";
 		if (typeof document !== "undefined" && document.querySelector("style[data-plugin-css=" + JSON.stringify(tagId) + "]") === null) {
 			const tag = document.createElement("style");
-			tag.dataset.plugin = "@gestaltrun/dsh-client-ui-skin-center";
+			tag.dataset.plugin = "@linxin666/dsh-client-ui-skin-center";
 			tag.dataset.pluginCss = tagId;
 			tag.textContent = css;
 			document.head.appendChild(tag);
@@ -379,7 +379,7 @@ window.__ModuleLoader__.load({
 		* The marker is body/html level (managed outside the surface/part/plugin
 		* enum, see contracts/semantic-attrs-v1.md) and survives a neutralizer
 		* teardown; the style is inert whenever the marker is absent.
-		* @module @gestaltrun/dsh-client-ui-skin-center/runtime/backdrop-scene
+		* @module @linxin666/dsh-client-ui-skin-center/runtime/backdrop-scene
 		*/
 		/** Shared marker: set on html + body while a source reports backdrop art. */
 		const BACKDROP_ACTIVE_ATTR = "data-dsh-backdrop-active";
@@ -1440,7 +1440,7 @@ window.__ModuleLoader__.load({
 		* browser). A pointer cancel aborts without committing, and the external
 		* value is re-synced into the DOM only while the user is neither dragging
 		* nor keyboard-focusing the input.
-		* @module @gestaltrun/dsh-client-ui-skin-center/slider-control
+		* @module @linxin666/dsh-client-ui-skin-center/slider-control
 		*/
 		/**
 		* A range slider that stays smooth during drag (issue #725).
@@ -2347,11 +2347,13 @@ window.__ModuleLoader__.load({
 			const blurContent = (0, react.useSyncExternalStore)(background.subscribe, background.blurContent);
 			const inputCardBlur = (0, react.useSyncExternalStore)(background.subscribe, background.inputCardBlur);
 			const bubbleOpacity = (0, react.useSyncExternalStore)(background.subscribe, background.bubbleOpacity);
+			const bubbleBlur = (0, react.useSyncExternalStore)(background.subscribe, background.bubbleBlur);
 			const [shownOpacity, setShownOpacity] = useLiveValue(opacity);
 			const [shownBlurEmpty, setShownBlurEmpty] = useLiveValue(blurEmpty);
 			const [shownBlurContent, setShownBlurContent] = useLiveValue(blurContent);
 			const [shownInputCardBlur, setShownInputCardBlur] = useLiveValue(inputCardBlur);
 			const [shownBubbleOpacity, setShownBubbleOpacity] = useLiveValue(bubbleOpacity);
+			const [shownBubbleBlur, setShownBubbleBlur] = useLiveValue(bubbleBlur);
 			const catalog = (0, react.useSyncExternalStore)(runtime.subscribe, runtime.catalog);
 			const state = (0, react.useSyncExternalStore)(runtime.subscribe, runtime.controller.getState);
 			const customThemeState = (0, react.useSyncExternalStore)(customTheme.subscribe, customTheme.getState);
@@ -2843,6 +2845,40 @@ window.__ModuleLoader__.load({
 								})
 							]
 						}),
+						/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
+							className: skin_center_module_css_default.backgroundRow,
+							children: [
+								/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
+									className: skin_center_module_css_default.backgroundHead,
+									children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
+										className: skin_center_module_css_default.backgroundLabel,
+										children: t("bubbleBlur")
+									}), /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("span", {
+										className: skin_center_module_css_default.backgroundValue,
+										"aria-hidden": "true",
+										children: [shownBubbleBlur, "px"]
+									})]
+								}),
+								/* @__PURE__ */ (0, react_jsx_runtime.jsx)(SliderControl, {
+									id: "skin-center-bubble-blur",
+									className: skin_center_module_css_default.backgroundRange,
+									min: 0,
+									max: 20,
+									step: 1,
+									value: bubbleBlur,
+									ariaValuetext: shownBubbleBlur + "px",
+									ariaLabel: t("bubbleBlur"),
+									onChanging: setShownBubbleBlur,
+									onChange: (value) => {
+										background.setBubbleBlur(value);
+									}
+								}),
+								/* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", {
+									className: skin_center_module_css_default.backgroundHint,
+									children: t("bubbleBlurHint")
+								})
+							]
+						}),
 						/* @__PURE__ */ (0, react_jsx_runtime.jsx)(WallpaperPanel, {
 							t,
 							wallpaper
@@ -3000,7 +3036,8 @@ window.__ModuleLoader__.load({
 			backgroundBlurEmpty: 0,
 			backgroundBlurContent: 0,
 			inputCardBlur: 10,
-			bubbleOpacity: 50
+			bubbleOpacity: 50,
+			bubbleBlur: 10
 		};
 		/** The fields normalize/sanitize know about; unknown keys are dropped. */
 		const SKIN_BACKGROUND_FIELDS = Object.keys(SKIN_BACKGROUND_DEFAULTS);
@@ -3012,7 +3049,8 @@ window.__ModuleLoader__.load({
 			backgroundBlurEmpty: [0, 20],
 			backgroundBlurContent: [0, 20],
 			inputCardBlur: [0, 20],
-			bubbleOpacity: [0, 100]
+			bubbleOpacity: [0, 100],
+			bubbleBlur: [0, 20]
 		};
 		function isRecord$1(value) {
 			return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -3080,10 +3118,13 @@ window.__ModuleLoader__.load({
 		const SCRIM_VAR = "--dsw-skin-scrim";
 		/** CSS custom property consumed by skins that expose translucent bubbles. */
 		const BUBBLE_ALPHA_VAR = "--dsh-skin-bubble-alpha";
+		/** CSS custom property consumed by skins that expose a bubble backdrop blur. */
+		const BUBBLE_BLUR_VAR = "--dsh-skin-bubble-blur";
 		/** CSS custom property consumed by the shared composer neutralizer. */
 		const INPUT_CARD_BLUR_VAR = "--dsh-input-card-blur";
 		SKIN_BACKGROUND_DEFAULTS.backgroundOpacity;
 		SKIN_BACKGROUND_DEFAULTS.bubbleOpacity;
+		SKIN_BACKGROUND_DEFAULTS.bubbleBlur;
 		SKIN_BACKGROUND_DEFAULTS.backgroundBlurEmpty;
 		/**
 		* Selector for a conversation message row inside the shell's center column.
@@ -3111,6 +3152,7 @@ window.__ModuleLoader__.load({
 			blurContentValue = SKIN_BACKGROUND_DEFAULTS.backgroundBlurContent;
 			inputCardBlurValue = SKIN_BACKGROUND_DEFAULTS.inputCardBlur;
 			bubbleOpacityValue = SKIN_BACKGROUND_DEFAULTS.bubbleOpacity;
+			bubbleBlurValue = SKIN_BACKGROUND_DEFAULTS.bubbleBlur;
 			listeners = /* @__PURE__ */ new Set();
 			persist;
 			/** The fixed backdrop-filter element, present only while active blur > 0. */
@@ -3132,6 +3174,7 @@ window.__ModuleLoader__.load({
 				this.applyOcclusion();
 				this.applyInputCardBlur();
 				this.applyBubbleOpacity();
+				this.applyBubbleBlur();
 				this.syncBlur();
 			}
 			/**
@@ -3146,6 +3189,7 @@ window.__ModuleLoader__.load({
 				this.applyOcclusion();
 				this.applyInputCardBlur();
 				this.applyBubbleOpacity();
+				this.applyBubbleBlur();
 				this.syncBlur();
 				this.publish();
 			}
@@ -3157,7 +3201,8 @@ window.__ModuleLoader__.load({
 					backgroundBlurEmpty: this.blurEmptyValue,
 					backgroundBlurContent: this.blurContentValue,
 					inputCardBlur: this.inputCardBlurValue,
-					bubbleOpacity: this.bubbleOpacityValue
+					bubbleOpacity: this.bubbleOpacityValue,
+					bubbleBlur: this.bubbleBlurValue
 				};
 			}
 			enabled = () => this.enabledValue;
@@ -3166,6 +3211,7 @@ window.__ModuleLoader__.load({
 				this.applyOcclusion();
 				this.applyInputCardBlur();
 				this.applyBubbleOpacity();
+				this.applyBubbleBlur();
 				this.syncBlur();
 				this.publish();
 				this.persist(this.snapshot());
@@ -3175,6 +3221,7 @@ window.__ModuleLoader__.load({
 			blurContent = () => this.blurContentValue;
 			inputCardBlur = () => this.inputCardBlurValue;
 			bubbleOpacity = () => this.bubbleOpacityValue;
+			bubbleBlur = () => this.bubbleBlurValue;
 			subscribe = (listener) => {
 				this.listeners.add(listener);
 				return () => {
@@ -3213,6 +3260,12 @@ window.__ModuleLoader__.load({
 				this.publish();
 				this.persist(this.snapshot());
 			}
+			setBubbleBlur(value) {
+				this.bubbleBlurValue = this.clampBlur(value);
+				this.applyBubbleBlur();
+				this.publish();
+				this.persist(this.snapshot());
+			}
 			dispose() {
 				this.disposed = true;
 				if (this.rafId !== null) {
@@ -3222,6 +3275,7 @@ window.__ModuleLoader__.load({
 				this.removeBlurElement();
 				document.body.style.removeProperty(INPUT_CARD_BLUR_VAR);
 				document.body.style.removeProperty(BUBBLE_ALPHA_VAR);
+				document.body.style.removeProperty(BUBBLE_BLUR_VAR);
 				if (this.observer !== null) {
 					this.observer.disconnect();
 					this.observer = null;
@@ -3236,6 +3290,7 @@ window.__ModuleLoader__.load({
 				this.blurContentValue = resolved.backgroundBlurContent;
 				this.inputCardBlurValue = resolved.inputCardBlur;
 				this.bubbleOpacityValue = resolved.bubbleOpacity;
+				this.bubbleBlurValue = resolved.bubbleBlur;
 			}
 			clampBlur(value) {
 				return Math.max(0, Math.min(20, Math.round(value)));
@@ -3256,6 +3311,13 @@ window.__ModuleLoader__.load({
 					return;
 				}
 				document.body.style.setProperty(BUBBLE_ALPHA_VAR, String(this.bubbleOpacityValue / 100));
+			}
+			applyBubbleBlur() {
+				if (!this.enabledValue) {
+					document.body.style.removeProperty(BUBBLE_BLUR_VAR);
+					return;
+				}
+				document.body.style.setProperty(BUBBLE_BLUR_VAR, this.bubbleBlurValue + "px");
 			}
 			/** Write the current occlusion onto the body CSS variable (0..1 alpha). */
 			applyOcclusion() {
@@ -3489,6 +3551,8 @@ window.__ModuleLoader__.load({
 			inputCardBlurHint: "Blurs only the area behind the input card while backdrop art is visible; it does not blur the entire wallpaper.",
 			bubbleOpacity: "Bubble opacity",
 			bubbleOpacityHint: "Controls translucent message bubbles for skins that expose bubble alpha, such as Whale Mom.",
+			bubbleBlur: "Bubble blur",
+			bubbleBlurHint: "Blurs the backdrop behind translucent message bubbles; independent of bubble opacity, 0 disables.",
 			backgroundBlurHint: "Applies a separate Gaussian blur to the backdrop for the empty conversation and the conversation with content; 0 disables.",
 			backgroundBlurInert: "Visible only with skins that paint a backdrop; the official default has none.",
 			backgroundHint: "Instantly veils the backdrop behind the panels — higher values obscure the art to help you focus.",
@@ -3609,6 +3673,8 @@ window.__ModuleLoader__.load({
 			inputCardBlurHint: "仅模糊输入卡背后的区域，不会让整张壁纸变糊。",
 			bubbleOpacity: "气泡不透明度",
 			bubbleOpacityHint: "调节支持气泡 alpha 的皮肤消息气泡，例如鲸鱼妈妈。",
+			bubbleBlur: "气泡模糊程度",
+			bubbleBlurHint: "模糊半透明消息气泡背后的区域，与「气泡不透明度」相互独立，0 为关闭。",
 			backgroundBlurHint: "对话为空与有内容时分别应用不同的背景高斯模糊强度，0 为关闭。",
 			backgroundBlurInert: "仅对带背景图插画的皮肤可见；官方默认无背景图。",
 			backgroundHint: "即时为面板背后的背景加遮罩——数值越高越能弱化插画，帮你集中注意力。",
@@ -3987,7 +4053,7 @@ window.__ModuleLoader__.load({
 		* The stylesheet is inert for the stock look: a catalog skin, custom theme or
 		* wallpaper must be active. It is installed once per runtime and removed with
 		* that runtime, so disabling the plugin restores the shell unchanged.
-		* @module @gestaltrun/dsh-client-ui-skin-center/runtime/shell-rendering
+		* @module @linxin666/dsh-client-ui-skin-center/runtime/shell-rendering
 		*/
 		/** Marker owned by the shared shell-rendering stylesheet. */
 		const SHELL_RENDERING_STYLE_ATTR = "data-dsh-shell-rendering";
@@ -4052,6 +4118,22 @@ window.__ModuleLoader__.load({
          creates a viewport-wide veil behind the active-goal chip. The repeated
          stable marker deliberately raises specificity above catalog-skin dock
          selectors that load after this shared adapter. */
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+    ${scoped("[data-phase=\"active\"] [data-slot=\"conversation.input.dock\"] > [data-queue-dock]")} {
+      /* The native queue dock stacks two boxes inside the input dock: a root
+         wrapper that only supplies the shared dock inset, and the panel inside
+         it that paints its own --dsw-specific-tip fill. Painting the wrapper as
+         an accessory adds a second opaque plate one dock inset (8px) wider than
+         the panel on each side, which reads as an extra sheet of paper under
+         the queue (issue #1572). Reset the accessory surface so the panel stays
+         the single layer; the wrapper keeps its inset, so the panel remains
+         aligned with the composer card. */
       background: transparent !important;
       border: 0 !important;
       border-radius: 0 !important;
@@ -4599,7 +4681,7 @@ window.__ModuleLoader__.load({
 		* selection, and activate it (the tapIndex adapter already stamped the
 		* attribute and preloaded the stylesheet for first paint; the controller
 		* re-installs under ledger ownership so later switches stay atomic).
-		* @module @gestaltrun/dsh-client-ui-skin-center/runtime/boot
+		* @module @linxin666/dsh-client-ui-skin-center/runtime/boot
 		*/
 		function bootSkinRuntime(options = {}) {
 			const doc = options.doc ?? document;
@@ -5068,6 +5150,76 @@ window.__ModuleLoader__.load({
 			}
 		};
 		//#endregion
+		//#region src/client/telemetry.ts
+		const VISITOR_KEY = "dsh-web-ui-telemetry-visitor";
+		const DAY_KEY_PREFIX = "dsh-web-ui-telemetry-day:";
+		const ENDPOINT = "https://dsh-market.com/api/telemetry/event";
+		/** The building package's version, when the bundle carries it. */
+		function bakedVersion() {
+			try {
+				return "0.3.23";
+			} catch {
+				return;
+			}
+		}
+		/** Read or lazily create the anonymous visitor id; null when storage is unavailable. */
+		function visitorId() {
+			try {
+				const existing = localStorage.getItem(VISITOR_KEY);
+				if (existing && /^[A-Za-z0-9_-]{16,64}$/.test(existing)) return existing;
+				const fresh = crypto.randomUUID().replaceAll("-", "");
+				localStorage.setItem(VISITOR_KEY, fresh);
+				return fresh;
+			} catch {
+				return null;
+			}
+		}
+		/** Drop stale per-day dedup keys so localStorage does not grow forever. */
+		function pruneDayKeys(today) {
+			try {
+				for (let index = localStorage.length - 1; index >= 0; index -= 1) {
+					const key = localStorage.key(index);
+					if (key !== null && key.startsWith(DAY_KEY_PREFIX) && key !== DAY_KEY_PREFIX + today) localStorage.removeItem(key);
+				}
+			} catch {}
+		}
+		/**
+		* Fire the daily heartbeat for the given items at most once per UTC day per
+		* browser. Never throws and never blocks the caller. Items without an explicit
+		* version inherit the bundle's baked build version.
+		*/
+		function reportDailyHeartbeat(items) {
+			try {
+				if (items.length === 0) return;
+				const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
+				if (navigator.webdriver) return;
+				if (localStorage.getItem(DAY_KEY_PREFIX + today) !== null) return;
+				const visitor = visitorId();
+				if (visitor === null) return;
+				pruneDayKeys(today);
+				const payloadItems = items.map((item) => {
+					const out = { name: item.name };
+					const version = item.version ?? bakedVersion();
+					if (version !== void 0) out.version = version;
+					if (item.channel !== void 0) out.channel = item.channel;
+					return out;
+				});
+				const body = JSON.stringify({
+					kind: "heartbeat",
+					visitor,
+					items: payloadItems
+				});
+				fetch(ENDPOINT, {
+					method: "POST",
+					headers: { "content-type": "application/json" },
+					body,
+					keepalive: true
+				}).then((response) => {
+					if (response.ok) localStorage.setItem(DAY_KEY_PREFIX + today, "1");
+				}).catch(() => {});
+			} catch {}
+		}
+		//#endregion
 		//#region src/client/index.ts
 		/** Locale namespace owned by this plugin. */
 		const NS = "skinCenter";
@@ -5081,13 +5233,14 @@ window.__ModuleLoader__.load({
 			"remote"
 		];
 		/** Self-report item for the install heartbeat. */
-		const SELF_ITEM = [{ name: "@gestaltrun/dsh-client-ui-skin-center" }];
+		const SELF_ITEM = [{ name: "@linxin666/dsh-client-ui-skin-center" }];
 		/**
 		* Beat the install heartbeat (docs/telemetry.md), enriching it with the
 		* installed skin inventory (skin:<id> + version + channel) once the v2
 		* catalog answers. Offline or pre-boot the beat stays package-only.
 		*/
 		function beatHeartbeat() {
+			reportDailyHeartbeat(SELF_ITEM);
 			fetch("/api/skin-center/v2/catalog").then((res) => res.ok ? res.json() : null).then((catalog) => {
 				if (!catalog || !Array.isArray(catalog.skins)) return;
 				const items = [...SELF_ITEM];
@@ -5099,7 +5252,7 @@ window.__ModuleLoader__.load({
 					if (typeof skin.channel === "string") item.channel = skin.channel;
 					items.push(item);
 				}
-				items.slice(0, 64);
+				reportDailyHeartbeat(items.slice(0, 64));
 			}).catch(() => {});
 		}
 		/**
@@ -5217,12 +5370,14 @@ window.__ModuleLoader__.load({
 					blurContent: () => background.blurContent(),
 					inputCardBlur: () => background.inputCardBlur(),
 					bubbleOpacity: () => background.bubbleOpacity(),
+					bubbleBlur: () => background.bubbleBlur(),
 					subscribe: (listener) => background.subscribe(listener),
 					set: (opacity) => background.set(opacity),
 					setBlurEmpty: (value) => background.setBlurEmpty(value),
 					setBlurContent: (value) => background.setBlurContent(value),
 					setInputCardBlur: (value) => background.setInputCardBlur(value),
 					setBubbleOpacity: (value) => background.setBubbleOpacity(value),
+					setBubbleBlur: (value) => background.setBubbleBlur(value),
 					dispose: () => background.dispose()
 				},
 				wallpaper: {

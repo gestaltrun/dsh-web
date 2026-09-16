@@ -1,7 +1,7 @@
 {
   "name": "@gestaltrun/dsh-client-ui-market",
   "description": "Workshop browser card: browse skins, pets and community plugins from dsh-market.com and install them in the GUI (assets into the DSH home directories, plugins through the optional plugin manager).",
-  "version": "0.3.21-gestaltrun.1",
+  "version": "0.3.23-gestaltrun.0",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -71,12 +71,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/gestaltrun/dsh-web.git",
-    "directory": "packages/dsh-market"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/",
-    "tag": "latest"
+    "url": "https://github.com/gestaltrun/dsh-web.git"
   }
 }

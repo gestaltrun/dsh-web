@@ -1,7 +1,7 @@
 {
   "name": "@gestaltrun/dsh-client-ui-model-capabilities",
   "description": "Per-model capability declarations (image input and reasoning efforts) for custom pi-ai providers, edited in place on the Models settings cards; writes the official llm-pi-ai settings namespace, no DSH source changes.",
-  "version": "0.3.21-gestaltrun.1",
+  "version": "0.3.23-gestaltrun.0",
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
@@ -81,12 +81,6 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gestaltrun/dsh-web.git",
-    "directory": "packages/dsh-model-capabilities"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/",
-    "tag": "latest"
+    "url": "https://github.com/gestaltrun/dsh-web.git"
   }
 }

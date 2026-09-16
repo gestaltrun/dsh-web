@@ -1,7 +1,7 @@
 {
   "name": "@gestaltrun/dsh-usage",
   "description": "Usage statistics plugin for the dsh web GUI: per-provider balance and coding-plan quota detection plus a live token usage ledger, with a dedicated pet bubble for the current provider",
-  "version": "0.3.21-gestaltrun.1",
+  "version": "0.3.23-gestaltrun.0",
   "type": "module",
   "packageManager": "pnpm@11.7.0",
   "engines": {
@@ -89,12 +89,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gestaltrun/dsh-web.git",
-    "directory": "packages/dsh-usage"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/",
-    "tag": "latest"
+    "url": "https://github.com/gestaltrun/dsh-web.git"
   }
 }

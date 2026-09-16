@@ -1,7 +1,7 @@
 {
   "name": "@gestaltrun/dsh-client-ui-task-board",
   "description": "Host-authoritative task board for the DSH Web GUI with real session execution, Host cron scheduling, and optional cross-platform idle-sleep protection; mounted without DSH source changes.",
-  "version": "0.3.21-gestaltrun.1",
+  "version": "0.3.23-gestaltrun.0",
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
@@ -94,12 +94,6 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gestaltrun/dsh-web.git",
-    "directory": "packages/dsh-task-board"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/",
-    "tag": "latest"
+    "url": "https://github.com/gestaltrun/dsh-web.git"
   }
 }

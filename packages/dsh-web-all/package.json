@@ -1,7 +1,7 @@
 {
   "name": "@gestaltrun/dsh-web-all",
-  "description": "Gestaltrun Web/Desktop 插件聚合包：安装选定功能、Better Sidebar 和插件管理，不包含创意工坊。",
-  "version": "0.3.21-gestaltrun.1",
+  "description": "DSH Web UI 全家桶聚合插件：一键安装全部功能插件（task-board / git-graph / pet / remote-web-ui / web-ui-settings / skin-center / community-plugins / compat shim）。compat 桥接层已并入本包（src/client），无需独立 compat npm 包。",
+  "version": "0.3.23-gestaltrun.0",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -10,10 +10,12 @@
     "./shell": "./lib/shell.js",
     "./degraded": "./lib/degraded.js",
     "./package.json": "./package.json",
+    "./community-plugins": "./lib/shells/shell.js",
     "./describe-image": "./lib/shells/shell.js",
     "./doctor": "./lib/shells/shell.js",
     "./git-graph": "./lib/shells/shell.js",
     "./liangshen": "./lib/shells/shell.js",
+    "./market": "./lib/shells/shell.js",
     "./pet": "./lib/shells/shell.js",
     "./plugin-manager": "./lib/shells/shell.js",
     "./remote-web-ui": "./lib/shells/shell.js",
@@ -27,8 +29,6 @@
     "./desktop-launcher": "./lib/shells/shell.js",
     "./dsh-perf": "./lib/shells/shell.js",
     "./model-capabilities": "./lib/shells/shell.js",
-    "./community-plugins": "./lib/shells/shell.js",
-    "./market": "./lib/shells/shell.js",
     "./preset-center": "./lib/shells/shell.js"
   },
   "dsh": {
@@ -57,8 +57,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/gestaltrun/dsh-web.git",
-    "directory": "packages/dsh-web-all"
+    "url": "https://github.com/gestaltrun/dsh-web.git"
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "^4.0.2",
@@ -84,6 +83,8 @@
   },
   "dependencies": {
     "@gestaltrun/dsh-client-ui-plugin-manager": "workspace:*",
+    "@gestaltrun/dsh-client-ui-community-plugins": "workspace:*",
+    "@gestaltrun/dsh-client-ui-market": "workspace:*",
     "@gestaltrun/dsh-client-ui-task-board": "workspace:*",
     "@gestaltrun/dsh-client-ui-git-graph": "workspace:*",
     "@gestaltrun/dsh-pet": "workspace:*",
@@ -96,14 +97,10 @@
     "@gestaltrun/dsh-usage": "workspace:*",
     "@gestaltrun/dsh-session-archive": "workspace:*",
     "@gestaltrun/dsh-client-ui-model-capabilities": "workspace:*",
+    "@gestaltrun/dsh-client-ui-preset-center": "workspace:*",
     "@gestaltrun/dsh-client-ui-web-ui-settings": "workspace:*",
     "@gestaltrun/dsh-client-ui-skin-center": "workspace:*",
     "@gestaltrun/dsh-i18n": "workspace:*",
     "@gestaltrun/dsh-better-sidebar": "0.19.1-gestaltrun.0"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/",
-    "tag": "latest"
   }
 }
