@@ -1439,24 +1439,15 @@ importers:
 
   packages/dsh-web-all:
     dependencies:
-      '@gestaltrun/dsh-client-ui-community-plugins':
-        specifier: workspace:*
-        version: link:../dsh-community-plugins
       '@gestaltrun/dsh-client-ui-git-graph':
         specifier: workspace:*
         version: link:../dsh-git-graph
-      '@gestaltrun/dsh-client-ui-market':
-        specifier: workspace:*
-        version: link:../dsh-market
       '@gestaltrun/dsh-client-ui-model-capabilities':
         specifier: workspace:*
         version: link:../dsh-model-capabilities
       '@gestaltrun/dsh-client-ui-plugin-manager':
         specifier: workspace:*
         version: link:../dsh-plugin-manager
-      '@gestaltrun/dsh-client-ui-preset-center':
-        specifier: workspace:*
-        version: link:../dsh-preset-center
       '@gestaltrun/dsh-client-ui-skill-explorer':
         specifier: workspace:*
         version: link:../dsh-skill-explorer

@@ -83,8 +83,6 @@
   },
   "dependencies": {
     "@gestaltrun/dsh-client-ui-plugin-manager": "workspace:*",
-    "@gestaltrun/dsh-client-ui-community-plugins": "workspace:*",
-    "@gestaltrun/dsh-client-ui-market": "workspace:*",
     "@gestaltrun/dsh-client-ui-task-board": "workspace:*",
     "@gestaltrun/dsh-client-ui-git-graph": "workspace:*",
     "@gestaltrun/dsh-pet": "workspace:*",
@@ -97,7 +95,6 @@
     "@gestaltrun/dsh-usage": "workspace:*",
     "@gestaltrun/dsh-session-archive": "workspace:*",
     "@gestaltrun/dsh-client-ui-model-capabilities": "workspace:*",
-    "@gestaltrun/dsh-client-ui-preset-center": "workspace:*",
     "@gestaltrun/dsh-client-ui-web-ui-settings": "workspace:*",
     "@gestaltrun/dsh-client-ui-skin-center": "workspace:*",
     "@gestaltrun/dsh-i18n": "workspace:*",
