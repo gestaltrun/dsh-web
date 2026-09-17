@@ -102,5 +102,9 @@
     "@gestaltrun/dsh-client-ui-skin-center": "workspace:*",
     "@gestaltrun/dsh-i18n": "workspace:*",
     "@gestaltrun/dsh-better-sidebar": "0.19.1-gestaltrun.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

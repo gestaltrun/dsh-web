@@ -77,5 +77,9 @@
   "license": "BSD-3-Clause",
   "dependencies": {
     "yaml": "^2.8.2"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
