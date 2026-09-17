@@ -11,7 +11,7 @@ importers:
   .:
     dependencies:
       '@gestaltrun/dsh-web-all':
-        specifier: 0.3.23
+        specifier: 0.3.23-gestaltrun.0
         version: link:packages/dsh-web-all
     devDependencies:
       '@deepseek-ai/cordis':
