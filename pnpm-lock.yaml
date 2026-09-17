@@ -1493,9 +1493,9 @@ importers:
       '@gestaltrun/dsh-usage':
         specifier: workspace:*
         version: link:../dsh-usage
-      dsh-better-sidebar:
-        specifier: 0.19.1
-        version: 0.19.1(5d01a0121f53fce90355120f9d87b845)
+      '@gestaltrun/dsh-better-sidebar':
+        specifier: 0.19.1-gestaltrun.0
+        version: 0.19.1-gestaltrun.0(5d01a0121f53fce90355120f9d87b845)
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: ^4.0.2
