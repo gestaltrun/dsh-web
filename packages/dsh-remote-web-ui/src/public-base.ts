@@ -12,7 +12,7 @@
  * kept only for a bounded grace window: Cloudflare's edge can still deliver a
  * connection the phone already opened, and a mobile network reconnects
  * constantly, so an instant drop turns the phone's retry into a silent 403.
- * @module @linxin666/dsh-remote-web-ui/public-base
+ * @module @gestaltrun/dsh-remote-web-ui/public-base
  */
 
 /** How long a quick-tunnel host stays trusted after the tunnel stops running. */
