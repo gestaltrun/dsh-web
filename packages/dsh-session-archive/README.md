@@ -17,7 +17,7 @@ Session archive management for DSH Web: one place to see every session, archive 
 ## Install
 
 ```sh
-pnpm add @linxin666/dsh-session-archive
+pnpm add @gestaltrun/dsh-session-archive
 ```
 
 The family bundle (`dsh-web-all`) includes this plugin. For a standalone profile mount:

@@ -4,7 +4,7 @@
  * official CLI finishes, so the tab can render exactly what the install
  * changed — rows disabled or claimed, bundles added or removed — as a
  * reversible, attributable notice. Pure logic shared by both halves.
- * @module @linxin666/dsh-client-ui-plugin-manager/core
+ * @module @gestaltrun/dsh-client-ui-plugin-manager/core
  */
 
 /** Row/bundle membership state used by the diff. */

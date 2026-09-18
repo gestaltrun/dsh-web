@@ -10,8 +10,8 @@ importers:
 
   .:
     dependencies:
-      '@linxin666/dsh-web-all':
-        specifier: 0.3.21
+      '@gestaltrun/dsh-web-all':
+        specifier: 0.3.23-gestaltrun.0
         version: link:packages/dsh-web-all
     devDependencies:
       '@deepseek-ai/cordis':
@@ -68,6 +68,9 @@ importers:
       '@playwright/test':
         specifier: ^1.62.1
         version: 1.63.0
+      fflate:
+        specifier: ^0.8.3
+        version: 0.8.3
       lightningcss:
         specifier: ^1.32.0
         version: 1.33.0
@@ -1397,7 +1400,7 @@ importers:
       '@deepseek-ai/dsh-settings':
         specifier: ^0.1.5-rc.1
         version: 0.1.5-rc.1(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-brand@0.1.5-rc.1(@deepseek-ai/cordis@4.0.2))(@deepseek-ai/dsh-invariants@0.1.5-rc.1(@deepseek-ai/cordis@4.0.2))(@deepseek-ai/dsh-session@0.1.5-rc.1(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-scope@0.1.5-rc.1(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-invariants@0.1.5-rc.1(@deepseek-ai/cordis@4.0.2))))(@deepseek-ai/schemastery@3.18.2)
-      '@linxin666/dsh-pet':
+      '@gestaltrun/dsh-pet':
         specifier: workspace:*
         version: link:../dsh-pet
       '@testing-library/dom':
@@ -1436,66 +1439,57 @@ importers:
 
   packages/dsh-web-all:
     dependencies:
-      '@linxin666/dsh-client-ui-community-plugins':
-        specifier: workspace:*
-        version: link:../dsh-community-plugins
-      '@linxin666/dsh-client-ui-git-graph':
+      '@gestaltrun/dsh-client-ui-git-graph':
         specifier: workspace:*
         version: link:../dsh-git-graph
-      '@linxin666/dsh-client-ui-market':
-        specifier: workspace:*
-        version: link:../dsh-market
-      '@linxin666/dsh-client-ui-model-capabilities':
+      '@gestaltrun/dsh-client-ui-model-capabilities':
         specifier: workspace:*
         version: link:../dsh-model-capabilities
-      '@linxin666/dsh-client-ui-plugin-manager':
+      '@gestaltrun/dsh-client-ui-plugin-manager':
         specifier: workspace:*
         version: link:../dsh-plugin-manager
-      '@linxin666/dsh-client-ui-preset-center':
-        specifier: workspace:*
-        version: link:../dsh-preset-center
-      '@linxin666/dsh-client-ui-skill-explorer':
+      '@gestaltrun/dsh-client-ui-skill-explorer':
         specifier: workspace:*
         version: link:../dsh-skill-explorer
-      '@linxin666/dsh-client-ui-skin-center':
+      '@gestaltrun/dsh-client-ui-skin-center':
         specifier: workspace:*
         version: link:../skins/skin-center
-      '@linxin666/dsh-client-ui-task-board':
+      '@gestaltrun/dsh-client-ui-task-board':
         specifier: workspace:*
         version: link:../dsh-task-board
-      '@linxin666/dsh-client-ui-web-ui-settings':
+      '@gestaltrun/dsh-client-ui-web-ui-settings':
         specifier: workspace:*
         version: link:../dsh-web-settings
-      '@linxin666/dsh-doctor':
+      '@gestaltrun/dsh-doctor':
         specifier: workspace:*
         version: link:../dsh-doctor
-      '@linxin666/dsh-i18n':
+      '@gestaltrun/dsh-i18n':
         specifier: workspace:*
         version: link:../dsh-i18n
-      '@linxin666/dsh-liangshen':
+      '@gestaltrun/dsh-liangshen':
         specifier: workspace:*
         version: link:../dsh-liangshen
-      '@linxin666/dsh-pet':
+      '@gestaltrun/dsh-pet':
         specifier: workspace:*
         version: link:../dsh-pet
-      '@linxin666/dsh-remote-web-ui':
+      '@gestaltrun/dsh-remote-web-ui':
         specifier: workspace:*
         version: link:../dsh-remote-web-ui
-      '@linxin666/dsh-session-archive':
+      '@gestaltrun/dsh-session-archive':
         specifier: workspace:*
         version: link:../dsh-session-archive
-      '@linxin666/dsh-ssh':
+      '@gestaltrun/dsh-ssh':
         specifier: workspace:*
         version: link:../dsh-ssh
-      '@linxin666/dsh-tool-describe-image':
+      '@gestaltrun/dsh-tool-describe-image':
         specifier: workspace:*
         version: link:../dsh-tool-describe-image
-      '@linxin666/dsh-usage':
+      '@gestaltrun/dsh-usage':
         specifier: workspace:*
         version: link:../dsh-usage
-      dsh-better-sidebar:
-        specifier: 0.19.0
-        version: 0.19.0(5d01a0121f53fce90355120f9d87b845)
+      '@gestaltrun/dsh-better-sidebar':
+        specifier: 0.19.1-gestaltrun.0
+        version: 0.19.1-gestaltrun.0(5d01a0121f53fce90355120f9d87b845)
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: ^4.0.2
@@ -3615,8 +3609,8 @@ packages:
   dompurify@3.4.15:
     resolution: {integrity: sha512-EUBjM+B+lkDE41iE82DDSCfkoPGfXx8IxFxPMjNzm/Uk4xDet77rTN9wqlxlVg71kK7XGuUMv6wUxJUwwv+Xyw==}
 
-  dsh-better-sidebar@0.19.0:
-    resolution: {integrity: sha512-eUNfVfJScUfvBiiB7yqot4UDslTOaDcRxPR9LKWE2Kv/Mp/iSk14whgrVg2RggYLc5aq2c+zpXG6qeQ5+aiHrg==}
+  '@gestaltrun/dsh-better-sidebar@0.19.1-gestaltrun.0':
+    resolution: {integrity: sha512-asZIt+2XZqq9dKqhSjIMPoAuPyT7Hg13EHoQBV9ICRI9X4tut3tQQBfv/gcuRBSDUFAgXCDSstEgHbvBn18zHg==}
     engines: {node: '>=20'}
     peerDependencies:
       '@deepseek-ai/cordis': ^4.0.2
@@ -3726,6 +3720,9 @@ packages:
     peerDependenciesMeta:
       picomatch:
         optional: true
+
+  fflate@0.8.3:
+    resolution: {integrity: sha512-tbZNuJrLwGUp3zshBtdy4W+ORxZuIh8a5ilyIEQDC5rY1f3U20JMry0Ll3WBzU58EZKsEuJFXhb5gwv8CsPvgA==}
 
   form-data@4.0.6:
     resolution: {integrity: sha512-vKatAh4SlVfgbv+YtmhiRjhEMJsYpsG1Y2rMQtR+SVSbytsSD1YGzDIcrAJmdFec88u/+VoGmxnl+80gL1tRCQ==}
@@ -6654,7 +6651,7 @@ snapshots:
     optionalDependencies:
       '@types/trusted-types': 2.0.7
 
-  dsh-better-sidebar@0.19.0(5d01a0121f53fce90355120f9d87b845):
+  '@gestaltrun/dsh-better-sidebar@0.19.1-gestaltrun.0(5d01a0121f53fce90355120f9d87b845)':
     dependencies:
       '@codemirror/commands': 6.11.0
       '@codemirror/lang-cpp': 6.0.3
@@ -6789,6 +6786,8 @@ snapshots:
   fdir@6.5.0(picomatch@4.0.7):
     optionalDependencies:
       picomatch: 4.0.7
+
+  fflate@0.8.3: {}
 
   form-data@4.0.6:
     dependencies:

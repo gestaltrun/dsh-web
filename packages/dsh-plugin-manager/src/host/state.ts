@@ -3,7 +3,7 @@
  * package.json, its node_modules manifests, and the patch rows' enablement.
  * The npm web runtime has no installer inventory service, so this module is
  * the read side of the gateway (the write side is the official CLI).
- * @module @linxin666/dsh-client-ui-plugin-manager/host
+ * @module @gestaltrun/dsh-client-ui-plugin-manager/host
  */
 
 import { existsSync } from 'node:fs'

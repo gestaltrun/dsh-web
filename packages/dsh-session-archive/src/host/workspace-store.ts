@@ -8,7 +8,7 @@
  * browser sees the change without a reload. The seams are feature-detected
  * and pinned to the SDK cohort; when absent, operations fail with
  * `missing-seam` instead of guessing at files.
- * @module @linxin666/dsh-session-archive/host/workspace-store
+ * @module @gestaltrun/dsh-session-archive/host/workspace-store
  */
 
 import type { Context } from '@deepseek-ai/cordis'

@@ -7,7 +7,7 @@
  *
  * Precedence rules are the dsh launcher's own (kept byte-compatible with the
  * retired module so the bridge reads the same file the old CLI wrote).
- * @module @linxin666/dsh-client-ui-skin-center/harness-home
+ * @module @gestaltrun/dsh-client-ui-skin-center/harness-home
  */
 
 import { realpathSync, statSync } from 'node:fs'

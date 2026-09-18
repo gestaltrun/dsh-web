@@ -1,7 +1,7 @@
 import { clientBundle } from '../../../shared/tsdown.client.ts'
 
 export default clientBundle(
-  '@linxin666/dsh-client-ui-skin-center',
+  '@gestaltrun/dsh-client-ui-skin-center',
   ['src/index.ts'],
   {
     lib: {

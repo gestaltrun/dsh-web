@@ -1,7 +1,7 @@
 /**
  * Configuration shape and validation for dsh-session-archive, shared by the
  * host schema and the client settings form. Pure logic.
- * @module @linxin666/dsh-session-archive/core/config
+ * @module @gestaltrun/dsh-session-archive/core/config
  */
 
 export interface SessionArchiveConfig {

@@ -16,7 +16,7 @@
  * agent-default-model settings (the wire's session.selectModel persists
  * there) re-runs the resting evaluation for every live agent, so a model
  * picked for a fresh session hides the tool from its very first turn.
- * @module @linxin666/dsh-tool-describe-image/tool-visibility
+ * @module @gestaltrun/dsh-tool-describe-image/tool-visibility
  */
 
 import type { Context } from '@deepseek-ai/cordis'

@@ -25,7 +25,7 @@
  *
  * This file is imported directly by scripts/dsh-pet under node's strip-only
  * TypeScript mode: keep it erasable-syntax-only.
- * @module @linxin666/dsh-pet/voice-pack
+ * @module @gestaltrun/dsh-pet/voice-pack
  */
 
 import {

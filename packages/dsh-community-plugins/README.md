@@ -1,4 +1,4 @@
-# @linxin666/dsh-client-ui-community-plugins
+# @gestaltrun/dsh-client-ui-community-plugins
 
 English | [中文](README.zh.md)
 
@@ -15,7 +15,7 @@ The community plugin index data source of the dsh web ecosystem: `community.json
 
 This package does not need a direct install; it ships with the repository as the index data source.
 
-Profiles that still mount the old card (for example through the aggregate) can uninstall `@linxin666/dsh-client-ui-community-plugins` from the plugin manager tab in the official Plugins section (effective on next start).
+Profiles that still mount the old card (for example through the aggregate) can uninstall `@gestaltrun/dsh-client-ui-community-plugins` from the plugin manager tab in the official Plugins section (effective on next start).
 
 ## Known limitations
 

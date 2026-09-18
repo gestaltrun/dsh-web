@@ -13,7 +13,7 @@
  * order, so enabling would look successful and do nothing), and the preset the
  * `agent-presets` default setting names is never disabled or uninstalled (a
  * default naming a missing preset fails every new session).
- * @module @linxin666/dsh-client-ui-preset-center/routes
+ * @module @gestaltrun/dsh-client-ui-preset-center/routes
  */
 
 import type { IncomingMessage, ServerResponse } from 'node:http'

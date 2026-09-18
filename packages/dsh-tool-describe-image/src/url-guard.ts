@@ -7,7 +7,7 @@
  * /etc/hosts entries and private answers are refused too; an unresolvable domain fails
  * closed. Rejections carry one generic wording and never response statuses or other
  * host-internal facts.
- * @module @linxin666/dsh-tool-describe-image/url-guard
+ * @module @gestaltrun/dsh-tool-describe-image/url-guard
  */
 
 import { lookup } from 'node:dns/promises'

@@ -4,7 +4,7 @@
  */
 import { clientBundle } from '../../shared/tsdown.client.ts'
 
-export default clientBundle('@linxin666/dsh-client-ui-market', ['src/index.ts'], {
+export default clientBundle('@gestaltrun/dsh-client-ui-market', ['src/index.ts'], {
   libExternal: [
     '@deepseek-ai/dsh-client-connection',
     '@deepseek-ai/dsh-client-locale',

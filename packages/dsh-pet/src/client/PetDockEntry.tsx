@@ -9,7 +9,7 @@
  * renders a fixed-position summon button. Which sprite renders is decided by
  * the host snapshot's pet id resolved against the registry list — no per-pet
  * component exists.
- * @module @linxin666/dsh-pet/client/PetDockEntry
+ * @module @gestaltrun/dsh-pet/client/PetDockEntry
  */
 
 import { useEffect, useRef, useSyncExternalStore, type ReactElement } from 'react'
@@ -63,7 +63,7 @@ export type PetDockEntryProps =
     portalTarget?: Element
   }
 
-const DEFAULT_DISPLAY: PetDisplayConfig = { visible: true, size: 160, right: 24, bottom: 20 }
+const DEFAULT_DISPLAY: PetDisplayConfig = { visible: true, size: 160, right: 24, bottom: 20, bubbleScale: 1 }
 
 /**
  * Dock entry: while the pet is visible, mount the floating PetSprite (it

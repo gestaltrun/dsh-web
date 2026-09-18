@@ -6,7 +6,7 @@
  * page's `settings.models.footer` seat) is where those providers come back:
  * it lists the archive entries whose route is still down and restores a profile
  * on enable. Renders nothing while no such entry exists.
- * @module @linxin666/dsh-client-ui-model-capabilities/client/DisabledProvidersFooter
+ * @module @gestaltrun/dsh-client-ui-model-capabilities/client/DisabledProvidersFooter
  */
 
 import { useCallback, useEffect, useState } from 'react'

@@ -23,7 +23,7 @@
  *    the token (light: #0f1115 on #ffffff, dark: #f9fafb on #0f1115 — the
  *    official theme's own pair, always legible).
  *
- * @module @linxin666/dsh-client-ui-skin-center/css-safety/token-audit
+ * @module @gestaltrun/dsh-client-ui-skin-center/css-safety/token-audit
  */
 
 export interface TokenAuditStylesheet {

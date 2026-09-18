@@ -50,10 +50,10 @@ describe('newlyAddedBundles', () => {
 describe('rowMountedPackageNames', () => {
   it('collects insert-entry names from every before-state dependency patch', async () => {
     const { facts } = profileWith({
-      '@linxin666/dsh-web-all': [
+      '@gestaltrun/dsh-web-all': [
         '- insert:',
         "    - id: web-ui-task-board",
-        "      name: '@linxin666/dsh-client-ui-task-board'",
+        "      name: '@gestaltrun/dsh-client-ui-task-board'",
         '- insert:',
         '    - id: better-sidebar',
         '      name: dsh-better-sidebar',
@@ -62,9 +62,9 @@ describe('rowMountedPackageNames', () => {
       'dsh-plain': '[]\n',
     })
     const mounted = await rowMountedPackageNames(facts, snapshot({
-      dependencies: ['@linxin666/dsh-web-all', 'dsh-plain'],
+      dependencies: ['@gestaltrun/dsh-web-all', 'dsh-plain'],
     }))
-    expect(mounted.has('@linxin666/dsh-client-ui-task-board')).toBe(true)
+    expect(mounted.has('@gestaltrun/dsh-client-ui-task-board')).toBe(true)
     expect(mounted.has('dsh-better-sidebar')).toBe(true)
     expect(mounted.has('dsh-plain')).toBe(false)
   })
@@ -89,10 +89,10 @@ describe('rowMountedPackageNames', () => {
 
   it('skips dependency insert entries the profile layer disables by id', async () => {
     const { facts } = profileWith({
-      '@linxin666/dsh-web-all': '- insert:\n    - id: better-sidebar\n      name: dsh-better-sidebar\n',
+      '@gestaltrun/dsh-web-all': '- insert:\n    - id: better-sidebar\n      name: dsh-better-sidebar\n',
     })
     const mounted = await rowMountedPackageNames(facts, snapshot({
-      dependencies: ['@linxin666/dsh-web-all'],
+      dependencies: ['@gestaltrun/dsh-web-all'],
       rowEnabled: new Map([['better-sidebar', false]]),
     }))
     expect(mounted.has('dsh-better-sidebar')).toBe(false)
@@ -102,13 +102,13 @@ describe('rowMountedPackageNames', () => {
 describe('duplicateMountBundles', () => {
   it('selects exactly the newly added, already row-mounted entries', async () => {
     const { facts } = profileWith({
-      '@linxin666/dsh-web-all': '- insert:\n    - id: better-sidebar\n      name: dsh-better-sidebar\n',
+      '@gestaltrun/dsh-web-all': '- insert:\n    - id: better-sidebar\n      name: dsh-better-sidebar\n',
     })
     const strip = await duplicateMountBundles(
       facts,
-      snapshot({ dependencies: ['@linxin666/dsh-web-all'] }),
-      ['@linxin666/dsh-web-all'],
-      ['@linxin666/dsh-web-all', 'dsh-better-sidebar', 'dsh-memoir'],
+      snapshot({ dependencies: ['@gestaltrun/dsh-web-all'] }),
+      ['@gestaltrun/dsh-web-all'],
+      ['@gestaltrun/dsh-web-all', 'dsh-better-sidebar', 'dsh-memoir'],
     )
     expect(strip).toEqual(['dsh-better-sidebar'])
   })

@@ -16,7 +16,7 @@ import { resolve, dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const repo = process.env.GITHUB_REPOSITORY || 'zhu1090093659/dsh-web'
+const repo = process.env.GITHUB_REPOSITORY || 'gestaltrun/dsh-web'
 const token = process.env.GITHUB_TOKEN || ''
 const files = [
   { rel: 'README.md', viewAllLabel: '查看全部贡献者' },

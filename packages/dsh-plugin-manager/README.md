@@ -1,4 +1,4 @@
-# @linxin666/dsh-client-ui-plugin-manager
+# @gestaltrun/dsh-client-ui-plugin-manager
 
 English | [中文](README.zh.md)
 
@@ -10,9 +10,9 @@ Plugin manager tab for the dsh web GUI Plugins settings section: installs plugin
 - Dual-channel transport: on runtimes with the official installer services (DSHCode and the 1.0.4 checkout web), every operation rides the official `/plugin-installer` and `/plugin-control` loopback RPC channels; on the npm-published web runtime those channels do not exist, so the package's host half mounts a loopback-fenced HTTP gateway that spawns the official `dsh plugin` CLI for installs/removals (the single writer) and writes `disabled` override rows for enablement.
 - Installs plugins from an npm package name or a git repository URL, with progress.
 - Lists installed user plugins with next-start enable switches, update checks (registry, npm sources), verified npm updates, and uninstall.
-- Per-row switches for aggregates (gateway mode): a bundle claiming several entry rows, such as `@linxin666/dsh-web-all`, expands into a child list where every family plugin toggles individually (a single-row `disabled` override; siblings are untouched). The manager tab, the family settings surface, and the aggregate compat face are locked rows that stay enabled even through a whole-package disable, so the management UI can never switch itself off. Child uninstall stays whole-package — the code ships in the aggregate, and a disabled child is simply never loaded; install the standalone package for independently versioned management (a standalone install wins over the aggregate row through the double-mount guard).
+- Per-row switches for aggregates (gateway mode): a bundle claiming several entry rows, such as `@gestaltrun/dsh-web-all`, expands into a child list where every family plugin toggles individually (a single-row `disabled` override; siblings are untouched). The manager tab, the family settings surface, and the aggregate compat face are locked rows that stay enabled even through a whole-package disable, so the management UI can never switch itself off. Child uninstall stays whole-package — the code ships in the aggregate, and a disabled child is simply never loaded; install the standalone package for independently versioned management (a standalone install wins over the aggregate row through the double-mount guard).
 - The aggregate child list is collapsed by default: the row shows only a `N/M child plugins on` summary that expands on click, so a bundle carrying 20+ family rows no longer stretches the settings page.
-- Detects the legacy aggregate `@linxin666/dsh-web-ui-all` and converts its update action into a transactional migration to `@linxin666/dsh-web-all`; the gateway removes the legacy package, installs the current package at an exact version, restores the legacy layer position, and verifies `--dump-config` before reporting success.
+- Detects the legacy aggregate `@gestaltrun/dsh-web-ui-all` and converts its update action into a transactional migration to `@gestaltrun/dsh-web-all`; the gateway removes the legacy package, installs the current package at an exact version, restores the legacy layer position, and verifies `--dump-config` before reporting success.
 - Verifies DSH runtime compatibility before npm updates (issue #754): update checks read the declared minimum DSH version from the latest manifest (`dsh.engines.dsh` with a top-level `engines.dsh` fallback), show the requirement beside the update button, disable the button when the running DSH is below it, and the host update route returns 412 before starting any CLI job when the runtime cannot be verified.
 - Shows the built-in product switches when the official plugin-control surface exists.
 - Surfaces install-time conflict actions: the product-snapshot diff around each install (official mode) or the profile layer diff around each CLI run (gateway mode), with undo for reversible actions and an `Ask the agent to fix` handoff on every conflict row.
@@ -25,13 +25,13 @@ Plugin manager tab for the dsh web GUI Plugins settings section: installs plugin
 ### From npm (recommended)
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-client-ui-plugin-manager
+dsh plugin --profile web add @gestaltrun/dsh-client-ui-plugin-manager
 ```
 
 ### From the repository (development)
 
 ```sh
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install && pnpm -r build
 dsh plugin --profile web add link:$(pwd)/packages/dsh-plugin-manager
@@ -68,7 +68,7 @@ The contract source of truth is `src/core/service.ts` (`PluginManagerService`). 
 - The web build has no in-place restart: changes apply at the next manual restart.
 - Install-time conflict detection reports what the install actually changed (product rows in official mode, profile rows and bundle entries in gateway mode). On the npm runtime, duplicate insert-id claims are detected after install and the new plugin is rolled back automatically (a shared id can never be `disabled` away: the loader's duplicate check has no disabled exemption); on official runtimes the host's own rules and the boot-failure ring own that case.
 - The npm runtime's boot preflight (`--dump-config`) catches composition failures, and the static insert check catches insert rows naming packages that resolve nowhere; runtime import/apply failures still surface only at the next real start, where official runtimes keep the failure ring and the npm runtime does not.
-- Duplicate-mount safeguard (gateway mode): the official CLI's bundle reconciliation re-adds every bundle-declaring dependency to `dsh.profile.bundles` after any install/remove — including packages the composition already mounts through a patch row (the family aggregate mounts `dsh-better-sidebar` as a row), which would double-mount and fail the next boot (`duplicate prefix route`). After every successful CLI mutation the gateway strips exactly the newly added, already-row-mounted bundles entries back out (the manifest write goes through backup + tmp + atomic rename), reports one notice per stripped entry on the job result, and leaves normal installs' bundles entries — and every entry the user had before — untouched.
+- Duplicate-mount safeguard (gateway mode): the official CLI's bundle reconciliation re-adds every bundle-declaring dependency to `dsh.profile.bundles` after any install/remove — including packages the composition already mounts through a patch row (the family aggregate mounts `@gestaltrun/dsh-better-sidebar` as a row), which would double-mount and fail the next boot (`duplicate prefix route`). After every successful CLI mutation the gateway strips exactly the newly added, already-row-mounted bundles entries back out (the manifest write goes through backup + tmp + atomic rename), reports one notice per stripped entry on the job result, and leaves normal installs' bundles entries — and every entry the user had before — untouched.
 - The wire shapes mirror the official installer tab protocol; on drift the tolerant parsers degrade to error rows rather than misbehaving.
 - The repair conversation's workspace keeps its path-derived default title.
 

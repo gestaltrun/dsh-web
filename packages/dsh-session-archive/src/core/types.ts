@@ -1,7 +1,7 @@
 /**
  * Wire and view types shared by the host half and the browser half of
  * dsh-session-archive. Pure data — no runtime imports on either side.
- * @module @linxin666/dsh-session-archive/core/types
+ * @module @gestaltrun/dsh-session-archive/core/types
  */
 
 /** Result status of one session inside a batch operation. */

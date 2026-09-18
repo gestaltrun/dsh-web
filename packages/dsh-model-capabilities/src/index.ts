@@ -9,7 +9,7 @@
  * subagent selection read; enabling restores the profile. The namespace holds
  * configuration only — API keys stay in the credentials service and are
  * untouched by a toggle.
- * @module @linxin666/dsh-client-ui-model-capabilities
+ * @module @gestaltrun/dsh-client-ui-model-capabilities
  */
 import type { Context } from '@deepseek-ai/cordis'
 import type { SettingsNamespace } from '@deepseek-ai/dsh-settings'
@@ -31,7 +31,7 @@ export const Config: z<Config> = z.object({
 })
 
 /** Register the namespace (once per process; the family bundle may add a second row). */
-export const apply = mountOnce('@linxin666/dsh-client-ui-model-capabilities', applyImpl)
+export const apply = mountOnce('@gestaltrun/dsh-client-ui-model-capabilities', applyImpl)
 
 function applyImpl(ctx: Context): void {
   ctx.inject(['settings'], (settingsCtx) => {

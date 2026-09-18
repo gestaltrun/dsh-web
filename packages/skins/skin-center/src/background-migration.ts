@@ -14,7 +14,7 @@
  * indistinguishable from an explicit all-defaults section — migrating either
  * is a no-op in behavior, and skipping both keeps the state document clean.
  * Never throws: a failed migration leaves both stores untouched.
- * @module @linxin666/dsh-client-ui-skin-center/background-migration
+ * @module @gestaltrun/dsh-client-ui-skin-center/background-migration
  */
 
 import { hasCustomSkinBackground, normalizeSkinBackground } from './core/background.ts'

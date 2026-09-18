@@ -3,7 +3,7 @@
  * matching, path-safety checks, size accounting, and session-rdb sqlite row
  * deletion. The physical-delete boundary — every path removal here is
  * validated to stay inside the sessions root and never follows symlinks out.
- * @module @linxin666/dsh-session-archive/host/session-files
+ * @module @gestaltrun/dsh-session-archive/host/session-files
  */
 
 import { DatabaseSync } from 'node:sqlite'

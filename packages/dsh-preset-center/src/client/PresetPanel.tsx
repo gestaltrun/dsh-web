@@ -8,7 +8,7 @@
  * `manifest/presets.json` and passes the records down, so one store section
  * makes one catalog request. Preset state comes from the preset-center host
  * routes, which derive it from disk on every read.
- * @module @linxin666/dsh-client-ui-preset-center/client/PresetPanel
+ * @module @gestaltrun/dsh-client-ui-preset-center/client/PresetPanel
  */
 
 import { useEffect, useState, type ReactNode } from 'react'

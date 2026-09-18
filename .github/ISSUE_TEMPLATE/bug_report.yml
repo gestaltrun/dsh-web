@@ -8,7 +8,7 @@ body:
       value: |
         请保持本模板完整并填写所有必填部分。缺少截图证据、冒烟测试或代码引用的 Bug 报告将被自动关闭。
 
-        提交前请先搜索确认没有重复：[搜索现有 Issue](https://github.com/zhu1090093659/dsh-web/issues?q=is%3Aissue)
+        提交前请先搜索确认没有重复：[搜索现有 Issue](https://github.com/gestaltrun/dsh-web/issues?q=is%3Aissue)
   - type: checkboxes
     id: duplicate-check
     attributes:
@@ -112,7 +112,7 @@ body:
       description: 指向仓库内相关代码的精确位置（文件路径 + 函数 / 行号，可附 GitHub 链接），便于维护者定位。
       placeholder: |
         packages/dsh-task-board/src/client/index.ts:120-135
-        https://github.com/zhu1090093659/dsh-web/blob/main/packages/dsh-task-board/src/client/index.ts#L120-L135
+        https://github.com/gestaltrun/dsh-web/blob/main/packages/dsh-task-board/src/client/index.ts#L120-L135
     validations:
       required: true
   - type: textarea

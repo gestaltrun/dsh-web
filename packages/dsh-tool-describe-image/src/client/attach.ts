@@ -5,7 +5,7 @@
  * store, and returns both a durable `[image attachment ...]` note and
  * self-contained Markdown reference. Image bytes never enter the conversation
  * log — only durable reference text does.
- * @module @linxin666/dsh-tool-describe-image/client/attach
+ * @module @gestaltrun/dsh-tool-describe-image/client/attach
  */
 
 /** The host attach endpoint, same-origin with the web shell. */

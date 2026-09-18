@@ -1,5 +1,5 @@
 /**
- * Aggregate-bundle mount lane: prove the packed `@linxin666/dsh-web-all`
+ * Aggregate-bundle mount lane: prove the packed `@gestaltrun/dsh-web-all`
  * tarball mounts into a real `dsh web` instance and boots cleanly on the
  * alpha.2 cohort:
  *

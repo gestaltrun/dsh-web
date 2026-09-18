@@ -1,7 +1,7 @@
 {
-  "name": "@linxin666/dsh-client-ui-git-graph",
+  "name": "@gestaltrun/dsh-client-ui-git-graph",
   "description": "External dsh web GUI plugin: a blank-session git branch selector + Git graph, with real host-side git operations and guards, as a dsh profile bundle",
-  "version": "0.3.21",
+  "version": "0.3.23-gestaltrun.0",
   "type": "module",
   "packageManager": "pnpm@11.7.0",
   "engines": {
@@ -96,6 +96,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zhu1090093659/dsh-web.git"
+    "url": "https://github.com/gestaltrun/dsh-web.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

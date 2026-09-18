@@ -1,7 +1,7 @@
 {
-  "name": "@linxin666/dsh-client-ui-web-ui-settings",
+  "name": "@gestaltrun/dsh-client-ui-web-ui-settings",
   "description": "Web UI plugin group for the dsh settings page: one first-level settings section that hosts the dsh-web family plugins' enable switches and configuration forms.",
-  "version": "0.3.21",
+  "version": "0.3.23-gestaltrun.0",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -70,6 +70,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/zhu1090093659/dsh-web.git"
+    "url": "https://github.com/gestaltrun/dsh-web.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

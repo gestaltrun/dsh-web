@@ -11,7 +11,7 @@
  * Resilience contract: apply() never throws. Every mount step is guarded so a
  * missing service, a duplicate injection or a hostile scope degrades to an
  * empty-but-alive plugin instead of taking the GUI down.
- * @module @linxin666/dsh-doctor/client
+ * @module @gestaltrun/dsh-doctor/client
  */
 
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
@@ -83,7 +83,7 @@ let claimed = false
 export function apply(ctx: ClientContext): void {
   // Anonymous install heartbeat (docs/telemetry.md): one beat per browser per
   // UTC day, package name only, silent failure.
-  reportDailyHeartbeat([{ name: '@linxin666/dsh-doctor' }])
+  reportDailyHeartbeat([{ name: '@gestaltrun/dsh-doctor' }])
 
   if (claimed) return
   claimed = true

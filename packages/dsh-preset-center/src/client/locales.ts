@@ -1,6 +1,6 @@
 /**
  * Preset-center copy (zh is the key source; en mirrors it key for key).
- * @module @linxin666/dsh-client-ui-preset-center/client/locales
+ * @module @gestaltrun/dsh-client-ui-preset-center/client/locales
  */
 
 /** Locale namespace owned by this plugin (single home; the entry and the panel import it). */

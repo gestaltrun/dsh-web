@@ -9,7 +9,7 @@
  *  - the discovery root is `USER_PRESET_DIR` of
  *    `@deepseek-ai/dsh-agent-presets`, appended to the roster unless a
  *    deployment sets `includeUserRoot: false`.
- * @module @linxin666/dsh-client-ui-preset-center/core/paths
+ * @module @gestaltrun/dsh-client-ui-preset-center/core/paths
  */
 
 import { join } from 'node:path'
@@ -22,7 +22,7 @@ export const ENABLED_DIR = '.agent-presets'
 
 /**
  * Provenance filename written by the market installer (mirrors
- * `PROVENANCE_FILENAME` in `@linxin666/dsh-client-ui-market`; no
+ * `PROVENANCE_FILENAME` in `@gestaltrun/dsh-client-ui-market`; no
  * cross-package runtime import, the same way the skin center mirrors it).
  */
 export const PROVENANCE_FILENAME = 'dsh-market.provenance.json'

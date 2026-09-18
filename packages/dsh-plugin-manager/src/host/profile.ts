@@ -4,7 +4,7 @@
  * boot profile from the host process's own argv (the launcher fact) and reads
  * the profile's package.json and cordis.patch.yml directly — reads only; every
  * write goes through the official CLI or the patch-row editor.
- * @module @linxin666/dsh-client-ui-plugin-manager/host
+ * @module @gestaltrun/dsh-client-ui-plugin-manager/host
  */
 
 import { existsSync, readFileSync } from 'node:fs'

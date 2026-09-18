@@ -1,4 +1,4 @@
-# @linxin666/dsh-client-ui-skill-explorer
+# @gestaltrun/dsh-client-ui-skill-explorer
 
 English | [中文](README.zh.md)
 
@@ -31,13 +31,13 @@ skills into a recoverable trash.
 ### From npm (recommended)
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-client-ui-skill-explorer@latest
+dsh plugin --profile web add @gestaltrun/dsh-client-ui-skill-explorer@latest
 ```
 
 ### From the repository (development)
 
 ```sh
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install
 pnpm -r build

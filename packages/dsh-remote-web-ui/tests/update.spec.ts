@@ -54,14 +54,14 @@ function npmFixture(anchorVersion = "0.1.10", childVersion = "0.1.10"): string {
     private: true,
     dependencies: { [AGGREGATE_PACKAGE]: "^0.1.10" },
   })
-  const anchorDir = join(profileDir, 'node_modules', '@linxin666', 'dsh-web-all')
+  const anchorDir = join(profileDir, 'node_modules', '@gestaltrun', 'dsh-web-all')
   writeManifest(anchorDir, {
     name: AGGREGATE_PACKAGE,
     version: anchorVersion,
-    dependencies: { '@linxin666/dsh-ssh': '^0.1.10' },
+    dependencies: { '@gestaltrun/dsh-ssh': '^0.1.10' },
   })
-  writeManifest(join(profileDir, 'node_modules', '@linxin666', 'dsh-ssh'), {
-    name: '@linxin666/dsh-ssh',
+  writeManifest(join(profileDir, 'node_modules', '@gestaltrun', 'dsh-ssh'), {
+    name: '@gestaltrun/dsh-ssh',
     version: childVersion,
   })
   return join(anchorDir, "package.json")
@@ -76,13 +76,13 @@ function standaloneFixture(): { anchor: string; profileDir: string } {
     private: true,
     dependencies: {
       [SELF_PACKAGE]: "^0.1.19",
-      "@linxin666/dsh-client-ui-git-graph": "^0.1.19",
-      "@linxin666/dsh-pet": "link:../../../code/dsh-web-ui/packages/dsh-pet",
-      "@linxin666/dsh-ssh": "^0.1.19",
+      "@gestaltrun/dsh-client-ui-git-graph": "^0.1.19",
+      "@gestaltrun/dsh-pet": "link:../../../code/dsh-web-ui/packages/dsh-pet",
+      "@gestaltrun/dsh-ssh": "^0.1.19",
       react: "^18.2.0",
     },
   })
-  for (const name of [SELF_PACKAGE, "@linxin666/dsh-client-ui-git-graph", "@linxin666/dsh-ssh"]) {
+  for (const name of [SELF_PACKAGE, "@gestaltrun/dsh-client-ui-git-graph", "@gestaltrun/dsh-ssh"]) {
     writeManifest(join(profileDir, "node_modules", ...name.split("/")), { name, version: "0.1.19" })
   }
   return {
@@ -145,10 +145,10 @@ describe("familyChildren", () => {
   it("collects family-scope dependencies only", () => {
     expect(familyChildren({
       dependencies: {
-        "@linxin666/dsh-ssh": "^0.1.10",
+        "@gestaltrun/dsh-ssh": "^0.1.10",
         "react": "^18.2.0",
       },
-    })).toEqual(["@linxin666/dsh-ssh"])
+    })).toEqual(["@gestaltrun/dsh-ssh"])
     expect(familyChildren({})).toEqual([])
   })
 })
@@ -257,8 +257,8 @@ describe("checkUpdates", () => {
     expect(status.anchor).toBe(SELF_PACKAGE)
     expect(status.packages.map(item => item.name)).toEqual([
       SELF_PACKAGE,
-      "@linxin666/dsh-client-ui-git-graph",
-      "@linxin666/dsh-ssh",
+      "@gestaltrun/dsh-client-ui-git-graph",
+      "@gestaltrun/dsh-ssh",
     ])
     expect(status.packages.map(item => item.current)).toEqual(["0.1.19", "0.1.19", "0.1.19"])
   })
@@ -268,10 +268,10 @@ describe("checkUpdates", () => {
     const status = await checkUpdates({
       anchorManifestPath: anchor,
       resolve: (specifier) => {
-        if (specifier === "@linxin666/dsh-ssh/package.json") {
-          return join(fixture!, "profiles", "web", "node_modules", "@linxin666", "dsh-ssh", "package.json")
+        if (specifier === "@gestaltrun/dsh-ssh/package.json") {
+          return join(fixture!, "profiles", "web", "node_modules", "@gestaltrun", "dsh-ssh", "package.json")
         }
-        return join(fixture!, "profiles", "web", "node_modules", "@linxin666", "dsh-web-all", "package.json")
+        return join(fixture!, "profiles", "web", "node_modules", "@gestaltrun", "dsh-web-all", "package.json")
       },
       fetchLatest: async (name) => name === AGGREGATE_PACKAGE ? "0.1.11" : "0.1.10",
     })
@@ -281,14 +281,14 @@ describe("checkUpdates", () => {
     expect(status.outdated).toBe(true)
     expect(status.packages).toEqual([
       { name: AGGREGATE_PACKAGE, current: "0.1.10", latest: "0.1.11", outdated: true },
-      { name: "@linxin666/dsh-ssh", current: "0.1.9", latest: "0.1.10", outdated: true },
+      { name: "@gestaltrun/dsh-ssh", current: "0.1.9", latest: "0.1.10", outdated: true },
     ])
   })
   it("includes structured release notes when the seam returns them", async () => {
     const anchor = npmFixture("0.1.10", "0.1.10")
     const status = await checkUpdates({
       anchorManifestPath: anchor,
-      resolve: () => join(fixture!, "profiles", "web", "node_modules", "@linxin666", "dsh-web-all", "package.json"),
+      resolve: () => join(fixture!, "profiles", "web", "node_modules", "@gestaltrun", "dsh-web-all", "package.json"),
       fetchLatest: async () => "0.1.11",
       fetchReleaseNotes: async version => ({ version, features: ["new"], fixes: ["fix"], other: ["other"] }),
     })
@@ -300,7 +300,7 @@ describe("checkUpdates", () => {
     const anchor = npmFixture("0.1.10", "0.1.10")
     const status = await checkUpdates({
       anchorManifestPath: anchor,
-      resolve: () => join(fixture!, "profiles", "web", "node_modules", "@linxin666", "dsh-web-all", "package.json"),
+      resolve: () => join(fixture!, "profiles", "web", "node_modules", "@gestaltrun", "dsh-web-all", "package.json"),
       fetchLatest: async () => "0.1.11",
       fetchReleaseNotes: async () => { throw new Error("github unavailable") },
     })
@@ -312,7 +312,7 @@ describe("checkUpdates", () => {
     const anchor = npmFixture("0.1.10", "0.1.10")
     const status = await checkUpdates({
       anchorManifestPath: anchor,
-      resolve: () => join(fixture!, "profiles", "web", "node_modules", "@linxin666", "dsh-web-all", "package.json"),
+      resolve: () => join(fixture!, "profiles", "web", "node_modules", "@gestaltrun", "dsh-web-all", "package.json"),
       fetchLatest: async () => "0.1.10",
     })
     expect(status.mode).toBe("npm")
@@ -325,7 +325,7 @@ describe("checkUpdates", () => {
       name: "dsh-profile-web",
       dependencies: { [AGGREGATE_PACKAGE]: "link:../../../code/dsh-web-ui/packages/dsh-web-all" },
     })
-    const anchorDir = join(profileDir, 'node_modules', '@linxin666', 'dsh-web-all')
+    const anchorDir = join(profileDir, 'node_modules', '@gestaltrun', 'dsh-web-all')
     writeManifest(anchorDir, { name: AGGREGATE_PACKAGE, version: "0.1.10", dependencies: {} })
     const status = await checkUpdates({
       anchorManifestPath: join(anchorDir, "package.json"),
@@ -344,7 +344,7 @@ describe("checkUpdates", () => {
       name: "dsh-profile-web",
       dependencies: {
         [AGGREGATE_PACKAGE]: "^0.1.10",
-        "@linxin666/dsh-ssh": "link:../../../code/dsh-web-ui/packages/dsh-ssh",
+        "@gestaltrun/dsh-ssh": "link:../../../code/dsh-web-ui/packages/dsh-ssh",
       },
     })
     const status = await checkUpdates({
@@ -358,7 +358,7 @@ describe("checkUpdates", () => {
     const anchor = npmFixture()
     const status = await checkUpdates({
       anchorManifestPath: anchor,
-      resolve: () => join(fixture!, "profiles", "web", "node_modules", "@linxin666", "dsh-web-all", "package.json"),
+      resolve: () => join(fixture!, "profiles", "web", "node_modules", "@gestaltrun", "dsh-web-all", "package.json"),
       fetchLatest: async () => undefined,
     })
     expect(status.error).toBe("registry-unreachable")
@@ -382,8 +382,8 @@ describe("resolveUpdateTarget", () => {
       profileDir,
       packages: [
         SELF_PACKAGE,
-        "@linxin666/dsh-client-ui-git-graph",
-        "@linxin666/dsh-ssh",
+        "@gestaltrun/dsh-client-ui-git-graph",
+        "@gestaltrun/dsh-ssh",
       ],
     })
   })
@@ -394,7 +394,7 @@ describe("resolveUpdateTarget", () => {
     expect(target).toEqual({
       profileName: "web",
       profileDir: join(fixture!, "profiles", "web"),
-      packages: [AGGREGATE_PACKAGE, "@linxin666/dsh-ssh"],
+      packages: [AGGREGATE_PACKAGE, "@gestaltrun/dsh-ssh"],
     })
   })
   it("rejects a link install", () => {
@@ -404,7 +404,7 @@ describe("resolveUpdateTarget", () => {
       name: "dsh-profile-web",
       dependencies: { [AGGREGATE_PACKAGE]: "link:../x" },
     })
-    const anchorDir = join(profileDir, 'node_modules', '@linxin666', 'dsh-web-all')
+    const anchorDir = join(profileDir, 'node_modules', '@gestaltrun', 'dsh-web-all')
     writeManifest(anchorDir, { name: AGGREGATE_PACKAGE, version: "0.1.10" })
     expect(resolveUpdateTarget({ anchorManifestPath: join(anchorDir, "package.json") })).toEqual({ error: "link" })
   })
@@ -415,7 +415,7 @@ describe("resolveUpdateTarget", () => {
       name: "dsh-profile-web",
       dependencies: {
         [AGGREGATE_PACKAGE]: "^0.1.10",
-        "@linxin666/dsh-ssh": "link:../../../code/dsh-web-ui/packages/dsh-ssh",
+        "@gestaltrun/dsh-ssh": "link:../../../code/dsh-web-ui/packages/dsh-ssh",
       },
     })
     expect(resolveUpdateTarget({ anchorManifestPath: anchor })).toEqual({ error: "link" })
@@ -713,10 +713,10 @@ describe("runUpdateVerified", () => {
     return {
       anchorManifestPath: npmFixture("0.1.10", "0.1.10"),
       resolve: (specifier: string) => {
-        if (specifier === "@linxin666/dsh-ssh/package.json") {
-          return join(fixture!, "profiles", "web", "node_modules", "@linxin666", "dsh-ssh", "package.json")
+        if (specifier === "@gestaltrun/dsh-ssh/package.json") {
+          return join(fixture!, "profiles", "web", "node_modules", "@gestaltrun", "dsh-ssh", "package.json")
         }
-        return join(fixture!, "profiles", "web", "node_modules", "@linxin666", "dsh-web-all", "package.json")
+        return join(fixture!, "profiles", "web", "node_modules", "@gestaltrun", "dsh-web-all", "package.json")
       },
       fetchLatest,
     }
@@ -724,7 +724,7 @@ describe("runUpdateVerified", () => {
 
   it("verifies version movement for directly installed family packages", async () => {
     const { anchor, profileDir } = standaloneFixture()
-    const packages = [SELF_PACKAGE, "@linxin666/dsh-client-ui-aionui-panel", "@linxin666/dsh-ssh"]
+    const packages = [SELF_PACKAGE, "@gestaltrun/dsh-client-ui-aionui-panel", "@gestaltrun/dsh-ssh"]
     const child = new FakeChild(0)
     const promise = runUpdateVerified({
       run: { profileDir, packages, spawnImpl: (() => child) as never },
@@ -831,8 +831,8 @@ describe("runUpdateVerified", () => {
       check: {
         anchorManifestPath: anchor,
         resolve: (specifier: string) => {
-          if (specifier === "@linxin666/dsh-ssh/package.json") {
-            return join(fixture!, "profiles", "web", "node_modules", "@linxin666", "dsh-ssh", "package.json")
+          if (specifier === "@gestaltrun/dsh-ssh/package.json") {
+            return join(fixture!, "profiles", "web", "node_modules", "@gestaltrun", "dsh-ssh", "package.json")
           }
           return anchor
         },
@@ -841,10 +841,10 @@ describe("runUpdateVerified", () => {
     })
     // pnpm actually updates the installed anchor on disk (the gate allowed a
     // partial move to 0.1.13) before it exits 0.
-    writeManifest(join(fixture!, "profiles", "web", "node_modules", "@linxin666", "dsh-web-all"), {
+    writeManifest(join(fixture!, "profiles", "web", "node_modules", "@gestaltrun", "dsh-web-all"), {
       name: AGGREGATE_PACKAGE,
       version: "0.1.13",
-      dependencies: { "@linxin666/dsh-ssh": "^0.1.10" },
+      dependencies: { "@gestaltrun/dsh-ssh": "^0.1.10" },
     })
     child.run(0)
     const result = await promise
@@ -857,7 +857,7 @@ describe("runUpdateVerified", () => {
     // there is no registry comparison to trust, so the run must not claim
     // success.
     const root = makeFixture()
-    const anchorDir = join(root, 'checkout', 'node_modules', '@linxin666', 'dsh-web-all')
+    const anchorDir = join(root, 'checkout', 'node_modules', '@gestaltrun', 'dsh-web-all')
     writeManifest(anchorDir, { name: AGGREGATE_PACKAGE, version: "0.1.10", dependencies: {} })
     const child = new FakeChild(0)
     const spawnImpl = (() => child) as never
@@ -882,7 +882,7 @@ describe("runUpdateVerified", () => {
     // update must not collapse into "update complete". The anchor still being
     // outdated is what drives the stale verdict.
     const anchor = npmFixture("0.1.10", "0.1.10")
-    const childDir = join(fixture!, "profiles", "web", "node_modules", "@linxin666", "dsh-ssh")
+    const childDir = join(fixture!, "profiles", "web", "node_modules", "@gestaltrun", "dsh-ssh")
     const child = new FakeChild(0)
     const spawnImpl = (() => child) as never
     const promise = runUpdateVerified({
@@ -890,7 +890,7 @@ describe("runUpdateVerified", () => {
       check: {
         anchorManifestPath: anchor,
         resolve: (specifier: string) => {
-          if (specifier === "@linxin666/dsh-ssh/package.json") {
+          if (specifier === "@gestaltrun/dsh-ssh/package.json") {
             return join(childDir, "package.json")
           }
           return anchor
@@ -920,8 +920,8 @@ describe("runUpdateVerified", () => {
       check: {
         anchorManifestPath: anchor,
         resolve: (specifier: string) => {
-          if (specifier === "@linxin666/dsh-ssh/package.json") {
-            return join(fixture!, "profiles", "web", "node_modules", "@linxin666", "dsh-ssh", "package.json")
+          if (specifier === "@gestaltrun/dsh-ssh/package.json") {
+            return join(fixture!, "profiles", "web", "node_modules", "@gestaltrun", "dsh-ssh", "package.json")
           }
           return anchor
         },
@@ -945,7 +945,7 @@ describe('fetchLatestVersion', () => {
       ok: true,
       json: async () => ({ version: '1.2.3' }),
     }))
-    const version = await fetchLatestVersion('@linxin666/dsh-remote-web-ui', fetchImpl)
+    const version = await fetchLatestVersion('@gestaltrun/dsh-remote-web-ui', fetchImpl)
     expect(version).toBe('1.2.3')
     expect(fetchImpl).toHaveBeenCalledTimes(1)
     const [url, init] = fetchImpl.mock.calls[0] as [string, RequestInit | undefined]
@@ -957,6 +957,6 @@ describe('fetchLatestVersion', () => {
     const fetchImpl = vi.fn(async () => {
       throw new Error('network down')
     })
-    await expect(fetchLatestVersion('@linxin666/dsh-remote-web-ui', fetchImpl)).resolves.toBeUndefined()
+    await expect(fetchLatestVersion('@gestaltrun/dsh-remote-web-ui', fetchImpl)).resolves.toBeUndefined()
   })
 })

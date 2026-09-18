@@ -15,7 +15,7 @@
  *
  * Failure policy: every DOM/runtime wiring failure is logged, never thrown —
  * the web shell fails the whole boot when a plugin apply throws.
- * @module @linxin666/dsh-tool-describe-image/client
+ * @module @gestaltrun/dsh-tool-describe-image/client
  */
 
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
@@ -76,7 +76,7 @@ export const inject = ['slots', 'conversation', 'settingsScope', 'locale']
 export function apply(ctx: ClientContext): void {
   // Anonymous install heartbeat (docs/telemetry.md): one beat per browser per
   // UTC day, package name only, silent failure.
-  reportDailyHeartbeat([{ name: '@linxin666/dsh-tool-describe-image' }])
+  reportDailyHeartbeat([{ name: '@gestaltrun/dsh-tool-describe-image' }])
 
   ctx.effect(() => {
     try {

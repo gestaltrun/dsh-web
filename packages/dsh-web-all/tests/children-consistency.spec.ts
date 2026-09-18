@@ -80,7 +80,7 @@ describe('family row / client child consistency', () => {
     for (const row of familyRows()) {
       if (row.plugin === undefined) continue
       const subpath = row.id.replace(/^web-ui-/, '')
-      expect(row.name, `row ${row.id}`).toBe('@linxin666/dsh-web-all/' + subpath)
+      expect(row.name, `row ${row.id}`).toBe('@gestaltrun/dsh-web-all/' + subpath)
     }
   })
 

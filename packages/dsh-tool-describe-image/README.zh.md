@@ -55,11 +55,11 @@
 
 ## 安装
 
-推荐直接安装全家桶聚合包 `@linxin666/dsh-web-all`（一个包装齐全部功能插件与皮肤），或单独安装本插件：
+推荐直接安装全家桶聚合包 `@gestaltrun/dsh-web-all`（一个包装齐全部功能插件与皮肤），或单独安装本插件：
 
 ```sh
 # 推荐：直接从 npm 安装
-dsh plugin --profile web add @linxin666/dsh-tool-describe-image@latest
+dsh plugin --profile web add @gestaltrun/dsh-tool-describe-image@latest
 ```
 
 聚合包默认**无配置挂载**本插件：加载不受影响，首次调用会以清晰的错误提示
@@ -91,7 +91,7 @@ dsh plugin --profile web add @linxin666/dsh-tool-describe-image@latest
 
 ```yaml
 - id: describe-image
-  name: '@linxin666/dsh-tool-describe-image'
+  name: '@gestaltrun/dsh-tool-describe-image'
   config:
     baseURL: https://dashscope.aliyuncs.com/compatible-mode/v1
     model: qwen-vl-max
@@ -102,7 +102,7 @@ dsh plugin --profile web add @linxin666/dsh-tool-describe-image@latest
 
 ```yaml
 - id: describe-image
-  name: '@linxin666/dsh-tool-describe-image'
+  name: '@gestaltrun/dsh-tool-describe-image'
   config:
     rotationMode: round-robin
     retryNextOnFailure: true
@@ -121,7 +121,7 @@ dsh plugin --profile web add @linxin666/dsh-tool-describe-image@latest
 
 ```yaml
 - id: describe-image
-  name: '@linxin666/dsh-tool-describe-image'
+  name: '@gestaltrun/dsh-tool-describe-image'
   config:
     baseURL: https://api.openai.com/v1
     apiStyle: responses
@@ -133,7 +133,7 @@ dsh plugin --profile web add @linxin666/dsh-tool-describe-image@latest
 
 ```yaml
 - id: describe-image
-  name: '@linxin666/dsh-tool-describe-image'
+  name: '@gestaltrun/dsh-tool-describe-image'
   config:
     baseURL: https://api.xiaomimimo.com/v1
     model: mimo-v2.5:off
@@ -145,7 +145,7 @@ Claude 风格端点（如 OpenCode Go——Qwen3.7 Plus 等视觉模型只走 Me
 
 ```yaml
 - id: describe-image
-  name: '@linxin666/dsh-tool-describe-image'
+  name: '@gestaltrun/dsh-tool-describe-image'
   config:
     baseURL: https://opencode.ai/zen/go
     apiStyle: anthropic-messages
@@ -205,7 +205,7 @@ DeepSeek chat-completions 适配器（rc.8）在模型目录条目的 `inputModa
 
 - **来源**：本包移植自 [whitelonng/dsh-plugin-describe-image](https://github.com/whitelonng/dsh-plugin-describe-image)
   （deepseek-harness `packages/vision/tool-describe-image`），2026-08 迁入，测试随源码一并移植
-  （`pnpm --filter @linxin666/dsh-tool-describe-image test`）。
+  （`pnpm --filter @gestaltrun/dsh-tool-describe-image test`）。
 - **版权**：原代码版权归原作者（deepseek-ai / whitelonng）所有，本仓库仅托管与维护，不主张版权；
   贡献移植部分由贡献者授权以全家桶许可证发布。
 - **许可证**：全家桶以 [Apache-2.0](../../LICENSE) 授权（见仓库根 LICENSE），本包 license 字段为 `Apache-2.0`。

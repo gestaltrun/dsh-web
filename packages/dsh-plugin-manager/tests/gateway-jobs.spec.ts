@@ -147,7 +147,7 @@ describe('unsafeSpecReason', () => {
   })
 
   it('accepts registry, scoped, version-range, and git specs', () => {
-    for (const spec of ['dsh-pet', '@linxin666/dsh-pet@^1.2.3', 'pkg@~2.0.0', 'git+https://github.com/a/b.git#main', 'github:a/b', 'link:../local-pkg']) {
+    for (const spec of ['dsh-pet', '@gestaltrun/dsh-pet@^1.2.3', 'pkg@~2.0.0', 'git+https://github.com/a/b.git#main', 'github:a/b', 'link:../local-pkg']) {
       expect(unsafeSpecReason(spec), spec).toBeUndefined()
     }
   })
@@ -207,8 +207,8 @@ describe('CliGateway install verification (B8)', () => {
 
 describe('CliGateway legacy aggregate migration', () => {
   it('removes legacy, installs current, preserves layer order, and verifies', async () => {
-    const legacy = '@linxin666/dsh-web-ui-all'
-    const current = '@linxin666/dsh-web-all'
+    const legacy = '@gestaltrun/dsh-web-ui-all'
+    const current = '@gestaltrun/dsh-web-all'
     const { facts, dir } = makeProfile({ [legacy]: { version: '0.3.2', bundle: true } }, { bundles: [legacy, '@omdsh-dev/dsh-annotation'] })
     tempDirs.push(dir)
     const calls: string[][] = []
@@ -234,8 +234,8 @@ describe('CliGateway legacy aggregate migration', () => {
   })
 
   it('does not recreate dual bundles when the current aggregate was already present and verify fails', async () => {
-    const legacy = '@linxin666/dsh-web-ui-all'
-    const current = '@linxin666/dsh-web-all'
+    const legacy = '@gestaltrun/dsh-web-ui-all'
+    const current = '@gestaltrun/dsh-web-all'
     const { facts, dir } = makeProfile(
       {
         [legacy]: { version: '0.3.2', bundle: true },
@@ -267,8 +267,8 @@ describe('CliGateway legacy aggregate migration', () => {
   })
 
   it('accepts a local repository link without requiring a registry version match', async () => {
-    const legacy = '@linxin666/dsh-web-ui-all'
-    const current = '@linxin666/dsh-web-all'
+    const legacy = '@gestaltrun/dsh-web-ui-all'
+    const current = '@gestaltrun/dsh-web-all'
     const { facts, dir } = makeProfile({ [legacy]: { version: '0.3.2', bundle: true } }, { bundles: [legacy, '@omdsh-dev/dsh-annotation'] })
     tempDirs.push(dir)
     const targetSpec = 'link:/Users/zcl/code/dsh-web/packages/dsh-web-all'
@@ -422,7 +422,7 @@ describe('CliGateway mutation queue (B7)', () => {
 const AGGREGATE_PATCH = [
   '- insert:',
   '    - id: web-ui-task-board',
-  "      name: '@linxin666/dsh-client-ui-task-board'",
+  "      name: '@gestaltrun/dsh-client-ui-task-board'",
   '- insert:',
   '    - id: better-sidebar',
   '      name: dsh-better-sidebar',
@@ -435,9 +435,9 @@ describe('CliGateway duplicate-mount safeguard (B9)', () => {
     // package also sits in dependencies (not in bundles); any CLI mutation
     // re-adds it to bundles and the next boot double-mounts.
     const { facts, dir } = makeProfile({
-      '@linxin666/dsh-web-all': { bundle: true, patch: AGGREGATE_PATCH },
+      '@gestaltrun/dsh-web-all': { bundle: true, patch: AGGREGATE_PATCH },
       'dsh-better-sidebar': { bundle: true },
-    }, { bundles: ['@linxin666/dsh-web-all'] })
+    }, { bundles: ['@gestaltrun/dsh-web-all'] })
     tempDirs.push(dir)
     const calls: string[][] = []
     const gateway = gatewayFor(facts, (args) => {
@@ -454,7 +454,7 @@ describe('CliGateway duplicate-mount safeguard (B9)', () => {
     expect(job.plugin?.id).toBe('dsh-memoir')
     const manifest = readManifest(facts.profileDir)
     // The duplicate-mount entry is stripped; everything else is untouched.
-    expect(manifest.dsh.profile.bundles).toEqual(['@linxin666/dsh-web-all', 'dsh-memoir'])
+    expect(manifest.dsh.profile.bundles).toEqual(['@gestaltrun/dsh-web-all', 'dsh-memoir'])
     expect(manifest.dependencies['dsh-better-sidebar']).toBe('1.0.0')
     // One notice per stripped entry, in the conflict-row shape.
     expect(job.notices).toEqual([{ id: 'dsh-better-sidebar', name: 'dsh-better-sidebar', from: 'enabled', to: 'uninstalled' }])
@@ -507,10 +507,10 @@ describe('CliGateway duplicate-mount safeguard (B9)', () => {
 
   it('a remove job does not resurrect a previously stripped bundles entry', async () => {
     const { facts, dir } = makeProfile({
-      '@linxin666/dsh-web-all': { bundle: true, patch: AGGREGATE_PATCH },
+      '@gestaltrun/dsh-web-all': { bundle: true, patch: AGGREGATE_PATCH },
       'dsh-better-sidebar': { bundle: true },
       'dsh-memoir': { bundle: true },
-    }, { bundles: ['@linxin666/dsh-web-all', 'dsh-memoir'] })
+    }, { bundles: ['@gestaltrun/dsh-web-all', 'dsh-memoir'] })
     tempDirs.push(dir)
     const calls: string[][] = []
     const gateway = gatewayFor(facts, (args) => {
@@ -526,7 +526,7 @@ describe('CliGateway duplicate-mount safeguard (B9)', () => {
     expect(job.phase).toBe('done')
     const manifest = readManifest(facts.profileDir)
     // Reconciliation re-added dsh-better-sidebar; the safeguard stripped it again.
-    expect(manifest.dsh.profile.bundles).toEqual(['@linxin666/dsh-web-all'])
+    expect(manifest.dsh.profile.bundles).toEqual(['@gestaltrun/dsh-web-all'])
     expect(manifest.dependencies['dsh-better-sidebar']).toBe('1.0.0')
     expect(manifest.dependencies['dsh-memoir']).toBeUndefined()
     expect(job.notices).toEqual([{ id: 'dsh-better-sidebar', name: 'dsh-better-sidebar', from: 'enabled', to: 'uninstalled' }])

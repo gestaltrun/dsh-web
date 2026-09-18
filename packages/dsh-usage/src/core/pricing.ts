@@ -14,7 +14,7 @@
  * (`deepseek-v4-flash`, `deepseek-v4-flash-vision-exp`) stay accepted and bill
  * at the flash row; DeepSeek routes `deepseek-v4-pro` to V4.1-Flash from the
  * retirement instant below until V4.1 Pro ships.
- * @module @linxin666/dsh-usage/core/pricing
+ * @module @gestaltrun/dsh-usage/core/pricing
  */
 
 import type { UsageTokenTotals } from './types.ts'

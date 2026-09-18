@@ -41,26 +41,26 @@ test('packOne: packs the exact published version and resolves the tarball path',
   const calls = []
   const fakeRun = (file, args, options) => {
     calls.push({ file, args, options })
-    return JSON.stringify([{ filename: 'linxin666-dsh-ssh-0.1.15.tgz' }])
+    return JSON.stringify([{ filename: 'gestaltrun-dsh-ssh-0.1.15.tgz' }])
   }
-  const out = packOne('@linxin666/dsh-ssh', '0.1.15', '/tmp/assets', fakeRun)
+  const out = packOne('@gestaltrun/dsh-ssh', '0.1.15', '/tmp/assets', fakeRun)
   assert.deepEqual(calls[0].args, [
-    'pack', '@linxin666/dsh-ssh@0.1.15', '--pack-destination', '/tmp/assets', '--json',
+    'pack', '@gestaltrun/dsh-ssh@0.1.15', '--pack-destination', '/tmp/assets', '--json',
   ])
-  assert.equal(out, join('/tmp/assets', 'linxin666-dsh-ssh-0.1.15.tgz'))
+  assert.equal(out, join('/tmp/assets', 'gestaltrun-dsh-ssh-0.1.15.tgz'))
 })
 
 test('packOne: rejects when npm pack reports no filename', () => {
   const fakeRun = () => JSON.stringify([])
-  assert.throws(() => packOne('@linxin666/dsh-ssh', '0.1.15', '/tmp/assets', fakeRun), /no filename/)
+  assert.throws(() => packOne('@gestaltrun/dsh-ssh', '0.1.15', '/tmp/assets', fakeRun), /no filename/)
 })
 
 test('publishablePackages: drops private family packages', () => {
   const out = publishablePackages([
-    { name: '@linxin666/dsh-ssh', version: '0.2.4' },
-    { name: '@linxin666/dsh-pet', version: '0.2.4', private: true },
+    { name: '@gestaltrun/dsh-ssh', version: '0.2.4' },
+    { name: '@gestaltrun/dsh-pet', version: '0.2.4', private: true },
   ])
-  assert.deepEqual(out, [{ name: '@linxin666/dsh-ssh', version: '0.2.4' }])
+  assert.deepEqual(out, [{ name: '@gestaltrun/dsh-ssh', version: '0.2.4' }])
 })
 
 test('waitForPublished: polls until every package version is readable', () => {
@@ -73,7 +73,7 @@ test('waitForPublished: polls until every package version is readable', () => {
     }
   }
   waitForPublished(
-    [{ name: '@linxin666/dsh-ssh' }, { name: '@linxin666/dsh-client-ui-aionui-panel' }],
+    [{ name: '@gestaltrun/dsh-ssh' }, { name: '@gestaltrun/dsh-client-ui-aionui-panel' }],
     '0.1.18',
     fakeView,
     { attempts: 5, delayMs: 0 },
@@ -84,7 +84,7 @@ test('waitForPublished: polls until every package version is readable', () => {
 test('waitForPublished: throws after the attempt budget', () => {
   const fakeView = () => { throw new Error('not found') }
   assert.throws(
-    () => waitForPublished([{ name: '@linxin666/dsh-ssh' }], '0.1.18', fakeView, { attempts: 2, delayMs: 0 }),
+    () => waitForPublished([{ name: '@gestaltrun/dsh-ssh' }], '0.1.18', fakeView, { attempts: 2, delayMs: 0 }),
     /timed out waiting for npm propagation/,
   )
 })

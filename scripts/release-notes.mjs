@@ -34,7 +34,7 @@ const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = resolve(SCRIPT_DIR, '..')
 
 /** The GitHub owner/repo used for issue links. */
-export const DEFAULT_REPO = 'zhu1090093659/dsh-web'
+export const DEFAULT_REPO = 'gestaltrun/dsh-web'
 
 /** Conventional-commit prefixes grouped into the three note sections. */
 const FEAT_TYPES = new Set(['feat'])

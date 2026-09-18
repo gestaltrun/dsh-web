@@ -4,7 +4,7 @@
  * a poll cycle, and announces the current provider's status to the pet
  * bubble. Secrets stay in the host process; the browser only ever sees the
  * overview document.
- * @module @linxin666/dsh-usage/host/usage-service
+ * @module @gestaltrun/dsh-usage/host/usage-service
  */
 
 import { mkdir, open, readFile, rename, unlink } from 'node:fs/promises'

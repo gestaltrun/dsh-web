@@ -2,7 +2,7 @@
  * dsh-session-archive locale dictionaries (zh/en). The zh dictionary is the
  * key source; `en` mirrors its full key set (packages/AGENTS.md bilingual
  * discipline). Russian copy ships centrally in dsh-i18n.
- * @module @linxin666/dsh-session-archive/client/locales
+ * @module @gestaltrun/dsh-session-archive/client/locales
  */
 
 /** Dictionary namespace this package registers. */

@@ -3,7 +3,7 @@
  * routes, and the browser section. Everything here crosses the wire as JSON
  * and must stay provider-agnostic: provider quirks are normalized inside the
  * core adapters, never here.
- * @module @linxin666/dsh-usage/core/types
+ * @module @gestaltrun/dsh-usage/core/types
  */
 
 /** One disjoint token bucket total, aggregated over calls (billed input = input + cacheRead + cacheWrite). */

@@ -10,7 +10,7 @@
  *
  * Semantic attrs: the root carries data-dsh-plugin="doctor"; parts carry bare
  * data-dsh-part values scoped by that plugin attribute.
- * @module @linxin666/dsh-doctor/client
+ * @module @gestaltrun/dsh-doctor/client
  */
 
 import { Component, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from 'react'

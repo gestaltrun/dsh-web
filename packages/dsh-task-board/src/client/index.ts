@@ -137,7 +137,7 @@ async function readPresetRoster(
 export function apply(ctx: ClientContext): void {
   // Anonymous install heartbeat (docs/telemetry.md): one beat per browser per
   // UTC day, package name only, silent failure.
-  reportDailyHeartbeat([{ name: '@linxin666/dsh-client-ui-task-board' }])
+  reportDailyHeartbeat([{ name: '@gestaltrun/dsh-client-ui-task-board' }])
 
   // A duplicated client injection (module factory executed twice in one page
   // lifetime) would otherwise mount a second sidebar entry and board view.
@@ -230,6 +230,13 @@ export function apply(ctx: ClientContext): void {
     }
     pushWorkspaceOptions()
     disposers.push(workspaces.list.subscribe(pushWorkspaceOptions))
+    // "New project" on the board is the GUI's own add-project call (#1536);
+    // the runtime emits the created Workspace through workspaces.list, which
+    // refreshes the filter above without a local re-read.
+    controller.setWorkspaceCreator(async path => {
+      const created = await workspaces.create({ path })
+      return { workspaceId: created.workspaceId }
+    })
     const pushPresetOptions = async (): Promise<void> => {
       try {
         const roster = await readPresetRoster(ctx, remote)

@@ -8,4 +8,4 @@
 # ~/.dsh/.agent-presets/liangshen on startup. No browser half.
 - insert:
     - id: liangshen
-      name: '@linxin666/dsh-liangshen'
+      name: '@gestaltrun/dsh-liangshen'

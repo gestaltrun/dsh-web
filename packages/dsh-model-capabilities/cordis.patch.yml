@@ -10,4 +10,4 @@
 # /plugins/ui-model-capabilities/client.js) load in the web GUI.
 - insert:
     - id: ui-model-capabilities
-      name: '@linxin666/dsh-client-ui-model-capabilities'
+      name: '@gestaltrun/dsh-client-ui-model-capabilities'

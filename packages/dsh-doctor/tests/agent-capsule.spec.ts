@@ -42,7 +42,7 @@ describe('rescue capsule provisioning', () => {
           capsule: join(dir, 'capsule'), logs: join(dir, 'logs'), socket: join(dir, 's.sock'), token: join(dir, 't.ok'),
         },
         dshExecutable: 'dsh',
-        doctorSpec: '@linxin666/dsh-doctor@0.2.7',
+        doctorSpec: '@gestaltrun/dsh-doctor@0.2.7',
         run,
         now: () => '2026-01-01T00:00:00Z',
       })
@@ -69,7 +69,7 @@ describe('rescue capsule provisioning', () => {
       const manifest = await provisionCapsule({
         paths: makePaths(dir),
         dshExecutable: 'dsh',
-        doctorSpec: '@linxin666/dsh-doctor@0.2.7',
+        doctorSpec: '@gestaltrun/dsh-doctor@0.2.7',
         sourceHome: source,
         sourceProfile: 'web',
         doctorVersion: '0.2.7',
@@ -101,7 +101,7 @@ describe('rescue capsule provisioning', () => {
       await mkdir(join(source, 'profiles', 'web'), { recursive: true })
       await writeFile(join(source, 'settings.yaml'), 'providers:\n  openai:\n    apiKey: x\n', 'utf8')
       const disabled = await provisionCapsule({
-        paths: makePaths(dir), dshExecutable: 'dsh', doctorSpec: '@linxin666/dsh-doctor@0.2.7',
+        paths: makePaths(dir), dshExecutable: 'dsh', doctorSpec: '@gestaltrun/dsh-doctor@0.2.7',
         sourceHome: source, sourceProfile: 'web', mirrorCredentials: false, run: fakeRun(),
         now: () => '2026-01-01T00:00:00Z',
       })
@@ -109,7 +109,7 @@ describe('rescue capsule provisioning', () => {
       const emptySource = join(dir, 'empty-home')
       await mkdir(emptySource, { recursive: true })
       const empty = await provisionCapsule({
-        paths: makePaths(dir), dshExecutable: 'dsh', doctorSpec: '@linxin666/dsh-doctor@0.2.7',
+        paths: makePaths(dir), dshExecutable: 'dsh', doctorSpec: '@gestaltrun/dsh-doctor@0.2.7',
         sourceHome: emptySource, sourceProfile: 'web', run: fakeRun(),
         now: () => '2026-01-01T00:00:00Z',
       })
@@ -152,7 +152,7 @@ describe('rescue capsule provisioning', () => {
           snapshots: join(dir, 'snapshots'), candidates: join(dir, 'candidates'), quarantine: join(dir, 'quarantine'),
           capsule: join(dir, 'capsule'), logs: join(dir, 'logs'), socket: '', token: '',
         },
-        dshExecutable: 'dsh', doctorSpec: '@linxin666/dsh-doctor@0.2.7', run,
+        dshExecutable: 'dsh', doctorSpec: '@gestaltrun/dsh-doctor@0.2.7', run,
       })).rejects.toThrow(/rescue Doctor install failed/)
     } finally {
       await rm(dir, { recursive: true, force: true })

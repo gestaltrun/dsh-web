@@ -3,7 +3,7 @@
  * the host attach route and the vision loader. Generated Markdown carries the
  * complete immutable reference, so it survives process restarts and PTC Mode
  * nested tool dispatch without relying on the short-lived id registry.
- * @module @linxin666/dsh-tool-describe-image/attachment-reference
+ * @module @gestaltrun/dsh-tool-describe-image/attachment-reference
  */
 
 import type { ImageAttachmentRef } from '@deepseek-ai/dsh-attachment'

@@ -1,4 +1,4 @@
-# @linxin666/dsh-client-ui-preset-center
+# @gestaltrun/dsh-client-ui-preset-center
 
 English | [中文](README.zh.md)
 
@@ -16,10 +16,10 @@ Community agent-preset manager for the DSH Web GUI: the Workshop's **Presets** p
 ## Install
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-client-ui-preset-center
+dsh plugin --profile web add @gestaltrun/dsh-client-ui-preset-center
 ```
 
-The Workshop card (`@linxin666/dsh-client-ui-market`) declares the panel slot and owns the download; without it the host routes still work but there is no panel to drive them. Both ship in the `@linxin666/dsh-web-all` aggregate.
+The Workshop card (`@gestaltrun/dsh-client-ui-market`) declares the panel slot and owns the download; without it the host routes still work but there is no panel to drive them. Both ship in the `@gestaltrun/dsh-web-all` aggregate.
 
 ## Config
 

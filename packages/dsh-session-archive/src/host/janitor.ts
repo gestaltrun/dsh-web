@@ -7,7 +7,7 @@
  * archive markers -> workspace rows -> storage (rdb rows, files) -> projection
  * cache -> ledger, so an interrupted batch can only ever leave a session
  * present-but-unlisted (retryable), never half-deleted.
- * @module @linxin666/dsh-session-archive/host/janitor
+ * @module @gestaltrun/dsh-session-archive/host/janitor
  */
 
 import { existsSync, readFileSync, unlinkSync } from 'node:fs'

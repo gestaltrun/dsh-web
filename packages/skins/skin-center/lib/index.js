@@ -145,7 +145,8 @@ const SKIN_BACKGROUND_DEFAULTS = {
 	backgroundBlurEmpty: 0,
 	backgroundBlurContent: 0,
 	inputCardBlur: 10,
-	bubbleOpacity: 50
+	bubbleOpacity: 50,
+	bubbleBlur: 10
 };
 /** The fields normalize/sanitize know about; unknown keys are dropped. */
 const SKIN_BACKGROUND_FIELDS = Object.keys(SKIN_BACKGROUND_DEFAULTS);
@@ -157,7 +158,8 @@ const RANGES = {
 	backgroundBlurEmpty: [0, 20],
 	backgroundBlurContent: [0, 20],
 	inputCardBlur: [0, 20],
-	bubbleOpacity: [0, 100]
+	bubbleOpacity: [0, 100],
+	bubbleBlur: [0, 20]
 };
 function isRecord$1(value) {
 	return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -620,7 +622,7 @@ function mergeTokens(stylesheets) {
 *
 * Precedence rules are the dsh launcher's own (kept byte-compatible with the
 * retired module so the bridge reads the same file the old CLI wrote).
-* @module @linxin666/dsh-client-ui-skin-center/harness-home
+* @module @gestaltrun/dsh-client-ui-skin-center/harness-home
 */
 /** First non-blank string in a list of candidate values. */
 function firstNonBlank$1(...values) {
@@ -759,7 +761,7 @@ const REVIEWED_SKIN_HOOKS = {
 	},
 	"miku": {
 		entry: "hooks.mjs",
-		manifestSha256: "9022628fd39e8ee48aef3b311c12f8411b4cc99d62764e84aa65fb4a5a3631ab",
+		manifestSha256: "a1c713e59ed31eaf43f136205e1326d35419d83d613107423099cef2c992c621",
 		hooksSha256: "1c4052d328ac6e1ede3115395e8823c4f6acecd3b4508b85615006a88f7cbdd1"
 	},
 	"minecraft": {
@@ -833,11 +835,11 @@ const REVIEWED_SKIN_HOOKS = {
 * requires write access to $DSH_HOME itself — an attacker with that access
 * can already install full plugins, so the file is a provenance record,
 * not a capability guard against the local user.
-* @module @linxin666/dsh-client-ui-skin-center/provenance
+* @module @gestaltrun/dsh-client-ui-skin-center/provenance
 */
-/** Provenance filename written by the market installer (mirrors PROVENANCE_FILENAME in @linxin666/dsh-client-ui-market; no cross-package runtime import). */
+/** Provenance filename written by the market installer (mirrors PROVENANCE_FILENAME in @gestaltrun/dsh-client-ui-market; no cross-package runtime import). */
 const MARKET_PROVENANCE_FILENAME = "dsh-market.provenance.json";
-/** Market origin the provenance must pin (mirrors MARKET_ORIGIN in @linxin666/dsh-client-ui-market). */
+/** Market origin the provenance must pin (mirrors MARKET_ORIGIN in @gestaltrun/dsh-client-ui-market). */
 const MARKET_PROVENANCE_SOURCE = "https://dsh-market.com";
 function sha256Hex(abs) {
 	try {
@@ -1143,7 +1145,7 @@ async function repairSkinFromMarket(destDir, skinId, options = {}) {
 * changes, so client requests never rescan the same sources. The fingerprint
 * covers add/remove/change of any skin directory, while writes outside the
 * sources (POST /active state) never invalidate it.
-* @module @linxin666/dsh-client-ui-skin-center/skin-repo
+* @module @gestaltrun/dsh-client-ui-skin-center/skin-repo
 */
 /** Read the manifest-referenced stylesheets for one skin directory. */
 function stylesheetEntries(manifest, dir) {
@@ -1516,7 +1518,7 @@ async function verifyAndRepairAllSkins(catalogGetter, options = {}) {
 * desktops (where the settings scope is loopback-only) read and persist
 * background values through the v2 channel. Kept dependency-free and
 * synchronous: the tap runs per response and must never await.
-* @module @linxin666/dsh-client-ui-skin-center/active-state
+* @module @gestaltrun/dsh-client-ui-skin-center/active-state
 */
 /**
 * The single skin shipped with the package (the market on-demand plan): the
@@ -2048,7 +2050,7 @@ function derivePrimaryActionFallbacks(defined) {
 * NOTE: this module runs host-side (node) in the M2 loader. lightningcss is
 * a native dependency and must stay OUT of the browser bundle (external in
 * tsdown.config.ts).
-* @module @linxin666/dsh-client-ui-skin-center/css-safety
+* @module @gestaltrun/dsh-client-ui-skin-center/css-safety
 */
 /** Violation of the CSS whitelist. Always fatal (fail-closed). */
 var SkinCssSafetyError = class extends Error {
@@ -2367,7 +2369,7 @@ function findCloseBrace(css, openBrace) {
 * trusted, same-review same-release code (high sensitivity, see contracts/),
 * served for built-in skins and for byte-verified official-market user
 * installs, including exact reviewed legacy installs (issue #1073).
-* @module @linxin666/dsh-client-ui-skin-center/routes-v2
+* @module @gestaltrun/dsh-client-ui-skin-center/routes-v2
 */
 const SKIN_CENTER_V2_PREFIX = "/api/skin-center/v2";
 const MIME = {
@@ -2841,7 +2843,7 @@ function makeSkinIndexTap(deps) {
 * indistinguishable from an explicit all-defaults section — migrating either
 * is a no-op in behavior, and skipping both keeps the state document clean.
 * Never throws: a failed migration leaves both stores untouched.
-* @module @linxin666/dsh-client-ui-skin-center/background-migration
+* @module @gestaltrun/dsh-client-ui-skin-center/background-migration
 */
 /**
 * Run the one-shot migration. Idempotent: once the v2 state carries a
@@ -2887,7 +2889,7 @@ function migrateBackgroundFromSettings(options) {
 *     whose ui-skin-<id> row is NOT disabled inside the managed section
 *     (bundle-wired active skins carried no row of their own);
 *  3. a managed section disabling everything (or no section at all) → stock.
-* @module @linxin666/dsh-client-ui-skin-center/legacy-bridge
+* @module @gestaltrun/dsh-client-ui-skin-center/legacy-bridge
 */
 /**
 * Atomic replace: write a sibling temp file then rename over the target, so
@@ -3015,7 +3017,7 @@ function stripLegacySkinState(patch) {
 * @param knownIds - the v2 catalog's known skin ids (bundle-wired detection).
 */
 function readLegacyActiveId(patch, knownIds) {
-	for (const m of patch.matchAll(/name:\s*['"]?@linxin666\/dsh-client-ui-skin-([a-z0-9-]+)['"]?/g)) if (m[1] !== "center") return m[1];
+	for (const m of patch.matchAll(/name:\s*['"]?@gestaltrun\/dsh-client-ui-skin-([a-z0-9-]+)['"]?/g)) if (m[1] !== "center") return m[1];
 	if (!patch.includes("# --- dsh-skin managed (auto-generated; do not edit) ---")) return null;
 	const disabled = /* @__PURE__ */ new Set();
 	for (const m of patch.matchAll(/^- id: (ui-skin-[a-z0-9-]+)\r?\n  disabled: true/gm)) disabled.add(m[1].replace("ui-skin-", ""));
@@ -3058,7 +3060,7 @@ function migrateLegacySelection(options) {
 			} catch {
 				continue;
 			}
-			if (!(patch.includes("# --- dsh-skin managed (auto-generated; do not edit) ---") || /name:\s*['"]?@linxin666\/dsh-client-ui-skin-/.test(patch))) continue;
+			if (!(patch.includes("# --- dsh-skin managed (auto-generated; do not edit) ---") || /name:\s*['"]?@gestaltrun\/dsh-client-ui-skin-/.test(patch))) continue;
 			sawLegacyState = true;
 			if (!idMigrationDone) {
 				if (readActiveSelection(options.activeStatePath) !== null) notes.push("v2 selection already present; skipped id migration");
@@ -3118,7 +3120,7 @@ function migrateLegacySelection(options) {
 * are parameters, never hard reads. Scanning is synchronous like the rest
 * of we-library (directory listings only; no file payload is read except
 * the small entries.json manifest).
-* @module @linxin666/dsh-client-ui-skin-center/macos-library
+* @module @gestaltrun/dsh-client-ui-skin-center/macos-library
 */
 /** Default roots for the current user (both modern and legacy layouts). */
 function defaultMacosWallpaperRoots(home = homedir()) {
@@ -3407,7 +3409,7 @@ function scanMacosWallpapers(roots, inject = {}) {
 * Entries are plain data; the HTTP layer (src/we-routes.ts) assigns media
 * tokens and decides what is playable. Everything here is injectable for
 * tests: roots, platform and environment are parameters, never hard reads.
-* @module @linxin666/dsh-client-ui-skin-center/we-library
+* @module @gestaltrun/dsh-client-ui-skin-center/we-library
 */
 /** Steam appid of Wallpaper Engine. */
 const WE_APPID = "431960";
@@ -4018,7 +4020,7 @@ function inventoryFingerprint(opts = {}) {
 * BC1/BC2/BC3 follow the standard public algorithms. One npm dependency:
 * jpeg-js (pure JavaScript, no native builds) for FreeImage JPEG mipmaps.
 *
-* @module @linxin666/dsh-client-ui-skin-center/pkg-extract
+* @module @gestaltrun/dsh-client-ui-skin-center/pkg-extract
 */
 var pkg_extract_exports = /* @__PURE__ */ __exportAll({
 	PKG_ENTRY_FLAG_LZ4: () => 1,
@@ -6198,7 +6200,7 @@ function extractSceneResourceFromDir(dir, subpath) {
 * silence, and hardware APIs become no-ops. Wallpapers that never touch these
 * APIs are unaffected; wallpapers that do degrade to their non-reactive
 * visuals instead of crashing on undefined globals.
-* @module @linxin666/dsh-client-ui-skin-center/we-shim-source
+* @module @gestaltrun/dsh-client-ui-skin-center/we-shim-source
 */
 /** The shim source, injected ahead of every web wallpaper HTML document. */
 const WE_SHIM_JS = [
@@ -9384,7 +9386,8 @@ const SkinBackgroundConfigSchema = z.object({
 	backgroundBlurEmpty: z.number().min(0).max(20).step(1).default(SKIN_BACKGROUND_DEFAULTS.backgroundBlurEmpty),
 	backgroundBlurContent: z.number().min(0).max(20).step(1).default(SKIN_BACKGROUND_DEFAULTS.backgroundBlurContent),
 	inputCardBlur: z.number().min(0).max(20).step(1).default(SKIN_BACKGROUND_DEFAULTS.inputCardBlur),
-	bubbleOpacity: z.number().min(0).max(100).step(5).default(SKIN_BACKGROUND_DEFAULTS.bubbleOpacity)
+	bubbleOpacity: z.number().min(0).max(100).step(5).default(SKIN_BACKGROUND_DEFAULTS.bubbleOpacity),
+	bubbleBlur: z.number().min(0).max(20).step(1).default(SKIN_BACKGROUND_DEFAULTS.bubbleBlur)
 });
 /**
 * Settings namespace for the Wallpaper Engine bridge, owned by the skin
@@ -9417,7 +9420,7 @@ const SkinWallpaperConfigSchema = z.object({
 * must not take the GUI down.
 * @param ctx - cordis context.
 */
-const apply = mountOnce("@linxin666/dsh-client-ui-skin-center", applyImpl);
+const apply = mountOnce("@gestaltrun/dsh-client-ui-skin-center", applyImpl);
 function applyImpl(ctx) {
 	ctx.inject(["settings"], (settingsCtx) => {
 		try {

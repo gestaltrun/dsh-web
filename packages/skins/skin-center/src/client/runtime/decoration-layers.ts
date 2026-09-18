@@ -20,7 +20,7 @@
  *    horizontal bands whenever unrelated repaint bursts (streaming chat,
  *    animated pets, overlay menus) invalidate the same area — visible as
  *    vertical band flicker (issue #1013).
- * @module @linxin666/dsh-client-ui-skin-center/runtime/decoration-layers
+ * @module @gestaltrun/dsh-client-ui-skin-center/runtime/decoration-layers
  */
 
 export const DECORATION_LAYER_NAMES = [

@@ -23,7 +23,7 @@
  * changes, so client requests never rescan the same sources. The fingerprint
  * covers add/remove/change of any skin directory, while writes outside the
  * sources (POST /active state) never invalidate it.
- * @module @linxin666/dsh-client-ui-skin-center/skin-repo
+ * @module @gestaltrun/dsh-client-ui-skin-center/skin-repo
  */
 
 import { existsSync, readFileSync, readdirSync, rmSync, statSync } from 'node:fs'

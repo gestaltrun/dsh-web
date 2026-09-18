@@ -6,7 +6,7 @@
  * everything user-facing around it lives in the section's locales. The pure
  * helpers are unit-tested; the draw itself degrades to a thrown error the
  * section renders as its failure line.
- * @module @linxin666/dsh-usage/client/voucher
+ * @module @gestaltrun/dsh-usage/client/voucher
  */
 
 import { isDeepSeekProviderRoute } from '../core/adapters.ts'
@@ -27,8 +27,8 @@ export interface VoucherData {
   to: string
 }
 
-/** Anti-inflation exchange rate: 1000 tokens mint one whale yuan. */
-export const TOKENS_PER_WHALE_YUAN = 1000
+/** Anti-inflation exchange rate: 1,000,000 tokens mint one whale yuan. */
+export const TOKENS_PER_WHALE_YUAN = 1_000_000
 
 /** The note's face value in whale yuan; the smallest denomination is 1. */
 export function faceValue(tokens: number): number {

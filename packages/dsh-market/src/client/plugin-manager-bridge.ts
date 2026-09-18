@@ -1,6 +1,6 @@
 /**
  * Bridge to the optional 'pluginManager' cordis service provided by the
- * sibling plugin @linxin666/dsh-client-ui-plugin-manager. The service is
+ * sibling plugin @gestaltrun/dsh-client-ui-plugin-manager. The service is
  * OPTIONAL: when that plugin is not installed the bridge holds null and the
  * card degrades to the read-only copy-command index, exactly as before.
  *

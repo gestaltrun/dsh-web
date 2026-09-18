@@ -4,7 +4,7 @@
  * e2e mount smoke (scripts/e2e-mount.sh).
  *
  * Modes:
- *   auto (default): every @linxin666/* dependency that already exists on
+ *   auto (default): every @gestaltrun/* dependency that already exists on
  *     npm at the packed version stays pointed at the registry (the gate's
  *     original "npm consumers can install this" assertion is unchanged);
  *     only a dependency NOT yet published — a brand-new family package in
@@ -12,7 +12,7 @@
  *     and rewritten to a file: tarball. This removes the red window without
  *     weakening the gate for anything already published.
  *   --family-dir DIR: manual full override (the old FAMILY_TGZS_DIR
- *     behavior): rewrite ALL @linxin666/* dependencies to the same-named
+ *     behavior): rewrite ALL @gestaltrun/* dependencies to the same-named
  *     tarballs in DIR.
  *   --better-sidebar-tgz TGZ: rewrite the dsh-better-sidebar dependency to
  *     the given tarball (pre-release local 联调).
@@ -37,7 +37,7 @@ const os = require('node:os')
 const path = require('node:path')
 const { execFileSync } = require('node:child_process')
 
-const FAMILY_SCOPE = '@linxin666/'
+const FAMILY_SCOPE = '@gestaltrun/'
 const REGISTRY = 'https://registry.npmjs.org'
 
 /** Default registry probe: true when name@version exists on npm. */
@@ -102,7 +102,7 @@ function repackTarball(tgz, staging) {
 }
 
 /**
- * Rewrite one package.json's @linxin666/* dependency table. Shared by the
+ * Rewrite one package.json's @gestaltrun/* dependency table. Shared by the
  * aggregate entry manifest and every nested family tarball; `prefix`
  * decorates the report lines so nested rewrites stay distinguishable.
  */
@@ -113,7 +113,7 @@ async function rewriteManifestDeps(pkgPath, opts, state, prefix) {
   // only the aggregate entry enforces a dependency table.
   if (!pkg.dependencies) return []
   const report = []
-  const familyNames = Object.keys(pkg.dependencies).filter(key => key.startsWith(FAMILY_SCOPE))
+  const familyNames = Object.keys(pkg.dependencies).filter(key => key.startsWith(FAMILY_SCOPE) && key !== '@gestaltrun/dsh-better-sidebar')
 
   if (opts.familyDir) {
     for (const name of familyNames) {
@@ -275,8 +275,8 @@ async function rewriteDependencies(opts) {
   const report = []
 
   if (betterSidebarTgz) {
-    if (!('dsh-better-sidebar' in pkg.dependencies)) throw new Error('tarball package.json 缺少 dsh-better-sidebar 依赖')
-    pkg.dependencies['dsh-better-sidebar'] = 'file:' + betterSidebarTgz
+    if (!('@gestaltrun/dsh-better-sidebar' in pkg.dependencies)) throw new Error('tarball package.json 缺少 dsh-better-sidebar 依赖')
+    pkg.dependencies['@gestaltrun/dsh-better-sidebar'] = 'file:' + betterSidebarTgz
     report.push('dsh-better-sidebar → file:' + betterSidebarTgz + '（手工覆盖）')
   }
   fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n')

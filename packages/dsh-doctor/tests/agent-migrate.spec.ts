@@ -7,8 +7,8 @@ import { migrateLegacyAggregate } from '../src/agent/migrate.ts'
 const homeDirs: string[] = []
 afterEach(() => { for (const dir of homeDirs.splice(0)) rmSync(dir, { recursive: true, force: true }) })
 
-const LEGACY = '@linxin666/dsh-web-ui-all'
-const CURRENT = '@linxin666/dsh-web-all'
+const LEGACY = '@gestaltrun/dsh-web-ui-all'
+const CURRENT = '@gestaltrun/dsh-web-all'
 
 function makeProfile(oldSpec = '0.3.2'): { home: string; profileDir: string; packagePath: string; lockPath: string } {
   const home = mkdtempSync(join(tmpdir(), 'doctor-migrate-'))

@@ -37,15 +37,15 @@ git 安装（无 sibling checkout 的消费者机器）走 `prepare` 脚本：`t
 本插件已并入 dsh-web 全家桶仓库（`github.com/zhu1090093659/dsh-web`）。插件已发布到 npm，推荐一行安装：
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-client-ui-git-graph@latest
+dsh plugin --profile web add @gestaltrun/dsh-client-ui-git-graph@latest
 ```
 
-或直接安装全家桶聚合包 `@linxin666/dsh-web-all` 一次到位（同样一行 `dsh plugin --profile web add @linxin666/dsh-web-all@latest`）。
+或直接安装全家桶聚合包 `@gestaltrun/dsh-web-all` 一次到位（同样一行 `dsh plugin --profile web add @gestaltrun/dsh-web-all@latest`）。
 
 需要改代码调试时再从仓库安装：
 
 ```sh
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install && pnpm -r build
 dsh plugin --profile web add link:$(pwd)/packages/dsh-git-graph
@@ -77,7 +77,7 @@ dsh plugin --profile <name> add link:/absolute/path/to/dsh-git-graph
 ## 卸载
 
 ```sh
-dsh plugin --profile web remove @linxin666/dsh-client-ui-git-graph
+dsh plugin --profile web remove @gestaltrun/dsh-client-ui-git-graph
 ```
 
 ## 设计要点

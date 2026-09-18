@@ -3,7 +3,7 @@
  * plugin manages destructive local session data; tunnels and LAN clients get
  * 403), mutating routes additionally require POST, and the delete route
  * surfaces the host plan on confirmation mismatch.
- * @module @linxin666/dsh-session-archive/host/routes
+ * @module @gestaltrun/dsh-session-archive/host/routes
  */
 
 import type { IncomingMessage, ServerResponse } from 'node:http'

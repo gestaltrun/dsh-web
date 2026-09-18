@@ -3,7 +3,7 @@
  * The player is a self-contained HTML string, so these tests pin the
  * reflection contract that pkg-extract's manifest feeds: the water line and
  * the reflection quad must follow scene data, not hard-coded constants (#742).
- * @module @linxin666/dsh-client-ui-skin-center/tests/we-player
+ * @module @gestaltrun/dsh-client-ui-skin-center/tests/we-player
  */
 
 import { describe, expect, it } from 'vitest'

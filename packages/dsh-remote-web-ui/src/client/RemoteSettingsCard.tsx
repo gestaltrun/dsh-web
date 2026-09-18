@@ -239,7 +239,7 @@ export function RemoteSettingsCard(props: RemoteSettingsCardProps) {
         onEdit={(text) => { props.edit('cookieName', text) }}
         onReset={() => { props.resetField('cookieName') }}
       />
-      <BooleanField
+      {window.location.protocol !== 'dsh-app:' && <BooleanField
         id="settings-remote-fence"
         label={t('settings.requirePairingForLan')}
         hint={t('settings.requirePairingForLanHint')}
@@ -250,7 +250,7 @@ export function RemoteSettingsCard(props: RemoteSettingsCardProps) {
         {...state.requirePairingForLan}
         onEdit={(text) => { props.edit('requirePairingForLan', text) }}
         onReset={() => { props.resetField('requirePairingForLan') }}
-      />
+      />}
       <ValueField
         id="settings-remote-public-base"
         label={t('settings.publicBaseUrl')}
@@ -299,7 +299,7 @@ export function RemoteSettingsCard(props: RemoteSettingsCardProps) {
       <BooleanField
         id="settings-remote-lan-bind"
         label={t('settings.lanBind')}
-        hint={t('settings.lanBindHint')}
+        hint={t(window.location.protocol === 'dsh-app:' ? 'settings.lanBindDesktopHint' : 'settings.lanBindHint')}
         inheritLabel={t('settings.inherit')}
         onLabel={t('settings.on')}
         offLabel={t('settings.off')}
@@ -335,7 +335,8 @@ function LanBindStatus({ t }: { t: TranslateNS<'remote'> }) {
     }
   }, [])
   if (frame === undefined) return null
-  const lanOn = frame.blockHost === '0.0.0.0'
+  const desktop = frame.listening !== undefined
+  const lanOn = desktop ? frame.listening === true && frame.bindHost === '0.0.0.0' : frame.blockHost === '0.0.0.0'
   const firewallText = frame.firewall.managed
     ? t(frame.firewall.ok ? 'lan.firewall.ok' : 'lan.firewall.bad')
     : t('lan.firewall.unmanaged')
@@ -348,7 +349,8 @@ function LanBindStatus({ t }: { t: TranslateNS<'remote'> }) {
   if (!lanOn) {
     lines.push(t('lan.off'))
   }
-  if (frame.setting === null) {
+  if (frame.error !== undefined) lines.push(t('lan.listenerFailed', { error: frame.error }))
+  if (frame.setting === null && !desktop) {
     lines.push(t('lan.untouched'))
   }
   if (frame.pendingRestart === true) {

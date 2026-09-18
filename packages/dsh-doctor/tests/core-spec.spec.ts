@@ -8,8 +8,8 @@ describe('splitPackageSpec', () => {
   it('handles scoped and unscoped names', () => {
     expect(splitPackageSpec('dsh-better-sidebar')).toEqual({ name: 'dsh-better-sidebar' })
     expect(splitPackageSpec('dsh-better-sidebar@0.14.0')).toEqual({ name: 'dsh-better-sidebar', sub: '0.14.0' })
-    expect(splitPackageSpec('@linxin666/dsh-web-all')).toEqual({ name: '@linxin666/dsh-web-all' })
-    expect(splitPackageSpec('@linxin666/dsh-web-all@0.2.7')).toEqual({ name: '@linxin666/dsh-web-all', sub: '0.2.7' })
+    expect(splitPackageSpec('@gestaltrun/dsh-web-all')).toEqual({ name: '@gestaltrun/dsh-web-all' })
+    expect(splitPackageSpec('@gestaltrun/dsh-web-all@0.2.7')).toEqual({ name: '@gestaltrun/dsh-web-all', sub: '0.2.7' })
   })
 })
 

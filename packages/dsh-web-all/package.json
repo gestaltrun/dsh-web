@@ -1,7 +1,7 @@
 {
-  "name": "@linxin666/dsh-web-all",
+  "name": "@gestaltrun/dsh-web-all",
   "description": "DSH Web UI 全家桶聚合插件：一键安装全部功能插件（task-board / git-graph / pet / remote-web-ui / web-ui-settings / skin-center / community-plugins / compat shim）。compat 桥接层已并入本包（src/client），无需独立 compat npm 包。",
-  "version": "0.3.21",
+  "version": "0.3.23-gestaltrun.0",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -57,7 +57,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/zhu1090093659/dsh-web.git"
+    "url": "https://github.com/gestaltrun/dsh-web.git"
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "^4.0.2",
@@ -82,25 +82,26 @@
     "vitest": "^4.1.8"
   },
   "dependencies": {
-    "@linxin666/dsh-client-ui-plugin-manager": "workspace:*",
-    "@linxin666/dsh-client-ui-community-plugins": "workspace:*",
-    "@linxin666/dsh-client-ui-market": "workspace:*",
-    "@linxin666/dsh-client-ui-task-board": "workspace:*",
-    "@linxin666/dsh-client-ui-git-graph": "workspace:*",
-    "@linxin666/dsh-pet": "workspace:*",
-    "@linxin666/dsh-remote-web-ui": "workspace:*",
-    "@linxin666/dsh-ssh": "workspace:*",
-    "@linxin666/dsh-tool-describe-image": "workspace:*",
-    "@linxin666/dsh-liangshen": "workspace:*",
-    "@linxin666/dsh-client-ui-skill-explorer": "workspace:*",
-    "@linxin666/dsh-doctor": "workspace:*",
-    "@linxin666/dsh-usage": "workspace:*",
-    "@linxin666/dsh-session-archive": "workspace:*",
-    "@linxin666/dsh-client-ui-model-capabilities": "workspace:*",
-    "@linxin666/dsh-client-ui-preset-center": "workspace:*",
-    "@linxin666/dsh-client-ui-web-ui-settings": "workspace:*",
-    "@linxin666/dsh-client-ui-skin-center": "workspace:*",
-    "@linxin666/dsh-i18n": "workspace:*",
-    "dsh-better-sidebar": "0.19.0"
+    "@gestaltrun/dsh-client-ui-plugin-manager": "workspace:*",
+    "@gestaltrun/dsh-client-ui-task-board": "workspace:*",
+    "@gestaltrun/dsh-client-ui-git-graph": "workspace:*",
+    "@gestaltrun/dsh-pet": "workspace:*",
+    "@gestaltrun/dsh-remote-web-ui": "workspace:*",
+    "@gestaltrun/dsh-ssh": "workspace:*",
+    "@gestaltrun/dsh-tool-describe-image": "workspace:*",
+    "@gestaltrun/dsh-liangshen": "workspace:*",
+    "@gestaltrun/dsh-client-ui-skill-explorer": "workspace:*",
+    "@gestaltrun/dsh-doctor": "workspace:*",
+    "@gestaltrun/dsh-usage": "workspace:*",
+    "@gestaltrun/dsh-session-archive": "workspace:*",
+    "@gestaltrun/dsh-client-ui-model-capabilities": "workspace:*",
+    "@gestaltrun/dsh-client-ui-web-ui-settings": "workspace:*",
+    "@gestaltrun/dsh-client-ui-skin-center": "workspace:*",
+    "@gestaltrun/dsh-i18n": "workspace:*",
+    "@gestaltrun/dsh-better-sidebar": "0.19.1-gestaltrun.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

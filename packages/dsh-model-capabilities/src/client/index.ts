@@ -8,7 +8,7 @@
  * come back. Both read and write the official `llm-pi-ai` settings namespace
  * plus the plugin's own archive namespace over the standard remote settings
  * wire; the host half registers that archive namespace.
- * @module @linxin666/dsh-client-ui-model-capabilities/client
+ * @module @gestaltrun/dsh-client-ui-model-capabilities/client
  */
 
 import type { Context as ClientContext } from '@deepseek-ai/cordis'

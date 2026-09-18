@@ -12,7 +12,7 @@
 # Hook arguments (git pre-push): <remote name> <remote URL>
 set -uo pipefail
 
-CANONICAL='https://github.com/zhu1090093659/dsh-web'
+CANONICAL='https://github.com/gestaltrun/dsh-web'
 remote="${1:-}"
 url="${2:-}"
 

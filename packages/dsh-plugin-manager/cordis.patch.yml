@@ -4,4 +4,4 @@
 # `dsh plugin --profile web add link:<repo>/packages/dsh-plugin-manager`.
 - insert:
     - id: ui-plugin-manager
-      name: '@linxin666/dsh-client-ui-plugin-manager'
+      name: '@gestaltrun/dsh-client-ui-plugin-manager'

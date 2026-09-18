@@ -7,7 +7,7 @@
  *  - POST /api/market/install-preset { id, force? }  (writes the preset library)
  * The host fetches the manifest itself, validates every path, and never
  * accepts a URL or a file list from the client (see core/installer).
- * @module @linxin666/dsh-client-ui-market/routes
+ * @module @gestaltrun/dsh-client-ui-market/routes
  */
 
 import { readdirSync } from 'node:fs'

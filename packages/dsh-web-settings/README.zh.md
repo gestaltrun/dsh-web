@@ -1,4 +1,4 @@
-# @linxin666/dsh-client-ui-web-ui-settings
+# @gestaltrun/dsh-client-ui-web-ui-settings
 
 [English](README.md) | 中文
 
@@ -14,13 +14,13 @@
 ### 从 npm 安装（推荐）
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-client-ui-web-ui-settings@latest
+dsh plugin --profile web add @gestaltrun/dsh-client-ui-web-ui-settings@latest
 ```
 
 ### 从仓库安装（开发调试）
 
 ```sh
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install && pnpm -r build
 dsh plugin --profile web add link:$(pwd)/packages/dsh-web-settings
@@ -67,8 +67,8 @@ reverse_proxy 127.0.0.1:3080 {
 
 0.1.18 起注册改到一级 `settings.section` 槽（list 槽，用 `id` 定位），0.2.0 已发布；`main` 上的代码与 rc.6 / rc.7 兼容。仍在报错的 profile 带的是冻结的旧安装：
 
-1. 把 profile `package.json` 里所有 `@linxin666/*` 依赖升到 `^0.2.0`（至少 `^0.1.18`）。
-2. 重装 profile 依赖（`pnpm install`）；Windows 下重建陈旧的 `node_modules/@linxin666/*` junction 链接（先 `cmd /c rmdir <链接>` 再 `cmd /c mklink /J <链接> <目标>`）。
+1. 把 profile `package.json` 里所有 `@gestaltrun/*` 依赖升到 `^0.2.0`（至少 `^0.1.18`）。
+2. 重装 profile 依赖（`pnpm install`）；Windows 下重建陈旧的 `node_modules/@gestaltrun/*` junction 链接（先 `cmd /c rmdir <链接>` 再 `cmd /c mklink /J <链接> <目标>`）。
 3. 重启 `dsh web`。
 
 参见 [issue #513](https://github.com/zhu1090093659/dsh-web/issues/513)。

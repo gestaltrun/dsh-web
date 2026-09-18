@@ -6,7 +6,7 @@
  * into the CURRENT DSH session when one is open. The dialog never touches the
  * supervisor state; a missing current session simply disables sending and
  * explains why.
- * @module @linxin666/dsh-doctor/client
+ * @module @gestaltrun/dsh-doctor/client
  */
 
 import { useEffect, useState, type ReactNode } from 'react'

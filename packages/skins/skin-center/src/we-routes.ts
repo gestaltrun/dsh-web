@@ -33,7 +33,7 @@
  * Compliance note: this module only ever reads files already present on the
  * user's machine (their own Wallpaper Engine library) or copies them within
  * it. Nothing is downloaded, uploaded, or redistributed.
- * @module @linxin666/dsh-client-ui-skin-center/we-routes
+ * @module @gestaltrun/dsh-client-ui-skin-center/we-routes
  */
 
 import { execFile } from 'node:child_process'

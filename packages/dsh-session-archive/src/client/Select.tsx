@@ -3,7 +3,7 @@
  * absolutely positioned listbox popup, replacing the unstyleable native
  * <select>. Keyboard complete (arrows, Home/End, Enter, Esc), closes on
  * outside pointer down, optional group headers render non-selectable.
- * @module @linxin666/dsh-session-archive/client/Select
+ * @module @gestaltrun/dsh-session-archive/client/Select
  */
 
 import { useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'

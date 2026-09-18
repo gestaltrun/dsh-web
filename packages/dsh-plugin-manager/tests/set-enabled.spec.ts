@@ -34,8 +34,8 @@ function makeProfile(): { facts: ProfileFacts; dir: string } {
 function makeAggregateProfile(): { facts: ProfileFacts; dir: string } {
   const dir = mkdtempSync(join(tmpdir(), 'plugin-manager-set-enabled-aggregate-'))
   const profileDir = join(dir, 'profiles', 'web')
-  const packageName = '@linxin666/dsh-web-all'
-  const moduleDir = join(profileDir, 'node_modules', '@linxin666', 'dsh-web-all')
+  const packageName = '@gestaltrun/dsh-web-all'
+  const moduleDir = join(profileDir, 'node_modules', '@gestaltrun', 'dsh-web-all')
   mkdirSync(moduleDir, { recursive: true })
   writeFileSync(join(profileDir, 'package.json'), JSON.stringify({
     name: 'dsh-profile-web', private: true,
@@ -47,13 +47,13 @@ function makeAggregateProfile(): { facts: ProfileFacts; dir: string } {
   writeFileSync(join(moduleDir, 'cordis.patch.yml'), [
     '- insert:',
     '    - id: web-ui-compat',
-    "      name: '@linxin666/dsh-web-all'",
+    "      name: '@gestaltrun/dsh-web-all'",
     '- insert:',
     '    - id: web-ui-plugin-manager',
-    "      name: '@linxin666/dsh-client-ui-plugin-manager'",
+    "      name: '@gestaltrun/dsh-client-ui-plugin-manager'",
     '- insert:',
     '    - id: web-ui-task-board',
-    "      name: '@linxin666/dsh-client-ui-task-board'",
+    "      name: '@gestaltrun/dsh-client-ui-task-board'",
     '',
   ].join('\n'))
   const facts: ProfileFacts = {
@@ -68,20 +68,20 @@ function makeAggregateProfile(): { facts: ProfileFacts; dir: string } {
 /** One aggregate package that ships an inactive-by-default family row (issue #1453). */
 function makeInactiveAggregateProfile(): { facts: ProfileFacts; dir: string } {
   const { facts, dir } = makeAggregateProfile()
-  const moduleDir = join(facts.profileDir, 'node_modules', '@linxin666', 'dsh-web-all')
+  const moduleDir = join(facts.profileDir, 'node_modules', '@gestaltrun', 'dsh-web-all')
   writeFileSync(join(moduleDir, 'cordis.patch.yml'), [
     '- insert:',
     '    - id: web-ui-compat',
-    "      name: '@linxin666/dsh-web-all'",
+    "      name: '@gestaltrun/dsh-web-all'",
     '- insert:',
     '    - id: web-ui-plugin-manager',
-    "      name: '@linxin666/dsh-client-ui-plugin-manager'",
+    "      name: '@gestaltrun/dsh-client-ui-plugin-manager'",
     '- insert:',
     '    - id: web-ui-task-board',
-    "      name: '@linxin666/dsh-client-ui-task-board'",
+    "      name: '@gestaltrun/dsh-client-ui-task-board'",
     '- insert:',
     '    - id: web-ui-ssh',
-    "      name: '@linxin666/dsh-web-all/ssh'",
+    "      name: '@gestaltrun/dsh-web-all/ssh'",
     '# inactive by default (opt-in rows)',
     '- id: web-ui-ssh',
     '  disabled: true',
@@ -228,7 +228,7 @@ describe('set-enabled id space', () => {
     const { facts, dir } = makeAggregateProfile()
     tempDirs.push(dir)
     const { res, body, status } = captureResponse()
-    await setEnabledHandler(facts)(loopbackRequest({ id: '@linxin666/dsh-web-all', enabled: false }), res)
+    await setEnabledHandler(facts)(loopbackRequest({ id: '@gestaltrun/dsh-web-all', enabled: false }), res)
     expect(status()).toBe(200)
     const patch = readFileSync(facts.patchPath, 'utf8')
     expect(patch).not.toContain('id: web-ui-compat')
@@ -239,21 +239,21 @@ describe('set-enabled id space', () => {
   })
 
   it('refuses to disable the standalone plugin manager entry', async () => {
-    const { facts, dir } = makePlainProfile(['@linxin666/dsh-client-ui-plugin-manager'])
+    const { facts, dir } = makePlainProfile(['@gestaltrun/dsh-client-ui-plugin-manager'])
     tempDirs.push(dir)
-    const moduleDir = join(facts.profileDir, 'node_modules', '@linxin666', 'dsh-client-ui-plugin-manager')
+    const moduleDir = join(facts.profileDir, 'node_modules', '@gestaltrun', 'dsh-client-ui-plugin-manager')
     mkdirSync(moduleDir, { recursive: true })
     writeFileSync(join(moduleDir, 'package.json'), JSON.stringify({
-      name: '@linxin666/dsh-client-ui-plugin-manager', version: '0.3.2',
+      name: '@gestaltrun/dsh-client-ui-plugin-manager', version: '0.3.2',
     }))
     writeFileSync(join(moduleDir, 'cordis.patch.yml'), [
       '- insert:',
       '    - id: ui-plugin-manager',
-      "      name: '@linxin666/dsh-client-ui-plugin-manager'",
+      "      name: '@gestaltrun/dsh-client-ui-plugin-manager'",
       '',
     ].join('\n'))
     const { res, body, status } = captureResponse()
-    await setEnabledHandler(facts)(loopbackRequest({ id: '@linxin666/dsh-client-ui-plugin-manager', enabled: false }), res)
+    await setEnabledHandler(facts)(loopbackRequest({ id: '@gestaltrun/dsh-client-ui-plugin-manager', enabled: false }), res)
     expect(status()).toBe(200)
     expect(readFileSync(facts.patchPath, 'utf8')).toBe('# layer\n[]\n')
     expect(existsSync(`${facts.patchPath}.bak-plugin-manager`)).toBe(false)
@@ -273,7 +273,7 @@ describe('set-enabled id space', () => {
     expect(patch).not.toContain('id: web-ui-plugin-manager')
     const parsed = JSON.parse(body()) as { plugin: { id: string; enabled: boolean; children?: Array<{ id: string; enabled: boolean; locked?: boolean }> } }
     // The response row is the OWNING package, carrying the children states.
-    expect(parsed.plugin.id).toBe('@linxin666/dsh-web-all')
+    expect(parsed.plugin.id).toBe('@gestaltrun/dsh-web-all')
     expect(parsed.plugin.enabled).toBe(false)
     expect(parsed.plugin.children?.find(child => child.id === 'web-ui-task-board')?.enabled).toBe(false)
     expect(parsed.plugin.children?.find(child => child.id === 'web-ui-compat')?.enabled).toBe(true)
@@ -320,7 +320,7 @@ describe('set-enabled id space', () => {
     writeFileSync(facts.patchPath, [
       '- insert:',
       '    - id: web-ui-task-board',
-      "      name: '@linxin666/dsh-web-all/task-board'",
+      "      name: '@gestaltrun/dsh-web-all/task-board'",
       '      disabled: true',
       '',
     ].join('\n'))
@@ -341,7 +341,7 @@ describe('set-enabled id space', () => {
     const listed = captureResponse()
     await listHandler(facts)(loopbackRequest({}), listed.res)
     const before = JSON.parse(listed.body()) as { plugins: WireRow[] }
-    const packageRow = before.plugins.find(item => item.id === '@linxin666/dsh-web-all')
+    const packageRow = before.plugins.find(item => item.id === '@gestaltrun/dsh-web-all')
     expect(packageRow?.enabled).toBe(false)
     expect(packageRow?.children?.find(child => child.id === 'web-ui-ssh')?.enabled).toBe(false)
     expect(packageRow?.children?.find(child => child.id === 'web-ui-task-board')?.enabled).toBe(true)
@@ -363,7 +363,7 @@ describe('set-enabled id space', () => {
     const { facts, dir } = makeInactiveAggregateProfile()
     tempDirs.push(dir)
     const { res, status } = captureResponse()
-    await setEnabledHandler(facts)(loopbackRequest({ id: '@linxin666/dsh-web-all', enabled: true }), res)
+    await setEnabledHandler(facts)(loopbackRequest({ id: '@gestaltrun/dsh-web-all', enabled: true }), res)
     expect(status()).toBe(200)
     const patch = readFileSync(facts.patchPath, 'utf8')
     expect(patch).toContain('id: web-ui-ssh')

@@ -2,7 +2,7 @@
  * The usage ledger: a pure fold from session usage facts into a per-day,
  * per-provider, per-model totals document, plus its JSON serialization.
  * Host-side state lives only in the document; the service owns persistence.
- * @module @linxin666/dsh-usage/core/ledger
+ * @module @gestaltrun/dsh-usage/core/ledger
  */
 
 import { addTotals, emptyTotals, type UsageLedgerDocument, type UsageProviderSummary, type UsageTokenTotals } from './types.ts'

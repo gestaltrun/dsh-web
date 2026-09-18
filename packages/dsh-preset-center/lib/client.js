@@ -1,5 +1,5 @@
 window.__ModuleLoader__.load({
-	id: "@linxin666/dsh-client-ui-preset-center",
+	id: "@gestaltrun/dsh-client-ui-preset-center",
 	factory: (require) => {
 		var module = { exports: {} };
 		var exports = module.exports;
@@ -9,10 +9,10 @@ window.__ModuleLoader__.load({
 		let react_jsx_runtime = require("react/jsx-runtime");
 		//#region \0dsh-css:packages/dsh-preset-center/src/client/preset-center.module.css.mjs
 		const css = ".fP-OOa_panel{flex-direction:column;gap:10px;display:flex}.fP-OOa_search{box-sizing:border-box;width:100%;font:inherit;color:var(--dsw-alias-label-primary);background:var(--dsw-alias-bg-layer-1);border:1px solid var(--dsw-alias-border-l2);border-radius:6px;padding:7px 10px;font-size:13px}.fP-OOa_search:focus-visible{outline:2px solid var(--dsw-alias-brand-primary);outline-offset:1px}.fP-OOa_empty{color:var(--dsw-alias-label-tertiary);margin:0;padding:14px 0;font-size:13px}.fP-OOa_list{flex-direction:column;gap:8px;margin:0;padding:0;list-style:none;display:flex}.fP-OOa_card{border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-1);border-radius:8px;flex-direction:column;gap:6px;padding:12px;display:flex}.fP-OOa_cardHead{flex-wrap:wrap;align-items:baseline;gap:6px 10px;min-width:0;display:flex}.fP-OOa_cardName{color:var(--dsw-alias-label-primary);font-weight:600}.fP-OOa_cardName a{color:inherit;text-decoration:none}.fP-OOa_cardName a:hover{text-decoration:underline}.fP-OOa_version{color:var(--dsw-alias-label-tertiary);font-variant-numeric:tabular-nums;margin-left:6px;font-size:11px}.fP-OOa_cardMeta{color:var(--dsw-alias-label-tertiary);flex-wrap:wrap;align-items:center;gap:4px 8px;font-size:11px;display:flex}.fP-OOa_cardDesc{color:var(--dsw-alias-label-secondary);margin:0;font-size:13px;line-height:1.45}.fP-OOa_badgeMuted,.fP-OOa_badgeOn,.fP-OOa_badgeOff,.fP-OOa_badgeWarn,.fP-OOa_badgeCode{white-space:nowrap;border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-module-platform);color:var(--dsw-alias-label-secondary);border-radius:999px;flex:none;padding:0 8px;font-size:11px;line-height:1.6}.fP-OOa_badgeOn{color:var(--dsw-alias-label-primary);background:var(--dsw-alias-bg-layer-2);border-color:var(--dsw-alias-label-dimmed)}.fP-OOa_badgeWarn{color:var(--dsw-alias-label-error,#c53030)}.fP-OOa_badgeCode{color:var(--dsw-alias-label-primary)}.fP-OOa_profile{flex-wrap:wrap;align-items:center;gap:6px;margin:0;display:flex}.fP-OOa_profileText{color:var(--dsw-alias-label-tertiary);font-size:11px;line-height:1.5}.fP-OOa_actions{flex-wrap:wrap;gap:6px;display:flex}.fP-OOa_actions>button{font-size:12px}.fP-OOa_primary{color:var(--dsw-alias-label-primary-foreground);background:var(--dsw-alias-button-primary-fill);border-color:var(--dsw-alias-button-primary-fill)}.fP-OOa_primary:hover:enabled{background:var(--dsw-alias-button-primary-hover);border-color:var(--dsw-alias-button-primary-hover)}.fP-OOa_primary:disabled{opacity:.55;cursor:default}.fP-OOa_secondary{color:var(--dsw-alias-label-primary)}.fP-OOa_danger{color:var(--dsw-alias-label-error,#c53030)}.fP-OOa_note{color:var(--dsw-alias-label-secondary);margin:0;font-size:12px;line-height:1.5}.fP-OOa_inlineButton{margin-left:8px;font-size:12px}.fP-OOa_viewer{white-space:pre;max-height:46vh;color:var(--dsw-alias-label-primary);background:var(--dsw-alias-bg-layer-2);border:1px solid var(--dsw-alias-border-l2);border-radius:6px;margin:0;padding:10px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;line-height:1.5;overflow:auto}.fP-OOa_modalActions{justify-content:flex-end;gap:8px;margin-top:12px;display:flex}";
-		const tagId = "@linxin666/dsh-client-ui-preset-center/packages/dsh-preset-center/src/client/preset-center.module.css";
+		const tagId = "@gestaltrun/dsh-client-ui-preset-center/packages/dsh-preset-center/src/client/preset-center.module.css";
 		if (typeof document !== "undefined" && document.querySelector("style[data-plugin-css=" + JSON.stringify(tagId) + "]") === null) {
 			const tag = document.createElement("style");
-			tag.dataset.plugin = "@linxin666/dsh-client-ui-preset-center";
+			tag.dataset.plugin = "@gestaltrun/dsh-client-ui-preset-center";
 			tag.dataset.pluginCss = tagId;
 			tag.textContent = css;
 			document.head.appendChild(tag);
@@ -56,7 +56,7 @@ window.__ModuleLoader__.load({
 		* `manifest/presets.json` and passes the records down, so one store section
 		* makes one catalog request. Preset state comes from the preset-center host
 		* routes, which derive it from disk on every read.
-		* @module @linxin666/dsh-client-ui-preset-center/client/PresetPanel
+		* @module @gestaltrun/dsh-client-ui-preset-center/client/PresetPanel
 		*/
 		const EMPTY_PROFILE = {
 			plugins: [],
@@ -605,7 +605,7 @@ window.__ModuleLoader__.load({
 		//#region src/client/locales.ts
 		/**
 		* Preset-center copy (zh is the key source; en mirrors it key for key).
-		* @module @linxin666/dsh-client-ui-preset-center/client/locales
+		* @module @gestaltrun/dsh-client-ui-preset-center/client/locales
 		*/
 		/** Locale namespace owned by this plugin (single home; the entry and the panel import it). */
 		const NS = "dsh-web-ui-preset-center";

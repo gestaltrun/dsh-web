@@ -150,8 +150,8 @@ export function makeRemoteApiRoutes(deps: RemoteApiDeps): WebRoute[] {
     // With the live policy off, untrusted-but-policy-open callers are proxied
     // (a stale client rewrite must not 403); loopback-only denials stay below.
     const require = typeof requirePairingForLan === 'function' ? requirePairingForLan() : requirePairingForLan
+    const paired = require ? pairedDeviceIdOf(req, service) : undefined
     if (require) {
-      const paired = pairedDeviceIdOf(req, service)
       if (paired === undefined) {
         req.resume()
         envelopeError(res, 403, 'invalid-request', 'unpaired', 'this device is not paired with the desktop')
@@ -180,6 +180,10 @@ export function makeRemoteApiRoutes(deps: RemoteApiDeps): WebRoute[] {
       return
     }
 
+    if (paired !== undefined) {
+      const unwatch = service.onState(() => { if (!service.hasDevice(paired)) res.destroy() })
+      res.once('close', unwatch)
+    }
     proxyLoopbackHttp(req, res, port, `${inner}${url.search}`, deps.auth)
   }
 
@@ -213,6 +217,7 @@ export function makeRemoteApiUpgradeRoutes(deps: RemoteApiDeps): WebUpgradeRoute
 
   const handlerFor = (fallbackPath: string) => (req: IncomingMessage, socket: Duplex, head: Buffer): void => {
     const require = typeof requirePairingForLan === 'function' ? requirePairingForLan() : requirePairingForLan
+    let paired: string | undefined
     if (require) {
       // WebSocket handshakes cannot carry headers from the Web API, so the
       // cookieless credential rides the query; the cookie stays the primary.
@@ -221,7 +226,7 @@ export function makeRemoteApiUpgradeRoutes(deps: RemoteApiDeps): WebUpgradeRoute
         queryDevice = new URL(req.url ?? '/', 'http://127.0.0.1').searchParams.get(REMOTE_DEVICE_QUERY) ?? undefined
       } catch { /* fall through to the cookie */ }
       const deviceId = pairedDeviceIdOf(req, service)
-      const paired = deviceId ?? (queryDevice !== undefined && service.touchDevice(queryDevice) ? queryDevice : undefined)
+      paired = deviceId ?? (queryDevice !== undefined && service.touchDevice(queryDevice) ? queryDevice : undefined)
       if (paired === undefined) {
         socket.write('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n')
         socket.destroy()
@@ -234,6 +239,11 @@ export function makeRemoteApiUpgradeRoutes(deps: RemoteApiDeps): WebUpgradeRoute
       socket.write('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n')
       socket.destroy()
       return
+    }
+    if (paired !== undefined) {
+      const deviceId = paired
+      const unwatch = service.onState(() => { if (!service.hasDevice(deviceId)) socket.destroy() })
+      socket.once('close', unwatch)
     }
     // The inner handshake needs the browser-auth credential (the gateway
     // event-stream route enforces it); resolving it is async, so the

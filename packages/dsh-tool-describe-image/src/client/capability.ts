@@ -6,7 +6,7 @@
  * (a mid-session model switch settles within the TTL), in-flight fetches are
  * deduped, and every failure answers false — the conservative value that
  * keeps the legacy rewrite for the text-only models this plugin serves.
- * @module @linxin666/dsh-tool-describe-image/client/capability
+ * @module @gestaltrun/dsh-tool-describe-image/client/capability
  */
 
 /** The host capability endpoint, same-origin with the web shell. */
