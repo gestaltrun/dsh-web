@@ -13,7 +13,7 @@
     "packages/dsh-web-all/cordis.patch.yml"
   ],
   "dependencies": {
-    "@gestaltrun/dsh-web-all": "0.3.23-gestaltrun.0"
+    "@gestaltrun/dsh-web-all": "0.3.23-gestaltrun.1"
   },
   "scripts": {
     "build": "pnpm -r build",
