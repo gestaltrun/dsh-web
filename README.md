@@ -609,3 +609,4 @@ dsh plugin --profile web add dsh-better-sidebar@latest                          
 <p align="center">
   <img src="docs/zanzhu-wechat.jpg" alt="微信赞助二维码" width="360">
 </p>
+候选 Sidebar 构建通过 `release:pack --out <目录> --sidebar-tarball <归档> --sidebar-integrity <sha512>` 绑定同一份 0.19.1-gestaltrun.1 归档。工作区的 .0 override 仅供已发布依赖的开发基线使用；候选构建临时替换为经过摘要校验的本地归档，结束后恢复工作区配置和锁文件。发布清单仍固定依赖 .1；基线 CI 不代表该候选组合已验收。

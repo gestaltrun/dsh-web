@@ -5,12 +5,12 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { execFileSync } from 'node:child_process'
 import { test } from 'node:test'
-import { integrity, REPOSITORY, runPnpm, validatePackage, validateTarball } from './release-pack.mjs'
+import { validateSidebarCandidate, integrity, REPOSITORY, runPnpm, validatePackage, validateTarball } from './release-pack.mjs'
 import { validateArtifacts } from './release-publish.mjs'
 
 const version = '0.3.21-gestaltrun.0'
 function manifest() {
-  return { name: '@gestaltrun/dsh-fixture', version, repository: { url: `https://github.com/${REPOSITORY}.git` }, publishConfig: { access: 'public', registry: 'https://registry.npmjs.org/' }, dependencies: { '@gestaltrun/dsh-better-sidebar': '0.19.1-gestaltrun.0' } }
+  return { name: '@gestaltrun/dsh-fixture', version, repository: { url: `https://github.com/${REPOSITORY}.git` }, publishConfig: { access: 'public', registry: 'https://registry.npmjs.org/' }, dependencies: { '@gestaltrun/dsh-better-sidebar': '0.19.1-gestaltrun.1' } }
 }
 
 test('only the fork namespace and repository can publish', () => {
@@ -80,3 +80,21 @@ test('the package manager receives literal paths and arguments without a command
     rmSync(root, { recursive: true, force: true })
   }
 })
+
+
+test('candidate Sidebar requires exact producer bytes and the selected version', () => {
+  const root = mkdtempSync(join(tmpdir(), 'sidebar-candidate-'));
+  try {
+    mkdirSync(join(root, 'package'));
+    const file = join(root, 'package/package.json');
+    const archive = join(root, 'sidebar.tgz');
+    writeFileSync(file, JSON.stringify({ name: '@gestaltrun/dsh-better-sidebar', version: '0.19.1-gestaltrun.1' }));
+    execFileSync('tar', ['-czf', archive, '-C', root, 'package']);
+    validateSidebarCandidate(archive, integrity(archive));
+    assert.throws(() => validateSidebarCandidate(archive));
+    assert.throws(() => validateSidebarCandidate(archive, 'sha512-' + 'A'.repeat(86) + '=='));
+    writeFileSync(file, JSON.stringify({ name: '@gestaltrun/dsh-better-sidebar', version: '0.19.1-gestaltrun.0' }));
+    execFileSync('tar', ['-czf', archive, '-C', root, 'package']);
+    assert.throws(() => validateSidebarCandidate(archive, integrity(archive)));
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});

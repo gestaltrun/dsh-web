@@ -126,3 +126,7 @@ minimumReleaseAgeExclude:
   - '@deepseek-ai/dsh-api-settings-controller@0.1.5-rc.1'
   - '@deepseek-ai/dsh-chunked-list@0.1.5-rc.1'
   - '@deepseek-ai/dsh-client-ui-settings-models@0.1.5-rc.1'
+
+# Registry baseline for development; candidate release builds override this with the verified local archive.
+overrides:
+  '@gestaltrun/dsh-better-sidebar': '0.19.1-gestaltrun.0'
