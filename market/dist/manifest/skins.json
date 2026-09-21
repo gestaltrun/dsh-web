@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-16",
+  "generated": "2026-09-21",
   "items": [
     {
       "id": "whale-song",
@@ -33,7 +33,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/whale-song",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/whale-song",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -97,7 +97,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/blue-fantasy",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/blue-fantasy",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -163,7 +163,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/harbor",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/harbor",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -230,7 +230,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/blueprint",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/blueprint",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css"
@@ -280,7 +280,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/xp",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/xp",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css"
@@ -333,7 +333,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/dragon-heir",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/dragon-heir",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -401,7 +401,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/cafe-roastery",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/cafe-roastery",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -447,7 +447,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/minecraft",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/minecraft",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css"
@@ -498,7 +498,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/trading",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/trading",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css"
@@ -551,7 +551,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/miku",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/miku",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -615,7 +615,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/whale-mom",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/whale-mom",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -678,7 +678,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/matrix",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/matrix",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css"
@@ -814,7 +814,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/summer-liquid-glass",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/summer-liquid-glass",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -960,7 +960,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/observatory",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/observatory",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -1010,7 +1010,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/stellar-diva",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/stellar-diva",
       "contributes": {
         "stylesheet": "skin.css",
         "backgroundMedia": {
@@ -1080,7 +1080,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/hive-maw",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/hive-maw",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -1130,7 +1130,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/starry-nocturne",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/starry-nocturne",
       "contributes": {
         "stylesheet": "skin.css",
         "backgroundMedia": {
@@ -1201,7 +1201,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/ember-fall",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/ember-fall",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -1251,7 +1251,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/hologram-sanctum",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/hologram-sanctum",
       "contributes": {
         "stylesheet": "skin.css",
         "backgroundMedia": {
@@ -1315,7 +1315,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/abyssal-serenade",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/abyssal-serenade",
       "contributes": {
         "stylesheet": "skin.css",
         "backgroundMedia": {
@@ -1386,7 +1386,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/astral-choir",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/astral-choir",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -1451,7 +1451,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/black-gold",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/black-gold",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css"
@@ -1514,7 +1514,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/ice-princess",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/ice-princess",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -1565,7 +1565,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/furina",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/furina",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -1625,7 +1625,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/mint",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/mint",
       "contributes": {
         "stylesheet": "skin.css"
       }
@@ -1665,7 +1665,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/cyber-night",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/cyber-night",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -1737,7 +1737,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/deep-current",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/deep-current",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css"
@@ -1776,7 +1776,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/pink-sakura",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/pink-sakura",
       "contributes": {
         "stylesheet": "skin.css"
       }
@@ -1816,7 +1816,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/war-thunder",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/war-thunder",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -1878,7 +1878,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/wallpaper-exclusive",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/wallpaper-exclusive",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -1932,7 +1932,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/future-window",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/future-window",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",
@@ -2039,7 +2039,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/catppuccin",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/catppuccin",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css"
@@ -2077,7 +2077,7 @@
         "skin.css",
         "skin.json"
       ],
-      "repo": "https://github.com/zhu1090093659/dsh-web/tree/dev/packages/skins/skin-center/skins/tokyo-night",
+      "repo": "https://github.com/gestaltrun/dsh-web/tree/dev/packages/skins/skin-center/skins/tokyo-night",
       "contributes": {
         "stylesheet": "skin.css",
         "patches": "patches.css",

@@ -68,5 +68,5 @@ See [issue #513](https://github.com/zhu1090093659/dsh-web/issues/513).
 
 - Every sub-plugin activates together. For only a subset, install that sub-plugin package directly.
 - Aggregate rows are namespaced `web-ui-*`, so the bundle can coexist with a standalone install of the same plugin: the loader no longer rejects the duplicate id, the host half runs once (the second source is a no-op), and the browser half is deduped by package name. Keeping both sources has no benefit; prefer one. When the bundle is the source, profile patch config rows must use the `web-ui-*` id (e.g. `web-ui-remote-web-ui` for the remote-web-ui `autoTunnel` row); standalone installs keep the plugin's own id.
-- `@gestaltrun/dsh-better-sidebar@0.19.1-gestaltrun.0` is an external npm dependency (not authored in this repo); it must be published before this package's release (see `docs/publish-prep.md` for the release order).
+- `@gestaltrun/dsh-better-sidebar@0.19.1-gestaltrun.1` is an external npm dependency (not authored in this repo); it must be published before this package's release (see `docs/publish-prep.md` for the release order).
 - Dependencies on the `@deepseek-ai/*` SDK are pinned; compatibility follows the repository's release cadence.
