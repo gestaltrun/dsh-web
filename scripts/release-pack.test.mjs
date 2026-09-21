@@ -1,11 +1,12 @@
 /** Publication rejects foreign identities and local dependency specifications. */
 import assert from 'node:assert/strict'
-import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
+import { fileURLToPath } from 'node:url'
 import { join } from 'node:path'
-import { execFileSync } from 'node:child_process'
+import { execFileSync, spawnSync } from 'node:child_process'
 import { test } from 'node:test'
-import { validateSidebarCandidate, integrity, REPOSITORY, runPnpm, validatePackage, validateTarball } from './release-pack.mjs'
+import { packFamily, validateSidebarCandidate, integrity, REPOSITORY, runPnpm, validatePackage, validateTarball } from './release-pack.mjs'
 import { validateArtifacts } from './release-publish.mjs'
 
 const version = '0.3.21-gestaltrun.0'
@@ -98,3 +99,22 @@ test('candidate Sidebar requires exact producer bytes and the selected version',
     assert.throws(() => validateSidebarCandidate(archive, integrity(archive)));
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
+
+for (const [options, args] of [
+  [{ sidebarTarball: '/candidate.tgz' }, ['--sidebar-tarball', '/candidate.tgz']],
+  [{ sidebarIntegrity: 'sha512-candidate' }, ['--sidebar-integrity', 'sha512-candidate']],
+]) {
+  test(`rejects unmatched candidate input before output or installation: ${args[0]}`, () => {
+    const root = mkdtempSync(join(tmpdir(), 'sidebar-input-pair-'));
+    try {
+      const out = join(root, 'output');
+      assert.throws(() => packFamily({ out, root, ...options }), /Supply both/);
+      assert.equal(existsSync(out), false);
+      const result = spawnSync(process.execPath, [fileURLToPath(new URL('./release-pack.mjs', import.meta.url)),
+        '--out', out, ...args], { encoding: 'utf8' });
+      assert.equal(result.status, 1);
+      assert.match(result.stderr, /Supply both/);
+      assert.equal(existsSync(out), false);
+    } finally { rmSync(root, { recursive: true, force: true }); }
+  });
+}

@@ -101,6 +101,8 @@ export function installSidebarOverride(tarball, expectedIntegrity, root = ROOT) 
 
 /** Build, validate, and write the owned family archives plus their integrity manifest. */
 export function packFamily({ out, sidebarTarball, sidebarIntegrity, root = ROOT }) {
+  if (Boolean(sidebarTarball) !== Boolean(sidebarIntegrity)) throw new Error('Supply both --sidebar-tarball and --sidebar-integrity')
+  if (!sidebarTarball) console.log('Registry development baseline build; this does not verify the Sidebar candidate combination')
   const output = resolve(out)
   mkdirSync(output, { recursive: true })
   const family = walkFamilyPackages(root).map(({ dir, pkgPath }) => ({ dir, pkg: JSON.parse(readFileSync(pkgPath, 'utf8')) })).filter(({ pkg }) => !pkg.private)
@@ -130,6 +132,6 @@ export function packFamily({ out, sidebarTarball, sidebarIntegrity, root = ROOT 
 
 if (resolve(process.argv[1] ?? '') === fileURLToPath(import.meta.url)) {
   const { values } = parseArgs({ args: process.argv.slice(2).filter(arg => arg !== '--'), options: { out: { type: 'string' }, 'sidebar-tarball': { type: 'string' }, 'sidebar-integrity': { type: 'string' } } })
-  if (!values.out) throw new Error('Usage: pnpm release:pack --out <directory> [--sidebar-tarball <archive>]')
+  if (!values.out) throw new Error('Usage: pnpm release:pack --out <directory> [--sidebar-tarball <archive> --sidebar-integrity <sha512>]')
   console.log(JSON.stringify(packFamily({ out: values.out, sidebarTarball: values['sidebar-tarball'], sidebarIntegrity: values['sidebar-integrity'] }), null, 2))
 }
