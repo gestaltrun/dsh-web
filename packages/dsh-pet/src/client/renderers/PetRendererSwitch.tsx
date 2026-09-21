@@ -5,7 +5,7 @@
  * sprite chrome (the dock, bubbles and panel belong to the pet center, not
  * the renderer); a renderer this build cannot serve renders a clear
  * diagnostic card instead of blanking.
- * @module @linxin666/dsh-pet/client/renderers/PetRendererSwitch
+ * @module @gestaltrun/dsh-pet/client/renderers/PetRendererSwitch
  */
 
 import { cloneElement, isValidElement, useRef, type ReactElement, type ReactNode } from 'react'

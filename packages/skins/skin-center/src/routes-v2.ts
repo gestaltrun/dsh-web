@@ -19,7 +19,7 @@
  * trusted, same-review same-release code (high sensitivity, see contracts/),
  * served for built-in skins and for byte-verified official-market user
  * installs, including exact reviewed legacy installs (issue #1073).
- * @module @linxin666/dsh-client-ui-skin-center/routes-v2
+ * @module @gestaltrun/dsh-client-ui-skin-center/routes-v2
  */
 
 import { existsSync, readFileSync, statSync } from 'node:fs'

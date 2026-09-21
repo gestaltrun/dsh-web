@@ -63,11 +63,11 @@ browser half, live settings, no dsh source changes.
 
 ## Installation
 
-Install the family aggregate `@linxin666/dsh-web-all` (all plugins and skins in one package), or this plugin alone:
+Install the family aggregate `@gestaltrun/dsh-web-all` (all plugins and skins in one package), or this plugin alone:
 
 ```sh
 # Recommended: install directly from npm
-dsh plugin --profile web add @linxin666/dsh-tool-describe-image@latest
+dsh plugin --profile web add @gestaltrun/dsh-tool-describe-image@latest
 ```
 
 The aggregate mounts this plugin **without configuration**: loading is unaffected, and the first call
@@ -100,7 +100,7 @@ Configured mount example (profile `cordis.patch.yml` / composition file):
 
 ```yaml
 - id: describe-image
-  name: '@linxin666/dsh-tool-describe-image'
+  name: '@gestaltrun/dsh-tool-describe-image'
   config:
     baseURL: https://dashscope.aliyuncs.com/compatible-mode/v1
     model: qwen-vl-max
@@ -111,7 +111,7 @@ Multi-model rotation and failover (Zhipu + DashScope Qwen-VL round-robin):
 
 ```yaml
 - id: describe-image
-  name: '@linxin666/dsh-tool-describe-image'
+  name: '@gestaltrun/dsh-tool-describe-image'
   config:
     rotationMode: round-robin
     retryNextOnFailure: true
@@ -130,7 +130,7 @@ Endpoints exposing only the Responses API set `apiStyle: responses`:
 
 ```yaml
 - id: describe-image
-  name: '@linxin666/dsh-tool-describe-image'
+  name: '@gestaltrun/dsh-tool-describe-image'
   config:
     baseURL: https://api.openai.com/v1
     apiStyle: responses
@@ -142,7 +142,7 @@ Endpoints whose models enable extended thinking by default (MiMo-V2.5, DeepSeek 
 
 ```yaml
 - id: describe-image
-  name: '@linxin666/dsh-tool-describe-image'
+  name: '@gestaltrun/dsh-tool-describe-image'
   config:
     baseURL: https://api.xiaomimimo.com/v1
     model: mimo-v2.5:off
@@ -154,7 +154,7 @@ through the Messages API) set `apiStyle: anthropic-messages`; a bare provider ro
 
 ```yaml
 - id: describe-image
-  name: '@linxin666/dsh-tool-describe-image'
+  name: '@gestaltrun/dsh-tool-describe-image'
   config:
     baseURL: https://opencode.ai/zen/go
     apiStyle: anthropic-messages
@@ -226,7 +226,7 @@ the same same-origin fence as the attach routes; the browser never sees credenti
 
 - **Source**: ported from [whitelonng/dsh-plugin-describe-image](https://github.com/whitelonng/dsh-plugin-describe-image)
   (deepseek-harness `packages/vision/tool-describe-image`), moved in 2026-08; tests ported with the source
-  (`pnpm --filter @linxin666/dsh-tool-describe-image test`).
+  (`pnpm --filter @gestaltrun/dsh-tool-describe-image test`).
 - **Copyright**: the original code belongs to its authors (deepseek-ai / whitelonng); this repository
   only hosts and maintains it and claims no copyright; the ported contribution is licensed by its
   contributor under the family license.

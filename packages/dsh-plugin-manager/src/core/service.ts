@@ -10,7 +10,7 @@
  * tab receives (`PluginManagerFace` in the client half): it is the stable
  * cross-plugin surface, so it only carries the operations a sibling plugin
  * needs to observe and drive the installed-plugin set.
- * @module @linxin666/dsh-client-ui-plugin-manager/core
+ * @module @gestaltrun/dsh-client-ui-plugin-manager/core
  */
 
 import type { InstallProgressItem, InstalledPluginItem, PluginFailuresSnapshot } from './protocol.ts'

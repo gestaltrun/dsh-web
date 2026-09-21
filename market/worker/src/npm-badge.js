@@ -1,6 +1,6 @@
 /**
  * Shields.io endpoint badges for the dsh-web npm family. The aggregate
- * package was renamed from @linxin666/dsh-web-ui-all to @linxin666/dsh-web-all
+ * package was renamed from @gestaltrun/dsh-web-ui-all to @gestaltrun/dsh-web-all
  * (dual-published for two releases, then the legacy name is deprecated), so
  * badge numbers must cover both names — shields' native npm badges cannot sum
  * packages and 404 on the new name until its first publish.
@@ -13,7 +13,7 @@
  * degrades to the grey "unavailable" badge.
  */
 
-const PACKAGES = ['@linxin666/dsh-web-all', '@linxin666/dsh-web-ui-all']
+const PACKAGES = ['@gestaltrun/dsh-web-all', '@gestaltrun/dsh-web-ui-all']
 /**
  * Every package name ever published under the family scope: current plugins,
  * both aggregate names, and the retired ones (pre-rename or removed). Summing
@@ -24,17 +24,17 @@ const PACKAGES = ['@linxin666/dsh-web-all', '@linxin666/dsh-web-ui-all']
  * 30-minute badge cache keep that at roughly one burst per colo per hour.
  */
 const FAMILY_PACKAGES = [
-  '@linxin666/dsh-web-all', '@linxin666/dsh-web-ui-all',
-  '@linxin666/dsh-chat-recovery', '@linxin666/dsh-client-ui-aionui-panel',
-  '@linxin666/dsh-client-ui-community-plugins', '@linxin666/dsh-client-ui-git-graph',
-  '@linxin666/dsh-client-ui-market', '@linxin666/dsh-client-ui-plugin-manager',
-  '@linxin666/dsh-client-ui-session-id', '@linxin666/dsh-client-ui-skill-explorer',
-  '@linxin666/dsh-client-ui-skin-center', '@linxin666/dsh-client-ui-task-board',
-  '@linxin666/dsh-client-ui-web-ui-settings', '@linxin666/dsh-desktop-launcher',
-  '@linxin666/dsh-doctor', '@linxin666/dsh-i18n', '@linxin666/dsh-liangshen',
-  '@linxin666/dsh-live-stats', '@linxin666/dsh-perf', '@linxin666/dsh-pet',
-  '@linxin666/dsh-remote-web-ui', '@linxin666/dsh-skins', '@linxin666/dsh-ssh',
-  '@linxin666/dsh-tool-describe-image', '@linxin666/dsh-usage',
+  '@gestaltrun/dsh-web-all', '@gestaltrun/dsh-web-ui-all',
+  '@gestaltrun/dsh-chat-recovery', '@gestaltrun/dsh-client-ui-aionui-panel',
+  '@gestaltrun/dsh-client-ui-community-plugins', '@gestaltrun/dsh-client-ui-git-graph',
+  '@gestaltrun/dsh-client-ui-market', '@gestaltrun/dsh-client-ui-plugin-manager',
+  '@gestaltrun/dsh-client-ui-session-id', '@gestaltrun/dsh-client-ui-skill-explorer',
+  '@gestaltrun/dsh-client-ui-skin-center', '@gestaltrun/dsh-client-ui-task-board',
+  '@gestaltrun/dsh-client-ui-web-ui-settings', '@gestaltrun/dsh-desktop-launcher',
+  '@gestaltrun/dsh-doctor', '@gestaltrun/dsh-i18n', '@gestaltrun/dsh-liangshen',
+  '@gestaltrun/dsh-live-stats', '@gestaltrun/dsh-perf', '@gestaltrun/dsh-pet',
+  '@gestaltrun/dsh-remote-web-ui', '@gestaltrun/dsh-skins', '@gestaltrun/dsh-ssh',
+  '@gestaltrun/dsh-tool-describe-image', '@gestaltrun/dsh-usage',
 ]
 /** Before the family's first publish (2026-08-13); both registries clamp a window's start to real data. */
 const FAMILY_EPOCH = '2026-01-01'

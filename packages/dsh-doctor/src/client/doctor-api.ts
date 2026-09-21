@@ -10,7 +10,7 @@
  * fallback page), a 403 fence refusal and a supervisor business failure all
  * degrade to structured errors instead of unhandled rejections. The fetch seam
  * accepts a narrow response interface so tests run in node or jsdom.
- * @module @linxin666/dsh-doctor/client
+ * @module @gestaltrun/dsh-doctor/client
  */
 
 import type {

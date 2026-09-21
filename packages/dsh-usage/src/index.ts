@@ -41,7 +41,7 @@ export function resolveConfig(config?: Config): ResolvedConfig {
   }
 }
 
-export const apply = mountOnce('@linxin666/dsh-usage', (ctx: Context, config?: Config): void => {
+export const apply = mountOnce('@gestaltrun/dsh-usage', (ctx: Context, config?: Config): void => {
   let source: () => Config = () => config ?? {}
   let service: UsageService | undefined
   let pendingStop: Promise<void> | undefined

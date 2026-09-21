@@ -67,7 +67,7 @@ declare module '@deepseek-ai/cordis' {
 export const inject = ['slots', 'locale', 'theme', 'settingsScope', 'connection', 'remote']
 
 /** Self-report item for the install heartbeat. */
-const SELF_ITEM = [{ name: '@linxin666/dsh-client-ui-skin-center' }]
+const SELF_ITEM = [{ name: '@gestaltrun/dsh-client-ui-skin-center' }]
 
 /**
  * Beat the install heartbeat (docs/telemetry.md), enriching it with the
@@ -258,12 +258,14 @@ export function apply(ctx: ClientContext): void {
       blurContent: () => background.blurContent(),
       inputCardBlur: () => background.inputCardBlur(),
       bubbleOpacity: () => background.bubbleOpacity(),
+      bubbleBlur: () => background.bubbleBlur(),
       subscribe: listener => background.subscribe(listener),
       set: opacity => background.set(opacity),
       setBlurEmpty: value => background.setBlurEmpty(value),
       setBlurContent: value => background.setBlurContent(value),
       setInputCardBlur: value => background.setInputCardBlur(value),
       setBubbleOpacity: value => background.setBubbleOpacity(value),
+      setBubbleBlur: value => background.setBubbleBlur(value),
       dispose: () => background.dispose(),
     },
     wallpaper: {

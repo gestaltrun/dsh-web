@@ -26,7 +26,7 @@
  * are parameters, never hard reads. Scanning is synchronous like the rest
  * of we-library (directory listings only; no file payload is read except
  * the small entries.json manifest).
- * @module @linxin666/dsh-client-ui-skin-center/macos-library
+ * @module @gestaltrun/dsh-client-ui-skin-center/macos-library
  */
 
 import { closeSync, existsSync, openSync, readdirSync, readFileSync, readSync, statSync } from 'node:fs'

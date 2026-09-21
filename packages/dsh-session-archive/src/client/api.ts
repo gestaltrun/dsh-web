@@ -1,6 +1,6 @@
 /**
  * Same-origin HTTP client for the dsh-session-archive host routes.
- * @module @linxin666/dsh-session-archive/client/api
+ * @module @gestaltrun/dsh-session-archive/client/api
  */
 
 import type {

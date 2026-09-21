@@ -6,7 +6,7 @@
  * desktops (where the settings scope is loopback-only) read and persist
  * background values through the v2 channel. Kept dependency-free and
  * synchronous: the tap runs per response and must never await.
- * @module @linxin666/dsh-client-ui-skin-center/active-state
+ * @module @gestaltrun/dsh-client-ui-skin-center/active-state
  */
 
 import { mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs'

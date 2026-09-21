@@ -4,87 +4,77 @@
  * so tsc must not resolve them; the bundle aliases these specifiers to
  * the child sources at build time (see the package tsdown.config.ts). */
 
-declare module '@linxin666/dsh-client-ui-web-ui-settings/client' {
+declare module '@gestaltrun/dsh-client-ui-web-ui-settings/client' {
   export const apply: unknown
   export const inject: readonly string[] | undefined
 }
 
-declare module '@linxin666/dsh-client-ui-plugin-manager/client' {
+declare module '@gestaltrun/dsh-client-ui-plugin-manager/client' {
   export const apply: unknown
   export const inject: readonly string[] | undefined
 }
 
-declare module '@linxin666/dsh-client-ui-market/client' {
+declare module '@gestaltrun/dsh-client-ui-task-board/client' {
   export const apply: unknown
   export const inject: readonly string[] | undefined
 }
 
-declare module '@linxin666/dsh-client-ui-task-board/client' {
+declare module '@gestaltrun/dsh-client-ui-git-graph/client' {
   export const apply: unknown
   export const inject: readonly string[] | undefined
 }
 
-declare module '@linxin666/dsh-client-ui-git-graph/client' {
+declare module '@gestaltrun/dsh-remote-web-ui/client' {
   export const apply: unknown
   export const inject: readonly string[] | undefined
 }
 
-declare module '@linxin666/dsh-remote-web-ui/client' {
+declare module '@gestaltrun/dsh-pet/client' {
   export const apply: unknown
   export const inject: readonly string[] | undefined
 }
 
-declare module '@linxin666/dsh-pet/client' {
+declare module '@gestaltrun/dsh-ssh/client' {
   export const apply: unknown
   export const inject: readonly string[] | undefined
 }
 
-declare module '@linxin666/dsh-ssh/client' {
+declare module '@gestaltrun/dsh-tool-describe-image/client' {
   export const apply: unknown
   export const inject: readonly string[] | undefined
 }
 
-declare module '@linxin666/dsh-tool-describe-image/client' {
+declare module '@gestaltrun/dsh-liangshen/client' {
   export const apply: unknown
   export const inject: readonly string[] | undefined
 }
 
-declare module '@linxin666/dsh-liangshen/client' {
+declare module '@gestaltrun/dsh-client-ui-skill-explorer/client' {
   export const apply: unknown
   export const inject: readonly string[] | undefined
 }
 
-declare module '@linxin666/dsh-client-ui-skill-explorer/client' {
+declare module '@gestaltrun/dsh-doctor/client' {
   export const apply: unknown
   export const inject: readonly string[] | undefined
 }
 
-declare module '@linxin666/dsh-doctor/client' {
+declare module '@gestaltrun/dsh-usage/client' {
   export const apply: unknown
   export const inject: readonly string[] | undefined
 }
 
-declare module '@linxin666/dsh-usage/client' {
+declare module '@gestaltrun/dsh-session-archive/client' {
   export const apply: unknown
   export const inject: readonly string[] | undefined
 }
 
-declare module '@linxin666/dsh-session-archive/client' {
+declare module '@gestaltrun/dsh-client-ui-model-capabilities/client' {
   export const apply: unknown
   export const inject: readonly string[] | undefined
 }
 
-declare module '@linxin666/dsh-client-ui-model-capabilities/client' {
-  export const apply: unknown
-  export const inject: readonly string[] | undefined
-}
-
-declare module '@linxin666/dsh-client-ui-preset-center/client' {
-  export const apply: unknown
-  export const inject: readonly string[] | undefined
-}
-
-declare module '@linxin666/dsh-client-ui-skin-center/client' {
+declare module '@gestaltrun/dsh-client-ui-skin-center/client' {
   export const apply: unknown
   export const inject: readonly string[] | undefined
 }

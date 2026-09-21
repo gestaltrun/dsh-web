@@ -23,7 +23,7 @@ The `dsh-web-all` aggregate bundle includes this plugin; mounting that bundle is
 ### Standalone (development)
 
 ```sh
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install
 pnpm -r build

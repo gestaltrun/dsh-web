@@ -9,7 +9,7 @@
  * selection, and activate it (the tapIndex adapter already stamped the
  * attribute and preloaded the stylesheet for first paint; the controller
  * re-installs under ledger ownership so later switches stay atomic).
- * @module @linxin666/dsh-client-ui-skin-center/runtime/boot
+ * @module @gestaltrun/dsh-client-ui-skin-center/runtime/boot
  */
 
 import { createEffectLedger } from './effect-ledger.ts'

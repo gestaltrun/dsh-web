@@ -9,7 +9,7 @@
  * Resilience contract: no method of this module ever throws. Event listeners
  * read event facts structurally because jsdom (tests) and browsers may hand us
  * differently shaped event objects; every read is guarded.
- * @module @linxin666/dsh-doctor/client
+ * @module @gestaltrun/dsh-doctor/client
  */
 
 /** Kinds of passive incident the probe can carry. */

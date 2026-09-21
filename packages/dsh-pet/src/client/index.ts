@@ -10,7 +10,7 @@
  * portals into that same root, so the root owns the whole surface and a
  * root-keyed suppressor can hide it as one unit. When the pet is hidden the
  * entry becomes a fixed-position summon button.
- * @module @linxin666/dsh-pet/client
+ * @module @gestaltrun/dsh-pet/client
  */
 
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
@@ -143,7 +143,7 @@ function activeWorkTickMs(store: PetStoreInstance): number | undefined {
 export function apply(ctx: ClientContext): void {
   // Anonymous install heartbeat (docs/telemetry.md): one beat per browser per
   // UTC day, package name only, silent failure.
-  reportDailyHeartbeat([{ name: '@linxin666/dsh-pet' }])
+  reportDailyHeartbeat([{ name: '@gestaltrun/dsh-pet' }])
 
   ctx.effect(() => {
     try {

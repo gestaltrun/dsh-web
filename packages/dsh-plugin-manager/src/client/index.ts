@@ -9,7 +9,7 @@
  * those channels do not exist, so the same face falls back to this package's
  * own loopback HTTP gateway, which spawns the official CLI for writes.
  * Neither the tab nor service consumers know which mode the face runs in.
- * @module @linxin666/dsh-client-ui-plugin-manager/client
+ * @module @gestaltrun/dsh-client-ui-plugin-manager/client
  */
 
 // Type-only: pulls the locale plugin's Context merge (ctx.locale).
@@ -343,7 +343,7 @@ export function createPluginManagerFace(ctx: ClientContext): PluginManagerFace {
 export function apply(ctx: ClientContext): void {
   // Anonymous install heartbeat (docs/telemetry.md): one beat per browser per
   // UTC day, package name only, silent failure.
-  reportDailyHeartbeat([{ name: '@linxin666/dsh-client-ui-plugin-manager' }])
+  reportDailyHeartbeat([{ name: '@gestaltrun/dsh-client-ui-plugin-manager' }])
 
   ctx.effect(() => {
     try {

@@ -11,7 +11,7 @@
  * configuration (the dsh-web-all aggregate does this), so endpoint/model validation happens per
  * call — or eagerly at load when a composition entry actually configures it. The "Image
  * understanding" settings section can fill the fields live from Settings → 插件配置.
- * @module @linxin666/dsh-tool-describe-image
+ * @module @gestaltrun/dsh-tool-describe-image
  */
 
 import type { Context } from '@deepseek-ai/cordis'
@@ -135,7 +135,7 @@ export function describeImageCallView(args: DescribeImageArgs): GenericCallView 
  * @param ctx - registrant context carrying the tool registry.
  * @param config - deployment configuration.
  */
-export const apply = mountOnce('@linxin666/dsh-tool-describe-image', applyImpl)
+export const apply = mountOnce('@gestaltrun/dsh-tool-describe-image', applyImpl)
 
 function applyImpl(ctx: Context, config: Config = {}): void {
   // The loader fills schema defaults before apply, so an unconfigured entry

@@ -8,4 +8,4 @@
  */
 import { clientBundle } from '../../shared/tsdown.client.ts'
 
-export default clientBundle('@linxin666/dsh-client-ui-session-id', ['src/index.ts'])
+export default clientBundle('@gestaltrun/dsh-client-ui-session-id', ['src/index.ts'])

@@ -5,11 +5,11 @@ const MOUNTED_PLUGINS = Symbol.for('dsh-web.mounted-plugins')
 
 vi.mock('../src/client/children.generated.ts', () => ({
   clientChildren: [
-    { name: '@linxin666/fake-own-entry', module: { apply: () => {} } },
-    { name: '@linxin666/fake-mounts', module: { apply: () => {} } },
-    { name: '@linxin666/fake-sync-throw', module: { apply: () => {} } },
-    { name: '@linxin666/fake-no-apply', module: {} },
-    { name: '@linxin666/dsh-client-ui-plugin-manager', module: { apply: () => {} } },
+    { name: '@gestaltrun/fake-own-entry', module: { apply: () => {} } },
+    { name: '@gestaltrun/fake-mounts', module: { apply: () => {} } },
+    { name: '@gestaltrun/fake-sync-throw', module: { apply: () => {} } },
+    { name: '@gestaltrun/fake-no-apply', module: {} },
+    { name: '@gestaltrun/dsh-client-ui-plugin-manager', module: { apply: () => {} } },
   ],
 }))
 
@@ -64,13 +64,13 @@ describe('mountClientChildren', () => {
   })
 
   it('skips children the loader serves through their own entries and mounts the rest', async () => {
-    bootWith(['@linxin666/fake-own-entry'])
+    bootWith(['@gestaltrun/fake-own-entry'])
     const { ctx, mounted } = fakeCtx()
     await mountClientChildren(ctx)
     expect(mounted.map((def) => def.name)).toEqual([
-      '@linxin666/fake-mounts',
-      '@linxin666/fake-sync-throw',
-      '@linxin666/dsh-client-ui-plugin-manager',
+      '@gestaltrun/fake-mounts',
+      '@gestaltrun/fake-sync-throw',
+      '@gestaltrun/dsh-client-ui-plugin-manager',
     ])
     expect(mounted[0].inject).toEqual([])
   })
@@ -87,70 +87,70 @@ describe('mountClientChildren', () => {
     // never appear, so the children must mount despite a fully-populated graph.
     bootWith([
       { id: '@deepseek-ai/dsh-client-modules' },
-      { id: '@linxin666/dsh-web-all' },
-      { id: '@linxin666/dsh-perf' },
+      { id: '@gestaltrun/dsh-web-all' },
+      { id: '@gestaltrun/dsh-perf' },
     ])
     const { ctx, mounted } = fakeCtx()
     await mountClientChildren(ctx)
-    expect(mounted.some((def) => def.name === '@linxin666/dsh-client-ui-plugin-manager')).toBe(true)
+    expect(mounted.some((def) => def.name === '@gestaltrun/dsh-client-ui-plugin-manager')).toBe(true)
     expect(mounted).toHaveLength(4) // every child except the no-apply shape
   })
 
   it('keeps mounting siblings when one child throws synchronously', async () => {
     bootWith([])
-    const { ctx, mounted } = fakeCtx({ '@linxin666/fake-mounts': 'throw' })
+    const { ctx, mounted } = fakeCtx({ '@gestaltrun/fake-mounts': 'throw' })
     await expect(mountClientChildren(ctx)).resolves.toBeUndefined()
     expect(mounted.map((def) => def.name)).toEqual([
-      '@linxin666/fake-own-entry',
-      '@linxin666/fake-sync-throw',
-      '@linxin666/dsh-client-ui-plugin-manager',
+      '@gestaltrun/fake-own-entry',
+      '@gestaltrun/fake-sync-throw',
+      '@gestaltrun/dsh-client-ui-plugin-manager',
     ])
     expect(console.error).toHaveBeenCalledTimes(2) // the throw + the no-apply shape
   })
 
   it('captures async fiber rejections without escaping', async () => {
     bootWith([])
-    const { ctx, mounted } = fakeCtx({ '@linxin666/fake-sync-throw': 'reject' })
+    const { ctx, mounted } = fakeCtx({ '@gestaltrun/fake-sync-throw': 'reject' })
     await mountClientChildren(ctx)
     expect(mounted.map((def) => def.name)).toEqual([
-      '@linxin666/fake-own-entry',
-      '@linxin666/fake-mounts',
-      '@linxin666/dsh-client-ui-plugin-manager',
+      '@gestaltrun/fake-own-entry',
+      '@gestaltrun/fake-mounts',
+      '@gestaltrun/dsh-client-ui-plugin-manager',
     ])
     await new Promise<void>((resolve) => { setTimeout(resolve, 0) })
     expect(console.error).toHaveBeenCalledWith(
-      '[dsh-web-all] client child degraded: @linxin666/fake-sync-throw',
+      '[dsh-web-all] client child degraded: @gestaltrun/fake-sync-throw',
       expect.any(Error),
     )
   })
 
   it('honours the shared mount registry across instances', async () => {
     bootWith([])
-    ;(globalThis as Record<symbol, unknown>)[MOUNTED_PLUGINS] = new Set(['@linxin666/fake-mounts'])
+    ;(globalThis as Record<symbol, unknown>)[MOUNTED_PLUGINS] = new Set(['@gestaltrun/fake-mounts'])
     const { ctx, mounted } = fakeCtx()
     await mountClientChildren(ctx)
     expect(mounted.map((def) => def.name)).toEqual([
-      '@linxin666/fake-own-entry',
-      '@linxin666/fake-sync-throw',
-      '@linxin666/dsh-client-ui-plugin-manager',
+      '@gestaltrun/fake-own-entry',
+      '@gestaltrun/fake-sync-throw',
+      '@gestaltrun/dsh-client-ui-plugin-manager',
     ])
   })
 
   it('hides children whose family row is inactive (#1372 row gating)', async () => {
     bootWith([])
     rowsRouteAnswer([
-      '@linxin666/fake-own-entry',
-      '@linxin666/fake-sync-throw',
-      '@linxin666/fake-no-apply',
-      // @linxin666/fake-mounts disabled through a user patch override
-      '@linxin666/dsh-client-ui-plugin-manager',
+      '@gestaltrun/fake-own-entry',
+      '@gestaltrun/fake-sync-throw',
+      '@gestaltrun/fake-no-apply',
+      // @gestaltrun/fake-mounts disabled through a user patch override
+      '@gestaltrun/dsh-client-ui-plugin-manager',
     ])
     const { ctx, mounted } = fakeCtx()
     await mountClientChildren(ctx)
     expect(mounted.map((def) => def.name)).toEqual([
-      '@linxin666/fake-own-entry',
-      '@linxin666/fake-sync-throw',
-      '@linxin666/dsh-client-ui-plugin-manager',
+      '@gestaltrun/fake-own-entry',
+      '@gestaltrun/fake-sync-throw',
+      '@gestaltrun/dsh-client-ui-plugin-manager',
     ])
   })
 
@@ -166,7 +166,7 @@ describe('mountClientChildren', () => {
     bootWith([])
     vi.stubGlobal('fetch', vi.fn(async () => ({
       ok: true,
-      json: async () => ({ ok: true, children: ['@linxin666/fake-mounts', 42] }),
+      json: async () => ({ ok: true, children: ['@gestaltrun/fake-mounts', 42] }),
     })))
     const { ctx, mounted } = fakeCtx()
     await mountClientChildren(ctx)

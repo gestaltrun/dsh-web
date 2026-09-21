@@ -39,7 +39,7 @@ Requires DSH 0.1.2-alpha.2 or later: the plugin is developed against the 0.1.2-a
 In your profile (e.g. `~/.dsh/profiles/web`):
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-i18n
+dsh plugin --profile web add @gestaltrun/dsh-i18n
 ```
 
 or, from a repository checkout:

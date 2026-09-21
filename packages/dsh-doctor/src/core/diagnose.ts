@@ -119,7 +119,7 @@ function diagnoseInventory(inventory: InventoryReport, diag: (code: string, seve
     if (row.mismatch) {
       diag('D-120', 'error', 'pnpm-lock.yaml', 'lockfile disagrees with pinned spec ' + row.name + ' (declared ' + spec.version + ', locked ' + row.locked + ')', 'regenerate the lockfile with the pinned pnpm')
     }
-    if (!row.installed && row.name.startsWith('@linxin666/')) {
+    if (!row.installed && row.name.startsWith('@gestaltrun/')) {
       diag('D-130', 'warn', 'node_modules', 'plugin ' + row.name + ' is declared but not installed', 'run a frozen-lockfile install in the profile dir')
     }
   }

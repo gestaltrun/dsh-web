@@ -4,4 +4,4 @@
 # Presets panel into the Workshop card's declared child slot.
 - insert:
     - id: ui-preset-center
-      name: '@linxin666/dsh-client-ui-preset-center'
+      name: '@gestaltrun/dsh-client-ui-preset-center'

@@ -6,7 +6,7 @@
  * `core/library.ts`); this half owns no durable record of its own, so a
  * preset enabled by another process or deleted by hand is reported from disk
  * on the next read.
- * @module @linxin666/dsh-client-ui-preset-center
+ * @module @gestaltrun/dsh-client-ui-preset-center
  */
 
 import type { Context } from '@deepseek-ai/cordis'
@@ -21,7 +21,7 @@ export const name = 'ui-preset-center'
 export const inject = ['webServer']
 
 /** Mount the preset-center gateway (once per process). */
-export const apply = mountOnce('@linxin666/dsh-client-ui-preset-center', applyImpl)
+export const apply = mountOnce('@gestaltrun/dsh-client-ui-preset-center', applyImpl)
 
 function applyImpl(ctx: Context): void {
   const routes = makePresetCenterRoutes({ ctx })

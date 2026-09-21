@@ -65,11 +65,11 @@ describe('active-row ledger', () => {
   afterEach(resetAll)
 
   it('records and removes rows in insertion order', () => {
-    recordActiveRow('@linxin666/dsh-pet')
-    recordActiveRow('@linxin666/dsh-usage')
-    expect(listActiveRows()).toEqual(['@linxin666/dsh-pet', '@linxin666/dsh-usage'])
-    removeActiveRow('@linxin666/dsh-pet')
-    expect(listActiveRows()).toEqual(['@linxin666/dsh-usage'])
+    recordActiveRow('@gestaltrun/dsh-pet')
+    recordActiveRow('@gestaltrun/dsh-usage')
+    expect(listActiveRows()).toEqual(['@gestaltrun/dsh-pet', '@gestaltrun/dsh-usage'])
+    removeActiveRow('@gestaltrun/dsh-pet')
+    expect(listActiveRows()).toEqual(['@gestaltrun/dsh-usage'])
   })
 })
 
@@ -130,9 +130,9 @@ describe('shell row-state surface', () => {
     expect(host.routes.has('/api/dsh-web-all/degraded')).toBe(true)
   })
 
-  it('a retired plugin row holds the routes but records nothing', async () => {
+  it.each(['@gestaltrun/dsh-perf', '@gestaltrun/dsh-client-ui-market', '@gestaltrun/dsh-client-ui-preset-center', '@gestaltrun/dsh-client-ui-community-plugins'])('retired %s holds routes without activating the old feature', async (plugin) => {
     const host = mockHost()
-    await apply(host.createCtx() as never, { plugin: '@linxin666/dsh-perf' })
+    await apply(host.createCtx() as never, { plugin })
     host.provideWebServer()
     expect(listActiveRows()).toEqual([])
     expect(host.routes.has('/api/dsh-web-all/rows')).toBe(true)
@@ -182,8 +182,8 @@ describe('shell row-state surface', () => {
   it('an import-failing row still counts as active (degraded, not disabled)', async () => {
     const host = mockHost()
     vi.spyOn(console, 'error').mockImplementation(() => {})
-    await apply(host.createCtx() as never, { plugin: '@linxin666/definitely-missing-package' })
-    expect(listActiveRows()).toEqual(['@linxin666/definitely-missing-package'])
+    await apply(host.createCtx() as never, { plugin: '@gestaltrun/definitely-missing-package' })
+    expect(listActiveRows()).toEqual(['@gestaltrun/definitely-missing-package'])
     vi.mocked(console.error).mockRestore()
   })
 })

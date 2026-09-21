@@ -6,4 +6,4 @@
 # browser half registers the ru language + dictionaries.
 - insert:
     - id: i18n
-      name: '@linxin666/dsh-i18n'
+      name: '@gestaltrun/dsh-i18n'

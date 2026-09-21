@@ -56,7 +56,7 @@ export const inject = ['slots', 'locale', 'connection', 'settingsScope', 'remote
 export function apply(ctx: ClientContext): void {
   // Anonymous install heartbeat (docs/telemetry.md): one beat per browser per
   // UTC day, package name only, silent failure.
-  reportDailyHeartbeat([{ name: '@linxin666/dsh-client-ui-web-ui-settings' }])
+  reportDailyHeartbeat([{ name: '@gestaltrun/dsh-client-ui-web-ui-settings' }])
 
   ctx.effect(() => {
     try {

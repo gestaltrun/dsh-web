@@ -53,7 +53,7 @@ describe('writeLanBind / lanBindState', () => {
     const home = tempHome()
     const patch = join(home, 'profiles', 'web', 'cordis.patch.yml')
     mkdirSync(join(home, 'profiles', 'web'), { recursive: true })
-    writeFileSync(patch, '- insert:\n    - id: remote-web-ui\n      name: \'@linxin666/dsh-remote-web-ui\'\n')
+    writeFileSync(patch, '- insert:\n    - id: remote-web-ui\n      name: \'@gestaltrun/dsh-remote-web-ui\'\n')
     writeLanBind('0.0.0.0', 3080, 'web', home)
     const afterOn = readFileSync(patch, 'utf8')
     expect(afterOn).toContain('- id: remote-web-ui')

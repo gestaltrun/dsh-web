@@ -9,7 +9,7 @@
  * The route works without any plugin configuration (the family aggregate mounts
  * this way): the byte bound falls back to the default and the attachment store
  * is resolved per call, failing with a clear message when it is absent.
- * @module @linxin666/dsh-tool-describe-image/attach
+ * @module @gestaltrun/dsh-tool-describe-image/attach
  */
 
 import type { IncomingMessage, ServerResponse } from 'node:http'

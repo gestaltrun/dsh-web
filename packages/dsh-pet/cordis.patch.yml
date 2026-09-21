@@ -7,4 +7,4 @@
 # package's lib/client.js plus the built-in pet assets under assets/).
 - insert:
     - id: pet
-      name: '@linxin666/dsh-pet'
+      name: '@gestaltrun/dsh-pet'

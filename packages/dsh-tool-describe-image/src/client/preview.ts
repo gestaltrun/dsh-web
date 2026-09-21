@@ -17,7 +17,7 @@
  * unreachable through the current origin (for example a proxy that does not
  * forward it), the thumbnail load fails, the failure is remembered for the
  * session, and the reference text is left alone from there on.
- * @module @linxin666/dsh-tool-describe-image/client/preview
+ * @module @gestaltrun/dsh-tool-describe-image/client/preview
  */
 
 import { t } from './locales.ts'

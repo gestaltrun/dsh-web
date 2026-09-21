@@ -9,7 +9,7 @@
  * inventory reads the profile files, installs and removals spawn the
  * official CLI (the single writer), and enablement writes bare `disabled`
  * override rows into the profile patch.
- * @module @linxin666/dsh-client-ui-plugin-manager
+ * @module @gestaltrun/dsh-client-ui-plugin-manager
  */
 
 import type { Context } from '@deepseek-ai/cordis'
@@ -26,7 +26,7 @@ export const name = 'ui-plugin-manager'
 export const inject = ['webServer']
 
 /** Apply the host half (once per process). */
-export const apply = mountOnce('@linxin666/dsh-client-ui-plugin-manager', applyImpl)
+export const apply = mountOnce('@gestaltrun/dsh-client-ui-plugin-manager', applyImpl)
 
 function applyImpl(ctx: Context): void {
   // Gateway mode needs the boot profile; on hosts without one (desktop

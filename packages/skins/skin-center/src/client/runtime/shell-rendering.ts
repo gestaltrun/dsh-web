@@ -8,7 +8,7 @@
  * The stylesheet is inert for the stock look: a catalog skin, custom theme or
  * wallpaper must be active. It is installed once per runtime and removed with
  * that runtime, so disabling the plugin restores the shell unchanged.
- * @module @linxin666/dsh-client-ui-skin-center/runtime/shell-rendering
+ * @module @gestaltrun/dsh-client-ui-skin-center/runtime/shell-rendering
  */
 
 /** Marker owned by the shared shell-rendering stylesheet. */
@@ -80,6 +80,22 @@ export function shellRenderingCss(): string {
          creates a viewport-wide veil behind the active-goal chip. The repeated
          stable marker deliberately raises specificity above catalog-skin dock
          selectors that load after this shared adapter. */
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+    ${scoped('[data-phase="active"] [data-slot="conversation.input.dock"] > [data-queue-dock]')} {
+      /* The native queue dock stacks two boxes inside the input dock: a root
+         wrapper that only supplies the shared dock inset, and the panel inside
+         it that paints its own --dsw-specific-tip fill. Painting the wrapper as
+         an accessory adds a second opaque plate one dock inset (8px) wider than
+         the panel on each side, which reads as an extra sheet of paper under
+         the queue (issue #1572). Reset the accessory surface so the panel stays
+         the single layer; the wrapper keeps its inset, so the panel remains
+         aligned with the composer card. */
       background: transparent !important;
       border: 0 !important;
       border-radius: 0 !important;

@@ -1,6 +1,6 @@
 /**
  * Mobile remote control for the dsh web GUI — host half. Mounts the pairing
- * service (one-time tokens, device sessions, revocation), the /api/pair
+ * service (limited-lifetime tokens, device sessions, revocation), the /api/pair
  * route family (issue/accept/stop/heartbeat/status/events), the api/gate
  * listener that enforces pairing on every other /api request from
  * non-loopback hosts, and the presence sweep. The browser half (the
@@ -37,6 +37,7 @@ import { loadRelayIdentity, RelayRegistrar, type RelayState } from './relay-regi
 import { desiredBindHost, desiredBindPort, firewallActionNeeded, pendingRestartOf, type AppliedFirewallState, type StartupFacts } from './lan-bind-plan.ts'
 import { createInnerAuth } from './inner-auth.ts'
 import { TunnelManager, type TunnelInfo } from './tunnel.ts'
+import { PublicBaseKeeper } from './public-base.ts'
 import {
   checkUpdates,
   fetchGitHubReleaseNotes,
@@ -52,6 +53,7 @@ import { makeUpdateRoutes } from './update-routes.ts'
 import { mountOnce } from './mount-once.ts'
 import { REMOTE_CHANNEL_BOOT_SCRIPT } from './remote-channel-boot.ts'
 import { UUID_POLYFILL_SCRIPT } from './uuid-polyfill.ts'
+import type { DesktopRemoteAccess } from './desktop-access.ts'
 
 declare module '@deepseek-ai/cordis' {
   interface Events {
@@ -114,7 +116,7 @@ export interface Config {
    * so a harness browser credential a device has already redeemed is not
    * invalidated by stop() — see the README security model. Set false to keep
    * the desktop on plain `/api` (only useful when that origin is already
-   * trusted for `/api`).
+   * trusted for `/api`). Desktop always requires pairing on `/remote`.
    */
   requirePairingForLan?: boolean
   /**
@@ -184,7 +186,8 @@ export interface Config {
    * some profile shapes, otherwise on the next start — and the settings
    * card reports the divergence (pendingRestart) instead of guessing.
    * While the toggle has never been set (undefined), the plugin does not
-   * touch the patch file at all.
+   * touch the patch file at all. Desktop instead changes its separate
+   * listener immediately and leaves profile files and firewall rules alone.
    */
   lanBind?: boolean
   /**
@@ -194,6 +197,8 @@ export interface Config {
    * schema, so the path builder asserts containment independently).
    */
   profile?: string
+  /** Desktop-only startup port; zero selects a free local port. */
+  desktopPort?: number
   /** Master switch for the plugin (browser half + host pairing surfaces). */
   enabled?: boolean
 }
@@ -213,6 +218,7 @@ export const Config: z<Config> = z.object({
   relay: z.boolean().default(true),
   lanBind: z.boolean(),
   profile: z.string().pattern(/^[A-Za-z0-9][A-Za-z0-9._-]*$/),
+  desktopPort: z.number().step(1).min(0).max(65535),
   enabled: z.boolean().default(true),
 })
 
@@ -224,7 +230,7 @@ const SWEEP_INTERVAL_MS = 10_000
  * which legitimately resolves to `undefined` when unset (the schema keeps it
  * optional, so `Required` alone would over-narrow it to `string`).
  */
-type ResolvedConfig = Required<Omit<Config, 'publicBaseUrl' | 'trustedHosts' | 'devicesFile' | 'lanBind' | 'profile' | 'tunnelToken'>> & {
+type ResolvedConfig = Required<Omit<Config, 'publicBaseUrl' | 'trustedHosts' | 'devicesFile' | 'lanBind' | 'profile' | 'tunnelToken' | 'desktopPort'>> & {
   publicBaseUrl: string | undefined
   trustedHosts: string[] | undefined
   devicesFile: string
@@ -283,9 +289,20 @@ const DEFAULTS: ResolvedConfig = {
  * @param ctx - host plugin context carrying webServer.
  * @param config - resolved plugin config (schema defaults applied by the loader).
  */
-export const apply = mountOnce('@linxin666/dsh-remote-web-ui', applyImpl)
+export const apply = mountOnce('@gestaltrun/dsh-remote-web-ui', applyImpl)
 
-function applyImpl(ctx: Context, config?: Config): void {
+function applyImpl(ctx: Context, config?: Config): void | Promise<void> {
+  const desktop = ctx.get('desktopRemoteAccess') as DesktopRemoteAccess | undefined
+  if (desktop === undefined) return applyMounted(ctx, config)
+  return desktop.initialize(config?.desktopPort ?? 0).then(() => {
+    ctx.effect(() => async () => {
+      await desktop.configure({ enabled: false, lanBind: false })
+    }, 'remote-web-ui: Desktop listener')
+    applyMounted(ctx, { ...config, requirePairingForLan: true, relay: config?.relay ?? false, profile: config?.profile ?? 'desktop' }, desktop)
+  })
+}
+
+function applyMounted(ctx: Context, config?: Config, desktop?: DesktopRemoteAccess): void {
   const envPublicBase = process.env.DSH_REMOTE_PUBLIC_BASE_URL?.trim() || undefined
   const resolved: ResolvedConfig = {
     tokenTtlMs: config?.tokenTtlMs ?? DEFAULTS.tokenTtlMs,
@@ -316,7 +333,7 @@ function applyImpl(ctx: Context, config?: Config): void {
       maxDevices: value.maxDevices ?? DEFAULTS.maxDevices,
       idleExpireMs: value.idleExpireMs ?? DEFAULTS.idleExpireMs,
       cookieName: value.cookieName ?? DEFAULTS.cookieName,
-      requirePairingForLan: value.requirePairingForLan ?? DEFAULTS.requirePairingForLan,
+      requirePairingForLan: desktop === undefined ? value.requirePairingForLan ?? DEFAULTS.requirePairingForLan : true,
       publicBaseUrl: value.publicBaseUrl ?? envPublicBase,
       trustedHosts: value.trustedHosts,
       devicesFile: value.devicesFile ?? DEFAULTS.devicesFile,
@@ -343,17 +360,18 @@ function applyImpl(ctx: Context, config?: Config): void {
   // raw quick URL is used, exactly as before. Named tunnels keep their fixed
   // dashboard hostname and never touch the relay.
   let relayRegistrar: RelayRegistrar | undefined
-  let relayUrl: string | undefined
-  let rawTunnelUrl: string | undefined
+  /**
+   * The public base the pairing fence trusts. A tunnel reconnect must not
+   * strip the host the QR still shows: named and relay hosts never change,
+   * and a quick tunnel's host survives a bounded grace window (issue #1547).
+   */
+  const publicBase = new PublicBaseKeeper((base) => { service.setPublicBaseUrl(base) })
   /** The tunnel target the registrar last announced (dedupes sync re-runs). */
   let relayAnnouncedFor: string | undefined
-  const setPublicBase = (): void => {
-    service.setPublicBaseUrl(relayUrl ?? rawTunnelUrl)
-  }
   const disposeRelayRegistrar = (unregister: boolean = false): void => {
     const registrar = relayRegistrar
     relayRegistrar = undefined
-    relayUrl = undefined
+    publicBase.setRelay(undefined)
     relayAnnouncedFor = undefined
     if (registrar === undefined) return
     // Toggle-off removes the registry row so the stable origin stops
@@ -371,16 +389,15 @@ function applyImpl(ctx: Context, config?: Config): void {
         relayRegistrar = new RelayRegistrar(identity, (state: RelayState) => {
           service.setRelayStatus(state.state === 'off' ? undefined : state)
           if (state.state === 'running') {
-            relayUrl = state.url
+            publicBase.setRelay(state.url)
           } else if (state.state === 'off') {
-            relayUrl = undefined
+            publicBase.setRelay(undefined)
           } else if (state.state === 'failed') {
             // Keep the last relay URL on failures: the phone origin only
             // breaks when the mapping itself goes stale, not when one
             // refresh call fails. The registrar retries with backoff.
             console.warn(`remote-web-ui: relay registration failed (${state.error}) — the stable origin may serve its offline page until the retry lands`)
           }
-          setPublicBase()
         })
       } catch (error) {
         console.warn(`remote-web-ui: relay registry unavailable (${error instanceof Error ? error.message : String(error)}) — the quick URL is the QR base`)
@@ -399,27 +416,28 @@ function applyImpl(ctx: Context, config?: Config): void {
   tunnel.onPhase((info: TunnelInfo) => {
     if (tunnelMode === 'off') return
     if (info.phase === 'running' && info.url !== undefined) {
-      rawTunnelUrl = info.url
-      setPublicBase()
+      publicBase.markRunning(info.url)
       service.setTunnelStatus({ state: 'running', url: info.url })
       const registrar = tunnelMode === 'quick' ? ensureRelayRegistrar() : undefined
       if (registrar !== undefined) announceRelay(registrar, info.url)
       runPostureProbe()
     } else if (info.phase === 'starting') {
-      // A restart mints a NEW hostname: the previous URL dies with the old
-      // process, so clear it now rather than advertising a dead link.
-      rawTunnelUrl = undefined
-      relayUrl = undefined
-      setPublicBase()
+      // A quick-tunnel restart mints a new hostname, but the old one is not
+      // dropped at once: the edge may still deliver a connection the phone
+      // already opened, and the reconnect usually lands inside the grace
+      // window (issue #1547). A named tunnel keeps its fixed hostname, and a
+      // registered relay its stable subdomain, so neither is ever dropped
+      // here — the previous code cleared the relay base on every restart.
+      publicBase.markReconnecting()
       service.setTunnelStatus({ state: 'starting' })
     } else if (info.phase === 'failed') {
-      rawTunnelUrl = undefined
-      setPublicBase()
+      publicBase.markReconnecting()
       service.setTunnelStatus(info.error === undefined ? { state: 'failed' } : { state: 'failed', error: info.error })
     }
   })
   ctx.effect(() => () => {
     disposeRelayRegistrar()
+    publicBase.dispose()
     tunnel.dispose()
   }, 'remote-web-ui: auto tunnel')
   // The bind facts are known by now (webServer is an inject edge): the LAN
@@ -438,6 +456,14 @@ function applyImpl(ctx: Context, config?: Config): void {
       ? lanIPv4Addresses().map(address => ({ address, base: `http://${address}:${String(ctx.webServer.port)}` }))
       : []
     service.setLanBases(lanBases)
+  }
+
+  if (desktop !== undefined) {
+    ctx.effect(() => desktop.onChange((state) => {
+      service.setLanBases(state.listening && state.host === '0.0.0.0'
+        ? lanIPv4Addresses().map(address => ({ address, base: `http://${address}:${String(state.port)}` }))
+        : [])
+    }), 'remote-web-ui: Desktop bind updates')
   }
 
   // Push a committed settings section into the service and gate. The service
@@ -520,6 +546,18 @@ function applyImpl(ctx: Context, config?: Config): void {
   let lastFirewallApplied: AppliedFirewallState | undefined
   const lanBindStatus = (): Record<string, unknown> => {
     const resolvedNow = resolve()
+    if (desktop !== undefined) {
+      const state = desktop.status()
+      return {
+        profile: resolvedNow.profile, setting: resolvedNow.lanBind ?? null,
+        blockHost: null, bindHost: state.host, port: state.port,
+        listening: state.listening, error: state.error,
+        lanUrls: state.listening && state.host === '0.0.0.0'
+          ? lanIPv4Addresses().map(address => `http://${address}:${String(state.port)}`) : [],
+        firewall: { ok: true, managed: false }, platform: process.platform,
+        pendingRestart: false,
+      }
+    }
     let state: { blockPresent: boolean; host?: string; port?: number }
     try {
       state = lanBindState(resolvedNow.profile)
@@ -712,7 +750,7 @@ function applyImpl(ctx: Context, config?: Config): void {
   // governed by the harness fence + browser-auth cookie, and this cohort's
   // api/gate seam has no emitter — so stop()/revoke() cannot invalidate a
   // browser credential a device has already redeemed.
-  if (ctx.webServer.host === '0.0.0.0') {
+  if (desktop === undefined && ctx.webServer.host === '0.0.0.0') {
     console.warn('remote-web-ui: LAN-exposed bind — pairing gates the /remote channel; direct /api stays under the harness fence + browser auth (stop() does not revoke an already-redeemed browser credential)')
   }
 
@@ -725,7 +763,11 @@ function applyImpl(ctx: Context, config?: Config): void {
     // the currently bound port. The block takes effect on the next start, so
     // the re-assert at every boot keeps it in sync with both the toggle and
     // the flags.
-    if (value.lanBind !== undefined) {
+    if (desktop !== undefined) {
+      void desktop.configure({ enabled: value.enabled, lanBind: value.lanBind === true }).catch((error: unknown) => {
+        console.error(`remote-web-ui: Desktop remote listener failed: ${error instanceof Error ? error.message : String(error)}`)
+      })
+    } else if (value.lanBind !== undefined) {
       const startup = ctx.get('webStartup') as StartupFacts | undefined
       const desiredHost = desiredBindHost(value.lanBind === true, startup?.host)
       const desiredPort = desiredBindPort(startup?.port, Number.isFinite(ctx.webServer.port) ? ctx.webServer.port : undefined)
@@ -768,22 +810,24 @@ function applyImpl(ctx: Context, config?: Config): void {
     // publicBaseUrl applies only when no tunnel runs.
     const plan = tunnelPlanOf(value, ctx.webServer.port)
     tunnelMode = plan.mode
+    publicBase.setMode(plan.mode)
+    const liveTunnelUrl = publicBase.quickUrl()
     if (plan.mode !== 'quick') {
       // The relay only fronts the quick tunnel; named mode owns its fixed
       // dashboard hostname and the off mode has no public base at all.
       disposeRelayRegistrar()
-      if (plan.mode !== 'named') setPublicBase()
+      if (plan.mode !== 'named') publicBase.refresh()
     } else if (value.relay === false) {
       // The relay toggle is off: no stable origin, the raw quick URL is the
       // QR base exactly as before the relay existed.
       disposeRelayRegistrar(true)
-      setPublicBase()
-    } else if (rawTunnelUrl !== undefined) {
+      publicBase.refresh()
+    } else if (liveTunnelUrl !== undefined) {
       // The relay just turned on (or the registrar is new) while the tunnel
       // already runs: announce now — no phase event will fire for an
       // unchanged target.
       const registrar = ensureRelayRegistrar()
-      if (registrar !== undefined) announceRelay(registrar, rawTunnelUrl)
+      if (registrar !== undefined) announceRelay(registrar, liveTunnelUrl)
     }
     if (plan.mode === 'quick') {
       for (const ignored of plan.ignored) {

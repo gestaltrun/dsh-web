@@ -5,7 +5,7 @@
  * plus a compact settings row. Data comes from the host's loopback-fenced
  * /api/dsh-usage/overview document; polling runs only while the section is
  * mounted and the tab is visible.
- * @module @linxin666/dsh-usage/client/UsageSectionCard
+ * @module @gestaltrun/dsh-usage/client/UsageSectionCard
  */
 
 import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from 'react'
@@ -401,7 +401,7 @@ function totalOf(totals: UsageTokenTotals): number {
 
 /**
  * The Token 银行 card: the DeepSeek official family's retained-ledger usage
- * minted onto the whale-yuan note at 1000 tokens per whale yuan. The window
+ * minted onto the whale-yuan note at 1,000,000 tokens per whale yuan. The window
  * prefers the host's whole-ledger aggregate and falls back to the 30-day
  * trend when an older host serves no `all`; the spend line prefers the
  * official balance watch and falls back to the fold-time estimate; the

@@ -34,7 +34,7 @@
  * BC1/BC2/BC3 follow the standard public algorithms. One npm dependency:
  * jpeg-js (pure JavaScript, no native builds) for FreeImage JPEG mipmaps.
  *
- * @module @linxin666/dsh-client-ui-skin-center/pkg-extract
+ * @module @gestaltrun/dsh-client-ui-skin-center/pkg-extract
  */
 
 import { Buffer } from 'node:buffer'

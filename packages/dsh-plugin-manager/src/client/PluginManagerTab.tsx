@@ -616,7 +616,7 @@ export function PluginManagerTab(props: PluginManagerTabProps) {
                   </div>
                   {children !== undefined && children.length > 0 && (() => {
                     // Default-collapsed child list: an aggregate such as
-                    // @linxin666/dsh-web-all expands to 20+ rows that would
+                    // @gestaltrun/dsh-web-all expands to 20+ rows that would
                     // otherwise push the whole settings page down.
                     const listId = 'pm-children-' + plugin.id.replace(/[^a-zA-Z0-9_-]/g, '-')
                     const expanded = expandedChildren.has(plugin.id)

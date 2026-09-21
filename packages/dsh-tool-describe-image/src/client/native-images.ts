@@ -4,7 +4,7 @@
  * and toggles the DeepSeek adapter catalog entry. Every failure answers a
  * conservative envelope — the section renders an unsupported hint instead of
  * throwing, and a failed toggle never pretends the state changed.
- * @module @linxin666/dsh-tool-describe-image/client/native-images
+ * @module @gestaltrun/dsh-tool-describe-image/client/native-images
  */
 
 /** The host native-image endpoint, same-origin with the web shell. */

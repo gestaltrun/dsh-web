@@ -11,7 +11,7 @@
  * - GET  /api/doctor/status        -> DoctorSupervisorResponse (snapshot)
  * - POST /api/doctor/action        -> DoctorSupervisorResponse (body { action, profileId?, incidentId? })
  * - POST /api/doctor/client-failure -> DoctorSupervisorResponse (body { message, stack?, phase?, runId? })
- * @module @linxin666/dsh-doctor/client
+ * @module @gestaltrun/dsh-doctor/client
  */
 
 /** Protocol version spoken by the Host half. */

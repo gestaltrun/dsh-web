@@ -24,7 +24,7 @@ const KNOWN = ['harbor', 'xp', 'matrix']
 const INSERT_PATCH = [
   '- insert:',
   '    - id: ui-skin-center',
-  "      name: '@linxin666/dsh-client-ui-skin-center'",
+  "      name: '@gestaltrun/dsh-client-ui-skin-center'",
   '',
   MANAGED_START,
   '- id: ui-skin-harbor',
@@ -33,7 +33,7 @@ const INSERT_PATCH = [
   '  disabled: true',
   '- insert:',
   '    - id: ui-skin-xp',
-  "      name: '@linxin666/dsh-client-ui-skin-xp'",
+  "      name: '@gestaltrun/dsh-client-ui-skin-xp'",
   MANAGED_END,
   '',
 ].join('\n')
@@ -110,7 +110,7 @@ describe('stripManaged / stripLegacySkinState', () => {
   })
 
   it('strips legacy insert rows outside the section too', () => {
-    const withStraggler = '- insert:\n    - id: ui-skin-old\n      name: \'@linxin666/dsh-client-ui-skin-old\'\n' + INSERT_PATCH
+    const withStraggler = '- insert:\n    - id: ui-skin-old\n      name: \'@gestaltrun/dsh-client-ui-skin-old\'\n' + INSERT_PATCH
     const out = stripLegacySkinState(withStraggler)
     expect(out).not.toContain('ui-skin-old')
     expect(out).toContain('ui-skin-center')
@@ -127,7 +127,7 @@ describe('stripManaged / stripLegacySkinState', () => {
   })
 
   it('drops a stray empty - insert: [] row (issue #676)', () => {
-    const withEmptyInsert = '- insert: []\n- insert:\n    - id: ui-skin-center\n      name: \'@linxin666/dsh-client-ui-skin-center\'\n'
+    const withEmptyInsert = '- insert: []\n- insert:\n    - id: ui-skin-center\n      name: \'@gestaltrun/dsh-client-ui-skin-center\'\n'
     const out = stripLegacySkinState(withEmptyInsert)
     expect(out).not.toContain('insert: []')
     expect(out).toContain('ui-skin-center')

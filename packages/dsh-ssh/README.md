@@ -35,14 +35,14 @@ The panel loads its contents on first open. Closing and reopening it preserves t
 
 ## Install
 
-Install the family aggregate package `@linxin666/dsh-web-all` (all plugins and skins in one) or this plugin alone:
+Install the family aggregate package `@gestaltrun/dsh-web-all` (all plugins and skins in one) or this plugin alone:
 
 ```sh
 ### From npm (recommended)
-dsh plugin --profile web add @linxin666/dsh-ssh@latest
+dsh plugin --profile web add @gestaltrun/dsh-ssh@latest
 
 ### From the repository (development)
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install && pnpm -r build
 dsh plugin --profile web add link:$(pwd)/packages/dsh-ssh
@@ -63,9 +63,9 @@ The settings panel (plugin config) toggles `announceToAgent` (whether to announc
 ## Development
 
 ```sh
-pnpm install --filter @linxin666/dsh-ssh...
-pnpm --filter @linxin666/dsh-ssh test    # unit tests: store + engine (embedded ssh2 Server + real sshd)
-pnpm --filter @linxin666/dsh-ssh build   # tsc types + tsdown dual-half artifacts
+pnpm install --filter @gestaltrun/dsh-ssh...
+pnpm --filter @gestaltrun/dsh-ssh test    # unit tests: store + engine (embedded ssh2 Server + real sshd)
+pnpm --filter @gestaltrun/dsh-ssh build   # tsc types + tsdown dual-half artifacts
 ```
 
 ## Known limitations

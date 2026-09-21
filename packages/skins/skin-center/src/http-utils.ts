@@ -3,7 +3,7 @@
  * retired v1 routes.ts; issue #506). Same-origin fence: /active writes the
  * user's GUI state, so a malicious webpage must not be able to switch the
  * user's skin through a localhost CSRF post.
- * @module @linxin666/dsh-client-ui-skin-center/http-utils
+ * @module @gestaltrun/dsh-client-ui-skin-center/http-utils
  */
 
 import type { IncomingMessage, ServerResponse } from 'node:http'

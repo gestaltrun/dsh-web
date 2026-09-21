@@ -5,10 +5,10 @@
  * (shared/tsdown.client.ts). The fault-isolation shell (src/shell.ts + its
  * degraded ledger) ships as additional node-half entries beside lib/index.js
  * — the generated patch rows' `name` mount the per-family subpath exports
- * (`@linxin666/dsh-web-all/<family>`, all resolving to the shared shell
+ * (`@gestaltrun/dsh-web-all/<family>`, all resolving to the shared shell
  * re-export lib/shells/shell.js so the plugin inventory can label each row)
  * and the main entry forwards to the shell, while the standalone
- * `@linxin666/dsh-web-all/shell` subpath stays importable for tests and
+ * `@gestaltrun/dsh-web-all/shell` subpath stays importable for tests and
  * tooling. The shells marker manifest (src/shells/package.json) is copied
  * next to the re-export: the client module scanner's nearest-package walk
  * must stop there instead of reaching the package root's dsh.client face.
@@ -47,11 +47,11 @@ const childSourceAlias = {
   },
 }
 
-export default clientBundle('@linxin666/dsh-web-all', ['src/index.ts'], {
+export default clientBundle('@gestaltrun/dsh-web-all', ['src/index.ts'], {
   clientPlugins: [childSourceAlias],
   companions: [
     {
-      name: '@linxin666/dsh-web-all/shell',
+      name: '@gestaltrun/dsh-web-all/shell',
       // Object entries pin the output paths: the shells re-export must land
       // exactly at lib/shells/shell.js (the exports map and the scanner
       // marker both depend on that location).

@@ -32,7 +32,7 @@
  * NOTE: this module runs host-side (node) in the M2 loader. lightningcss is
  * a native dependency and must stay OUT of the browser bundle (external in
  * tsdown.config.ts).
- * @module @linxin666/dsh-client-ui-skin-center/css-safety
+ * @module @gestaltrun/dsh-client-ui-skin-center/css-safety
  */
 
 import { transform } from 'lightningcss'

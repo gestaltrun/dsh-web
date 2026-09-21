@@ -114,6 +114,24 @@ describe('remote channel boot patch (issue #987)', () => {
     expect(win.wsUrls[0]).toContain('/remote/api/remote.mux?device=dev-42')
   })
 
+  it.each(['dsh-app://app/', 'file:///index.html'])('keeps the existing transport on %s pages', async (href) => {
+    const win = makeWindow()
+    const page = new URL(href)
+    win.location = { origin: page.origin, href, hostname: page.hostname }
+    const originalFetch = win.fetch
+    const originalWebSocket = win.WebSocket
+    const originalKeys = Object.keys(win)
+    boot(win)
+    expect(win.fetch).toBe(originalFetch)
+    expect(win.WebSocket).toBe(originalWebSocket)
+    expect(Object.keys(win)).toEqual(originalKeys)
+    expect(win[REMOTE_CHANNEL_BOOT_GLOBAL]).toBeUndefined()
+    const init = { method: 'POST', body: JSON.stringify({ rpcId: 'picker-1' }) }
+    await win.fetch('/api/directoryPicker/pick', init)
+    expect(win.calls).toEqual([new URL('/api/directoryPicker/pick', href).href])
+    expect(win.initSeen).toEqual([init])
+  })
+
   it('does nothing on loopback origins', () => {
     for (const hostname of ['localhost', '127.0.0.1', '127.1.2.3']) {
       const win = makeWindow(hostname)
@@ -202,6 +220,46 @@ describe('remote channel boot patch (issue #987)', () => {
     expect(win[REMOTE_CHANNEL_BOOT_GLOBAL]).toBeUndefined()
     await win.fetch('/api/session.list', { method: 'POST' })
     expect(win.calls).toEqual(['http://192.168.1.20:3080/api/session.list'])
+  })
+
+  it('publishes the pre-Cordis upload hook onto the patched fetch (issue #1580)', async () => {
+    const win = makeWindow()
+    win.sessionStorage = { getItem: () => 'dev-42' }
+    boot(win)
+    const hook = (win as Record<string, unknown>).__DSH_FILE_UPLOAD__ as
+      | { fetch: (input: URL, init: RequestInit) => Promise<Response> }
+      | undefined
+    expect(hook).toBeDefined()
+    // The runtime hands the hook an absolute same-origin URL (it resolves the
+    // route against location.origin), exactly as customTransport does.
+    const body = new Blob(['bytes'])
+    // Exactly what the runtime's customTransport passes: absolute URL, the
+    // octet-stream content type, and the raw body.
+    await hook!.fetch(new URL('http://192.168.1.20:3080/api/session/uploadFileBinary?sessionId=s1'), {
+      method: 'POST',
+      headers: { 'content-type': 'application/octet-stream' },
+      body,
+    })
+    expect(win.calls[0]).toBe('http://192.168.1.20:3080/remote/api/session/uploadFileBinary?sessionId=s1')
+    const init = win.initSeen[0] as RequestInit & { headers?: Record<string, string> }
+    expect(init.method).toBe('POST')
+    expect(init.body).toBe(body)
+    expect(init.headers?.['content-type']).toBe('application/octet-stream')
+    expect(init.headers?.['x-dsh-remote-device']).toBe('dev-42')
+  })
+
+  it('never republishes a pre-existing upload hook owned by the page', () => {
+    const win = makeWindow() as FakeWindow & Record<string, unknown>
+    const existing = { fetch: () => Promise.resolve(new Response('{}')) }
+    win.__DSH_FILE_UPLOAD__ = existing
+    boot(win)
+    expect(win.__DSH_FILE_UPLOAD__).toBe(existing)
+  })
+
+  it('does not publish the upload hook on loopback origins', () => {
+    const win = makeWindow('127.0.0.1') as FakeWindow & Record<string, unknown>
+    boot(win)
+    expect(win.__DSH_FILE_UPLOAD__).toBeUndefined()
   })
 
   it('flips the official UI into host mode on non-loopback origins', () => {

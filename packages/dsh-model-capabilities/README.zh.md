@@ -23,7 +23,7 @@
 ### 独立挂载(开发)
 
 ```sh
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install
 pnpm -r build

@@ -20,7 +20,7 @@
  * failure resolves conservative — acceptsImages false keeps the legacy
  * rewrite, so a probe failure can never strip images from a text-only
  * model's reach.
- * @module @linxin666/dsh-tool-describe-image/model-capability
+ * @module @gestaltrun/dsh-tool-describe-image/model-capability
  */
 
 import type { Context } from '@deepseek-ai/cordis'

@@ -4,7 +4,7 @@
  * `$DSH_HOME/dsh-session-archive/`. Every write goes through a unique temp
  * file + fsync + rename, so an interrupted write can never produce a
  * half-written document.
- * @module @linxin666/dsh-session-archive/host/ledger
+ * @module @gestaltrun/dsh-session-archive/host/ledger
  */
 
 import { mkdir, open, readFile, rename, unlink } from 'node:fs/promises'

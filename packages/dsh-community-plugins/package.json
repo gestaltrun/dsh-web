@@ -1,7 +1,7 @@
 {
-  "name": "@linxin666/dsh-client-ui-community-plugins",
+  "name": "@gestaltrun/dsh-client-ui-community-plugins",
   "description": "Community plugin index data source for the dsh web ecosystem: community.json is the single source of the Workshop store plugin list and the dsh-market.com plugin manifest.",
-  "version": "0.3.21",
+  "version": "0.3.23-gestaltrun.1",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -62,6 +62,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/zhu1090093659/dsh-web.git"
+    "url": "https://github.com/gestaltrun/dsh-web.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

@@ -29,7 +29,7 @@
  * The marker is body/html level (managed outside the surface/part/plugin
  * enum, see contracts/semantic-attrs-v1.md) and survives a neutralizer
  * teardown; the style is inert whenever the marker is absent.
- * @module @linxin666/dsh-client-ui-skin-center/runtime/backdrop-scene
+ * @module @gestaltrun/dsh-client-ui-skin-center/runtime/backdrop-scene
  */
 
 /** Shared marker: set on html + body while a source reports backdrop art. */

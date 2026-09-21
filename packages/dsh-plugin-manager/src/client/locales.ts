@@ -1,7 +1,7 @@
 /**
  * Locale dictionaries for the plugin-manager tab. The zh dictionary is the
  * key source; the en dictionary mirrors the exact key set.
- * @module @linxin666/dsh-client-ui-plugin-manager/client
+ * @module @gestaltrun/dsh-client-ui-plugin-manager/client
  */
 
 /** Simplified Chinese copy (the key-set source of truth). */

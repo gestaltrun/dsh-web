@@ -91,11 +91,11 @@ const PATCH_HEADER = [
 
 /**
  * The fault-isolation shell: family insert rows mount a per-family subpath
- * export of @linxin666/dsh-web-all (this module never fails to import or
+ * export of @gestaltrun/dsh-web-all (this module never fails to import or
  * start) and carry the real plugin package name in the row config. The shell
  * imports the real module at start time and contains any import/activation
  * failure to that entry, so one broken plugin can no longer roll back the
- * whole boot group. The subpath spelling (`@linxin666/dsh-web-all/<family>`)
+ * whole boot group. The subpath spelling (`@gestaltrun/dsh-web-all/<family>`)
  * is what the official plugin inventory displays: titles render per family
  * ("web-all/usage", "web-all/pet", ...) instead of a wall of identical
  * "web-all" cards — the same multi-entry convention as the host's own
@@ -106,7 +106,7 @@ const PATCH_HEADER = [
  * the family) keep mounting directly: their owners manage their own failure
  * semantics.
  */
-const AGGREGATE_SHELL_PACKAGE = '@linxin666/dsh-web-all'
+const AGGREGATE_SHELL_PACKAGE = '@gestaltrun/dsh-web-all'
 
 /**
  * Every family subpath export resolves to the shared shell re-export module
@@ -806,6 +806,7 @@ function renderPackageJson(pkgPath, resolvedDeps, shellSubpaths) {
   const next = {}
   for (const { name } of resolvedDeps) next[name] = 'workspace:*'
   for (const key of Object.keys(pkg.dependencies ?? {}).filter((k) => !(k in next)).sort()) {
+    if (pkg.dependencies[key].startsWith('workspace:')) continue
     next[key] = pkg.dependencies[key]
   }
   if (Object.keys(next).length) pkg.dependencies = next

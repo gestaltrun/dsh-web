@@ -1,4 +1,4 @@
-# @linxin666/dsh-doctor
+# @gestaltrun/dsh-doctor
 
 [English](README.md) | 中文
 
@@ -24,7 +24,7 @@ profile。插件默认开启：初次安装或 WebUI 版本更新后救援模式
 - Doctor Supervisor 作为宿主的受管子进程运行（带父进程存活监视，宿主退出即
   退出，不注册任何 OS 级后台服务）：把退出归类为用户停止、任务完成与真实故障，
   应用崩溃循环熔断，并负责救援调度。
-- Doctor Launcher 会在启动 DSH 前检测旧聚合包，并在 `autoMigrate`（默认开启）且目标包可用时自动执行 `@linxin666/dsh-web-ui-all` 到 `@linxin666/dsh-web-all` 的迁移；迁移经官方 `dsh plugin` CLI 执行，带 package.json/pnpm-lock 备份和 `--dump-config` 门禁。
+- Doctor Launcher 会在启动 DSH 前检测旧聚合包，并在 `autoMigrate`（默认开启）且目标包可用时自动执行 `@gestaltrun/dsh-web-ui-all` 到 `@gestaltrun/dsh-web-all` 的迁移；迁移经官方 `dsh plugin` CLI 执行，带 package.json/pnpm-lock 备份和 `--dump-config` 门禁。
 - Doctor Launcher 把 `dsh` 参数原样转发给真实 DSH 可执行文件，转发 stdin、
   stdout、stderr 与信号，记录启动意图与退出事实，之后才上报事件。
 - 救援胶囊在机器本地目录准备固定版本 DSH 运行时、固定版本 Doctor 包与隔离的
@@ -48,19 +48,19 @@ profile 的 package.json 与 cordis.patch.yml 只通过官方 `dsh plugin` 命�
 ### 从 npm 安装（全家桶优先）
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-web-all@latest
+dsh plugin --profile web add @gestaltrun/dsh-web-all@latest
 ```
 
 ### 独立 bundle 安装
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-doctor@latest
+dsh plugin --profile web add @gestaltrun/dsh-doctor@latest
 ```
 
 ### 从仓库安装（开发调试）
 
 ```sh
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install
 pnpm -r build

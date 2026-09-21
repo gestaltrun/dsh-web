@@ -206,6 +206,10 @@ export interface LanBindFrame {
   lanUrls: string[]
   firewall: { ok: boolean; managed: boolean; note?: string }
   platform: string
+  /** Desktop listener availability; absent on an ordinary Web profile. */
+  listening?: boolean
+  /** Desktop listener startup/rebind failure. */
+  error?: string
   /** true when the running bind has not caught up with the toggle yet. */
   pendingRestart?: boolean
 }

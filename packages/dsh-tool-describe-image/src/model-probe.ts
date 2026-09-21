@@ -5,7 +5,7 @@
  * proves the endpoint is reachable and the key authenticates; no completion
  * call is made, so the probe never spends tokens. The key stays on the host —
  * the browser half only reads the returned id list.
- * @module @linxin666/dsh-tool-describe-image/model-probe
+ * @module @gestaltrun/dsh-tool-describe-image/model-probe
  */
 
 import { readBoundedBody } from './vision-client.ts'

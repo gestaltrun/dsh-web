@@ -4,7 +4,7 @@
  * catalog data itself is served by dsh-market.com and ingested by the
  * browser half — this half only owns the durable setting and the asset
  * writer.
- * @module @linxin666/dsh-client-ui-market
+ * @module @gestaltrun/dsh-client-ui-market
  */
 
 import type { Context } from '@deepseek-ai/cordis'
@@ -34,7 +34,7 @@ export const Config: z<Config> = z.object({
 })
 
 /** Register the namespace and mount the install gateway (once). */
-export const apply = mountOnce('@linxin666/dsh-client-ui-market', applyImpl)
+export const apply = mountOnce('@gestaltrun/dsh-client-ui-market', applyImpl)
 
 function applyImpl(ctx: Context): void {
   ctx.inject(['settings'], (settingsCtx) => {

@@ -45,7 +45,7 @@ function fixtureSkin() {
   writeFileSync(join(dir, 'assets', 'decoration.webp'), Buffer.from(ONE_PIXEL_PNG))
   writeFileSync(join(dir, 'LICENSE'), 'fixture license\n')
   writeFileSync(join(dir, 'package.json'), JSON.stringify({
-    name: '@linxin666/dsh-client-ui-skin-fixture-skin',
+    name: '@gestaltrun/dsh-client-ui-skin-fixture-skin',
     version: '0.3.1',
   }))
   writeFileSync(join(dir, 'skin.json'), JSON.stringify({
@@ -64,7 +64,7 @@ function fixtureSkin() {
     sourceUrl: 'https://example.test/source',
     attribution: 'fixture artist',
     bodyAttr: 'data-dsh-fixture',
-    package: '@linxin666/dsh-client-ui-skin-fixture-skin',
+    package: '@gestaltrun/dsh-client-ui-skin-fixture-skin',
     wiring: { id: 'ui-skin-fixture-skin', bundleWired: false },
     preview: {
       light: 'packages/skins/fixture-skin/preview/light.png',

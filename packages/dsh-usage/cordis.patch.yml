@@ -7,4 +7,4 @@
 # served from this package's lib/client.js).
 - insert:
     - id: usage
-      name: '@linxin666/dsh-usage'
+      name: '@gestaltrun/dsh-usage'

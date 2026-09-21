@@ -1,4 +1,4 @@
-# @linxin666/dsh-client-ui-web-ui-settings
+# @gestaltrun/dsh-client-ui-web-ui-settings
 
 English | [中文](README.zh.md)
 
@@ -14,13 +14,13 @@ The dsh web UI plugin group for the DSH settings page: it adds a first-level set
 ### From npm (recommended)
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-client-ui-web-ui-settings@latest
+dsh plugin --profile web add @gestaltrun/dsh-client-ui-web-ui-settings@latest
 ```
 
 ### From the repository (development)
 
 ```sh
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install && pnpm -r build
 dsh plugin --profile web add link:$(pwd)/packages/dsh-web-settings
@@ -67,8 +67,8 @@ Plugin versions up to 0.1.17 registered the group card in the keyed `settings.pl
 
 The registration moved to the first-level `settings.section` slot (a list slot addressed by `id`) in 0.1.18 and ships in 0.2.0; the code on `main` is compatible with rc.6 and rc.7. A profile that still fails carries a frozen older install:
 
-1. Bump every `@linxin666/*` dependency in the profile `package.json` to `^0.2.0` (at least `^0.1.18`).
-2. Reinstall the profile dependencies (`pnpm install`), and on Windows recreate stale `node_modules/@linxin666/*` junction links (`cmd /c rmdir <link>` then `cmd /c mklink /J <link> <target>`).
+1. Bump every `@gestaltrun/*` dependency in the profile `package.json` to `^0.2.0` (at least `^0.1.18`).
+2. Reinstall the profile dependencies (`pnpm install`), and on Windows recreate stale `node_modules/@gestaltrun/*` junction links (`cmd /c rmdir <link>` then `cmd /c mklink /J <link> <target>`).
 3. Restart `dsh web`.
 
 See [issue #513](https://github.com/zhu1090093659/dsh-web/issues/513).

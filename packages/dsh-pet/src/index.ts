@@ -8,7 +8,7 @@
  * those sources, never touching host or client code. Install via
  * 'dsh plugin --profile web add link:<dsh-web>/packages/dsh-pet'; the
  * cordis.patch.yml inserts this plugin row.
- * @module @linxin666/dsh-pet
+ * @module @gestaltrun/dsh-pet
  */
 
 import { Context } from '@deepseek-ai/cordis'
@@ -18,7 +18,7 @@ import z from 'schemastery'
 import { PetService, PET_SETTINGS_NAMESPACE, type PetConfig, type PetSettingsSection } from './service.ts'
 import { makePetRoutes } from './routes.ts'
 import { loadPetRegistry, petPackageRoot } from './registry.ts'
-import { DISPLAY_INSET_MAX, DISPLAY_SIZE_MAX, DISPLAY_SIZE_MIN } from './persist.ts'
+import { BUBBLE_SCALE_MAX, BUBBLE_SCALE_MIN, DISPLAY_INSET_MAX, DISPLAY_SIZE_MAX, DISPLAY_SIZE_MIN } from './persist.ts'
 import { mountOnce } from './mount-once.ts'
 
 export { PetService, MAX_SESSION_BUBBLES } from './service.ts'
@@ -132,6 +132,7 @@ export function makePetSettingsSchema(fallbackPetId: string) {
     size: z.number().step(1).min(DISPLAY_SIZE_MIN).max(DISPLAY_SIZE_MAX).default(160),
     right: z.number().step(1).min(0).max(DISPLAY_INSET_MAX).default(24),
     bottom: z.number().step(1).min(0).max(DISPLAY_INSET_MAX).default(20),
+    bubbleScale: z.number().step(0.05).min(BUBBLE_SCALE_MIN).max(BUBBLE_SCALE_MAX).default(1),
     petId: z.string().default(fallbackPetId),
     enabled: z.boolean().default(true),
     decorationEnabled: z.boolean().default(true),
@@ -139,7 +140,7 @@ export function makePetSettingsSchema(fallbackPetId: string) {
 }
 
 /** Register the pet service and its API + asset routes on the context. */
-export const apply = mountOnce('@linxin666/dsh-pet', applyImpl)
+export const apply = mountOnce('@gestaltrun/dsh-pet', applyImpl)
 
 function applyImpl(ctx: Context, config: PetConfig = {}): void {
   const registry = config.registry

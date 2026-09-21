@@ -6,4 +6,4 @@
 # removed through the plugin manager.
 - insert:
     - id: ui-community-plugins
-      name: '@linxin666/dsh-client-ui-community-plugins'
+      name: '@gestaltrun/dsh-client-ui-community-plugins'

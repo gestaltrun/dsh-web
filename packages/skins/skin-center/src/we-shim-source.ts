@@ -11,7 +11,7 @@
  * silence, and hardware APIs become no-ops. Wallpapers that never touch these
  * APIs are unaffected; wallpapers that do degrade to their non-reactive
  * visuals instead of crashing on undefined globals.
- * @module @linxin666/dsh-client-ui-skin-center/we-shim-source
+ * @module @gestaltrun/dsh-client-ui-skin-center/we-shim-source
  */
 
 /** The shim source, injected ahead of every web wallpaper HTML document. */

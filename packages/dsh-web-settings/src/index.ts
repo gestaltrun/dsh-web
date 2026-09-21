@@ -68,7 +68,7 @@ export function settingsYamlFallbackPath(env: NodeJS.ProcessEnv = process.env, h
   return join(resolveDshHome(env, home), 'settings.yaml')
 }
 
-export const apply = mountOnce('@linxin666/dsh-client-ui-web-ui-settings', applyImpl)
+export const apply = mountOnce('@gestaltrun/dsh-client-ui-web-ui-settings', applyImpl)
 
 function applyImpl(ctx: Context, config?: Config): void {
   const access = resolveProxyAccess(config)

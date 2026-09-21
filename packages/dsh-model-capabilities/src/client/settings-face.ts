@@ -3,7 +3,7 @@
  * Typed locally (the generated `ClientRemote['settings']` resolves to `any`
  * fields under this repo's dependency graph, because skipLibCheck swallows
  * the settings-controller d.ts's own unresolved imports).
- * @module @linxin666/dsh-client-ui-model-capabilities/client/settings-face
+ * @module @gestaltrun/dsh-client-ui-model-capabilities/client/settings-face
  */
 
 import type { RemoteResult } from '@deepseek-ai/dsh-typert-protocol'

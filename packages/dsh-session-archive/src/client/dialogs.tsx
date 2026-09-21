@@ -4,7 +4,7 @@
  * confirmation for large deletes), the live batch progress, and the
  * session preview. All dialogs are keyboard-accessible (Esc closes, focus
  * moves in on open and back on close) and render with role=dialog.
- * @module @linxin666/dsh-session-archive/client/dialogs
+ * @module @gestaltrun/dsh-session-archive/client/dialogs
  */
 
 import { useEffect, useRef, useState, type ReactNode } from 'react'

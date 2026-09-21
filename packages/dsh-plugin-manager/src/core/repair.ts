@@ -10,7 +10,7 @@
  * failure message/stack, and paths. Callers must never append credentials,
  * tokens, or environment contents; the failure ring is the host's bounded,
  * pruned record and nothing else is added.
- * @module @linxin666/dsh-client-ui-plugin-manager/core
+ * @module @gestaltrun/dsh-client-ui-plugin-manager/core
  */
 
 import type { PluginFailureItem } from './protocol.ts'

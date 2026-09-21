@@ -3,7 +3,7 @@
  * filters/search/sort, cross-result multi-select, batch archive/unarchive/
  * physical delete with progress and per-session reasons, session preview,
  * and the automatic-maintenance settings panel.
- * @module @linxin666/dsh-session-archive/client/SessionArchiveCard
+ * @module @gestaltrun/dsh-session-archive/client/SessionArchiveCard
  */
 
 import { useEffect, useMemo, useState, useSyncExternalStore, type ReactNode } from 'react'

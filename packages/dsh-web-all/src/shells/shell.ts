@@ -1,6 +1,6 @@
 /**
  * Shared import target for the per-family shell subpaths
- * (`@linxin666/dsh-web-all/<family>`, one package.json exports key per family
+ * (`@gestaltrun/dsh-web-all/<family>`, one package.json exports key per family
  * row, all pointing here): the loader imports this module for every family
  * patch row, and the row config keeps naming the real plugin package
  * (`config.plugin`), exactly like the main face — the subpath exists purely

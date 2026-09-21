@@ -40,7 +40,7 @@ dsh Web GUI 的语言包插件：向 Web GUI 语言目录注册 Русский�
 在你的 profile（如 `~/.dsh/profiles/web`）中执行：
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-i18n
+dsh plugin --profile web add @gestaltrun/dsh-i18n
 ```
 
 或从仓库检出安装：

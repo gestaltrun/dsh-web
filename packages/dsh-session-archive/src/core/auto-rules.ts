@@ -5,7 +5,7 @@
  * archive time (never the file mtime, never the scan time) and requires that
  * time to be known — sessions archived before this plugin existed (unknown
  * archive time) are never auto-deleted.
- * @module @linxin666/dsh-session-archive/core/auto-rules
+ * @module @gestaltrun/dsh-session-archive/core/auto-rules
  */
 
 import type { ArchiveSessionRow } from './types.ts'

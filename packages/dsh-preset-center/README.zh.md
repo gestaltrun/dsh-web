@@ -1,4 +1,4 @@
-# @linxin666/dsh-client-ui-preset-center
+# @gestaltrun/dsh-client-ui-preset-center
 
 [English](README.md) | 中文
 
@@ -16,10 +16,10 @@ DSH Web GUI 的社区 agent 预设管理器：创意工坊的**预设**面板，
 ## 安装
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-client-ui-preset-center
+dsh plugin --profile web add @gestaltrun/dsh-client-ui-preset-center
 ```
 
-创意工坊卡片（`@linxin666/dsh-client-ui-market`）声明面板槽位并负责下载；没有它时 host 路由仍可用，但没有面板驱动。两者都在 `@linxin666/dsh-web-all` 聚合包内。
+创意工坊卡片（`@gestaltrun/dsh-client-ui-market`）声明面板槽位并负责下载；没有它时 host 路由仍可用，但没有面板驱动。两者都在 `@gestaltrun/dsh-web-all` 聚合包内。
 
 ## 配置
 

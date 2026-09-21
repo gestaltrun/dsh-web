@@ -7,7 +7,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { rootAggregatePinMismatch } from './lib/root-alias-pin.mjs'
 
-const manifest = spec => ({ dependencies: { '@linxin666/dsh-web-all': spec } })
+const manifest = spec => ({ dependencies: { '@gestaltrun/dsh-web-all': spec } })
 
 test('accepts an exact pin on the tag version', () => {
   assert.equal(rootAggregatePinMismatch(manifest('0.3.20'), '0.3.20'), undefined)

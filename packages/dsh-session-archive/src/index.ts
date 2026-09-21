@@ -23,7 +23,7 @@ export const Config: z<SessionArchiveConfig> = z.object({
   checkIntervalMin: z.number().min(15).max(1440).default(60),
 })
 
-export const apply = mountOnce('@linxin666/dsh-session-archive', (ctx: Context, config?: SessionArchiveConfig): void => {
+export const apply = mountOnce('@gestaltrun/dsh-session-archive', (ctx: Context, config?: SessionArchiveConfig): void => {
   let source: () => SessionArchiveConfig = () => config ?? {}
   let service: ArchiveService | undefined
   let disposeRoutes: (() => void) | undefined

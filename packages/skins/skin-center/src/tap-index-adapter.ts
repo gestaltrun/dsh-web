@@ -8,7 +8,7 @@
  *
  * Fail-closed: any problem yields the stock look plus at most one warning per
  * adapter and reason. Neither the row collector nor the tap throws.
- * @module @linxin666/dsh-client-ui-skin-center/tap-index-adapter
+ * @module @gestaltrun/dsh-client-ui-skin-center/tap-index-adapter
  */
 
 import type { IndexInjection } from '@deepseek-ai/dsh-host-webserver'

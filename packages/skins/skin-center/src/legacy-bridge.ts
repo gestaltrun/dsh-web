@@ -15,7 +15,7 @@
  *     whose ui-skin-<id> row is NOT disabled inside the managed section
  *     (bundle-wired active skins carried no row of their own);
  *  3. a managed section disabling everything (or no section at all) → stock.
- * @module @linxin666/dsh-client-ui-skin-center/legacy-bridge
+ * @module @gestaltrun/dsh-client-ui-skin-center/legacy-bridge
  */
 
 import { chmodSync, mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs'
@@ -164,7 +164,7 @@ export function stripLegacySkinState(patch: string): string {
 export function readLegacyActiveId(patch: string, knownIds: readonly string[]): string | null {
   // The first skin insert row wins; dsh-client-ui-skin-center is the skin
   // center's own wiring and never names an active skin.
-  for (const m of patch.matchAll(/name:\s*['"]?@linxin666\/dsh-client-ui-skin-([a-z0-9-]+)['"]?/g)) {
+  for (const m of patch.matchAll(/name:\s*['"]?@gestaltrun\/dsh-client-ui-skin-([a-z0-9-]+)['"]?/g)) {
     if (m[1] !== 'center') return m[1]
   }
   if (!patch.includes(MANAGED_START)) return null
@@ -226,7 +226,7 @@ export function migrateLegacySelection(options: {
         continue
       }
       const hasLegacyState = patch.includes(MANAGED_START)
-        || /name:\s*['"]?@linxin666\/dsh-client-ui-skin-/.test(patch)
+        || /name:\s*['"]?@gestaltrun\/dsh-client-ui-skin-/.test(patch)
       if (!hasLegacyState) continue
       sawLegacyState = true
 

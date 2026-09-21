@@ -5,7 +5,7 @@
  * fence is the shared family loopback guard — same-origin local browsers
  * only, mirroring the official loopback authority the installer channels
  * would have enforced.
- * @module @linxin666/dsh-client-ui-plugin-manager/host
+ * @module @gestaltrun/dsh-client-ui-plugin-manager/host
  */
 
 import type { IncomingMessage, ServerResponse } from 'node:http'

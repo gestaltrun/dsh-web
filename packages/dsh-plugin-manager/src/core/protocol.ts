@@ -8,7 +8,7 @@
  * The shapes mirror the official web installer tab's wire protocol (see the
  * DSH checkout's packages/client/ui-settings-plugin-installer/src/client/
  * protocol.ts); they are a contract observation, not an import.
- * @module @linxin666/dsh-client-ui-plugin-manager/core
+ * @module @gestaltrun/dsh-client-ui-plugin-manager/core
  */
 
 /** One loader entry row claimed by an installed bundle package (aggregate child). */

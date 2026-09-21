@@ -10,38 +10,38 @@ import {
 
 test('legacy manifest gains migration metadata and old npm identity', () => {
   const output = rewriteLegacyPackageJson(JSON.stringify({
-    name: '@linxin666/dsh-web-all',
+    name: '@gestaltrun/dsh-web-all',
     version: '0.3.3',
     dsh: { engines: { dsh: '>=0.1.1-rc.1' } },
   }), '0.3.3')
   const pkg = JSON.parse(output)
-  assert.equal(pkg.name, '@linxin666/dsh-web-ui-all')
-  assert.deepEqual(pkg.dsh.migrate, { to: '@linxin666/dsh-web-all', since: '0.3.3' })
+  assert.equal(pkg.name, '@gestaltrun/dsh-web-ui-all')
+  assert.deepEqual(pkg.dsh.migrate, { to: '@gestaltrun/dsh-web-all', since: '0.3.3' })
 })
 
 test('legacy patch self row points to the old package', () => {
-  const output = rewriteLegacyPatch("- insert:\n    - id: web-ui-compat\n      name: '@linxin666/dsh-web-all'\n")
-  assert.match(output, /name: '@linxin666\/dsh-web-ui-all'/)
-  assert.doesNotMatch(output, /name: '@linxin666\/dsh-web-all'/)
+  const output = rewriteLegacyPatch("- insert:\n    - id: web-ui-compat\n      name: '@gestaltrun/dsh-web-all'\n")
+  assert.match(output, /name: '@gestaltrun\/dsh-web-ui-all'/)
+  assert.doesNotMatch(output, /name: '@gestaltrun\/dsh-web-all'/)
 })
 
 test('legacy patch family subpath rows point to the old package too', () => {
-  const output = rewriteLegacyPatch("- insert:\n    - id: web-ui-usage\n      name: '@linxin666/dsh-web-all/usage'\n      config:\n        plugin: '@linxin666/dsh-usage'\n")
-  assert.match(output, /name: '@linxin666\/dsh-web-ui-all\/usage'/)
-  assert.doesNotMatch(output, /name: '@linxin666\/dsh-web-all\//)
+  const output = rewriteLegacyPatch("- insert:\n    - id: web-ui-usage\n      name: '@gestaltrun/dsh-web-all/usage'\n      config:\n        plugin: '@gestaltrun/dsh-usage'\n")
+  assert.match(output, /name: '@gestaltrun\/dsh-web-ui-all\/usage'/)
+  assert.doesNotMatch(output, /name: '@gestaltrun\/dsh-web-all\//)
   // The real plugin config is untouched.
-  assert.match(output, /plugin: '@linxin666\/dsh-usage'/)
+  assert.match(output, /plugin: '@gestaltrun\/dsh-usage'/)
 })
 
 test('legacy client bundle loader id is rewritten', () => {
-  assert.equal(rewriteLegacyClient('id: "@linxin666/dsh-web-all"'), 'id: "@linxin666/dsh-web-ui-all"')
+  assert.equal(rewriteLegacyClient('id: "@gestaltrun/dsh-web-all"'), 'id: "@gestaltrun/dsh-web-ui-all"')
 })
 
 test('dual-publish skips after the two-release transition window', () => {
   const migrated = (count) => ({
     versions: Object.fromEntries(Array.from({ length: count }, (_, index) => [
       `0.3.${String(3 + index)}`,
-      { dsh: { migrate: { to: '@linxin666/dsh-web-all' } } },
+      { dsh: { migrate: { to: '@gestaltrun/dsh-web-all' } } },
     ])),
   })
   assert.equal(legacyDualPublishedCount({ view: () => JSON.stringify(migrated(1)) }), 1)

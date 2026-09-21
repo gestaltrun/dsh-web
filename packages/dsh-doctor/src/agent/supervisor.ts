@@ -266,7 +266,7 @@ export class DoctorSupervisor {
     const explicit = process.env.DSH_DOCTOR_REAL_DSH?.trim()
     const first = Object.values(this.state.profiles).find(profile => profile.identity.role !== 'rescue')
     const dshExecutable = explicit && explicit !== '' ? explicit : (first?.identity.dshExecutable ?? this.locateDsh())
-    const spec = process.env.DSH_DOCTOR_PACKAGE?.trim() || '@linxin666/dsh-doctor@' + this.version
+    const spec = process.env.DSH_DOCTOR_PACKAGE?.trim() || '@gestaltrun/dsh-doctor@' + this.version
     const sourceHome = first?.identity.dshHome ?? resolveDshHome()
     const sourceProfile = first?.identity.name ?? 'web'
     await provisionCapsule({ paths: this.paths, dshExecutable, doctorSpec: spec, doctorPackageDir: process.env.DSH_DOCTOR_PACKAGE_DIR?.trim(), doctorVersion: this.version, sourceHome, sourceProfile, mirrorCredentials: process.env.DSH_DOCTOR_CREDENTIALS !== 'off' })

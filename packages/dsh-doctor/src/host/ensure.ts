@@ -18,7 +18,7 @@ import type { SupervisorResponse } from '../core/protocol.ts'
  * stale. Uninstall marks the supervisor state, removes legacy registrations
  * and the capsule credentials. Every external effect sits behind injectable
  * seams so tests verify the full sequence without spawning real processes.
- * @module @linxin666/dsh-doctor/host
+ * @module @gestaltrun/dsh-doctor/host
  */
 
 /** Result of one spawned command. */

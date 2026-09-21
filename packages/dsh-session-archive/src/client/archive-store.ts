@@ -2,7 +2,7 @@
  * Browser-side store for the session-archive section: inventory, filters,
  * selection (as an id array — store drafts are plain data), batch progress,
  * preview lifecycle, and the delete-confirmation state.
- * @module @linxin666/dsh-session-archive/client/archive-store
+ * @module @gestaltrun/dsh-session-archive/client/archive-store
  */
 
 import { defineStore } from '@deepseek-ai/dsh-client-store'

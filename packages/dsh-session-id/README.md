@@ -1,4 +1,4 @@
-# @linxin666/dsh-client-ui-session-id
+# @gestaltrun/dsh-client-ui-session-id
 
 English | [中文](README.zh.md)
 
@@ -28,7 +28,7 @@ changes, nothing runs on the host.
 ### From npm (recommended)
 
 ```sh
-dsh plugin --profile web add @linxin666/dsh-client-ui-session-id@latest
+dsh plugin --profile web add @gestaltrun/dsh-client-ui-session-id@latest
 ```
 
 Restart `dsh web` (or wait for the hot-reload) and click the Session ID entry
@@ -37,7 +37,7 @@ at the bottom of the sidebar.
 ### From the repository (development)
 
 ```sh
-git clone https://github.com/zhu1090093659/dsh-web.git
+git clone https://github.com/gestaltrun/dsh-web.git
 cd dsh-web
 pnpm install
 pnpm -r build

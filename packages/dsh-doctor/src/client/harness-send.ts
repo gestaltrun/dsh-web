@@ -8,7 +8,7 @@
  * answers), never touching the console's own host state. The port is the only
  * browser-half seam that talks to the session domain; everything here is
  * framework-free and testable with a fake port.
- * @module @linxin666/dsh-doctor/client
+ * @module @gestaltrun/dsh-doctor/client
  */
 
 /** One target session the prompt may be sent into. */

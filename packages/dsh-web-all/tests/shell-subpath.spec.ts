@@ -1,6 +1,6 @@
 /**
  * Family subpath display-name contract. The generated patch rows mount the
- * aggregate's per-family subpath exports (`@linxin666/dsh-web-all/<family>`)
+ * aggregate's per-family subpath exports (`@gestaltrun/dsh-web-all/<family>`)
  * so the official plugin inventory renders one distinct "web-all/<family>"
  * title per row instead of a wall of identical "web-all" cards, while the
  * row config keeps naming the real plugin package (`config.plugin`, the
@@ -78,12 +78,12 @@ describe('family subpath display names', () => {
     expect(rows.find(row => row.id === 'web-ui-compat')?.name).toBe(manifest.name)
     // The exempted i18n row stays direct.
     const i18n = rows.find(row => row.id === 'web-ui-i18n')
-    expect(i18n?.name).toBe('@linxin666/dsh-i18n')
+    expect(i18n?.name).toBe('@gestaltrun/dsh-i18n')
     expect(i18n?.plugin).toBeUndefined()
     // Spot-check the forwarded real plugin of two rows.
     expect(rows.find(row => row.id === 'web-ui-usage')).toMatchObject({
       name: `${manifest.name}/usage`,
-      plugin: '@linxin666/dsh-usage',
+      plugin: '@gestaltrun/dsh-usage',
     })
   })
 
@@ -96,6 +96,7 @@ describe('family subpath display names', () => {
   it('retired family subpaths (tombstones) resolve to the shell re-export for backwards compatibility', () => {
     expect(manifest.exports['./desktop-launcher']).toBe('./lib/shells/shell.js')
     expect(manifest.exports['./dsh-perf']).toBe('./lib/shells/shell.js')
+    for (const retired of ['market', 'preset-center', 'community-plugins']) expect(manifest.exports[`./${retired}`]).toBe('./lib/shells/shell.js')
   })
 
   it('the built shells face re-exports the main face apply (one degraded ledger)', async () => {

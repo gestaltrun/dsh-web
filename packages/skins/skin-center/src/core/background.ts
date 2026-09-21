@@ -10,7 +10,7 @@
  * rides the same allow-listed channel as skin switching. This module is the
  * dependency-free source of truth both halves (host routes / migration and
  * the browser controller) share.
- * @module @linxin666/dsh-client-ui-skin-center/core/background
+ * @module @gestaltrun/dsh-client-ui-skin-center/core/background
  */
 
 /** Skin-background preference set persisted in the v2 active state file. */
@@ -27,6 +27,8 @@ export interface SkinBackgroundConfig {
   inputCardBlur?: number
   /** Message bubble opacity 0-100, for skins exposing bubble alpha. */
   bubbleOpacity?: number
+  /** Message-bubble backdrop blur 0-20 px, for skins exposing bubble blur. */
+  bubbleBlur?: number
 }
 
 /** Effective value of every field when the state carries none. */
@@ -37,6 +39,7 @@ export const SKIN_BACKGROUND_DEFAULTS: Readonly<Required<SkinBackgroundConfig>> 
   backgroundBlurContent: 0,
   inputCardBlur: 10,
   bubbleOpacity: 50,
+  bubbleBlur: 10,
 }
 
 /** The fields normalize/sanitize know about; unknown keys are dropped. */
@@ -52,6 +55,7 @@ const RANGES: Record<Exclude<keyof SkinBackgroundConfig, 'enabled'>, [number, nu
   backgroundBlurContent: [0, 20],
   inputCardBlur: [0, 20],
   bubbleOpacity: [0, 100],
+  bubbleBlur: [0, 20],
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

@@ -5,7 +5,7 @@
  * manifests (skins / pets / plugins) with one-click install into the DSH
  * home directories, and bridging the optional pluginManager service for
  * one-click plugin installs.
- * @module @linxin666/dsh-client-ui-market/client
+ * @module @gestaltrun/dsh-client-ui-market/client
  */
 
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
@@ -73,7 +73,7 @@ export const inject = ['slots', 'locale', 'connection', 'settingsScope', 'remote
 export function apply(ctx: ClientContext): void {
   // Anonymous install heartbeat (docs/telemetry.md): one beat per browser per
   // UTC day, package name only, silent failure.
-  reportDailyHeartbeat([{ name: '@linxin666/dsh-client-ui-market' }])
+  reportDailyHeartbeat([{ name: '@gestaltrun/dsh-client-ui-market' }])
 
   ctx.effect(() => {
     try {

@@ -5,7 +5,7 @@
  * directories served through the safety pipeline; switching is a client-side
  * atomic swap and never touches `cordis.patch.yml`. Try-on stays pure
  * browser work (see src/client/runtime/skin-controller.ts).
- * @module @linxin666/dsh-client-ui-skin-center
+ * @module @gestaltrun/dsh-client-ui-skin-center
  */
 
 import { Context } from '@deepseek-ai/cordis'
@@ -98,6 +98,7 @@ export const SkinBackgroundConfigSchema: z<SkinBackgroundConfig> = z.object({
   backgroundBlurContent: z.number().min(0).max(20).step(1).default(SKIN_BACKGROUND_DEFAULTS.backgroundBlurContent),
   inputCardBlur: z.number().min(0).max(20).step(1).default(SKIN_BACKGROUND_DEFAULTS.inputCardBlur),
   bubbleOpacity: z.number().min(0).max(100).step(5).default(SKIN_BACKGROUND_DEFAULTS.bubbleOpacity),
+  bubbleBlur: z.number().min(0).max(20).step(1).default(SKIN_BACKGROUND_DEFAULTS.bubbleBlur),
 })
 
 /**
@@ -155,7 +156,7 @@ export const SkinWallpaperConfigSchema: z<SkinWallpaperConfig> = z.object({
  * must not take the GUI down.
  * @param ctx - cordis context.
  */
-export const apply = mountOnce('@linxin666/dsh-client-ui-skin-center', applyImpl)
+export const apply = mountOnce('@gestaltrun/dsh-client-ui-skin-center', applyImpl)
 
 function applyImpl(ctx: Context): void {
   // Optional-settings wiring for the background scrim namespace. The browser
