@@ -2,7 +2,7 @@
   "name": "dsh-web",
   "version": "0.1.1",
   "private": true,
-  "description": "DeepSeek Harness Web GUI \u63d2\u4ef6\u5168\u5bb6\u6876 + \u76ae\u80a4\u96c6\u5408\u3002\u76ae\u80a4\u662f\u7eaf\u8d44\u4ea7\u76ee\u5f55\uff08packages/skins/skin-center/skins/<id>\uff09\uff0c\u7531\u76ae\u80a4\u4e2d\u5fc3\u5305\u7edf\u4e00\u52a0\u8f7d\u3002",
+  "description": "DeepSeek Harness Web GUI 插件全家桶 + 皮肤集合。皮肤是纯资产目录（packages/skins/skin-center/skins/<id>），由皮肤中心包统一加载。",
   "dsh": {
     "bundle": {
       "patch": "./packages/dsh-web-all/cordis.patch.yml"
@@ -13,7 +13,7 @@
     "packages/dsh-web-all/cordis.patch.yml"
   ],
   "dependencies": {
-    "@gestaltrun/dsh-web-all": "0.3.23-gestaltrun.0"
+    "@gestaltrun/dsh-web-all": "0.3.23-gestaltrun.1"
   },
   "scripts": {
     "build": "pnpm -r build",
@@ -67,7 +67,8 @@
     "fflate": "^0.8.3",
     "lightningcss": "^1.32.0",
     "playwright": "^1.62.1",
-    "tsdown": "^0.22.2"
+    "tsdown": "^0.22.2",
+    "yaml": "2.9.0"
   },
   "license": "Apache-2.0",
   "packageManager": "pnpm@11.24.0"

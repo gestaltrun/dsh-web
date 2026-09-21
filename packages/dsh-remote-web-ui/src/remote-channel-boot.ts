@@ -39,7 +39,8 @@ export function buildRemoteChannelBootScript(rules: RemoteChannelRules = REMOTE_
   // browsers. Keep everything inside the IIFE and fail closed.
   return '(function(){' +
     'try{' +
-    'var w=window,loc=w.location,h=loc.hostname;' +
+    'var w=window,loc=w.location,h=loc.hostname,R=' + json + ';' +
+    'if(R.pageProtocols.indexOf(new URL(loc.href).protocol)<0)return;' +
     // Loopback origins keep the original paths (mirrors isLoopbackHostname).
     "if(h==='localhost'||h==='::1'||/^127(\\.\\d{1,3}){3}$/.test(h))return;" +
     // Host mode: the paired remote desktop presents itself as the machine
@@ -47,7 +48,6 @@ export function buildRemoteChannelBootScript(rules: RemoteChannelRules = REMOTE_
     // settings mirror, document controller, and deliverables open actions
     // all branch on connection.isLoopback). Must run before any boot entry.
     'try{if(w.__DSH_TRANSPORT__===undefined)w.__DSH_TRANSPORT__={};w.__DSH_TRANSPORT__.ownsHost=true}catch(e){}' +
-    'var R=' + json + ';' +
     // The cookieless device credential: read lazily per call - the
     // /pair-app capture script sets it in head AFTER this boot script ran,
     // so a parse-time read would always see null.

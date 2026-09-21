@@ -115,7 +115,7 @@ flowchart LR
 
 ## 创意工坊与市场站
 
-仓库是市场内容的唯一事实源：皮肤取 skin-center 的 skin.json、宠物取 dsh-pet 的 pet.json、插件取 community.json、预设取 dsh-preset-center 的 presets/，[scripts/market-build](../scripts/market-build) 派生 `market/dist`（`manifest/{skins,pets,plugins,presets}.json`、预览与试穿资产；产物提交进仓，`market:check` 校验一致）。tryon 试穿壳来自 market/shell 的构建产物，拷入 `dist/tryon/`。部署经 [scripts/deploy-market](../scripts/deploy-market)：先 `market-build --check`，再 wrangler 应用 D1 migrations 并部署 [Worker](../market/worker/wrangler.jsonc)（ASSETS 绑定 dist、Turnstile secret 守卫）；push 到 dev 且触及市场相关路径时由 [deploy-market.yml](../.github/workflows/deploy-market.yml) 自动上架。匿名点赞必须保持 Turnstile 门控并经单个 D1 batch 写入（信任边界见根 [AGENTS.md](../AGENTS.md)）。
+仓库是市场内容的唯一事实源：皮肤取 skin-center 的 skin.json、宠物取 dsh-pet 的 pet.json、插件取 community.json、预设取 dsh-preset-center 的 presets/，[scripts/market-build](../scripts/market-build) 派生 `market/dist`（`manifest/{skins,pets,plugins,presets}.json`、预览与试穿资产；产物提交进仓，`market:check` 校验一致）。tryon 试穿壳来自 market/shell 的构建产物，拷入 `dist/tryon/`。部署经 [scripts/deploy-market](../scripts/deploy-market)：先 `market-build --check`，再 wrangler 应用 D1 migrations 并部署 [Worker](../market/worker/wrangler.jsonc)（ASSETS 绑定 dist、Turnstile secret 守卫）；市场部署由维护者显式运行该脚本。匿名点赞必须保持 Turnstile 门控并经单个 D1 batch 写入（信任边界见根 [AGENTS.md](../AGENTS.md)）。
 
 ```mermaid
 flowchart LR
@@ -201,5 +201,5 @@ flowchart TB
     G --> M["维护者集成：dev 测试通过后合入 main"]
     M --> T["从 main 打 vX.Y.Z tag"]
     T -- "release.yml + verify-version" --> NPM["npm 发布 @linxin666/dsh-*"]
-    DEV -- "触及市场路径时 deploy-market.yml" --> DEP["部署 dsh-market.com（独立于发布流程）"]
+    DEV -- "维护者显式运行 deploy-market" --> DEP["部署 dsh-market.com（独立于发布流程）"]
 ```

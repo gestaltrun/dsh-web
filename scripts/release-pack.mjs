@@ -6,6 +6,7 @@ import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseArgs } from 'node:util'
+import { parse, stringify } from 'yaml'
 import { canonicalizeGzip } from './canonical-gzip.mjs'
 import { walkFamilyPackages } from './lib/family-packages.mjs'
 
@@ -13,7 +14,7 @@ const ROOT = fileURLToPath(new URL('..', import.meta.url))
 export const REPOSITORY = 'gestaltrun/dsh-web'
 export const SCOPE = '@gestaltrun/'
 export const SIDEBAR = '@gestaltrun/dsh-better-sidebar'
-export const SIDEBAR_VERSION = '0.19.1-gestaltrun.0'
+export const SIDEBAR_VERSION = '0.19.1-gestaltrun.1'
 
 /** Invoke the package manager which launched this script through the current Node executable. */
 export function runPnpm(args, options, cli = process.env.npm_execpath) {
@@ -64,17 +65,32 @@ export function integrity(path) {
   return `sha512-${createHash('sha512').update(readFileSync(path)).digest('base64')}`
 }
 
-/** Install an unpublished sidebar archive for local builds while preserving committed config. */
-export function installSidebarOverride(tarball, root = ROOT) {
+/** Verify the supplied candidate against the producer's explicit byte identity. */
+export function validateSidebarCandidate(tarball, expectedIntegrity) {
   const path = resolve(tarball)
   const pkg = tarballPackage(path)
+  if (typeof expectedIntegrity !== 'string' || !/^sha512-[A-Za-z0-9+/]{86}==$/.test(expectedIntegrity)
+    || integrity(path) !== expectedIntegrity) throw new Error('Sidebar candidate integrity differs from the producer')
   if (pkg.name !== SIDEBAR || pkg.version !== SIDEBAR_VERSION) throw new Error('Sidebar override must contain the pinned Gestaltrun package')
+  return path
+}
+
+/** Install an unpublished sidebar archive for local builds while preserving committed config. */
+export function installSidebarOverride(tarball, expectedIntegrity, root = ROOT) {
+  const path = validateSidebarCandidate(tarball, expectedIntegrity)
   const workspacePath = join(root, 'pnpm-workspace.yaml')
   const lockPath = join(root, 'pnpm-lock.yaml')
   const workspace = readFileSync(workspacePath, 'utf8')
   const lock = readFileSync(lockPath)
-  if (/^overrides:/m.test(workspace)) throw new Error('Local sidebar installation requires merging an existing overrides mapping')
-  writeFileSync(workspacePath, `${workspace.trimEnd()}\n\noverrides:\n  '${SIDEBAR}': ${JSON.stringify(`file:${path}`)}\n`)
+  const config = parse(workspace)
+  const existing = config.overrides?.[SIDEBAR]
+  if (existing === `file:${path}`) {
+    runPnpm(['install', '--frozen-lockfile', '--ignore-scripts'], { cwd: root, stdio: 'inherit' })
+    return
+  }
+  if (existing !== undefined && existing !== '0.19.1-gestaltrun.0') throw new Error('Sidebar workspace override differs from the approved baseline')
+  config.overrides = { ...config.overrides, [SIDEBAR]: `file:${path}` }
+  writeFileSync(workspacePath, stringify(config))
   try {
     runPnpm(['install', '--no-frozen-lockfile', '--ignore-scripts'], { cwd: root, stdio: 'inherit' })
   } finally {
@@ -84,14 +100,16 @@ export function installSidebarOverride(tarball, root = ROOT) {
 }
 
 /** Build, validate, and write the owned family archives plus their integrity manifest. */
-export function packFamily({ out, sidebarTarball, root = ROOT }) {
+export function packFamily({ out, sidebarTarball, sidebarIntegrity, root = ROOT }) {
+  if (Boolean(sidebarTarball) !== Boolean(sidebarIntegrity)) throw new Error('Supply both --sidebar-tarball and --sidebar-integrity')
+  if (!sidebarTarball) console.log('Registry development baseline build; this does not verify the Sidebar candidate combination')
   const output = resolve(out)
   mkdirSync(output, { recursive: true })
   const family = walkFamilyPackages(root).map(({ dir, pkgPath }) => ({ dir, pkg: JSON.parse(readFileSync(pkgPath, 'utf8')) })).filter(({ pkg }) => !pkg.private)
   if (family.length === 0) throw new Error('No publishable family packages')
   const version = family[0].pkg.version
   for (const { pkg } of family) validatePackage(pkg, version)
-  if (sidebarTarball) installSidebarOverride(sidebarTarball, root)
+  if (sidebarTarball) installSidebarOverride(sidebarTarball, sidebarIntegrity, root)
   execFileSync(process.execPath, ['scripts/sync-shared.mjs', '--check'], { cwd: root, stdio: 'inherit' })
   execFileSync(process.execPath, ['scripts/aggregate.mjs', '--check'], { cwd: root, stdio: 'inherit' })
   // Build tools preserve companion chunks; remove prior outputs before packaging.
@@ -113,7 +131,7 @@ export function packFamily({ out, sidebarTarball, root = ROOT }) {
 }
 
 if (resolve(process.argv[1] ?? '') === fileURLToPath(import.meta.url)) {
-  const { values } = parseArgs({ args: process.argv.slice(2).filter(arg => arg !== '--'), options: { out: { type: 'string' }, 'sidebar-tarball': { type: 'string' } } })
-  if (!values.out) throw new Error('Usage: pnpm release:pack --out <directory> [--sidebar-tarball <archive>]')
-  console.log(JSON.stringify(packFamily({ out: values.out, sidebarTarball: values['sidebar-tarball'] }), null, 2))
+  const { values } = parseArgs({ args: process.argv.slice(2).filter(arg => arg !== '--'), options: { out: { type: 'string' }, 'sidebar-tarball': { type: 'string' }, 'sidebar-integrity': { type: 'string' } } })
+  if (!values.out) throw new Error('Usage: pnpm release:pack --out <directory> [--sidebar-tarball <archive> --sidebar-integrity <sha512>]')
+  console.log(JSON.stringify(packFamily({ out: values.out, sidebarTarball: values['sidebar-tarball'], sidebarIntegrity: values['sidebar-integrity'] }), null, 2))
 }
